@@ -20,7 +20,7 @@ namespace Texart
                     pixelSamplingRatio: scale
                 );
                 ITextData textData = textGenerator.GenerateText();
-                ITextDataSerializer textDataSerializer = new Serializers.UTF8TextDataSerializer();
+                ITextDataSerializer textDataSerializer = new Serializers.StringTextDataSerializer();
                 textDataSerializer.Write(textData, Console.OpenStandardOutput());
                 /*
                 using (var outBitmap = new SKBitmap(bitmap.Width, bitmap.Height, SKImageInfo.PlatformColorType, SKAlphaType.Premul))

@@ -75,7 +75,7 @@
     <Compile Include="ITextData.cs" />
     <Compile Include="ITextDataSerializer.cs" />
     <Compile Include="ITextGenerator.cs" />
-    <Compile Include="Serializers\UTF8TextDataSerializer.cs" />
+    <Compile Include="Serializers\StringTextDataSerializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextGeneratorBase.cs" />
