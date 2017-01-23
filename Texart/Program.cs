@@ -19,16 +19,9 @@ namespace Texart
                     characters: new[] { ' ', '.', ',', '-', '~', ':', ';', '!', '*', '=', '$', '#', '@' },
                     pixelSamplingRatio: scale
                 );
-                var text = textGenerator.GenerateText();
-                for (var y = 0; y < text.Height; ++y)
-                {
-                    for (var x = 0; x < text.Width; ++x)
-                    {
-                        var ch = text[x, y];
-                        Console.Write(ch);
-                    }
-                    Console.Write('\n');
-                }
+                ITextData textData = textGenerator.GenerateText();
+                ITextDataSerializer textDataSerializer = new Serializers.UTF8TextDataSerializer();
+                textDataSerializer.Write(textData, Console.OpenStandardOutput());
                 /*
                 using (var outBitmap = new SKBitmap(bitmap.Width, bitmap.Height, SKImageInfo.PlatformColorType, SKAlphaType.Premul))
                 using (var canvas = new SKCanvas(outBitmap))
