@@ -1,5 +1,4 @@
 ﻿using SkiaSharp;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -9,13 +8,13 @@ namespace Texart.Generators
     public sealed class BrightnessBasedGenerator : TextGeneratorBase, ITextGenerator
     {
         /// <inheritdocs/>
-        public override IList<char> Characters { get; }
+        public override IList<char> Characters { get; protected set; }
 
         /// <inheritdocs/>
         public override ITextData GenerateText()
         {
             var characters = Characters;
-            var charactersCount = Characters.Count;
+            var charactersCount = characters.Count;
             var targetWidth = Width;
             var targetHeight = Height;
             var brightnessValues = GenerateBrightnessArray();
@@ -66,7 +65,7 @@ namespace Texart.Generators
             var brightnessValues = new float[targetWidth * targetHeight];
 
             // process chunks in parallel
-            using (var lockedBitmapAccessor = LockedBitmap(Bitmap))
+            using (var lockedBitmapAccessor = BitmapHelpers.LockedBitmap(Bitmap))
             {
                 SKBitmap bitmap = lockedBitmapAccessor.Bitmap;
 
@@ -109,26 +108,8 @@ namespace Texart.Generators
         }
 
         public BrightnessBasedGenerator(SKBitmap bitmap, IEnumerable<char> characters, int pixelSamplingRatio = 1)
+            : base(bitmap, new List<char>(characters), pixelSamplingRatio)
         {
-            if (bitmap == null) { throw new ArgumentNullException(nameof(bitmap)); }
-            Bitmap = bitmap;
-
-            if (characters == null) { throw new ArgumentNullException(nameof(characters)); }
-            Characters = new List<char>(characters);
-            if (Characters.Count < 1)
-            {
-                throw new ArgumentException($"{nameof(characters)} must have at least 1 character.");
-            }
-
-            if (pixelSamplingRatio < 1)
-            {
-                throw new ArgumentException($"{nameof(pixelSamplingRatio)} must be at least 1.");
-            }
-            if (!(bitmap.Width % pixelSamplingRatio == 0) || !(bitmap.Height % pixelSamplingRatio == 0))
-            {
-                throw new ArgumentException($"{nameof(pixelSamplingRatio)} must evenly divide both Bitmap width and height.");
-            }
-            PixelSamplingRatio = pixelSamplingRatio;
         }
 
     }

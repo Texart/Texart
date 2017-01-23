@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayTextData.cs" />
+    <Compile Include="BitmapHelpers.cs" />
     <Compile Include="Generators\BrightnessBasedGenerator.cs" />
     <Compile Include="ITextData.cs" />
     <Compile Include="ITextGenerator.cs" />
