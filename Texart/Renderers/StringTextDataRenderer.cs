@@ -22,7 +22,7 @@ namespace Texart.Renderers
             outputStream = (outputStream is BufferedStream) ?
                 outputStream : new BufferedStream(outputStream);
 
-            using (TextWriter writer = new StreamWriter(outputStream, Encoding.UTF8))
+            using (TextWriter writer = new StreamWriter(outputStream, Encoding))
             {
                 for (var y = 0; y < textData.Height; ++y)
                 {
@@ -36,12 +36,13 @@ namespace Texart.Renderers
         }
 
         /// <summary>
-        /// Creates a <code>StringTextDataSerializer</code> with <code>Encoding</code> of UTF8.
+        /// Creates a <code>StringTextDataSerializer</code> with <code>DefaultEncoding</code>.
         /// </summary>
+        /// <see cref="PlatformHelpers.DefaultEncoding"/>
         /// <see cref="StringTextDataRenderer(Encoding)"/>
         /// <see cref="System.Text.Encoding"/>
         public StringTextDataRenderer()
-            : this(Encoding.UTF8)
+            : this(PlatformHelpers.DefaultEncoding)
         {
         }
 

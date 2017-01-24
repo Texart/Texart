@@ -75,6 +75,7 @@
     <Compile Include="ITextData.cs" />
     <Compile Include="ITextDataRenderer.cs" />
     <Compile Include="ITextGenerator.cs" />
+    <Compile Include="PlatformHelpers.cs" />
     <Compile Include="Renderers\FontRasterizedTextDataRenderer.cs" />
     <Compile Include="Renderers\StringTextDataRenderer.cs" />
     <Compile Include="Program.cs" />

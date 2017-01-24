@@ -17,7 +17,7 @@ namespace Texart
 
         /// <summary>
         /// The available characters that will be used in the generated text.
-        /// This listed shall be sorted from darkest characters to brightest characters.
+        /// This listed shall be sorted from brightest characters to darkest characters.
         /// The definitions of dark and bright are implementation-defined.
         /// </summary>
         IList<char> Characters { get; }

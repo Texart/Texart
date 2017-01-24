@@ -35,7 +35,9 @@ namespace Texart.Generators
                 float scaledBrightness = (brightness / 255f) * (charactersCount - 1);
                 var scaledCharacterIndex = (int)(scaledBrightness + 0.5f);
 
-                targetData[index] = characters[scaledCharacterIndex];
+                // we count from the end because the characters are sorted from brightest to darkest
+                // so high brightness => lower index
+                targetData[index] = characters[charactersCount - scaledCharacterIndex - 1];
             });
 
             return new ArrayTextData(targetData, targetWidth, targetHeight);
