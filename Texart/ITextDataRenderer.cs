@@ -2,13 +2,13 @@
 
 namespace Texart
 {
-    public interface ITextDataSerializer
+    public interface ITextDataRenderer
     {
         /// <summary>
         /// Write some text data to an output stream.
         /// </summary>
         /// <param name="textData">The source text data</param>
         /// <param name="outputStream">The stream to write to</param>
-        void Write(ITextData textData, Stream outputStream);
+        void Render(ITextData textData, Stream outputStream);
     }
 }

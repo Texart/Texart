@@ -3,18 +3,18 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace Texart.Serializers
+namespace Texart.Renderers
 {
     /// <summary>
-    /// A serializer that simply writes the text data to the output
+    /// A renderer that simply writes the text data to the output
     /// as a string.
     /// </summary>
-    public class StringTextDataSerializer : ITextDataSerializer
+    public class StringTextDataRenderer : ITextDataRenderer
     {
         public Encoding Encoding { get; }
 
         /// <inheritdocs/>
-        public void Write(ITextData textData, Stream outputStream)
+        public void Render(ITextData textData, Stream outputStream)
         {
             Debug.Assert(textData != null);
             Debug.Assert(outputStream != null);
@@ -38,9 +38,9 @@ namespace Texart.Serializers
         /// <summary>
         /// Creates a <code>StringTextDataSerializer</code> with <code>Encoding</code> of UTF8.
         /// </summary>
-        /// <see cref="StringTextDataSerializer(Encoding)"/>
+        /// <see cref="StringTextDataRenderer(Encoding)"/>
         /// <see cref="System.Text.Encoding"/>
-        public StringTextDataSerializer()
+        public StringTextDataRenderer()
             : this(Encoding.UTF8)
         {
         }
@@ -53,7 +53,7 @@ namespace Texart.Serializers
         ///     Thrown if <code>encoding</code>
         ///     is <code>null</code>.
         /// </exception>
-        public StringTextDataSerializer(Encoding encoding)
+        public StringTextDataRenderer(Encoding encoding)
         {
             if (encoding == null) { throw new ArgumentNullException(nameof(encoding)); }
             Encoding = encoding;
