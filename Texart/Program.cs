@@ -8,8 +8,8 @@ namespace Texart
     {
         static void Main(string[] args)
         {
-            using (SKStream stream = new SKFileStream("C:/_img/mona1.png"))
-            using (FileStream output = File.OpenWrite("C:/_img/mona2.png"))
+			using (SKStream stream = new SKManagedStream(File.OpenRead("../../../../mona.png")))
+            using (FileStream output = File.OpenWrite("../../../../mona.gen.png"))
             {
                 SKBitmap bitmap = SKBitmap.Decode(stream);
                 // bitmap.LockPixels();
