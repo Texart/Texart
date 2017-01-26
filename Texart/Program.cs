@@ -7,17 +7,6 @@ namespace Texart
 {
     class Program
     {
-
-        static void Main(string[] args)
-        {
-            var mainTask = Task.Run(async () =>
-            {
-                await MainAsync(args);
-            });
-            mainTask.GetAwaiter().GetResult();
-        }
-
-
         static async Task MainAsync(string[] args)
         {
 			using (SKStream stream = new SKManagedStream(File.OpenRead("../../../../mona.png")))
@@ -45,13 +34,22 @@ namespace Texart
                     },
                     pixelSamplingRatio: scale
                 );
-                ITextData textData = await textGenerator.GenerateText();
+                ITextData textData = await textGenerator.GenerateTextAsync();
                 ITextDataRenderer textDataRenderer = new Builtin.Renderers.StringTextDataRenderer();
                 var typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold);
                 ITextDataRenderer imageRenderer = new Builtin.Renderers.FontRasterizedTextDataRenderer(typeface);
-                // await textDataRenderer.Render(textData, Console.OpenStandardOutput());
-                await imageRenderer.Render(textData, output);
+                // await textDataRenderer.RenderAsync(textData, Console.OpenStandardOutput());
+                await imageRenderer.RenderAsync(textData, output);
             }
+        }
+
+        static void Main(string[] args)
+        {
+            var mainTask = Task.Run(async () =>
+            {
+                await MainAsync(args);
+            });
+            mainTask.GetAwaiter().GetResult();
         }
     }
 }

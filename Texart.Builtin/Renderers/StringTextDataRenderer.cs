@@ -15,7 +15,7 @@ namespace Texart.Builtin.Renderers
         public Encoding Encoding { get; }
 
         /// <inheritdocs/>
-        public Task Render(ITextData textData, Stream outputStream)
+        public Task RenderAsync(ITextData textData, Stream outputStream)
         {
             Debug.Assert(textData != null);
             Debug.Assert(outputStream != null);

@@ -11,7 +11,7 @@ namespace Texart.Builtin.Generators
         public override IList<char> Characters { get; protected set; }
 
         /// <inheritdocs/>
-        public override Task<ITextData> GenerateText()
+        public override Task<ITextData> GenerateTextAsync()
         {
             var characters = Characters;
             var charactersCount = characters.Count;

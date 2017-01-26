@@ -47,6 +47,6 @@ namespace Texart.Builtin.Generators
         public int PixelSamplingRatio { get; protected set; }
 
         /// <inheritdocs/>
-        public abstract Task<ITextData> GenerateText();
+        public abstract Task<ITextData> GenerateTextAsync();
     }
 }

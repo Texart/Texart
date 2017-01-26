@@ -55,6 +55,6 @@ namespace Texart
         /// <returns></returns>
         /// <see cref="PixelSamplingRatio"/>
         /// <see cref="Characters"/>
-        Task<ITextData> GenerateText();
+        Task<ITextData> GenerateTextAsync();
     }
 }

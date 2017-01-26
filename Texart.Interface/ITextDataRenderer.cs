@@ -10,6 +10,6 @@ namespace Texart
         /// </summary>
         /// <param name="textData">The source text data</param>
         /// <param name="outputStream">The stream to write to</param>
-        Task Render(ITextData textData, Stream outputStream);
+        Task RenderAsync(ITextData textData, Stream outputStream);
     }
 }
