@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Texart.Renderers
 {
@@ -14,7 +15,7 @@ namespace Texart.Renderers
         public Encoding Encoding { get; }
 
         /// <inheritdocs/>
-        public void Render(ITextData textData, Stream outputStream)
+        public Task Render(ITextData textData, Stream outputStream)
         {
             Debug.Assert(textData != null);
             Debug.Assert(outputStream != null);
@@ -30,9 +31,13 @@ namespace Texart.Renderers
                     {
                         writer.Write((char)textData[x, y]);
                     }
-                    writer.Write('\n');
+                    writer.Write(writer.NewLine);
                 }
             }
+
+            // We don't have .NET 4.6 :(
+            // TODO: change this when we move to .NET 4.6
+            return Task.FromResult(0);
         }
 
         /// <summary>

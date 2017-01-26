@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 
 namespace Texart
 {
@@ -9,6 +10,6 @@ namespace Texart
         /// </summary>
         /// <param name="textData">The source text data</param>
         /// <param name="outputStream">The stream to write to</param>
-        void Render(ITextData textData, Stream outputStream);
+        Task Render(ITextData textData, Stream outputStream);
     }
 }

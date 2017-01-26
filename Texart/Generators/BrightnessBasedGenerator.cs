@@ -11,7 +11,7 @@ namespace Texart.Generators
         public override IList<char> Characters { get; protected set; }
 
         /// <inheritdocs/>
-        public override ITextData GenerateText()
+        public override Task<ITextData> GenerateText()
         {
             var characters = Characters;
             var charactersCount = characters.Count;
@@ -40,7 +40,8 @@ namespace Texart.Generators
                 targetData[index] = characters[charactersCount - scaledCharacterIndex - 1];
             });
 
-            return new ArrayTextData(targetData, targetWidth, targetHeight);
+            ITextData textData = new ArrayTextData(targetData, targetWidth, targetHeight);
+            return Task.FromResult(textData);
         }
 
         /// <summary>

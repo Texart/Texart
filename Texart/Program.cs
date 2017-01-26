@@ -1,18 +1,29 @@
 ﻿using System;
 using SkiaSharp;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Texart
 {
     class Program
     {
+
         static void Main(string[] args)
+        {
+            var mainTask = Task.Run(async () =>
+            {
+                await MainAsync(args);
+            });
+            mainTask.GetAwaiter().GetResult();
+        }
+
+
+        static async Task MainAsync(string[] args)
         {
 			using (SKStream stream = new SKManagedStream(File.OpenRead("../../../../mona.png")))
             using (FileStream output = File.OpenWrite("../../../../mona.gen.png"))
             {
                 SKBitmap bitmap = SKBitmap.Decode(stream);
-                // bitmap.LockPixels();
                 const int scale = 2;
                 ITextGenerator textGenerator = new Generators.BrightnessBasedGenerator(
                     bitmap: bitmap,
@@ -34,12 +45,12 @@ namespace Texart
                     },
                     pixelSamplingRatio: scale
                 );
-                ITextData textData = textGenerator.GenerateText();
+                ITextData textData = await textGenerator.GenerateText();
                 ITextDataRenderer textDataRenderer = new Renderers.StringTextDataRenderer();
                 var typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold);
                 ITextDataRenderer imageRenderer = new Renderers.FontRasterizedTextDataRenderer(typeface);
-                // textDataRenderer.Render(textData, Console.OpenStandardOutput());
-                imageRenderer.Render(textData, output);
+                // await textDataRenderer.Render(textData, Console.OpenStandardOutput());
+                await imageRenderer.Render(textData, output);
             }
         }
     }

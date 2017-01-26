@@ -1,5 +1,6 @@
 ﻿using SkiaSharp;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Texart
 {
@@ -54,6 +55,6 @@ namespace Texart
         /// <returns></returns>
         /// <see cref="PixelSamplingRatio"/>
         /// <see cref="Characters"/>
-        ITextData GenerateText();
+        Task<ITextData> GenerateText();
     }
 }

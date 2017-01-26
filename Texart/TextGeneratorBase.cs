@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SkiaSharp;
 using System;
+using System.Threading.Tasks;
 
 namespace Texart
 {
@@ -46,6 +47,6 @@ namespace Texart
         public int PixelSamplingRatio { get; protected set; }
 
         /// <inheritdocs/>
-        public abstract ITextData GenerateText();
+        public abstract Task<ITextData> GenerateText();
     }
 }
