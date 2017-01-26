@@ -9,8 +9,8 @@ namespace Texart
     {
         static async Task MainAsync(string[] args)
         {
-			using (SKStream stream = new SKManagedStream(File.OpenRead("../../../../mona.png")))
-            using (FileStream output = File.OpenWrite("../../../../mona.gen.png"))
+			using (SKStream stream = new SKManagedStream(File.OpenRead("../../../../mona1.png")))
+            using (FileStream output = File.OpenWrite("../../../../mona1.gen.png"))
             {
                 SKBitmap bitmap = SKBitmap.Decode(stream);
                 const int scale = 2;

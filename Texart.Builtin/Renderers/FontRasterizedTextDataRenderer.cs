@@ -8,8 +8,43 @@ namespace Texart.Builtin.Renderers
 {
     public class FontRasterizedTextDataRenderer : ITextDataRenderer
     {
+        /// <summary>
+        /// The typeface to paint with.
+        /// </summary>
         public SKTypeface Typeface { get; }
 
+        /// <summary>
+        /// The amount of spacing reserved for one character in the text data.
+        /// That is, each character is assigned a square grid of length
+        /// <code>CharacterSpacing</code>.
+        /// </summary>
+        public int CharacterSpacing { get; }
+
+        /// <summary>
+        /// Determines if the output image should be antialiased.
+        /// </summary>
+        /// <see cref="SKPaint.IsAntialias"/>
+        public bool ShouldAntialias { get; }
+
+        /// <summary>
+        /// Determines if the output image should be dithered.
+        /// </summary>
+        /// <see cref="SKPaint.IsDither"/>
+        public bool ShouldDither { get; }
+
+        /// <summary>
+        /// Determines if font kerning is enabled.
+        /// </summary>
+        /// <see cref="SKPaint.DeviceKerningEnabled"/>
+        public bool Kerning { get; }
+
+        /// <summary>
+        /// The point size of the font.
+        /// </summary>
+        /// <see cref="SKPaint.TextSize"/>
+        public float TextSize { get; }
+
+        /// <inheritdocs />
         public Task RenderAsync(ITextData textData, Stream outputStream)
         {
             Debug.Assert(textData != null);
@@ -38,6 +73,7 @@ namespace Texart.Builtin.Renderers
                 paint.IsAntialias = true;
                 paint.IsDither = true;
                 paint.IsAutohinted = true;
+                paint.DeviceKerningEnabled = true;
                 paint.Typeface = Typeface;
                 paint.TextSize = 12f;
                 paint.TextEncoding = SKTextEncoding.Utf8;
@@ -116,10 +152,5 @@ namespace Texart.Builtin.Renderers
         {
             if (typeface == null) { throw new ArgumentNullException(nameof(typeface)); }
         }
-
-        /// <summary>
-        /// The string to use to guess font width when we can't figure it out using other methods.
-        /// </summary>
-        private const string FallbackMeasuringString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
 }
