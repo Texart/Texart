@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace Texart.Generators
+namespace Texart.Builtin.Generators
 {
     public sealed class BrightnessBasedGenerator : TextGeneratorBase, ITextGenerator
     {

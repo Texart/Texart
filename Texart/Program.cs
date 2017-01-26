@@ -25,7 +25,7 @@ namespace Texart
             {
                 SKBitmap bitmap = SKBitmap.Decode(stream);
                 const int scale = 2;
-                ITextGenerator textGenerator = new Generators.BrightnessBasedGenerator(
+                ITextGenerator textGenerator = new Builtin.Generators.BrightnessBasedGenerator(
                     bitmap: bitmap,
                     characters: new[] {
                         ' ', ' ', ' ', ' ',
@@ -46,9 +46,9 @@ namespace Texart
                     pixelSamplingRatio: scale
                 );
                 ITextData textData = await textGenerator.GenerateText();
-                ITextDataRenderer textDataRenderer = new Renderers.StringTextDataRenderer();
+                ITextDataRenderer textDataRenderer = new Builtin.Renderers.StringTextDataRenderer();
                 var typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold);
-                ITextDataRenderer imageRenderer = new Renderers.FontRasterizedTextDataRenderer(typeface);
+                ITextDataRenderer imageRenderer = new Builtin.Renderers.FontRasterizedTextDataRenderer(typeface);
                 // await textDataRenderer.Render(textData, Console.OpenStandardOutput());
                 await imageRenderer.Render(textData, output);
             }

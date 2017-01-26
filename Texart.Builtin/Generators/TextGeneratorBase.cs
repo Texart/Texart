@@ -4,11 +4,11 @@ using SkiaSharp;
 using System;
 using System.Threading.Tasks;
 
-namespace Texart
+namespace Texart.Builtin.Generators
 {
     public abstract class TextGeneratorBase : ITextGenerator
     {
-        public TextGeneratorBase(SKBitmap bitmap, IList<char> characters, int pixelSamplingRatio)
+        internal TextGeneratorBase(SKBitmap bitmap, IList<char> characters, int pixelSamplingRatio)
         {
             if (bitmap == null) { throw new ArgumentNullException(nameof(bitmap)); }
             Bitmap = bitmap;

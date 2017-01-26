@@ -2,9 +2,9 @@
 using System;
 using System.Diagnostics;
 
-namespace Texart
+namespace Texart.Builtin
 {
-    public static class BitmapHelpers
+    internal static class BitmapHelpers
     {
         /// <summary>
         /// Creates a <code>LockedBitmapAccessor</code> from <code>bitmap</code>.

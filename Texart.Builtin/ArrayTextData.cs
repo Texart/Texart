@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Texart
+namespace Texart.Builtin
 {
     /// <summary>
     /// An implementation of <code>ITextData</code> which exposes an underlying
     /// one dimensional array.
     /// </summary>
-    public sealed class ArrayTextData : ITextData
+    internal sealed class ArrayTextData : ITextData
     {
         /// <inheritdoc/>
         public int Height { get; }

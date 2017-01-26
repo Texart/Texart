@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Texart.Renderers
+namespace Texart.Builtin.Renderers
 {
     /// <summary>
     /// A renderer that simply writes the text data to the output

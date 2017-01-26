@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Texart.Renderers
+namespace Texart.Builtin.Renderers
 {
-    class FontRasterizedTextDataRenderer : ITextDataRenderer
+    public class FontRasterizedTextDataRenderer : ITextDataRenderer
     {
         public SKTypeface Typeface { get; }
 

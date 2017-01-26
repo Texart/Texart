@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
 
-namespace Texart
+namespace Texart.Builtin
 {
-    public static class PlatformHelpers
+    internal static class PlatformHelpers
     {
         /// <summary>
         /// Determines if we are currently executing on a Unix system.
