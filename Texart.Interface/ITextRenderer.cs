@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Texart
 {
-    public interface ITextDataRenderer
+    public interface ITextRenderer
     {
         /// <summary>
         /// Write some text data to an output stream.

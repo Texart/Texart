@@ -8,13 +8,10 @@ namespace Texart.Builtin.Generators
 {
     public abstract class TextGeneratorBase : ITextGenerator
     {
-        internal TextGeneratorBase(SKBitmap bitmap, IList<char> characters, int pixelSamplingRatio)
+        protected TextGeneratorBase(IList<char> characters, int pixelSamplingRatio)
         {
-            if (bitmap == null) { throw new ArgumentNullException(nameof(bitmap)); }
-            Bitmap = bitmap;
-
             if (characters == null) { throw new ArgumentNullException(nameof(characters)); }
-            Characters = characters;
+            this.Characters = characters;
             if (Characters.Count < 1)
             {
                 throw new ArgumentException($"{nameof(characters)} must have at least 1 character.");
@@ -24,29 +21,57 @@ namespace Texart.Builtin.Generators
             {
                 throw new ArgumentException($"{nameof(pixelSamplingRatio)} must be at least 1.");
             }
-            if (!(bitmap.Width % pixelSamplingRatio == 0) || !(bitmap.Height % pixelSamplingRatio == 0))
-            {
-                throw new ArgumentException($"{nameof(pixelSamplingRatio)} must evenly divide both Bitmap width and height.");
-            }
-            PixelSamplingRatio = pixelSamplingRatio;
+            this.PixelSamplingRatio = pixelSamplingRatio;
         }
-
-        /// <inheritdocs/>
-        public int Width { get { return Bitmap.Width / PixelSamplingRatio; } }
-
-        /// <inheritdocs/>
-        public int Height { get { return Bitmap.Height / PixelSamplingRatio; } }
 
         /// <inheritdocs/>
         public abstract IList<char> Characters { get; protected set; }
 
         /// <inheritdocs/>
-        public SKBitmap Bitmap { get; protected set; }
-
-        /// <inheritdocs/>
         public int PixelSamplingRatio { get; protected set; }
 
         /// <inheritdocs/>
-        public abstract Task<ITextData> GenerateTextAsync();
+        public async Task<ITextData> GenerateTextAsync(SKBitmap bitmap)
+        {
+            if (bitmap == null) { throw new ArgumentNullException(nameof(bitmap)); }
+            if (!(bitmap.Width % this.PixelSamplingRatio == 0) || !(bitmap.Height % this.PixelSamplingRatio == 0))
+            {
+                throw new ArgumentException($"{nameof(this.PixelSamplingRatio)} must evenly divide both Bitmap width and height.");
+            }
+            return await this.DoGenerateTextAsync(bitmap);
+        }
+
+        /// <summary>
+        /// The method that will perform the text generation after <code>bitmap</code> has
+        /// been checked for potential errors.
+        /// </summary>
+        /// <param name="bitmap">The image to generate text data from.</param>
+        /// <returns>The generated text data.</returns>
+        /// <see cref="ITextGenerator.GenerateTextAsync(SKBitmap)"/>
+        public abstract Task<ITextData> DoGenerateTextAsync(SKBitmap bitmap);
+
+        /// <summary>
+        /// Gets the width for the given bitmap adjusted for the sampling ratio.
+        /// </summary>
+        /// <param name="bitmap">The bitmap to get width for.</param>
+        /// <returns>The adjusted width.</returns>
+        /// <see cref="PixelSamplingRatio"/>
+        protected int WidthFor(SKBitmap bitmap)
+        {
+            Debug.Assert(bitmap.Width % this.PixelSamplingRatio == 0);
+            return bitmap.Width / this.PixelSamplingRatio;
+        }
+
+        /// <summary>
+        /// Gets the height for the given bitmap adjusted for the sampling ratio.
+        /// </summary>
+        /// <param name="bitmap">The bitmap to get height for.</param>
+        /// <returns>The adjusted height.</returns>
+        /// <see cref="PixelSamplingRatio"/>
+        protected int HeightFor(SKBitmap bitmap)
+        {
+            Debug.Assert(bitmap.Height % this.PixelSamplingRatio == 0);
+            return bitmap.Height / this.PixelSamplingRatio;
+        }
     }
 }

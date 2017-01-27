@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Texart.Builtin.Renderers
 {
-    public class FontRasterizedTextDataRenderer : ITextDataRenderer
+    public sealed class FontRenderer : ITextRenderer
     {
         /// <summary>
         /// The typeface to paint with.
@@ -33,10 +33,10 @@ namespace Texart.Builtin.Renderers
         public bool ShouldDither { get; }
 
         /// <summary>
-        /// Determines if font kerning is enabled.
+        /// Determines if font hinting is enabled.
         /// </summary>
-        /// <see cref="SKPaint.DeviceKerningEnabled"/>
-        public bool Kerning { get; }
+        /// <see cref="SKPaint.IsAutohinted"/>
+        public bool ShouldHint { get; }
 
         /// <summary>
         /// The point size of the font.
@@ -64,27 +64,28 @@ namespace Texart.Builtin.Renderers
         /// Generates a bitmap using the provided textData and font info. Note that
         /// you are responsible for calling <code>Dispose</code> on the returned bitmap.
         /// </summary>
-        /// <param name="textData">The <code>TextData</code> to read from</param>
+        /// <param name="textData">The <code>ITextData</code> to read from</param>
         /// <returns>The generated <code>SKBitmap</code></returns>
         public SKBitmap GenerateBitmap(ITextData textData)
         {
             using (var paint = new SKPaint())
             {
-                paint.IsAntialias = true;
-                paint.IsDither = true;
-                paint.IsAutohinted = true;
-                paint.DeviceKerningEnabled = true;
-                paint.Typeface = Typeface;
-                paint.TextSize = 12f;
+                paint.IsAntialias = this.ShouldAntialias;
+                paint.IsDither = this.ShouldDither;
+                paint.IsAutohinted = this.ShouldHint;
+                
+                paint.Typeface = this.Typeface;
+                paint.TextSize = this.TextSize;
                 paint.TextEncoding = SKTextEncoding.Utf8;
                 paint.SubpixelText = true;
+                paint.DeviceKerningEnabled = false;
 
                 int textWidth = textData.Width;
                 int textHeight = textData.Height;
 
                 // spacing reserved for a single character
                 SKFontMetrics fontMetrics = paint.FontMetrics;
-                int characterSpacing = 8;
+                int characterSpacing = this.CharacterSpacing;
 
                 Debug.Assert(characterSpacing > 0);
 
@@ -107,11 +108,8 @@ namespace Texart.Builtin.Renderers
                     var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 1 };
                     Parallel.For(0, textHeight, parallelOptions, y =>
                     {
-                        // make a string for the current line in parallel
-                        // var lineChars = new char[textWidth];
                         Parallel.For(0, textWidth, x =>
                         {
-                            // lineChars[x] = textData[x, y];
                             string charAsString = textData[x, y].ToString();
 
                             // dimensions of actual printed chars
@@ -132,25 +130,29 @@ namespace Texart.Builtin.Renderers
                                 paint: paint
                             );
                         });
-                        // var line = new string(lineChars);
-
-                        // Console.WriteLine(line);
-
-                        /*canvas.DrawText(
-                            text: line,
-                            x: 0f,
-                            y: 10 + y * characterHeight,
-                            paint: paint
-                        );*/
                     });
                 }
                 return bitmap;
             }
         }
 
-        public FontRasterizedTextDataRenderer(SKTypeface typeface)
+        public FontRenderer(
+            SKTypeface typeface,
+            float textSize, int characterSpacing,
+            bool antialias = true,
+            bool dither = true,
+            bool hint = true)
         {
             if (typeface == null) { throw new ArgumentNullException(nameof(typeface)); }
+            if (textSize <= 0f) { throw new ArgumentException($"{nameof(textSize)} must be positive"); }
+            if (characterSpacing <= 0) { throw new ArgumentException($"{nameof(characterSpacing)} must be positive"); }
+
+            this.Typeface = typeface;
+            this.TextSize = textSize;
+            this.CharacterSpacing = characterSpacing;
+            this.ShouldAntialias = antialias;
+            this.ShouldDither = dither;
+            this.ShouldHint = hint;
         }
     }
 }

@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ITextData.cs" />
-    <Compile Include="ITextDataRenderer.cs" />
+    <Compile Include="ITextRenderer.cs" />
     <Compile Include="ITextGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

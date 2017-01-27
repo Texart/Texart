@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart.Interface", "Texart.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart.Builtin", "Texart.Builtin\Texart.Builtin.csproj", "{0CAC3BD4-65FA-46CE-AA22-83874C994AE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart.ScriptInterface", "Texart.ScriptInterface\Texart.ScriptInterface.csproj", "{63A521E4-26B7-4992-87A4-F9B4A519BE3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart.Scripting", "Texart.Scripting\Texart.Scripting.csproj", "{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}"
+EndProject
 Global
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true
@@ -44,6 +48,22 @@ Global
 		{0CAC3BD4-65FA-46CE-AA22-83874C994AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0CAC3BD4-65FA-46CE-AA22-83874C994AE7}.Release|x64.ActiveCfg = Release|Any CPU
 		{0CAC3BD4-65FA-46CE-AA22-83874C994AE7}.Release|x64.Build.0 = Release|Any CPU
+		{63A521E4-26B7-4992-87A4-F9B4A519BE3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63A521E4-26B7-4992-87A4-F9B4A519BE3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63A521E4-26B7-4992-87A4-F9B4A519BE3B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{63A521E4-26B7-4992-87A4-F9B4A519BE3B}.Debug|x64.Build.0 = Debug|Any CPU
+		{63A521E4-26B7-4992-87A4-F9B4A519BE3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63A521E4-26B7-4992-87A4-F9B4A519BE3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63A521E4-26B7-4992-87A4-F9B4A519BE3B}.Release|x64.ActiveCfg = Release|Any CPU
+		{63A521E4-26B7-4992-87A4-F9B4A519BE3B}.Release|x64.Build.0 = Release|Any CPU
+		{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}.Debug|x64.Build.0 = Debug|Any CPU
+		{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}.Release|x64.ActiveCfg = Release|Any CPU
+		{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

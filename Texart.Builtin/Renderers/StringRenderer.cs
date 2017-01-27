@@ -10,7 +10,7 @@ namespace Texart.Builtin.Renderers
     /// A renderer that simply writes the text data to the output
     /// as a string.
     /// </summary>
-    public class StringTextDataRenderer : ITextDataRenderer
+    public sealed class StringRenderer : ITextRenderer
     {
         public Encoding Encoding { get; }
 
@@ -41,25 +41,25 @@ namespace Texart.Builtin.Renderers
         }
 
         /// <summary>
-        /// Creates a <code>StringTextDataSerializer</code> with <code>DefaultEncoding</code>.
+        /// Creates a <code>StringRenderer</code> with <code>DefaultEncoding</code>.
         /// </summary>
         /// <see cref="PlatformHelpers.DefaultEncoding"/>
-        /// <see cref="StringTextDataRenderer(Encoding)"/>
+        /// <see cref="StringRenderer(Encoding)"/>
         /// <see cref="System.Text.Encoding"/>
-        public StringTextDataRenderer()
+        public StringRenderer()
             : this(PlatformHelpers.DefaultEncoding)
         {
         }
 
         /// <summary>
-        /// Creates a <code>StringTextDataSerializer</code> with the given encoding.
+        /// Creates a <code>StringRenderer</code> with the given encoding.
         /// </summary>
         /// <param name="encoding">The encoding to write with</param>
         /// <exception cref="ArgumentNullException">
         ///     Thrown if <code>encoding</code>
         ///     is <code>null</code>.
         /// </exception>
-        public StringTextDataRenderer(Encoding encoding)
+        public StringRenderer(Encoding encoding)
         {
             if (encoding == null) { throw new ArgumentNullException(nameof(encoding)); }
             Encoding = encoding;
