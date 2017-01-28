@@ -1,8 +1,7 @@
-﻿using SkiaSharp;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Texart
+namespace Texart.Interface
 {
     /// <summary>
     /// An <code>ITextGenerator</code> is used to generate <code>ITextData</code>s given
@@ -37,6 +36,6 @@ namespace Texart
         /// <returns></returns>
         /// <see cref="PixelSamplingRatio"/>
         /// <see cref="Characters"/>
-        Task<ITextData> GenerateTextAsync(SKBitmap bitmap);
+        Task<ITextData> GenerateTextAsync(Bitmap bitmap);
     }
 }

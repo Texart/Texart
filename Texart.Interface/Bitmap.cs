@@ -1,11 +1,11 @@
 ﻿using SkiaSharp;
 using System.IO;
 
-namespace Texart.ScriptInterface
+namespace Texart.Interface
 {
     public class Bitmap
     {
-        internal SKBitmap SkiaBitmap { get; set; }
+        public SKBitmap SkiaBitmap { get; set; }
 
         public int Width { get { return this.SkiaBitmap.Width; } }
         public int Height { get { return this.SkiaBitmap.Height; } }

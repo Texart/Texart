@@ -1,10 +1,10 @@
 ﻿using SkiaSharp;
 
-namespace Texart.ScriptInterface
+namespace Texart.Interface
 {
     public struct Color
     {
-        internal SKColor SkiaColor { get; set; }
+        public SKColor SkiaColor { get; set; }
 
         public Color(byte r, byte g, byte b, byte a = 255)
         {

@@ -3,8 +3,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Texart.Interface;
 
-namespace Texart.Builtin.Renderers
+namespace Texart.Builtin
 {
     /// <summary>
     /// A renderer that simply writes the text data to the output

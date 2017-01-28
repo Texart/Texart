@@ -2,13 +2,15 @@
 
 namespace Texart.ScriptInterface
 {
-    public static class CharacterSets
+    public static partial class Tx
     {
-        public static IEnumerable<char> Basic
+        public static class CharacterSets
         {
-            get
+            public static IEnumerable<char> Basic
             {
-                return new[] {
+                get
+                {
+                    return new[] {
                     ' ', ' ', ' ', ' ',
                     '.', '.',
                     ',', ',',
@@ -24,6 +26,7 @@ namespace Texart.ScriptInterface
                     '&', '&', '&', '&', '&', '&', '&', '&', '&', '&',
                     '@', '@', '@', '@', '@', '@', '@', '@', '@', '@', '@', '@'
                 };
+                }
             }
         }
     }

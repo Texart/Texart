@@ -1,4 +1,4 @@
-﻿namespace Texart
+﻿namespace Texart.Interface
 {
     public interface ITextData
     {

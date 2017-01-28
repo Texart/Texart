@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Texart.Interface;
 
 namespace Texart.Builtin
 {

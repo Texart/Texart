@@ -3,15 +3,16 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using Texart.Interface;
 
-namespace Texart.Builtin.Renderers
+namespace Texart.Builtin
 {
     public sealed class FontRenderer : ITextRenderer
     {
         /// <summary>
-        /// The typeface to paint with.
+        /// The font to paint with.
         /// </summary>
-        public SKTypeface Typeface { get; }
+        public Font Font { get; }
 
         /// <summary>
         /// Determines if the output image should be antialiased.
@@ -31,39 +32,7 @@ namespace Texart.Builtin.Renderers
         /// <see cref="SKPaint.IsAutohinted"/>
         public bool ShouldHint { get; set; }
 
-        /// <summary>
-        /// The amount of spacing reserved for one character in the text data.
-        /// That is, each character is assigned a square grid of length
-        /// <code>CharacterSpacing</code>.
-        /// </summary>
-        public int CharacterSpacing
-        {
-            get { return this._characterSpacing; }
-            set
-            {
-                if (value <= 0) { throw new ArgumentException($"{nameof(CharacterSpacing)} must be positive"); }
-                this._characterSpacing = value;
-            }
-        }
-        private int _characterSpacing = DefaultCharacterSpacing;
-
-        /// <summary>
-        /// The point size of the font.
-        /// </summary>
-        /// <see cref="SKPaint.TextSize"/>
-        public float TextSize
-        {
-            get { return this._textSize; }
-            set
-            {
-                if (value <= 0f) { throw new ArgumentException($"{nameof(this.TextSize)} must be positive"); }
-                this._textSize = value;
-            }
-        }
-        private float _textSize = DefaultTextSize;
-
         public SKColor BackgroundColor { get; set; } = DefaultBackgroundColor;
-        public SKColor ForegroundColor { get; set; } = DefaultForegroundColor;
 
         /// <inheritdocs />
         public Task RenderAsync(ITextData textData, Stream outputStream)
@@ -94,14 +63,15 @@ namespace Texart.Builtin.Renderers
                 paint.IsAntialias = this.ShouldAntialias;
                 paint.IsDither = this.ShouldDither;
                 paint.IsAutohinted = this.ShouldHint;
-                
-                paint.Typeface = this.Typeface;
-                paint.TextSize = this.TextSize;
+
+                var font = this.Font;
+                paint.Typeface = font.Typeface.SkiaTypeface;
+                paint.TextSize = font.TextSize;
                 paint.TextEncoding = SKTextEncoding.Utf8;
                 paint.SubpixelText = true;
                 paint.DeviceKerningEnabled = false;
 
-                paint.Color = this.ForegroundColor;
+                paint.Color = font.Color.SkiaColor;
                 var backgroundColor = this.BackgroundColor;
 
                 int textWidth = textData.Width;
@@ -109,7 +79,7 @@ namespace Texart.Builtin.Renderers
 
                 // spacing reserved for a single character
                 SKFontMetrics fontMetrics = paint.FontMetrics;
-                int characterSpacing = this.CharacterSpacing;
+                int characterSpacing = font.CharacterSpacing;
 
                 Debug.Assert(characterSpacing > 0);
 
@@ -161,22 +131,13 @@ namespace Texart.Builtin.Renderers
             }
         }
 
-        public FontRenderer(SKTypeface typeface)
+        public FontRenderer(Font font)
         {
-            if (typeface == null) { throw new ArgumentNullException(nameof(typeface)); }
-            this.Typeface = typeface;
+            if (font == null) { throw new ArgumentNullException(nameof(font)); }
+            if (font.Typeface == null) { throw new ArgumentNullException(nameof(font.Typeface)); }
+            this.Font = font;
         }
 
-        public static int DefaultCharacterSpacing { get { return 8; } }
-        public static float DefaultTextSize { get { return 12f; } }
-
-        public static SKColor DefaultForegroundColor
-        {
-            get
-            {
-                return SKColors.Black;
-            }
-        }
         public static SKColor DefaultBackgroundColor
         {
             get

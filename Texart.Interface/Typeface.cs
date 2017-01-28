@@ -1,13 +1,13 @@
 ﻿using SkiaSharp;
 
-namespace Texart.ScriptInterface
+namespace Texart.Interface
 {
     public class Typeface
     {
         /// <summary>
         /// The internal reference to the underlying <code>SKTypeface</code>.
         /// </summary>
-        internal SKTypeface SkiaTypeface { get; set; }
+        public SKTypeface SkiaTypeface { get; set; }
 
         /// <summary>
         /// Creates a <code>Typeface</code> from the provided file name.

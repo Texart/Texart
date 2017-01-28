@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Texart.ScriptInterface;
+using Texart.Builtin;
+using Texart.Interface;
 
 namespace Texart
 {
@@ -14,15 +16,15 @@ namespace Texart
             using (var output = File.OpenWrite("../../../../mona1.gen.png"))
             {
                 Bitmap bitmap = Bitmap.FromFile("../../../../mona1.png");
-                int scale = Tx.GetPerfectPixelRatios(bitmap).OrderBy(val => val).First();
-                ITextGenerator textGenerator = Tx.CreateBrightnessBasedGenerator(
-                    characterSet: CharacterSets.Basic,
-                    pixelRatio: scale
+                int scale = Tx.GetPerfectPixelRatios(bitmap).OrderBy(val => val).ElementAt(1);
+                ITextGenerator textGenerator = new BrightnessBasedGenerator(
+                    characters: Tx.CharacterSets.Basic,
+                    pixelSamplingRatio: scale
                 );
-                ITextData textData = await Tx.Generate(textGenerator, bitmap);
+                ITextData textData = await textGenerator.GenerateTextAsync(bitmap);
                 Font font = Font.FromTypeface(Typeface.FromName("Consolas"));
-                ITextRenderer textRenderer = Tx.CreateFontRenderer(font);
-                await Tx.Render(textRenderer, textData, output);
+                ITextRenderer textRenderer = new FontRenderer(font);
+                await textRenderer.RenderAsync(textData, output);
             }
         }
 
