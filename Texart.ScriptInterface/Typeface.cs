@@ -39,5 +39,10 @@ namespace Texart.ScriptInterface
         /// Private constructor. Does nothing.
         /// </summary>
         private Typeface() { }
+
+        ~Typeface()
+        {
+            this.SkiaTypeface.Dispose();
+        }
     }
 }

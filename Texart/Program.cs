@@ -1,7 +1,9 @@
 ﻿using System;
 using SkiaSharp;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using Texart.ScriptInterface;
 
 namespace Texart
 {
@@ -9,36 +11,18 @@ namespace Texart
     {
         static async Task MainAsync(string[] args)
         {
-            using (SKStream stream = new SKManagedStream(File.OpenRead("../../../../mona1.png")))
-            using (FileStream output = File.OpenWrite("../../../../mona1.gen.png"))
+            using (var output = File.OpenWrite("../../../../mona1.gen.png"))
             {
-                SKBitmap bitmap = SKBitmap.Decode(stream);
-                const int scale = 2;
-                ITextGenerator textGenerator = new Builtin.Generators.BrightnessBasedGenerator(
-                    characters: new[] {
-                        ' ', ' ', ' ', ' ',
-                        '.', '.',
-                        ',', ',',
-                        '-', '-', '-',
-                        '~', '~', '~',
-                        ':', ':',
-                        ';', ';', ';',
-                        '!', '!', '!',
-                        '*', '*', '*',
-                        '=', '=', '=', '=', '=',
-                        '$', '$', '$', '$', '$', '$', '$',
-                        '#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
-                        '&', '&', '&', '&', '&', '&', '&', '&', '&', '&',
-                        '@', '@', '@', '@', '@', '@', '@', '@', '@', '@', '@', '@'
-                    },
-                    pixelSamplingRatio: scale
+                Bitmap bitmap = Bitmap.FromFile("../../../../mona1.png");
+                int scale = Tx.GetPerfectPixelRatios(bitmap).OrderBy(val => val).First();
+                ITextGenerator textGenerator = Tx.CreateBrightnessBasedGenerator(
+                    characterSet: CharacterSets.Basic,
+                    pixelRatio: scale
                 );
-                ITextData textData = await textGenerator.GenerateTextAsync(bitmap);
-                ITextRenderer textDataRenderer = new Builtin.Renderers.StringRenderer();
-                var typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold);
-                ITextRenderer imageRenderer = new Builtin.Renderers.FontRenderer(typeface, 12f, 8);
-                // await textDataRenderer.RenderAsync(textData, Console.OpenStandardOutput());
-                await imageRenderer.RenderAsync(textData, output);
+                ITextData textData = await Tx.Generate(textGenerator, bitmap);
+                Font font = Font.FromTypeface(Typeface.FromName("Consolas"));
+                ITextRenderer textRenderer = Tx.CreateFontRenderer(font);
+                await Tx.Render(textRenderer, textData, output);
             }
         }
 

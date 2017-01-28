@@ -14,35 +14,56 @@ namespace Texart.Builtin.Renderers
         public SKTypeface Typeface { get; }
 
         /// <summary>
-        /// The amount of spacing reserved for one character in the text data.
-        /// That is, each character is assigned a square grid of length
-        /// <code>CharacterSpacing</code>.
-        /// </summary>
-        public int CharacterSpacing { get; }
-
-        /// <summary>
         /// Determines if the output image should be antialiased.
         /// </summary>
         /// <see cref="SKPaint.IsAntialias"/>
-        public bool ShouldAntialias { get; }
+        public bool ShouldAntialias { get; set; }
 
         /// <summary>
         /// Determines if the output image should be dithered.
         /// </summary>
         /// <see cref="SKPaint.IsDither"/>
-        public bool ShouldDither { get; }
+        public bool ShouldDither { get; set; }
 
         /// <summary>
         /// Determines if font hinting is enabled.
         /// </summary>
         /// <see cref="SKPaint.IsAutohinted"/>
-        public bool ShouldHint { get; }
+        public bool ShouldHint { get; set; }
+
+        /// <summary>
+        /// The amount of spacing reserved for one character in the text data.
+        /// That is, each character is assigned a square grid of length
+        /// <code>CharacterSpacing</code>.
+        /// </summary>
+        public int CharacterSpacing
+        {
+            get { return this._characterSpacing; }
+            set
+            {
+                if (value <= 0) { throw new ArgumentException($"{nameof(CharacterSpacing)} must be positive"); }
+                this._characterSpacing = value;
+            }
+        }
+        private int _characterSpacing = DefaultCharacterSpacing;
 
         /// <summary>
         /// The point size of the font.
         /// </summary>
         /// <see cref="SKPaint.TextSize"/>
-        public float TextSize { get; }
+        public float TextSize
+        {
+            get { return this._textSize; }
+            set
+            {
+                if (value <= 0f) { throw new ArgumentException($"{nameof(this.TextSize)} must be positive"); }
+                this._textSize = value;
+            }
+        }
+        private float _textSize = DefaultTextSize;
+
+        public SKColor BackgroundColor { get; set; } = DefaultBackgroundColor;
+        public SKColor ForegroundColor { get; set; } = DefaultForegroundColor;
 
         /// <inheritdocs />
         public Task RenderAsync(ITextData textData, Stream outputStream)
@@ -80,6 +101,9 @@ namespace Texart.Builtin.Renderers
                 paint.SubpixelText = true;
                 paint.DeviceKerningEnabled = false;
 
+                paint.Color = this.ForegroundColor;
+                var backgroundColor = this.BackgroundColor;
+
                 int textWidth = textData.Width;
                 int textHeight = textData.Height;
 
@@ -105,6 +129,7 @@ namespace Texart.Builtin.Renderers
                 );
                 using (var canvas = new SKCanvas(bitmap))
                 {
+                    bitmap.Erase(backgroundColor);
                     var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 1 };
                     Parallel.For(0, textHeight, parallelOptions, y =>
                     {
@@ -136,23 +161,28 @@ namespace Texart.Builtin.Renderers
             }
         }
 
-        public FontRenderer(
-            SKTypeface typeface,
-            float textSize, int characterSpacing,
-            bool antialias = true,
-            bool dither = true,
-            bool hint = true)
+        public FontRenderer(SKTypeface typeface)
         {
             if (typeface == null) { throw new ArgumentNullException(nameof(typeface)); }
-            if (textSize <= 0f) { throw new ArgumentException($"{nameof(textSize)} must be positive"); }
-            if (characterSpacing <= 0) { throw new ArgumentException($"{nameof(characterSpacing)} must be positive"); }
-
             this.Typeface = typeface;
-            this.TextSize = textSize;
-            this.CharacterSpacing = characterSpacing;
-            this.ShouldAntialias = antialias;
-            this.ShouldDither = dither;
-            this.ShouldHint = hint;
+        }
+
+        public static int DefaultCharacterSpacing { get { return 8; } }
+        public static float DefaultTextSize { get { return 12f; } }
+
+        public static SKColor DefaultForegroundColor
+        {
+            get
+            {
+                return SKColors.Black;
+            }
+        }
+        public static SKColor DefaultBackgroundColor
+        {
+            get
+            {
+                return SKColors.White;
+            }
         }
     }
 }

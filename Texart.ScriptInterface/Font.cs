@@ -1,6 +1,8 @@
-﻿namespace Texart.ScriptInterface
+﻿using SkiaSharp;
+
+namespace Texart.ScriptInterface
 {
-    public struct Font
+    public class Font
     {
         /// <summary>
         /// The desired number of pixels that represents the length
@@ -15,5 +17,22 @@
         /// The underlying typeface.
         /// </summary>
         public Typeface Typeface { get; set; }
+
+        public Color Color { get; set; }
+
+        public static Font FromTypeface(Typeface typeface)
+        {
+            return new Font()
+            {
+                Typeface = typeface,
+                DesiredCharacterSpacing = DefaultCharacterSpacing,
+                TextSize = DefaultTextSize,
+                Color = DefaultColor
+            };
+        }
+
+        public static int DefaultCharacterSpacing { get { return 8; } }
+        public static float DefaultTextSize { get { return 12f; } }
+        public static Color DefaultColor { get { return new Color(SKColors.Black); } }
     }
 }

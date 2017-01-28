@@ -12,20 +12,23 @@ namespace Texart.ScriptInterface
         /// <param name="dither">Whether the font should be dithered.</param>
         /// <param name="hint">Whether the font should be hinted.</param>
         /// <returns>A renderer using a font.</returns>
-        public static ITextRenderer CreateFontRenderer(
+        public static FontRenderer CreateFontRenderer(
             Font font,
+            Color? backgroundColor = null,
             bool antialias = true,
             bool dither = true,
             bool hint = true)
         {
-            return new FontRenderer(
-                typeface: font.Typeface.SkiaTypeface,
-                textSize: font.TextSize,
-                characterSpacing: font.DesiredCharacterSpacing,
-                antialias: antialias,
-                dither: dither,
-                hint: hint
-            );
+            return new FontRenderer(typeface: font.Typeface.SkiaTypeface)
+            {
+                ForegroundColor = font.Color.SkiaColor,
+                BackgroundColor = backgroundColor.HasValue ? backgroundColor.Value.SkiaColor : FontRenderer.DefaultBackgroundColor,
+                TextSize = font.TextSize,
+                CharacterSpacing = font.DesiredCharacterSpacing,
+                ShouldAntialias = antialias,
+                ShouldDither = dither,
+                ShouldHint = hint
+            };
         }
     }
 }

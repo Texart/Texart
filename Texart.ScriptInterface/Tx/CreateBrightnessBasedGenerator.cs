@@ -5,11 +5,11 @@ namespace Texart.ScriptInterface
 {
     public static partial class Tx
     {
-        public static ITextGenerator BrightnessBasedGenerator(IEnumerable<char> characterSet, int samplingRatio = 1)
+        public static BrightnessBasedGenerator CreateBrightnessBasedGenerator(IEnumerable<char> characterSet, int pixelRatio = 1)
         {
             return new BrightnessBasedGenerator(
                 characters: characterSet,
-                pixelSamplingRatio: samplingRatio
+                pixelSamplingRatio: pixelRatio
             );
         }
     }
