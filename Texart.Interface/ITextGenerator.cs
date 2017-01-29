@@ -8,17 +8,18 @@ namespace Texart.Interface
     /// some configuration options.
     /// </summary>
     /// <see cref="ITextData"/>
+    /// <see cref="ITextGenerator"/>
     public interface ITextGenerator
     {
         /// <summary>
-        /// The available characters that will be used in the generated text.
+        /// Gets the available characters that will be used in the generated text.
         /// This listed shall be sorted from brightest characters to darkest characters.
         /// The definitions of dark and bright are implementation-defined.
         /// </summary>
         IList<char> Characters { get; }
 
         /// <summary>
-        /// The ratio of source resolution to generated resolution. That is, one
+        /// Gets the ratio of source resolution to generated resolution. That is, one
         /// pixel in the generated text will come from sampling <code>PixelSamplingRation</code>
         /// squared pixels.
         /// For example, if <code>PixelSamplingRatio</code> is <code>2</code>, then <code>4</code>

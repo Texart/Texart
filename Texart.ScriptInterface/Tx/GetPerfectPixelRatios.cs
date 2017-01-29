@@ -17,7 +17,8 @@ namespace Texart.ScriptInterface
             Debug.Assert(width > 0);
             Debug.Assert(height > 0);
 
-            // All common factors are <= the greatest common factor by definition
+            // All common factors are <= the greatest common factor by definition.
+            // So listing all factors of the gcd is sufficient.
             int gcd = GetPerfectPixelRatios__Gcd(width, height);
             Debug.Assert(gcd >= 1);
 

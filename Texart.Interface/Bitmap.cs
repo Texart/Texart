@@ -5,6 +5,7 @@ namespace Texart.Interface
 {
     public class Bitmap
     {
+        [SkiaProperty]
         public SKBitmap SkiaBitmap { get; set; }
 
         public int Width { get { return this.SkiaBitmap.Width; } }

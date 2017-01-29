@@ -53,6 +53,7 @@
     <Compile Include="ITextRenderer.cs" />
     <Compile Include="ITextGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SkiaPropertyAttribute.cs" />
     <Compile Include="Typeface.cs" />
   </ItemGroup>
   <ItemGroup>

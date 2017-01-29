@@ -3,6 +3,12 @@ using System.Threading.Tasks;
 
 namespace Texart.Interface
 {
+    /// <summary>
+    /// An <code>ITextRenderer</code> writes some text data into an output stream
+    /// in an implementation-defined format.
+    /// </summary>
+    /// <see cref="ITextData"/>
+    /// <see cref="ITextGenerator"/>
     public interface ITextRenderer
     {
         /// <summary>

@@ -2,11 +2,18 @@
 
 namespace Texart.Interface
 {
+    /// <summary>
+    /// A <code>Typeface</code> represents a generic typeface as in typography.
+    /// For example: "Consolas", "Times New Roman". A typeface does not define text
+    /// sizes or weights.
+    /// </summary>
+    /// <see cref="Font"/>
     public class Typeface
     {
         /// <summary>
         /// The internal reference to the underlying <code>SKTypeface</code>.
         /// </summary>
+        [SkiaProperty]
         public SKTypeface SkiaTypeface { get; set; }
 
         /// <summary>
