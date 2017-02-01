@@ -54,9 +54,9 @@ namespace Texart.Builtin
             {
                 if (disposing)
                 {
-                    Bitmap.UnlockPixels();
+                    // we don't have any unmanaged resources...
                 }
-                // we don't have any unmanaged resources...
+                Bitmap.UnlockPixels();
             }
 
             /// <inheritdocs />
