@@ -36,9 +36,7 @@ namespace Texart.Builtin
                 }
             }
 
-            // We don't have .NET 4.6 :(
-            // TODO: change this when we move to .NET 4.6
-            return Task.FromResult(0);
+            return Task.CompletedTask;
         }
 
         /// <summary>

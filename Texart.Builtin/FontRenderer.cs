@@ -46,8 +46,7 @@ namespace Texart.Builtin
                 image.Encode().SaveTo(outputStream);
             }
 
-            // TODO: change this when we move to .NET 4.6
-            return Task.FromResult(0);
+            return Task.CompletedTask;
         }
 
         /// <summary>
