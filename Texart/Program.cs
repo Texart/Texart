@@ -13,10 +13,10 @@ namespace Texart
     {
         static async Task MainAsync(string[] args)
         {
-            using (var output = File.OpenWrite("../../../../mona1.gen.png"))
+            using (var output = File.OpenWrite("../../../../mona.gen.png"))
             {
-                Bitmap bitmap = Bitmap.FromFile("../../../../mona1.png");
-                int scale = Tx.GetPerfectPixelRatios(bitmap).OrderBy(val => val).ElementAt(1);
+                Bitmap bitmap = Bitmap.FromFile("../../../../mona.png");
+                int scale = Tx.GetPerfectPixelRatios(bitmap).OrderBy(val => val).ElementAt(0);
                 ITextGenerator textGenerator = new BrightnessBasedGenerator(
                     characters: Tx.CharacterSets.Basic,
                     pixelSamplingRatio: scale
