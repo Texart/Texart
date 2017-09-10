@@ -27,7 +27,7 @@ namespace Texart.Builtin
         public sealed class LockedBitmapAccessor : IDisposable
         {
             /// <summary>
-            /// The locked bitmap
+            /// Get the locked bitmap.
             /// </summary>
             public SKBitmap Bitmap { get; }
 
@@ -38,31 +38,15 @@ namespace Texart.Builtin
             internal LockedBitmapAccessor(SKBitmap bitmap)
             {
                 Debug.Assert(bitmap != null);
-                Bitmap = bitmap;
+                this.Bitmap = bitmap;
 
-                Bitmap.LockPixels();
+                this.Bitmap.LockPixels();
             }
 
             /// <inheritdocs/>
             public void Dispose()
             {
-                this.Dispose(true);
-                GC.SuppressFinalize(this);
-            }
-
-            private void Dispose(bool disposing)
-            {
-                if (disposing)
-                {
-                    Bitmap.UnlockPixels();
-                }
-                // we don't have any unmanaged resources...
-            }
-
-            /// <inheritdocs />
-            ~LockedBitmapAccessor()
-            {
-                this.Dispose(false);
+                this.Bitmap.UnlockPixels();
             }
         }
     }
