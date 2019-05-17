@@ -19,6 +19,9 @@ namespace Texart.Scripting.Tests
             [Test]
             public void AllowsNumbers() => AssertValidScheme("h0t");
 
+            [Test]
+            public void AllowsHyphen() => AssertValidScheme("hello-world");
+
             private void AssertValidScheme(string scheme) =>
                 Assert.DoesNotThrow(() => new SourceReferenceScheme(scheme));
         }
@@ -54,6 +57,12 @@ namespace Texart.Scripting.Tests
 
             [Test]
             public void RejectsUnderscore() => AssertInvalidScheme("hel_lo");
+
+            [Test]
+            public void RejectsColon() => AssertInvalidScheme("he:lo");
+
+            [Test]
+            public void RejectsColonAtEnd() => AssertInvalidScheme("hello:");
 
             private void AssertInvalidScheme(string scheme)
             {
