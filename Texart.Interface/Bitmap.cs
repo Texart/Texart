@@ -8,8 +8,8 @@ namespace Texart.Interface
         [SkiaProperty]
         public SKBitmap SkiaBitmap { get; set; }
 
-        public int Width { get { return this.SkiaBitmap.Width; } }
-        public int Height { get { return this.SkiaBitmap.Height; } }
+        public int Width => this.SkiaBitmap.Width;
+        public int Height => this.SkiaBitmap.Height;
 
         public static Bitmap FromFile(string fileName)
         {
