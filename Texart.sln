@@ -1,46 +1,62 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart", "Texart\Texart.csproj", "{0E5B1D32-D017-41DC-80E3-AEB594702463}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart", "Texart\Texart.csproj", "{2C0D9F96-71AE-4C51-9C8E-7AEB4450839F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{79D5AE08-BB44-4AAA-A231-BE92A16198D8} = {79D5AE08-BB44-4AAA-A231-BE92A16198D8}
+		{E558BD10-8E2C-4EBC-812F-6559CBC7F8FD} = {E558BD10-8E2C-4EBC-812F-6559CBC7F8FD}
+		{88AC2F5A-F5D9-41A2-A4D0-DA33C767BEFB} = {88AC2F5A-F5D9-41A2-A4D0-DA33C767BEFB}
+		{06996F5C-DAA7-4280-AF55-8C020FB88DA7} = {06996F5C-DAA7-4280-AF55-8C020FB88DA7}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart.Interface", "Texart.Interface\Texart.Interface.csproj", "{D51E61D8-1DDC-419A-AD7B-98F76C99A05A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart.Scripting", "Texart.Scripting\Texart.Scripting.csproj", "{79D5AE08-BB44-4AAA-A231-BE92A16198D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart.Builtin", "Texart.Builtin\Texart.Builtin.csproj", "{0CAC3BD4-65FA-46CE-AA22-83874C994AE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart.ScriptInterface", "Texart.ScriptInterface\Texart.ScriptInterface.csproj", "{06996F5C-DAA7-4280-AF55-8C020FB88DA7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E558BD10-8E2C-4EBC-812F-6559CBC7F8FD} = {E558BD10-8E2C-4EBC-812F-6559CBC7F8FD}
+		{88AC2F5A-F5D9-41A2-A4D0-DA33C767BEFB} = {88AC2F5A-F5D9-41A2-A4D0-DA33C767BEFB}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart.ScriptInterface", "Texart.ScriptInterface\Texart.ScriptInterface.csproj", "{63A521E4-26B7-4992-87A4-F9B4A519BE3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart.Builtin", "Texart.Builtin\Texart.Builtin.csproj", "{88AC2F5A-F5D9-41A2-A4D0-DA33C767BEFB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E558BD10-8E2C-4EBC-812F-6559CBC7F8FD} = {E558BD10-8E2C-4EBC-812F-6559CBC7F8FD}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart.Scripting", "Texart.Scripting\Texart.Scripting.csproj", "{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart.Interface", "Texart.Interface\Texart.Interface.csproj", "{E558BD10-8E2C-4EBC-812F-6559CBC7F8FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Release|x64 = Release|x64
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0E5B1D32-D017-41DC-80E3-AEB594702463}.Debug|x64.ActiveCfg = Debug|x64
-		{0E5B1D32-D017-41DC-80E3-AEB594702463}.Debug|x64.Build.0 = Debug|x64
-		{0E5B1D32-D017-41DC-80E3-AEB594702463}.Release|x64.ActiveCfg = Release|x64
-		{0E5B1D32-D017-41DC-80E3-AEB594702463}.Release|x64.Build.0 = Release|x64
-		{D51E61D8-1DDC-419A-AD7B-98F76C99A05A}.Debug|x64.ActiveCfg = Debug|x64
-		{D51E61D8-1DDC-419A-AD7B-98F76C99A05A}.Debug|x64.Build.0 = Debug|x64
-		{D51E61D8-1DDC-419A-AD7B-98F76C99A05A}.Release|x64.ActiveCfg = Release|x64
-		{D51E61D8-1DDC-419A-AD7B-98F76C99A05A}.Release|x64.Build.0 = Release|x64
-		{0CAC3BD4-65FA-46CE-AA22-83874C994AE7}.Debug|x64.ActiveCfg = Debug|x64
-		{0CAC3BD4-65FA-46CE-AA22-83874C994AE7}.Debug|x64.Build.0 = Debug|x64
-		{0CAC3BD4-65FA-46CE-AA22-83874C994AE7}.Release|x64.ActiveCfg = Release|x64
-		{0CAC3BD4-65FA-46CE-AA22-83874C994AE7}.Release|x64.Build.0 = Release|x64
-		{63A521E4-26B7-4992-87A4-F9B4A519BE3B}.Debug|x64.ActiveCfg = Debug|x64
-		{63A521E4-26B7-4992-87A4-F9B4A519BE3B}.Debug|x64.Build.0 = Debug|x64
-		{63A521E4-26B7-4992-87A4-F9B4A519BE3B}.Release|x64.ActiveCfg = Release|x64
-		{63A521E4-26B7-4992-87A4-F9B4A519BE3B}.Release|x64.Build.0 = Release|x64
-		{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}.Debug|x64.ActiveCfg = Debug|x64
-		{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}.Debug|x64.Build.0 = Debug|x64
-		{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}.Release|x64.ActiveCfg = Release|x64
-		{422EA285-8CD6-40B8-8D1F-C7D3F43019C9}.Release|x64.Build.0 = Release|x64
+		{2C0D9F96-71AE-4C51-9C8E-7AEB4450839F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C0D9F96-71AE-4C51-9C8E-7AEB4450839F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C0D9F96-71AE-4C51-9C8E-7AEB4450839F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C0D9F96-71AE-4C51-9C8E-7AEB4450839F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79D5AE08-BB44-4AAA-A231-BE92A16198D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79D5AE08-BB44-4AAA-A231-BE92A16198D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79D5AE08-BB44-4AAA-A231-BE92A16198D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79D5AE08-BB44-4AAA-A231-BE92A16198D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06996F5C-DAA7-4280-AF55-8C020FB88DA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06996F5C-DAA7-4280-AF55-8C020FB88DA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06996F5C-DAA7-4280-AF55-8C020FB88DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06996F5C-DAA7-4280-AF55-8C020FB88DA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88AC2F5A-F5D9-41A2-A4D0-DA33C767BEFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88AC2F5A-F5D9-41A2-A4D0-DA33C767BEFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88AC2F5A-F5D9-41A2-A4D0-DA33C767BEFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88AC2F5A-F5D9-41A2-A4D0-DA33C767BEFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E558BD10-8E2C-4EBC-812F-6559CBC7F8FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E558BD10-8E2C-4EBC-812F-6559CBC7F8FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E558BD10-8E2C-4EBC-812F-6559CBC7F8FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E558BD10-8E2C-4EBC-812F-6559CBC7F8FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81F196F3-F824-419A-AE9C-F16676BB4090}
 	EndGlobalSection
 EndGlobal

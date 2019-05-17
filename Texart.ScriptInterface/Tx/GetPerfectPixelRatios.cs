@@ -19,7 +19,7 @@ namespace Texart.ScriptInterface
 
             // All common factors are <= the greatest common factor by definition.
             // So listing all factors of the gcd is sufficient.
-            int gcd = GetPerfectPixelRatios__Gcd(width, height);
+            int gcd = Gcd(width, height);
             Debug.Assert(gcd >= 1);
 
             int checkMax = (int)Math.Sqrt(gcd);
@@ -40,7 +40,7 @@ namespace Texart.ScriptInterface
             }
         }
 
-        private static int GetPerfectPixelRatios__Gcd(int a, int b)
+        private static int Gcd(int a, int b)
         {
             // Generic Euclidean GCD algorithm
             while (b != 0)

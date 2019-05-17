@@ -11,11 +11,11 @@ namespace Texart
 {
     class Program
     {
-        static async Task MainAsync(string[] args)
+        static async Task Main(string[] args)
         {
-            using (var output = File.OpenWrite("../../../../mona.gen.png"))
+            using (var output = File.OpenWrite("../../../../meme.gen.png"))
             {
-                Bitmap bitmap = Bitmap.FromFile("../../../../mona.png");
+                Bitmap bitmap = Bitmap.FromFile("../../../../meme.jpg");
                 int scale = Tx.GetPerfectPixelRatios(bitmap).OrderBy(val => val).ElementAt(0);
                 ITextGenerator textGenerator = new BrightnessBasedGenerator(
                     characters: Tx.CharacterSets.Basic,
@@ -26,15 +26,6 @@ namespace Texart
                 ITextRenderer textRenderer = new FontRenderer(font);
                 await textRenderer.RenderAsync(textData, output);
             }
-        }
-
-        static void Main(string[] args)
-        {
-            var mainTask = Task.Run(async () =>
-            {
-                await MainAsync(args);
-            });
-            mainTask.GetAwaiter().GetResult();
         }
     }
 }

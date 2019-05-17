@@ -26,7 +26,7 @@ namespace Texart.Builtin
         /// The length of this array must match the provided <code>width</code> and
         /// <code>height</code>. That is, <code>characters.length == width * height</code>.
         /// </summary>
-        /// <param name="characters">The underyling array</param>
+        /// <param name="characters">The underlying array</param>
         /// <param name="width">The width of the text data</param>
         /// <param name="height">The height of the text data</param>
         public ArrayTextData(char[] characters, int width, int height)
@@ -52,7 +52,7 @@ namespace Texart.Builtin
         }
 
         /// <summary>
-        /// Asserts that the specificed bounds are within the bounds of the underlying data.
+        /// Asserts that the specified bounds are within the bounds of the underlying data.
         /// </summary>
         /// <param name="x">The X coordinate</param>
         /// <param name="y">The Y coordinate</param>

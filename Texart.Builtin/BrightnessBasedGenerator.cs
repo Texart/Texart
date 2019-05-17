@@ -68,44 +68,39 @@ namespace Texart.Builtin
             var brightnessValues = new float[targetWidth * targetHeight];
 
             // process chunks in parallel
-            using (var lockedBitmapAccessor = BitmapHelpers.LockedBitmap(bitmap))
+            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = -1 };
+            Parallel.For(0, targetWidth, parallelOptions, horizChunkIndex =>
             {
-                bitmap = lockedBitmapAccessor.Bitmap;
-
-                var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = -1 };
-                Parallel.For(0, targetWidth, parallelOptions, horizChunkIndex =>
+                // the x position of the pixel at the top left of this chunk
+                var chunkX = horizChunkIndex * pixelSamplingRatio;
+                Parallel.For(0, targetHeight, parallelOptions, vertChunkIndex =>
                 {
-                    // the x position of the pixel at the top left of this chunk
-                    var chunkX = horizChunkIndex * pixelSamplingRatio;
-                    Parallel.For(0, targetHeight, parallelOptions, vertChunkIndex =>
-                    {
-                        // the y position of the pixel at the top left of this chunk
-                        var chunkY = vertChunkIndex * pixelSamplingRatio;
-                        // the current chunk's coordinate projected to an index for a 1D array
-                        var chunkCoordProjectedIndex = vertChunkIndex * targetWidth + horizChunkIndex;
+                    // the y position of the pixel at the top left of this chunk
+                    var chunkY = vertChunkIndex * pixelSamplingRatio;
+                    // the current chunk's coordinate projected to an index for a 1D array
+                    var chunkCoordProjectedIndex = vertChunkIndex * targetWidth + horizChunkIndex;
 
-                        // we iterate over this square chunk and accumulate the brightness
-                        // value of each pixel. This chunk is almost like a bitmap in itself.
-                        // We could to do a parallel accumulate, but we won't do that for now. Unless
-                        // the Bitmap is huge or pixelSamplingRatio is tiny, each chunk should be small
-                        // enough.
-                        float accumulatedBrightness = 0f;
-                        for (var offsetX = 0; offsetX < pixelSamplingRatio; ++offsetX)
+                    // we iterate over this square chunk and accumulate the brightness
+                    // value of each pixel. This chunk is almost like a bitmap in itself.
+                    // We could to do a parallel accumulate, but we won't do that for now. Unless
+                    // the Bitmap is huge or pixelSamplingRatio is tiny, each chunk should be small
+                    // enough.
+                    float accumulatedBrightness = 0f;
+                    for (var offsetX = 0; offsetX < pixelSamplingRatio; ++offsetX)
+                    {
+                        for (var offsetY = 0; offsetY < pixelSamplingRatio; ++offsetY)
                         {
-                            for (var offsetY = 0; offsetY < pixelSamplingRatio; ++offsetY)
-                            {
-                                SKColor pixelColor = bitmap.GetPixel(chunkX + offsetX, chunkY + offsetY);
-                                float alphaFactor = (pixelColor.Alpha / 255f);
-                                float rgbAverage = (pixelColor.Red + pixelColor.Green + pixelColor.Blue) / 3f;
-                                accumulatedBrightness += rgbAverage * alphaFactor;
-                            }
+                            SKColor pixelColor = bitmap.GetPixel(chunkX + offsetX, chunkY + offsetY);
+                            float alphaFactor = (pixelColor.Alpha / 255f);
+                            float rgbAverage = (pixelColor.Red + pixelColor.Green + pixelColor.Blue) / 3f;
+                            accumulatedBrightness += rgbAverage * alphaFactor;
                         }
-                        // set the chunk's value to the average
-                        var averageBrightness = accumulatedBrightness / pixelsPerChunk;
-                        brightnessValues[chunkCoordProjectedIndex] = averageBrightness;
-                    });
+                    }
+                    // set the chunk's value to the average
+                    var averageBrightness = accumulatedBrightness / pixelsPerChunk;
+                    brightnessValues[chunkCoordProjectedIndex] = averageBrightness;
                 });
-            }
+            });
 
             return brightnessValues;
         }
