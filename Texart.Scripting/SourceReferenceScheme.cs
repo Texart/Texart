@@ -9,7 +9,7 @@ namespace Texart.Scripting
         /// <summary>
         /// All valid schemes must match this regex
         /// </summary>
-        private static readonly Regex SchemeRegex = new Regex("[a-zA-Z][a-zA-Z\\-0-9]", RegexOptions.Compiled);
+        private static readonly Regex SchemeRegex = new Regex("^[a-zA-Z][a-zA-Z\\-0-9]*$", RegexOptions.Compiled);
 
         /// <summary>
         /// The underlying string.
