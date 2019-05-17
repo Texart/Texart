@@ -5,27 +5,55 @@ namespace Texart.Scripting.Tests
 {
     internal static class SourceReferenceSchemeTests
     {
+        private class AllowanceTests
+        {
+            [Test]
+            public void AllowsSimple() => AssertValidScheme("hello");
+
+            [Test]
+            public void AllowsSingleCharacter() => AssertValidScheme("h");
+
+            [Test]
+            public void AllowsTwoCharacters() => AssertValidScheme("he");
+
+            [Test]
+            public void AllowsNumbers() => AssertValidScheme("h0t");
+
+            private void AssertValidScheme(string scheme) =>
+                Assert.DoesNotThrow(() => new SourceReferenceScheme(scheme));
+        }
+
         private class RejectionTests
         {
             [Test]
-            public void RejectsEmpty() =>
-                AssertInvalidScheme(string.Empty);
+            public void RejectsEmpty() => AssertInvalidScheme(string.Empty);
 
             [Test]
-            public void RejectsWhitespace() =>
+            public void RejectsWhitespace() {
                 AssertInvalidScheme("hello world");
+                AssertInvalidScheme("hello\tworld");
+                AssertInvalidScheme("\nhello");
+                AssertInvalidScheme("\r\nhello");
+                AssertInvalidScheme("hello\n");
+                AssertInvalidScheme("hello\r\n");
+                AssertInvalidScheme("hello\n\r");
+                AssertInvalidScheme("hello\nworld");
+            }
 
             [Test]
-            public void RejectsHyphenAtStart() =>
-                AssertInvalidScheme("-hello");
+            public void RejectsHyphenAtStart() => AssertInvalidScheme("-hello");
 
             [Test]
-            public void RejectsNumberAtStart() =>
-                AssertInvalidScheme("4hello");
+            public void RejectsOnlyHyphen() => AssertInvalidScheme("-");
 
             [Test]
-            public void RejectsUnderscore() =>
-                AssertInvalidScheme("hel_lo");
+            public void RejectsNumberAtStart() => AssertInvalidScheme("4hello");
+
+            [Test]
+            public void RejectsOnlyNumber() => AssertInvalidScheme("0");
+
+            [Test]
+            public void RejectsUnderscore() => AssertInvalidScheme("hel_lo");
 
             private void AssertInvalidScheme(string scheme)
             {
