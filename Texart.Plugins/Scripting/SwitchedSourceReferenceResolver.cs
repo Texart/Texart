@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
@@ -15,12 +16,14 @@ namespace Texart.Plugins.Scripting
         private readonly SourceReferenceResolver _defaultResolver;
         private readonly IImmutableDictionary<SourceReferenceScheme, SourceReferenceResolver> _resolversByScheme;
 
-        public SwitchedSourceReferenceResolver(SourceReferenceResolver defaultResolver, IImmutableDictionary<string, SourceReferenceResolver> resolversByScheme) :
-            this(defaultResolver, ToSchemeKeyDictionary(resolversByScheme))
+        public SwitchedSourceReferenceResolver(SourceReferenceResolver defaultResolver, ImmutableDictionary<string, SourceReferenceResolver> resolversByScheme)
         {
+            this._defaultResolver = defaultResolver ?? throw new ArgumentNullException(nameof(defaultResolver));
+            this._resolversByScheme =
+                ToSchemeKeyDictionary(resolversByScheme ?? throw new ArgumentNullException(nameof(resolversByScheme)));
         }
 
-        public SwitchedSourceReferenceResolver(SourceReferenceResolver defaultResolver, IImmutableDictionary<SourceReferenceScheme, SourceReferenceResolver> resolversByScheme)
+        public SwitchedSourceReferenceResolver(SourceReferenceResolver defaultResolver, ImmutableDictionary<SourceReferenceScheme, SourceReferenceResolver> resolversByScheme)
         {
             this._defaultResolver = defaultResolver ?? throw new ArgumentNullException(nameof(defaultResolver));
             this._resolversByScheme = resolversByScheme ?? throw new ArgumentNullException(nameof(resolversByScheme));
@@ -67,6 +70,10 @@ namespace Texart.Plugins.Scripting
         /// <inheritdoc />
         public override bool Equals(object other)
         {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
             switch (other)
             {
                 case SwitchedSourceReferenceResolver resolver when resolver.GetType() == this.GetType():
@@ -79,9 +86,14 @@ namespace Texart.Plugins.Scripting
         /// <inheritdoc />
         public override int GetHashCode() => HashCode.Combine(_defaultResolver, _resolversByScheme);
 
-        private static IImmutableDictionary<SourceReferenceScheme, T> ToSchemeKeyDictionary<T>(IImmutableDictionary<string, T> dictionary) =>
-            dictionary.ToImmutableDictionary(
+        private static ImmutableDictionary<SourceReferenceScheme, T> ToSchemeKeyDictionary<T>(ImmutableDictionary<string, T> dictionary)
+        {
+            return dictionary.ToImmutableDictionary(
                 keyValuePair => new SourceReferenceScheme(keyValuePair.Key),
                 keyValuePair => keyValuePair.Value);
+        }
+
+        private static ImmutableDictionary<TKey, TValue> EmptyIfNull<TKey, TValue>(ImmutableDictionary<TKey, TValue> dictionary) =>
+            dictionary ?? ImmutableDictionary<TKey, TValue>.Empty;
     }
 }
