@@ -5,10 +5,10 @@ using Texart.Interface;
 namespace Texart.Builtin.Internal
 {
     /// <summary>
-    /// An implementation of <code>ITextData</code> which exposes an underlying
+    /// An implementation of <code>ITextBitmap</code> which exposes an underlying
     /// one dimensional array.
     /// </summary>
-    internal sealed class ArrayTextData : ITextData
+    internal sealed class ArrayTextBitmap : ITextBitmap
     {
         /// <inheritdoc/>
         public int Height { get; }
@@ -22,14 +22,14 @@ namespace Texart.Builtin.Internal
         private char[] Characters { get; }
 
         /// <summary>
-        /// Constructs an <code>ArrayTextData</code> given the underlying array to use.
+        /// Constructs an <code>ArrayTextBitmap</code> given the underlying array to use.
         /// The length of this array must match the provided <code>width</code> and
         /// <code>height</code>. That is, <code>characters.length == width * height</code>.
         /// </summary>
         /// <param name="characters">The underlying array</param>
         /// <param name="width">The width of the text data</param>
         /// <param name="height">The height of the text data</param>
-        public ArrayTextData(char[] characters, int width, int height)
+        public ArrayTextBitmap(char[] characters, int width, int height)
         {
             Debug.Assert(characters != null);
             Debug.Assert(width > 0);

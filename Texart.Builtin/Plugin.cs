@@ -9,25 +9,25 @@ namespace Texart.Builtin
 {
     public sealed class Plugin : IPlugin
     {
-        private readonly IDictionary<string, Factory<ITextGenerator>> _generators =
-            new Dictionary<string, Factory<ITextGenerator>>
+        private readonly IDictionary<string, Factory<ITextBitmapGenerator>> _generators =
+            new Dictionary<string, Factory<ITextBitmapGenerator>>
             {
-                { typeof(BrightnessBasedGenerator).Name, BrightnessBasedGenerator.Create },
+                { typeof(BrightnessBasedBitmapGenerator).Name, BrightnessBasedBitmapGenerator.Create },
             };
 
-        private readonly Factory<ITextGenerator> _defaultGenerator = BrightnessBasedGenerator.Create;
+        private readonly Factory<ITextBitmapGenerator> _defaultGenerator = BrightnessBasedBitmapGenerator.Create;
 
-        private readonly IDictionary<string, Factory<ITextRenderer>> _renderers =
-            new Dictionary<string, Factory<ITextRenderer>>
+        private readonly IDictionary<string, Factory<ITextBitmapRenderer>> _renderers =
+            new Dictionary<string, Factory<ITextBitmapRenderer>>
             {
-                { typeof(StringRenderer).Name, StringRenderer.Create },
-                { typeof(FontRenderer).Name, FontRenderer.Create },
+                { typeof(StringBitmapRenderer).Name, StringBitmapRenderer.Create },
+                { typeof(FontBitmapRenderer).Name, FontBitmapRenderer.Create },
             };
-        private readonly Factory<ITextRenderer> _defaultRenderer = FontRenderer.Create;
+        private readonly Factory<ITextBitmapRenderer> _defaultRenderer = FontBitmapRenderer.Create;
 
         public IEnumerable<string> AvailableGenerators => _generators.Keys;
 
-        public Factory<ITextGenerator> LookupGenerator(string name)
+        public Factory<ITextBitmapGenerator> LookupGenerator(string name)
         {
             if (name == null)
             {
@@ -37,12 +37,12 @@ namespace Texart.Builtin
             {
                 return factory;
             }
-            throw new ArgumentException($"No {nameof(ITextGenerator)} named '{name}' exists.");
+            throw new ArgumentException($"No {nameof(ITextBitmapGenerator)} named '{name}' exists.");
         }
 
         public IEnumerable<string> AvailableRenderers => _renderers.Keys;
 
-        public Factory<ITextRenderer> LookupRenderer(string name)
+        public Factory<ITextBitmapRenderer> LookupRenderer(string name)
         {
             if (name == null)
             {
@@ -52,7 +52,7 @@ namespace Texart.Builtin
             {
                 return factory;
             }
-            throw new ArgumentException($"No {nameof(ITextRenderer)} named '{name}' exists.");
+            throw new ArgumentException($"No {nameof(ITextBitmapRenderer)} named '{name}' exists.");
         }
     }
 }

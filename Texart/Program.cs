@@ -19,21 +19,21 @@ namespace Texart
                 IPlugin builtinPlugin = new Builtin.Plugin();
 
                 // TODO: use JSON stream instead of null
-                var textGenerator = builtinPlugin.LookupGenerator("BrightnessBasedGenerator")(null);
-                var textData = await textGenerator.GenerateTextAsync(bitmap);
-                var textRenderer = builtinPlugin.LookupRenderer("FontRenderer")(null);
-                await textRenderer.RenderAsync(textData, output);
+                var textBitmapGenerator = builtinPlugin.LookupGenerator("BrightnessBasedBitmapGenerator")(null);
+                var textBitmap = await textBitmapGenerator.GenerateAsync(bitmap);
+                var textBitmapRenderer = builtinPlugin.LookupRenderer("FontBitmapRenderer")(null);
+                await textBitmapRenderer.RenderAsync(textBitmap, output);
 
                 //Bitmap bitmap = Bitmap.FromFile("../../../../meme.jpg");
                 //int scale = Tx.GetPerfectPixelRatios(bitmap).OrderBy(val => val).ElementAt(0);
-                //ITextGenerator textGenerator = new BrightnessBasedGenerator(
+                //ITextBitmapGenerator textBitmapGenerator = new BrightnessBasedBitmapGenerator(
                 //    characters: Tx.CharacterSets.Basic,
                 //    pixelSamplingRatio: scale
                 //);
-                //ITextData textData = await textGenerator.GenerateTextAsync(bitmap);
+                //ITextBitmap textBitmap = await textBitmapGenerator.GenerateAsync(bitmap);
                 //Font font = Font.FromTypeface(Typeface.FromName("Consolas"));
-                //ITextRenderer textRenderer = new FontRenderer(font);
-                //await textRenderer.RenderAsync(textData, output);
+                //ITextBitmapRenderer textBitmapRenderer = new FontBitmapRenderer(font);
+                //await textBitmapRenderer.RenderAsync(textBitmap, output);
             }
         }
     }
