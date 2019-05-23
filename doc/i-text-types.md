@@ -17,3 +17,6 @@ In the future, `ITextBitmap` may expose more information about each "pixel" (suc
 ## `ITextBitmapRenderer`
 
 `ITextBitmapRenderer` serializes `ITextBitmap` to an output `Stream`. The format of the output is implementation-defined.
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTEwMDQzMzU2NzBdfQ==
+-->
