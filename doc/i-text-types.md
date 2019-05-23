@@ -10,7 +10,9 @@ st->op->cond
 cond(yes)->e
 cond(no)->op
 ```
-
+```bash
+cd hello
+```
 ```sequence
 Alice->Bob: Hello Bob, how are you?
 Note right of Bob: Bob thinks
@@ -35,5 +37,5 @@ In the future, `ITextBitmap` may expose more information about each "pixel" (suc
 
 `ITextBitmapRenderer` serializes `ITextBitmap` to an output `Stream`. The format of the output is implementation-defined.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU4MzUxNzcyMF19
+eyJoaXN0b3J5IjpbODgyNDU2MTA5LDE1ODM1MTc3MjBdfQ==
 -->
