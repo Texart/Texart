@@ -1,4 +1,4 @@
-# `IText*` types
+# `IText*` Types
 
 ## `ITextBitmap`
 
