@@ -11,7 +11,7 @@
 - [ ] Come up with a documentation plan (e.g. publishing to GitHub Pages).
 - [ ] How to handle errors in plugins?
 - [ ] Implement argument parsing.
-  - [ ] Group arugments by prefixes to figure out which ones are passed to plugins. (e.g `--generator-*` and `--renderer-*`).
+  - [ ] Group arguments by prefixes to figure out which ones are passed to plugins. (e.g `--generator-*` and `--renderer-*`).
   - Add interfaces in `Texart.Api` to support common CLI arguments deserialization.
 - [X] ~~Investigate using JSON for communication with plugins.~~ Looks good for now.
   - [X] ~~Investigate whether `Stream` is the right type (or maybe `JObject/JArray`).~~ Decided on `Lazy<JToken>`.
