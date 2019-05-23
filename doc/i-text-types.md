@@ -2,7 +2,7 @@
 
 ```mermaid
 graph LR;
-  
+  B[Image Bitmap
   G[ITextBitmapGenerator]-- generates -->D[ITextBitmap];
   A-->C;
 ```
@@ -25,5 +25,5 @@ In the future, `ITextBitmap` may expose more information about each "pixel" (suc
 
 `ITextBitmapRenderer` serializes `ITextBitmap` to an output `Stream`. The format of the output is implementation-defined.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk1NzI3NjU0NCwxNTgzNTE3NzIwXX0=
+eyJoaXN0b3J5IjpbLTIwMTY0OTU4ODUsMTU4MzUxNzcyMF19
 -->
