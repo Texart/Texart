@@ -1,9 +1,5 @@
 # `IText*` Types
 
-<p align="center">
-  <img src='./i-text-types.1.svg' width='300' />
-</p>
-
 ## `ITextBitmap`
 
 `ITextBitmap` is a bitmap of character data – like `char[,]`. The API exposes an indexer, `char this[int x, int y]` just like `char[,]` (2D `char` array).
@@ -21,3 +17,11 @@ In the future, `ITextBitmap` may expose more information about each "pixel" (suc
 ## `ITextBitmapRenderer`
 
 `ITextBitmapRenderer` serializes `ITextBitmap` to an output `Stream`. The format of the output is implementation-defined.
+
+## Diagram
+
+<!-- markdownlint-disable MD033 -->
+<p align="center">
+  <img src='./i-text-types.1.svg' width='400' />
+</p>
+<!-- markdownlint-enable MD033 -->
