@@ -11,7 +11,7 @@ namespace Texart.Plugins.Tests.Scripting
         public async Task AllowsCompilation()
         {
             const string code = @"
-#load ""hello2.csx""
+#load ""file:hello2.csx""
 return new Hello2().DoStuff();
 ";
             
