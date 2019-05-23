@@ -55,7 +55,7 @@ namespace Texart.Builtin
         /// </summary>
         /// <param name="textData">The <code>ITextData</code> to read from</param>
         /// <returns>The generated <code>SKBitmap</code></returns>
-        public SKBitmap GenerateBitmap(ITextData textData)
+        private SKBitmap GenerateBitmap(ITextData textData)
         {
             using (var paint = new SKPaint())
             {
@@ -83,7 +83,7 @@ namespace Texart.Builtin
                 Debug.Assert(characterSpacing > 0);
 
                 // bitmap may not be big enough for all text if using
-                // non-monospace characters and/or characterSize/ is not
+                // non-monospace characters and/or characterSize is not
                 // sufficient. Too bad.
                 int bitmapWidth = characterSpacing * textWidth;
                 int bitmapHeight = characterSpacing * textHeight;
@@ -137,12 +137,6 @@ namespace Texart.Builtin
             this.Font = font;
         }
 
-        public static SKColor DefaultBackgroundColor
-        {
-            get
-            {
-                return SKColors.White;
-            }
-        }
+        public static SKColor DefaultBackgroundColor => SKColors.White;
     }
 }
