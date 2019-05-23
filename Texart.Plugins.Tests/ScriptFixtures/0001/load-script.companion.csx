@@ -1,0 +1,1 @@
+int LoadScriptCompanion() => 42;
