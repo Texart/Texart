@@ -1,6 +1,8 @@
 # `IText*` Types
 
-![Mermaid](./i-text-types.1.svg)
+<p align="center">
+  <img src='./i-text-types.1.svg' width='300' />
+</p>
 
 ## `ITextBitmap`
 
