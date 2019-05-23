@@ -2,17 +2,16 @@
 
 ```mermaid
 graph LR;
-    G[ITextBitmapGenerator]-- generates -->D[ITextBitmapData];
-    A-->C;
-    B-->D;
-    C-->D;
+  
+  G[ITextBitmapGenerator]-- generates -->D[ITextBitmap];
+  A-->C;
 ```
 
 ## `ITextBitmap`
 
 `ITextBitmap` is a bitmap of character data – like `char[,]`. The API exposes an indexer, `char this[int x, int y]` just like `char[,]` (2D `char` array).
 
-The internal representation is implementation-defined. The underlying computation can be performed on the fly, or wrap around a pre-populated `char[,]`. Implementations are strongly encouraged to be immutable.
+The internal representation is implementation-defined. The underlying computation can be performed on the fly, or wrap around a pre-populated `char[,]` etc. Implementations are strongly encouraged to be immutable.
 
 A reference implementation, `ArrayTextBitmap`, is provided. The underlying data is stored as `char[]` (1D `char` array).
 
@@ -26,5 +25,5 @@ In the future, `ITextBitmap` may expose more information about each "pixel" (suc
 
 `ITextBitmapRenderer` serializes `ITextBitmap` to an output `Stream`. The format of the output is implementation-defined.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc5ODg5NDUxNSwxNTgzNTE3NzIwXX0=
+eyJoaXN0b3J5IjpbMTk1NzI3NjU0NCwxNTgzNTE3NzIwXX0=
 -->
