@@ -1,7 +1,8 @@
 using System;
 using NUnit.Framework;
+using Texart.Plugins.Scripting;
 
-namespace Texart.Scripting.Tests
+namespace Texart.Plugins.Tests.Scripting
 {
     internal static class SourceReferenceSchemeTests
     {

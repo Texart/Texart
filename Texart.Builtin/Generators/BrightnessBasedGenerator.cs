@@ -1,10 +1,12 @@
 ﻿using SkiaSharp;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
+using Texart.Builtin.Internal;
 using Texart.Interface;
 
-namespace Texart.Builtin
+namespace Texart.Builtin.Generators
 {
     public sealed class BrightnessBasedGenerator : TextGeneratorBase, ITextGenerator
     {
@@ -105,6 +107,12 @@ namespace Texart.Builtin
         public BrightnessBasedGenerator(IEnumerable<char> characters, int pixelSamplingRatio = 1)
             : base(new List<char>(characters), pixelSamplingRatio)
         {
+        }
+
+        public static BrightnessBasedGenerator Create(Stream jsonStream)
+        {
+            // TODO: Use jsonStream
+            return new BrightnessBasedGenerator(CharacterSets.Basic, 1);
         }
 
     }

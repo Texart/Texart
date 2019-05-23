@@ -6,11 +6,8 @@ namespace Texart.ScriptInterface
     {
         public static class CharacterSets
         {
-            public static IEnumerable<char> Basic
-            {
-                get
-                {
-                    return new[] {
+            public static IEnumerable<char> Basic =>
+                new[] {
                     ' ', ' ', ' ', ' ',
                     '.', '.',
                     ',', ',',
@@ -26,8 +23,6 @@ namespace Texart.ScriptInterface
                     '&', '&', '&', '&', '&', '&', '&', '&', '&', '&',
                     '@', '@', '@', '@', '@', '@', '@', '@', '@', '@', '@', '@'
                 };
-                }
-            }
         }
     }
 }

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Texart.Builtin
+namespace Texart.Builtin.Internal
 {
     internal static class PlatformHelpers
     {

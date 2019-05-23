@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
-namespace Texart.Scripting
+namespace Texart.Plugins.Scripting
 {
     public readonly struct SourceReferenceScheme : IComparable<SourceReferenceScheme>, IEquatable<SourceReferenceScheme>
     {

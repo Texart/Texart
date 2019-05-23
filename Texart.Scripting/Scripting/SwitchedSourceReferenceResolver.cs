@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace Texart.Scripting
+namespace Texart.Plugins.Scripting
 {
     /// <summary>
     /// A reference resolver that selects one of multiple resolvers based on a matching <see cref="SourceReferenceScheme"/>.

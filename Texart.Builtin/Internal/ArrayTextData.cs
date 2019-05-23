@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using Texart.Interface;
 
-namespace Texart.Builtin
+namespace Texart.Builtin.Internal
 {
     /// <summary>
     /// An implementation of <code>ITextData</code> which exposes an underlying

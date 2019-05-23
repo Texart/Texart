@@ -5,7 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Texart.Interface;
 
-namespace Texart.Builtin
+namespace Texart.Builtin.Renderers
 {
     public sealed class FontRenderer : ITextRenderer
     {
@@ -138,5 +138,11 @@ namespace Texart.Builtin
         }
 
         public static SKColor DefaultBackgroundColor => SKColors.White;
+
+        public static FontRenderer Create(Stream jsonStream)
+        {
+            // TODO: use jsonStream
+            return new FontRenderer(Interface.Font.FromTypeface(Typeface.FromName("Consolas")));
+        }
     }
 }

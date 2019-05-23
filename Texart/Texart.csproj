@@ -15,7 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Texart.Builtin\Texart.Builtin.csproj" />
     <ProjectReference Include="..\Texart.Interface\Texart.Interface.csproj" />
-    <ProjectReference Include="..\Texart.Scripting\Texart.Scripting.csproj" />
+    <ProjectReference Include="..\Texart.Scripting\Texart.Plugins.csproj" />
     <ProjectReference Include="..\Texart.ScriptInterface\Texart.ScriptInterface.csproj" />
   </ItemGroup>
 

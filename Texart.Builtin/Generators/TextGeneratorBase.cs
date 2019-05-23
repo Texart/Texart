@@ -5,7 +5,7 @@ using System;
 using System.Threading.Tasks;
 using Texart.Interface;
 
-namespace Texart.Builtin
+namespace Texart.Builtin.Generators
 {
     public abstract class TextGeneratorBase : ITextGenerator
     {

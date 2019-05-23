@@ -3,9 +3,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Texart.Builtin.Internal;
 using Texart.Interface;
 
-namespace Texart.Builtin
+namespace Texart.Builtin.Renderers
 {
     /// <summary>
     /// A renderer that simply writes the text data to the output
@@ -43,7 +44,7 @@ namespace Texart.Builtin
         /// Creates a <code>StringRenderer</code> with <code>DefaultEncoding</code>.
         /// </summary>
         /// <see cref="PlatformHelpers.DefaultEncoding"/>
-        /// <see cref="StringRenderer(Encoding)"/>
+        /// <see cref="StringRenderer(System.Text.Encoding)"/>
         /// <see cref="System.Text.Encoding"/>
         public StringRenderer()
             : this(PlatformHelpers.DefaultEncoding)
@@ -60,8 +61,13 @@ namespace Texart.Builtin
         /// </exception>
         public StringRenderer(Encoding encoding)
         {
-            if (encoding == null) { throw new ArgumentNullException(nameof(encoding)); }
-            Encoding = encoding;
+            Encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
+        }
+
+        public static StringRenderer Create(Stream jsonStream)
+        {
+            // TODO: use jsonStream
+            return new StringRenderer();
         }
     }
 }

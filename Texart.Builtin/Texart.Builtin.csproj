@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Texart.Interface\Texart.Interface.csproj" />
+    <ProjectReference Include="..\Texart.Scripting\Texart.Plugins.csproj" />
   </ItemGroup>
 
 </Project>
