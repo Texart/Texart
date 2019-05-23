@@ -1,5 +1,8 @@
 ﻿using System;
 using System.IO;
+using Microsoft.CodeAnalysis.Scripting;
+using Texart.Api;
+using Texart.Plugins.Scripting;
 
 namespace Texart.Plugins.Tests
 {
@@ -39,6 +42,25 @@ namespace Texart.Plugins.Tests
 
             return Path.Combine(GetDirectory(fixture), relativePath);
         }
+
+        /// <summary>
+        /// Loads a plugin script from the provided fixture and relative path.
+        /// </summary>
+        /// <param name="fixture">Fixture number.</param>
+        /// <param name="relativePath">The relative path from the fixture directory.</param>
+        /// <returns>Loaded script.</returns>
+        public static Script<IPlugin> LoadFrom(int fixture, string relativePath) =>
+            PluginScript.LoadFrom(GetPath(fixture, relativePath));
+
+        /// <summary>
+        /// Loads a plugin script from the provided fixture and relative path.
+        /// </summary>
+        /// <typeparam name="T">The return type of the script.</typeparam>
+        /// <param name="fixture">Fixture number.</param>
+        /// <param name="relativePath">The relative path from the fixture directory.</param>
+        /// <returns>Loaded script.</returns>
+        public static Script<T> LoadFrom<T>(int fixture, string relativePath) =>
+            PluginScript.LoadFrom<T>(GetPath(fixture, relativePath));
 
         /// <summary>
         /// Verifies that the fixture number is in range.

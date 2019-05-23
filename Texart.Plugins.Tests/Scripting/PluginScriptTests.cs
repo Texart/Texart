@@ -11,8 +11,26 @@ namespace Texart.Plugins.Tests.Scripting
         {
             const int fixture = 1;
             // TODO: set up actual tests
-            var script = PluginScript.LoadFrom(ScriptFixtures.GetPath(fixture, "hello.csx"));
+            var script = ScriptFixtures.LoadFrom(fixture, "hello.csx");
             var result = (await script.RunAsync()).ReturnValue;
+        }
+
+        [Test]
+        public async Task AllowsLoadingAssembly()
+        {
+            const int fixture = 2;
+            var script = ScriptFixtures.LoadFrom<int>(fixture, "load-assembly.csx");
+            var result = (await script.RunAsync()).ReturnValue;
+            Assert.AreEqual(42, result);
+        }
+
+        [Test]
+        public async Task AllowsLoadingAssemblyWithScheme()
+        {
+            const int fixture = 2;
+            var script = ScriptFixtures.LoadFrom<int>(fixture, "load-assembly-with-scheme.csx");
+            var result = (await script.RunAsync()).ReturnValue;
+            Assert.AreEqual(42, result);
         }
     }
 }
