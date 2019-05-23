@@ -33,6 +33,17 @@ namespace Texart.Plugins.Scripting
             return CSharpScript.Create<IPlugin>(sourceFile.Code, scriptOptions);
         }
 
+        /// <summary>
+        /// Creates a <code>Script</code> instance that will execute a <code>SourceFile</code> loaded from
+        /// the provided path.
+        /// The returned <code>Script</code> is pre-configured with Texart-specific compiler options.
+        /// </summary>
+        /// <param name="sourceFilePath">The file to load source file from.</param>
+        /// <returns>Script instance</returns>
+        /// <see cref="From(SourceFile)"/>
+        /// <see cref="SourceFile"/>
+        public static Script<IPlugin> LoadFrom(string sourceFilePath) => From(SourceFile.Load(sourceFilePath));
+
         private static LanguageVersion DefaultLanguageVersion => LanguageVersion.CSharp8;
         private static OptimizationLevel DefaultOptimizationLevel =>
             CompilationDefines.IsRelease ? OptimizationLevel.Release : OptimizationLevel.Debug;

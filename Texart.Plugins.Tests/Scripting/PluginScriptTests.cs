@@ -10,8 +10,9 @@ namespace Texart.Plugins.Tests.Scripting
         [Test]
         public async Task AllowsCompilation()
         {
+            const int fixture = 1;
             // TODO: set up actual tests
-            var script = PluginScript.From(SourceFile.Load("../../../scripts/hello.csx"));
+            var script = PluginScript.LoadFrom(ScriptFixtures.GetPath(fixture, "hello.csx"));
             var result = (await script.RunAsync()).ReturnValue;
         }
     }
