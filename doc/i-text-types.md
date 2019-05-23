@@ -1,14 +1,6 @@
 # `IText*` Types
 
-```mermaid
-graph TD;
-  C1(Configuration) -- passed to --> G[ITextBitmapGenerator]
-  B(Image Bitmap) -- passed to --> G
-  G -- generates --> D(ITextBitmap);
-  D -- passed to --> R[ITextBitmapRenderer]
-  C2(Configuration) -- passed to --> R
-  R -- renders to --> O(Output Stream)
-```
+![Mermaid](./i-text-types.1.svg)
 
 ## `ITextBitmap`
 
