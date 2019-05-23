@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using Microsoft.CodeAnalysis;
@@ -36,7 +35,11 @@ namespace Texart.Plugins.Scripting
 
         private static Assembly[] DefaultExtraAssemblies => new[]
         {
-            typeof(IPlugin).Assembly, // this is Texart.Api
+            // This will also bring in the transitive dependencies of Texart.Api, including:
+            // * Newtonsoft.Json
+            // * SkiaSharp
+            // Refer to Texart.Api.csproj for complete list
+            typeof(IPlugin).Assembly,
         };
 
         private static ScriptOptions DefaultScriptOptions => ScriptOptions.Default

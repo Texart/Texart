@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Newtonsoft.Json.Linq;
+using SkiaSharp;
 using Texart.Api;
 
 class Hello2 {

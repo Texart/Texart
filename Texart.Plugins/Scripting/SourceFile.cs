@@ -1,9 +1,10 @@
 ﻿using System;
+using System.IO;
 
 namespace Texart.Plugins.Scripting
 {
     /// <summary>
-    /// A tuple of file path and the source code in that file.
+    /// A tuple of a file path and the source code in that file.
     /// </summary>
     public sealed class SourceFile : IEquatable<SourceFile>
     {
@@ -16,10 +17,15 @@ namespace Texart.Plugins.Scripting
             Code = code ?? throw new ArgumentNullException(nameof(code));
         }
 
-        public static SourceFile FromFile(string filePath)
+        public static SourceFile Load(string filePath)
         {
-            // TODO: implement this
-            throw new NotImplementedException();
+            var absolutePath = Path.GetFullPath(filePath);
+
+            using (var file = File.OpenRead(absolutePath))
+            using (var reader = new StreamReader(file))
+            {
+                return new SourceFile(absolutePath, reader.ReadToEnd());
+            }
         }
 
         public override int GetHashCode() => HashCode.Combine(FilePath, Code);
