@@ -1,42 +1,67 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace Texart.Plugins.Scripting
 {
     /// <summary>
-    /// A tuple of a file path and the source code in that file.
+    /// An object that encapsulates a file path and the text in that file.
     /// </summary>
     public sealed class SourceFile : IEquatable<SourceFile>
     {
+        /// <summary>
+        /// The path of the source file. This should be an absolute path, since Roslyn usually demands it.
+        /// </summary>
         public string FilePath { get; }
-        public string Code { get; }
+        /// <summary>
+        /// The text in the source file. This is just the file contents, properly decoded.
+        /// </summary>
+        public string Text { get; }
 
-        public SourceFile(string filePath, string code)
+        /// <summary>
+        /// Creates an instance with the provided <code>FilePath</code> and <code>Text</code> properties.
+        /// </summary>
+        /// <param name="filePath">The path of the source file.</param>
+        /// <param name="text">The text in the source file.</param>
+        public SourceFile(string filePath, string text)
         {
             FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
-            Code = code ?? throw new ArgumentNullException(nameof(code));
+            Text = text ?? throw new ArgumentNullException(nameof(text));
         }
 
-        public static SourceFile Load(string filePath)
+        /// <summary>
+        /// Creates an instance of <code>SourceFile</code> by open the file at the given path.
+        /// The returned instance's <code>FilePath</code> is guaranteed to be an absolute path.
+        /// </summary>
+        /// <param name="filePath">The file path to load text from.</param>
+        /// <param name="encoding">
+        ///     The encoding to use to read the file contents.
+        ///     If this is <code>null</code>, then <see cref="Encoding.UTF8"/> is used.
+        /// </param>
+        /// <returns>A <code>SourceFile</code> instance.</returns>
+        public static SourceFile Load(string filePath, Encoding encoding = null)
         {
             var absolutePath = Path.GetFullPath(filePath);
 
             using (var file = File.OpenRead(absolutePath))
-            using (var reader = new StreamReader(file))
+            using (var reader = new StreamReader(file, encoding ?? Encoding.UTF8))
             {
                 return new SourceFile(absolutePath, reader.ReadToEnd());
             }
         }
 
-        public override int GetHashCode() => HashCode.Combine(FilePath, Code);
+        /// <inheritdoc />
+        public override int GetHashCode() => HashCode.Combine(FilePath, Text);
 
+        /// <inheritdoc />
         public bool Equals(SourceFile other)
         {
             if (other is null) return false;
             if (ReferenceEquals(this, other)) return true;
-            return string.Equals(FilePath, other.FilePath) && string.Equals(Code, other.Code);
+            return string.Equals(FilePath, other.FilePath) && string.Equals(Text, other.Text);
         }
 
+        /// <inheritdoc />
         public override bool Equals(object obj) =>
             ReferenceEquals(this, obj) || obj is SourceFile other && Equals(other);
     }

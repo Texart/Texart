@@ -1,5 +1,8 @@
 ﻿namespace Texart.Plugins.Internal
 {
+    /// <summary>
+    /// Internal helpers based on compiler <code>#define</code>s.
+    /// </summary>
     internal static class CompilationDefines
     {
         /// <summary>

@@ -31,7 +31,7 @@ namespace Texart.Plugins.Scripting
                 .WithFilePath(sourceFile.FilePath)
                 .WithSourceResolver(BuildSourceReferenceResolver(sourceFile))
                 .WithMetadataResolver(BuildMetadataReferenceResolver(sourceFile));
-            return CSharpScript.Create<IPlugin>(sourceFile.Code, scriptOptions);
+            return CSharpScript.Create<IPlugin>(sourceFile.Text, scriptOptions);
         }
 
         /// <summary>

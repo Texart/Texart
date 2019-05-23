@@ -14,6 +14,11 @@ namespace Texart.Plugins.Scripting
         private readonly MetadataReferenceResolver _defaultResolver;
         private readonly ImmutableDictionary<ReferenceScheme, MetadataReferenceResolver> _resolversByScheme;
 
+        /// <summary>
+        /// Creates an instance with a default fallback resolver, and a lookup table for different schemes.
+        /// </summary>
+        /// <param name="defaultResolver">The fallback resolvers.</param>
+        /// <param name="resolversByScheme">The lookup table for different schemes.</param>
         public MetadataReferenceResolverDemux(MetadataReferenceResolver defaultResolver, ImmutableDictionary<ReferenceScheme, MetadataReferenceResolver> resolversByScheme)
         {
             this._defaultResolver = defaultResolver ?? throw new ArgumentNullException(nameof(defaultResolver));

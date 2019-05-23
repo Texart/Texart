@@ -4,6 +4,13 @@ using System.Text.RegularExpressions;
 
 namespace Texart.Plugins.Scripting
 {
+    /// <summary>
+    /// A <code>ReferenceScheme</code> is akin to URI schemes (such as <code>file:</code> and <code>http:</code>).
+    /// It is intended to be used as a way to allow custom resolution strategies for <code>#load</code> and <code>#r</code>
+    /// directives.
+    /// </summary>
+    /// <see cref="MetadataReferenceResolverDemux"/>
+    /// <see cref="SourceReferenceResolverDemux"/>
     public readonly struct ReferenceScheme : IComparable<ReferenceScheme>, IEquatable<ReferenceScheme>
     {
         /// <summary>
@@ -14,7 +21,7 @@ namespace Texart.Plugins.Scripting
             RegexOptions.Compiled | RegexOptions.Singleline);
 
         /// <summary>
-        /// The underlying string.
+        /// The underlying scheme string.
         /// </summary>
         public string Scheme { get; }
         /// <summary>

@@ -15,14 +15,11 @@ namespace Texart.Plugins.Scripting
         private readonly SourceReferenceResolver _defaultResolver;
         private readonly ImmutableDictionary<ReferenceScheme, SourceReferenceResolver> _resolversByScheme;
 
-        // TODO: remove if this is unused in the future
-        public SourceReferenceResolverDemux(SourceReferenceResolver defaultResolver, ImmutableDictionary<string, SourceReferenceResolver> resolversByScheme)
-        {
-            this._defaultResolver = defaultResolver ?? throw new ArgumentNullException(nameof(defaultResolver));
-            this._resolversByScheme =
-                ToSchemeKeyDictionary(resolversByScheme ?? throw new ArgumentNullException(nameof(resolversByScheme)));
-        }
-
+        /// <summary>
+        /// Creates an instance with a default fallback resolver, and a lookup table for different schemes.
+        /// </summary>
+        /// <param name="defaultResolver">The fallback resolvers.</param>
+        /// <param name="resolversByScheme">The lookup table for different schemes.</param>
         public SourceReferenceResolverDemux(SourceReferenceResolver defaultResolver, ImmutableDictionary<ReferenceScheme, SourceReferenceResolver> resolversByScheme)
         {
             this._defaultResolver = defaultResolver ?? throw new ArgumentNullException(nameof(defaultResolver));
@@ -90,15 +87,5 @@ namespace Texart.Plugins.Scripting
 
         /// <inheritdoc />
         public override int GetHashCode() => HashCode.Combine(_defaultResolver, _resolversByScheme);
-
-        private static ImmutableDictionary<ReferenceScheme, T> ToSchemeKeyDictionary<T>(ImmutableDictionary<string, T> dictionary)
-        {
-            return dictionary.ToImmutableDictionary(
-                keyValuePair => new ReferenceScheme(keyValuePair.Key),
-                keyValuePair => keyValuePair.Value);
-        }
-
-        private static ImmutableDictionary<TKey, TValue> EmptyIfNull<TKey, TValue>(ImmutableDictionary<TKey, TValue> dictionary) =>
-            dictionary ?? ImmutableDictionary<TKey, TValue>.Empty;
     }
 }
