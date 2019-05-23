@@ -2,10 +2,10 @@
 
 ## High-level
 
-- [ ] Investigate .NET Core 3.0
-  - [ ] Investigate C# 8.0 (and nullable reference types)
+- [ ] Investigate .NET Core 3.0.
+  - [ ] Investigate C# 8.0 (and nullable reference types).
 - [ ] Investigate coloring.
-- [ ] Come up with a documentation plan (e.g. publishing to GitHub Pages)
+- [ ] Come up with a documentation plan (e.g. publishing to GitHub Pages).
 - [ ] How to handle errors in plugins?
 - [ ] Implement argument parsing.
   - [ ] Group by prefixes to figure out which arguments are passed to plugins. (e.g `--generator-*` and `--renderer-*`).
@@ -21,6 +21,8 @@
 
 ## Chore
 
+- [ ] Remove `SkiaPropertyAttribute`
+  - [ ] Remove useless wrappers around Skia types, `Color`, `Typeface`, `Bitmap` (or at least make them `static`).
 - [ ] Convert some of the `Debug.Assert`s to real checks.
   - [ ] Especially in `Texart.Interface` since that will be run by public code.
 - [ ] Investigate an alternative to mermaidjs for diagrams in docs since GitHub doesn't support it.
