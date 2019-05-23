@@ -7,14 +7,15 @@ using Microsoft.CodeAnalysis;
 namespace Texart.Plugins.Scripting
 {
     /// <summary>
-    /// A reference resolver that selects one of multiple resolvers based on a matching <see cref="ReferenceScheme"/>.
+    /// A source reference resolver that selects one of multiple resolvers based on a matching <see cref="ReferenceScheme"/>.
     /// In the case where there is no matching scheme, it uses the default resolver as a fallback.
     /// </summary>
-    public class SourceReferenceResolverDemux : SourceReferenceResolver, IEquatable<SourceReferenceResolverDemux>
+    public sealed class SourceReferenceResolverDemux : SourceReferenceResolver, IEquatable<SourceReferenceResolverDemux>
     {
         private readonly SourceReferenceResolver _defaultResolver;
-        private readonly IImmutableDictionary<ReferenceScheme, SourceReferenceResolver> _resolversByScheme;
+        private readonly ImmutableDictionary<ReferenceScheme, SourceReferenceResolver> _resolversByScheme;
 
+        // TODO: remove if this is unused in the future
         public SourceReferenceResolverDemux(SourceReferenceResolver defaultResolver, ImmutableDictionary<string, SourceReferenceResolver> resolversByScheme)
         {
             this._defaultResolver = defaultResolver ?? throw new ArgumentNullException(nameof(defaultResolver));
@@ -55,6 +56,11 @@ namespace Texart.Plugins.Scripting
             return resolver.OpenRead(scheme.HasValue ? scheme.Value.NormalizePath(resolvedPath) : resolvedPath);
         }
 
+        /// <summary>
+        /// Gets the resolver by checking the provided path for a matching scheme.
+        /// </summary>
+        /// <param name="path">The path to check for scheme.</param>
+        /// <returns>Matching resolver if found, else the default resolver.</returns>
         private (ReferenceScheme?, SourceReferenceResolver) GetResolverByPath(string path) =>
             _resolversByScheme
                 .Where(kv => kv.Key.Matches(path))

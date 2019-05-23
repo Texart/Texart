@@ -29,7 +29,8 @@ namespace Texart.Plugins.Scripting
             if (sourceFile == null) throw new ArgumentNullException(nameof(sourceFile));
             var scriptOptions = BaseScriptOptions
                 .WithFilePath(sourceFile.FilePath)
-                .WithSourceResolver(BuildReferenceResolverForFile(sourceFile));
+                .WithSourceResolver(BuildSourceReferenceResolver(sourceFile))
+                .WithMetadataResolver(BuildMetadataReferenceResolver(sourceFile));
             return CSharpScript.Create<IPlugin>(sourceFile.Code, scriptOptions);
         }
 
@@ -83,7 +84,7 @@ namespace Texart.Plugins.Scripting
         /// </summary>
         /// <param name="sourceFile">The C# script</param>
         /// <returns>A custom resolver</returns>
-        private static SourceReferenceResolver BuildReferenceResolverForFile(SourceFile sourceFile)
+        private static SourceReferenceResolver BuildSourceReferenceResolver(SourceFile sourceFile)
         {
             var fileResolver = new SourceFileResolver(ImmutableArray<string>.Empty, Path.GetDirectoryName(sourceFile.FilePath));
             var resolvers = new Dictionary<ReferenceScheme, SourceReferenceResolver>
@@ -91,6 +92,22 @@ namespace Texart.Plugins.Scripting
                 {FileReferenceScheme, fileResolver}
             };
             return new SourceReferenceResolverDemux(fileResolver, resolvers.ToImmutableDictionary());
+        }
+
+        /// <summary>
+        /// Creates a <code>MetadataReferenceResolverDemux</code> that is able to recognize different schemes are forward to
+        /// appropriate resolvers. <see cref="MetadataReferenceResolverDemux"/>.
+        /// </summary>
+        /// <param name="sourceFile">The C# script</param>
+        /// <returns>A custom resolver</returns>
+        private static MetadataReferenceResolver BuildMetadataReferenceResolver(SourceFile sourceFile)
+        {
+            var scriptResolver = ScriptMetadataResolver.Default.WithBaseDirectory(Path.GetDirectoryName(sourceFile.FilePath));
+            var resolvers = new Dictionary<ReferenceScheme, MetadataReferenceResolver>
+            {
+                {FileReferenceScheme, scriptResolver}
+            };
+            return new MetadataReferenceResolverDemux(scriptResolver, resolvers.ToImmutableDictionary());
         }
     }
 }
