@@ -8,7 +8,6 @@ namespace Texart.Plugins.Tests
     /// </summary>
     internal static class ScriptFixtures
     {
-        // TODO: copy ScriptFixtures to output (configure in .csproj)
         /// <summary>
         /// The base directory containing all fixtures.
         /// </summary>
