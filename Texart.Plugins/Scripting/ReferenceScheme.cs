@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Texart.Plugins.Scripting
 {
-    public readonly struct SourceReferenceScheme : IComparable<SourceReferenceScheme>, IEquatable<SourceReferenceScheme>
+    public readonly struct ReferenceScheme : IComparable<ReferenceScheme>, IEquatable<ReferenceScheme>
     {
         /// <summary>
         /// All valid schemes must match this regex
@@ -26,7 +26,7 @@ namespace Texart.Plugins.Scripting
         /// Constructs a scheme from the given string. It must match <see cref="SchemeRegex"/>.
         /// </summary>
         /// <param name="scheme"></param>
-        public SourceReferenceScheme(string scheme)
+        public ReferenceScheme(string scheme)
         {
             if (scheme == null || !SchemeRegex.IsMatch(scheme))
             {
@@ -65,14 +65,14 @@ namespace Texart.Plugins.Scripting
         public override string ToString() => Scheme;
 
         /// <inheritdoc />
-        public int CompareTo(SourceReferenceScheme other) =>
+        public int CompareTo(ReferenceScheme other) =>
             string.Compare(Scheme, other.Scheme, StringComparison.Ordinal);
 
         /// <inheritdoc />
-        public bool Equals(SourceReferenceScheme other) => Scheme == other.Scheme;
+        public bool Equals(ReferenceScheme other) => Scheme == other.Scheme;
 
         /// <inheritdoc />
-        public override bool Equals(object obj) => obj is SourceReferenceScheme scheme && Equals(scheme);
+        public override bool Equals(object obj) => obj is ReferenceScheme scheme && Equals(scheme);
 
         /// <inheritdoc />
         public override int GetHashCode() => Scheme.GetHashCode();

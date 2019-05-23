@@ -4,7 +4,7 @@ using Texart.Plugins.Scripting;
 
 namespace Texart.Plugins.Tests.Scripting
 {
-    internal class SourceReferenceSchemeTests
+    internal class ReferenceSchemeTests
     {
         [Test]
         public void AllowsSimple() => AssertValidScheme("hello");
@@ -22,7 +22,7 @@ namespace Texart.Plugins.Tests.Scripting
         public void AllowsHyphen() => AssertValidScheme("hello-world");
 
         private static void AssertValidScheme(string scheme) =>
-            Assert.DoesNotThrow(() => new SourceReferenceScheme(scheme));
+            Assert.DoesNotThrow(() => new ReferenceScheme(scheme));
 
         [Test]
         public void RejectsEmpty() => AssertInvalidScheme(string.Empty);
@@ -62,7 +62,7 @@ namespace Texart.Plugins.Tests.Scripting
 
         private static void AssertInvalidScheme(string scheme)
         {
-            var ex = Assert.Throws<ArgumentException>(() => new SourceReferenceScheme(scheme));
+            var ex = Assert.Throws<ArgumentException>(() => new ReferenceScheme(scheme));
             Assert.IsTrue(
                 ex.Message.StartsWith("scheme is not valid"),
                 "Exception was thrown but not because of invalid scheme");

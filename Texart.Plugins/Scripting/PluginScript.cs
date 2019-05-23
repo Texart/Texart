@@ -52,16 +52,16 @@ namespace Texart.Plugins.Scripting
             .WithFileEncoding(DefaultFileEncoding)
             .AddReferences(DefaultExtraAssemblies);
 
-        private static SourceReferenceScheme FileReferenceScheme => new SourceReferenceScheme("file");
+        private static ReferenceScheme FileReferenceScheme => new ReferenceScheme("file");
 
         private static SourceReferenceResolver BuildReferenceResolverForFile(SourceFile sourceFile)
         {
             var fileResolver = new SourceFileResolver(ImmutableArray<string>.Empty, Path.GetDirectoryName(sourceFile.FilePath));
-            var resolvers = new Dictionary<SourceReferenceScheme, SourceReferenceResolver>
+            var resolvers = new Dictionary<ReferenceScheme, SourceReferenceResolver>
             {
                 {FileReferenceScheme, fileResolver}
             };
-            return new SwitchedSourceReferenceResolver(fileResolver, resolvers.ToImmutableDictionary());
+            return new SourceReferenceResolverDemux(fileResolver, resolvers.ToImmutableDictionary());
         }
     }
 }

@@ -7,22 +7,22 @@ using Microsoft.CodeAnalysis;
 namespace Texart.Plugins.Scripting
 {
     /// <summary>
-    /// A reference resolver that selects one of multiple resolvers based on a matching <see cref="SourceReferenceScheme"/>.
+    /// A reference resolver that selects one of multiple resolvers based on a matching <see cref="ReferenceScheme"/>.
     /// In the case where there is no matching scheme, it uses the default resolver as a fallback.
     /// </summary>
-    public class SwitchedSourceReferenceResolver : SourceReferenceResolver, IEquatable<SwitchedSourceReferenceResolver>
+    public class SourceReferenceResolverDemux : SourceReferenceResolver, IEquatable<SourceReferenceResolverDemux>
     {
         private readonly SourceReferenceResolver _defaultResolver;
-        private readonly IImmutableDictionary<SourceReferenceScheme, SourceReferenceResolver> _resolversByScheme;
+        private readonly IImmutableDictionary<ReferenceScheme, SourceReferenceResolver> _resolversByScheme;
 
-        public SwitchedSourceReferenceResolver(SourceReferenceResolver defaultResolver, ImmutableDictionary<string, SourceReferenceResolver> resolversByScheme)
+        public SourceReferenceResolverDemux(SourceReferenceResolver defaultResolver, ImmutableDictionary<string, SourceReferenceResolver> resolversByScheme)
         {
             this._defaultResolver = defaultResolver ?? throw new ArgumentNullException(nameof(defaultResolver));
             this._resolversByScheme =
                 ToSchemeKeyDictionary(resolversByScheme ?? throw new ArgumentNullException(nameof(resolversByScheme)));
         }
 
-        public SwitchedSourceReferenceResolver(SourceReferenceResolver defaultResolver, ImmutableDictionary<SourceReferenceScheme, SourceReferenceResolver> resolversByScheme)
+        public SourceReferenceResolverDemux(SourceReferenceResolver defaultResolver, ImmutableDictionary<ReferenceScheme, SourceReferenceResolver> resolversByScheme)
         {
             this._defaultResolver = defaultResolver ?? throw new ArgumentNullException(nameof(defaultResolver));
             this._resolversByScheme = resolversByScheme ?? throw new ArgumentNullException(nameof(resolversByScheme));
@@ -55,15 +55,15 @@ namespace Texart.Plugins.Scripting
             return resolver.OpenRead(scheme.HasValue ? scheme.Value.NormalizePath(resolvedPath) : resolvedPath);
         }
 
-        private (SourceReferenceScheme?, SourceReferenceResolver) GetResolverByPath(string path) =>
+        private (ReferenceScheme?, SourceReferenceResolver) GetResolverByPath(string path) =>
             _resolversByScheme
                 .Where(kv => kv.Key.Matches(path))
-                .Select(kv => (new SourceReferenceScheme?(kv.Key), kv.Value))
+                .Select(kv => (new ReferenceScheme?(kv.Key), kv.Value))
                 .DefaultIfEmpty((null, _defaultResolver))
                 .First();
 
         /// <inheritdoc />
-        public bool Equals(SwitchedSourceReferenceResolver other) =>
+        public bool Equals(SourceReferenceResolverDemux other) =>
             _defaultResolver.Equals(other._defaultResolver) && _resolversByScheme.Equals(other._resolversByScheme);
 
         /// <inheritdoc />
@@ -75,7 +75,7 @@ namespace Texart.Plugins.Scripting
             }
             switch (other)
             {
-                case SwitchedSourceReferenceResolver resolver when resolver.GetType() == this.GetType():
+                case SourceReferenceResolverDemux resolver when resolver.GetType() == this.GetType():
                     return this.Equals(resolver);
                 default:
                     return false;
@@ -85,10 +85,10 @@ namespace Texart.Plugins.Scripting
         /// <inheritdoc />
         public override int GetHashCode() => HashCode.Combine(_defaultResolver, _resolversByScheme);
 
-        private static ImmutableDictionary<SourceReferenceScheme, T> ToSchemeKeyDictionary<T>(ImmutableDictionary<string, T> dictionary)
+        private static ImmutableDictionary<ReferenceScheme, T> ToSchemeKeyDictionary<T>(ImmutableDictionary<string, T> dictionary)
         {
             return dictionary.ToImmutableDictionary(
-                keyValuePair => new SourceReferenceScheme(keyValuePair.Key),
+                keyValuePair => new ReferenceScheme(keyValuePair.Key),
                 keyValuePair => keyValuePair.Value);
         }
 
