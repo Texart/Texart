@@ -1,22 +1,11 @@
 # `IText*` Types
 
-```flow
-st=>start: Start
-e=>end
-op=>operation: My Operation
-cond=>condition: Yes or No?
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
-```bash
-cd hello
-```
-```sequence
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
 ```
 
 ## `ITextBitmap`
@@ -37,5 +26,5 @@ In the future, `ITextBitmap` may expose more information about each "pixel" (suc
 
 `ITextBitmapRenderer` serializes `ITextBitmap` to an output `Stream`. The format of the output is implementation-defined.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODgyNDU2MTA5LDE1ODM1MTc3MjBdfQ==
+eyJoaXN0b3J5IjpbMTA0MjI0Mjc1OCwxNTgzNTE3NzIwXX0=
 -->
