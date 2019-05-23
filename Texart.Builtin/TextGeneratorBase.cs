@@ -11,8 +11,7 @@ namespace Texart.Builtin
     {
         protected TextGeneratorBase(IList<char> characters, int pixelSamplingRatio)
         {
-            if (characters == null) { throw new ArgumentNullException(nameof(characters)); }
-            this.Characters = characters;
+            this.Characters = characters ?? throw new ArgumentNullException(nameof(characters));
             if (Characters.Count < 1)
             {
                 throw new ArgumentException($"{nameof(characters)} must have at least 1 character.");
@@ -26,7 +25,7 @@ namespace Texart.Builtin
         }
 
         /// <inheritdocs/>
-        public abstract IList<char> Characters { get; protected set; }
+        public IList<char> Characters { get; protected set; }
 
         /// <inheritdocs/>
         public int PixelSamplingRatio { get; protected set; }
@@ -36,7 +35,7 @@ namespace Texart.Builtin
         {
             if (bitmap == null) { throw new ArgumentNullException(nameof(bitmap)); }
             if (bitmap.SkiaBitmap == null) { throw new ArgumentNullException(nameof(bitmap.SkiaBitmap)); }
-            if (!(bitmap.Width % this.PixelSamplingRatio == 0) || !(bitmap.Height % this.PixelSamplingRatio == 0))
+            if (bitmap.Width % this.PixelSamplingRatio != 0 || bitmap.Height % this.PixelSamplingRatio != 0)
             {
                 throw new ArgumentException($"{nameof(this.PixelSamplingRatio)} must evenly divide both Bitmap width and height.");
             }

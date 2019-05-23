@@ -9,9 +9,6 @@ namespace Texart.Builtin
     public sealed class BrightnessBasedGenerator : TextGeneratorBase, ITextGenerator
     {
         /// <inheritdocs/>
-        public override IList<char> Characters { get; protected set; }
-
-        /// <inheritdocs/>
         public override Task<ITextData> DoGenerateTextAsync(SKBitmap bitmap)
         {
             var characters = this.Characters;
@@ -69,16 +66,16 @@ namespace Texart.Builtin
 
             // process chunks in parallel
             var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = -1 };
-            Parallel.For(0, targetWidth, parallelOptions, horizChunkIndex =>
+            Parallel.For(0, targetWidth, parallelOptions, horizontalChunkIndex =>
             {
                 // the x position of the pixel at the top left of this chunk
-                var chunkX = horizChunkIndex * pixelSamplingRatio;
-                Parallel.For(0, targetHeight, parallelOptions, vertChunkIndex =>
+                var chunkX = horizontalChunkIndex * pixelSamplingRatio;
+                Parallel.For(0, targetHeight, parallelOptions, verticalChunkIndex =>
                 {
                     // the y position of the pixel at the top left of this chunk
-                    var chunkY = vertChunkIndex * pixelSamplingRatio;
+                    var chunkY = verticalChunkIndex * pixelSamplingRatio;
                     // the current chunk's coordinate projected to an index for a 1D array
-                    var chunkCoordProjectedIndex = vertChunkIndex * targetWidth + horizChunkIndex;
+                    var chunkCoordinateProjectedIndex = verticalChunkIndex * targetWidth + horizontalChunkIndex;
 
                     // we iterate over this square chunk and accumulate the brightness
                     // value of each pixel. This chunk is almost like a bitmap in itself.
@@ -98,7 +95,7 @@ namespace Texart.Builtin
                     }
                     // set the chunk's value to the average
                     var averageBrightness = accumulatedBrightness / pixelsPerChunk;
-                    brightnessValues[chunkCoordProjectedIndex] = averageBrightness;
+                    brightnessValues[chunkCoordinateProjectedIndex] = averageBrightness;
                 });
             });
 
