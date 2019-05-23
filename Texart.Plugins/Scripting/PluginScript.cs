@@ -13,12 +13,21 @@ using Texart.Plugins.Internal;
 
 namespace Texart.Plugins.Scripting
 {
+    /// <summary>
+    /// Helper methods for creating <see cref="Script{T}"/> instances with the correct options for Texart.
+    /// </summary>
     public static class PluginScript
     {
+        /// <summary>
+        /// Creates a <code>Script</code> instance that will execute the provided <code>SourceFile</code>.
+        /// The returned <code>Script</code> is pre-configured with Texart-specific compiler options.
+        /// </summary>
+        /// <param name="sourceFile">the source file to run</param>
+        /// <returns>Script instance</returns>
         public static Script<IPlugin> From(SourceFile sourceFile)
         {
             if (sourceFile == null) throw new ArgumentNullException(nameof(sourceFile));
-            var scriptOptions = DefaultScriptOptions
+            var scriptOptions = BaseScriptOptions
                 .WithFilePath(sourceFile.FilePath)
                 .WithSourceResolver(BuildReferenceResolverForFile(sourceFile));
             return CSharpScript.Create<IPlugin>(sourceFile.Code, scriptOptions);
@@ -42,7 +51,10 @@ namespace Texart.Plugins.Scripting
             typeof(IPlugin).Assembly,
         };
 
-        private static ScriptOptions DefaultScriptOptions => ScriptOptions.Default
+        /// <summary>
+        /// Pre-configured default script options.
+        /// </summary>
+        private static ScriptOptions BaseScriptOptions => ScriptOptions.Default
             .WithLanguageVersion(DefaultLanguageVersion)
             .WithOptimizationLevel(DefaultOptimizationLevel)
             .WithEmitDebugInformation(DefaultEmitDebugInformation)
@@ -54,6 +66,12 @@ namespace Texart.Plugins.Scripting
 
         private static ReferenceScheme FileReferenceScheme => new ReferenceScheme("file");
 
+        /// <summary>
+        /// Creates a <code>SourceReferenceResolver</code> that is able to recognize different schemes are forward to
+        /// appropriate resolvers. <see cref="SourceReferenceResolverDemux"/>.
+        /// </summary>
+        /// <param name="sourceFile">The C# script</param>
+        /// <returns>A custom resolver</returns>
         private static SourceReferenceResolver BuildReferenceResolverForFile(SourceFile sourceFile)
         {
             var fileResolver = new SourceFileResolver(ImmutableArray<string>.Empty, Path.GetDirectoryName(sourceFile.FilePath));
