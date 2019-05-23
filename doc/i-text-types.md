@@ -6,7 +6,8 @@ graph TD;
   B(Image Bitmap) -- passed to --> G
   G -- generates --> D(ITextBitmap);
   D -- passed to --> R[ITextBitmapRenderer]
-  C1(Configuration)
+  C2(Configuration) -- passed to --> R
+  R -- renders to --> O(Output Stream)
 ```
 
 ## `ITextBitmap`
@@ -27,5 +28,5 @@ In the future, `ITextBitmap` may expose more information about each "pixel" (suc
 
 `ITextBitmapRenderer` serializes `ITextBitmap` to an output `Stream`. The format of the output is implementation-defined.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0OTg4Njc2ODAsMTU4MzUxNzcyMF19
+eyJoaXN0b3J5IjpbMTM2NDk0NDAzNywxNTgzNTE3NzIwXX0=
 -->
