@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 
-namespace Texart.Interface
+namespace Texart.Api
 {
     /// <summary>
     /// An <code>ITextBitmapRenderer</code> writes some text data into an output stream

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Texart.ScriptInterface;
 using Texart.Builtin.Generators;
 using Texart.Builtin.Renderers;
-using Texart.Interface;
+using Texart.Api;
 using Texart.Plugins;
 
 namespace Texart

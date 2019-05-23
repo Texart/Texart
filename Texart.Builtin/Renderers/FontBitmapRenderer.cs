@@ -3,7 +3,8 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using Texart.Interface;
+using Newtonsoft.Json.Linq;
+using Texart.Api;
 
 namespace Texart.Builtin.Renderers
 {
@@ -139,10 +140,10 @@ namespace Texart.Builtin.Renderers
 
         public static SKColor DefaultBackgroundColor => SKColors.White;
 
-        public static FontBitmapRenderer Create(Stream jsonStream)
+        public static FontBitmapRenderer Create(Lazy<JToken> json)
         {
-            // TODO: use jsonStream
-            return new FontBitmapRenderer(Interface.Font.FromTypeface(Typeface.FromName("Consolas")));
+            // TODO: use json
+            return new FontBitmapRenderer(Api.Font.FromTypeface(Typeface.FromName("Consolas")));
         }
     }
 }

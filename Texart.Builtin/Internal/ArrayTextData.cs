@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using Texart.Interface;
+using Texart.Api;
 
 namespace Texart.Builtin.Internal
 {

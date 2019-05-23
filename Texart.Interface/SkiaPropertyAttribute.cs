@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Texart.Interface
+namespace Texart.Api
 {
     /// <summary>
     /// An attribute for stating that a property is the underlying Skia type that the current

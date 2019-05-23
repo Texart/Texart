@@ -1,6 +1,6 @@
 ﻿using SkiaSharp;
 
-namespace Texart.Interface
+namespace Texart.Api
 {
     /// <summary>
     /// A <code>Typeface</code> represents a generic typeface as in typography.

@@ -1,6 +1,6 @@
 ﻿using SkiaSharp;
 
-namespace Texart.Interface
+namespace Texart.Api
 {
     /// <summary>
     /// A <code>Color</code> represents a 32-bit RGBA color.

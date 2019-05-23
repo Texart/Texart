@@ -3,8 +3,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using Texart.Builtin.Internal;
-using Texart.Interface;
+using Texart.Api;
 
 namespace Texart.Builtin.Renderers
 {
@@ -64,9 +65,9 @@ namespace Texart.Builtin.Renderers
             Encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
         }
 
-        public static StringBitmapRenderer Create(Stream jsonStream)
+        public static StringBitmapRenderer Create(Lazy<JToken> json)
         {
-            // TODO: use jsonStream
+            // TODO: use json
             return new StringBitmapRenderer();
         }
     }

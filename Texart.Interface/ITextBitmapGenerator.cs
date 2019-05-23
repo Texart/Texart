@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Texart.Interface
+namespace Texart.Api
 {
     /// <summary>
     /// An <code>ITextBitmapGenerator</code> is used to generate <code>ITextBitmap</code>s given

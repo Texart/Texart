@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SkiaSharp;
 using System;
 using System.Threading.Tasks;
-using Texart.Interface;
+using Texart.Api;
 
 namespace Texart.Builtin.Generators
 {

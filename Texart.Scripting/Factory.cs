@@ -1,5 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using Newtonsoft.Json.Linq;
+
 namespace Texart.Plugins
 {
-    public delegate T Factory<out T>(Stream jsonStream);
+    public delegate T Factory<out T>(Lazy<JToken> json);
 }

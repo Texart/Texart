@@ -1,7 +1,7 @@
 ﻿using SkiaSharp;
 using System;
 
-namespace Texart.Interface
+namespace Texart.Api
 {
     /// <summary>
     /// A <code>Font</code> represents a particular <code>Typeface</code> with extra

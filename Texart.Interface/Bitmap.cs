@@ -2,7 +2,7 @@
 using SkiaSharp;
 using System.IO;
 
-namespace Texart.Interface
+namespace Texart.Api
 {
     public class Bitmap : IDisposable
     {
@@ -31,7 +31,7 @@ namespace Texart.Interface
             Dispose(false);
         }
 
-        private void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (disposing)
             {

@@ -1,4 +1,4 @@
-﻿namespace Texart.Interface
+﻿namespace Texart.Api
 {
     public interface ITextBitmap
     {

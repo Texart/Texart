@@ -1,10 +1,11 @@
-﻿using SkiaSharp;
+﻿using System;
+using SkiaSharp;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using Texart.Builtin.Internal;
-using Texart.Interface;
+using Texart.Api;
 
 namespace Texart.Builtin.Generators
 {
@@ -109,9 +110,9 @@ namespace Texart.Builtin.Generators
         {
         }
 
-        public static BrightnessBasedBitmapGenerator Create(Stream jsonStream)
+        public static BrightnessBasedBitmapGenerator Create(Lazy<JToken> json)
         {
-            // TODO: Use jsonStream
+            // TODO: Use json
             return new BrightnessBasedBitmapGenerator(CharacterSets.Basic, 1);
         }
 

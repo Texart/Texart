@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Texart.Interface;
+using Texart.Api;
 
 namespace Texart.ScriptInterface
 {

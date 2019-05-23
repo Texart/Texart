@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Texart.Interface;
+using Texart.Api;
 
 namespace Texart.Plugins
 {
