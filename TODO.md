@@ -4,6 +4,11 @@
 
 - [ ] Investigate coloring.
 - [ ] Come up with a documentation plan (e.g. publishing to GitHub Pages)
+- [ ] How to handle errors in plugins?
+- [ ] Implement argument parsing.
+  - [ ] Group by prefixes to figure out which arguments are passed to plugins. (e.g `--generator-*` and `--renderer-*`).
+- [ ] Investigate JSON for communication with plugins.
+  - [ ] Investigate whether `Stream` is the right type (or maybe `JObject/JArray`).
 
 ## App-level
 
@@ -11,7 +16,6 @@
 - [ ] Merge `Texart.ScriptInterface` with `Texart.Interface`.
 - [ ] Move common helpers (such `ArrayTextData`) to `Texart.Api`.
   - [ ] `Texart.Builtin` and external plugins should both depend on this assembly.
-- [ ] Investigate argument parsing + JSON for communication with plugins.
 
 ## Chore
 
