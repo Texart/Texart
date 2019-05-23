@@ -1,10 +1,11 @@
 # `IText*` Types
 
 ```mermaid
-graph LR;
-  B>Image Bitmap] -- passed to --> G[ITextBitmapGenerator]
+graph TD;
+  C1(Configuration) -- passed to --> G[ITextBitmapGenerator]
+  B(Image Bitmap) -- passed to --> G
   G -- generates --> D>ITextBitmap];
-  D -- passed to --> R[ITextBitmapR]
+  D -- passed to --> R[ITextBitmapRenderer]
 ```
 
 ## `ITextBitmap`
@@ -25,5 +26,5 @@ In the future, `ITextBitmap` may expose more information about each "pixel" (suc
 
 `ITextBitmapRenderer` serializes `ITextBitmap` to an output `Stream`. The format of the output is implementation-defined.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM5NDA3NDU4MywxNTgzNTE3NzIwXX0=
+eyJoaXN0b3J5IjpbOTEyMDU4MTc5LDE1ODM1MTc3MjBdfQ==
 -->
