@@ -5,7 +5,7 @@ using Texart.Plugins.Scripting;
 
 namespace Texart.Plugins.Tests.Scripting
 {
-    internal class TranslationUnitTests
+    internal class PluginScriptTests
     {
         [Test]
         public async Task AllowsCompilation()
@@ -15,9 +15,8 @@ namespace Texart.Plugins.Tests.Scripting
 return new Hello2().DoStuff();
 ";
             
-            var tu = new TranslationUnit(new SourceFile("C:/Code/Texart/hello.csx", code));
-            var result = await tu.RunAsync();
-            Assert.AreEqual(5, result);
+            var script = PluginScript.From(new SourceFile("C:/Code/Texart/hello.csx", code));
+            var result = (await script.RunAsync()).ReturnValue;
         }
     }
 }

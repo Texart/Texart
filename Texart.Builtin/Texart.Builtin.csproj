@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Texart.Api\Texart.Api.csproj" />
-    <ProjectReference Include="..\Texart.Plugins\Texart.Plugins.csproj" />
   </ItemGroup>
 
 </Project>
