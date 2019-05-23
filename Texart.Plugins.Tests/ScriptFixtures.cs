@@ -33,7 +33,7 @@ namespace Texart.Plugins.Tests
         /// <returns></returns>
         public static string GetPath(int fixture, string relativePath)
         {
-            if (Path.IsPathRooted(relativePath))
+            if (Path.IsPathRooted(relativePath) || Path.IsPathFullyQualified(relativePath))
             {
                 throw new ArgumentException($"{nameof(relativePath)} must be a relative path, received: {relativePath}");
             }
