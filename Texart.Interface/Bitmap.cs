@@ -1,9 +1,10 @@
-﻿using SkiaSharp;
+﻿using System;
+using SkiaSharp;
 using System.IO;
 
 namespace Texart.Interface
 {
-    public class Bitmap
+    public class Bitmap : IDisposable
     {
         [SkiaProperty]
         public SKBitmap SkiaBitmap { get; set; }
@@ -20,14 +21,29 @@ namespace Texart.Interface
             }
         }
 
-        ~Bitmap()
-        {
-            this.SkiaBitmap.Dispose();
-        }
-
         /// <summary>
         /// Private constructor. Does nothing.
         /// </summary>
         private Bitmap() { }
+
+        ~Bitmap()
+        {
+            Dispose(false);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                SkiaBitmap?.Dispose();
+            }
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

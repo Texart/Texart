@@ -89,6 +89,6 @@ namespace Texart.Interface
         /// Gets the default value for color.
         /// </summary>
         /// <see cref="Color"/>
-        public static Color DefaultColor { get { return new Color(SKColors.Black); } }
+        public static Color DefaultColor => new Color(SKColors.Black);
     }
 }

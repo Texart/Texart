@@ -22,7 +22,7 @@ namespace Texart.Scripting.Tests
             [Test]
             public void AllowsHyphen() => AssertValidScheme("hello-world");
 
-            private void AssertValidScheme(string scheme) =>
+            private static void AssertValidScheme(string scheme) =>
                 Assert.DoesNotThrow(() => new SourceReferenceScheme(scheme));
         }
 
@@ -64,7 +64,7 @@ namespace Texart.Scripting.Tests
             [Test]
             public void RejectsColonAtEnd() => AssertInvalidScheme("hello:");
 
-            private void AssertInvalidScheme(string scheme)
+            private static void AssertInvalidScheme(string scheme)
             {
                 var ex = Assert.Throws<ArgumentException>(() => new SourceReferenceScheme(scheme));
                 Assert.IsTrue(

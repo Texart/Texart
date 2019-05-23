@@ -20,13 +20,13 @@ namespace Texart.Interface
 
         /// <summary>
         /// Gets the ratio of source resolution to generated resolution. That is, one
-        /// pixel in the generated text will come from sampling <code>PixelSamplingRation</code>
-        /// squared pixels.
+        /// pixel in the generated text will come from sampling <code>Math.Pow(PixelSamplingRatio, 2)</code>
+        /// pixels.
         /// For example, if <code>PixelSamplingRatio</code> is <code>2</code>, then <code>4</code>
         /// pixels from the image will be used to generate <code>1</code> character.
-        /// Consequently, a value of <code>1</code> is lossless.
+        /// Consequently, a value of <code>1</code> is loss-less.
         /// </summary>
-        /// <see cref="Image"/>
+        /// <see cref="GenerateTextAsync"/>
         int PixelSamplingRatio { get; }
 
         /// <summary>
