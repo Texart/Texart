@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Texart", "Texart\Texart.csp
 		{06996F5C-DAA7-4280-AF55-8C020FB88DA7} = {06996F5C-DAA7-4280-AF55-8C020FB88DA7}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Texart.Plugins", "Texart.Scripting\Texart.Plugins.csproj", "{79D5AE08-BB44-4AAA-A231-BE92A16198D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Texart.Plugins", "Texart.Plugins\Texart.Plugins.csproj", "{79D5AE08-BB44-4AAA-A231-BE92A16198D8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Texart.ScriptInterface", "Texart.ScriptInterface\Texart.ScriptInterface.csproj", "{06996F5C-DAA7-4280-AF55-8C020FB88DA7}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -24,9 +24,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Texart.Builtin", "Texart.Bu
 		{E558BD10-8E2C-4EBC-812F-6559CBC7F8FD} = {E558BD10-8E2C-4EBC-812F-6559CBC7F8FD}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Texart.Api", "Texart.Interface\Texart.Api.csproj", "{E558BD10-8E2C-4EBC-812F-6559CBC7F8FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Texart.Api", "Texart.Api\Texart.Api.csproj", "{E558BD10-8E2C-4EBC-812F-6559CBC7F8FD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Texart.Plugins.Tests", "Texart.Scripting.Tests\Texart.Plugins.Tests.csproj", "{837F51C6-C11B-4A0E-8A34-CADC0C2D15B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Texart.Plugins.Tests", "Texart.Plugins.Tests\Texart.Plugins.Tests.csproj", "{837F51C6-C11B-4A0E-8A34-CADC0C2D15B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Texart.Api.Tests", "Texart.Api.Tests\Texart.Api.Tests.csproj", "{FBA96944-9DB2-4667-8AB6-9FDEEFEA8A40}"
 EndProject

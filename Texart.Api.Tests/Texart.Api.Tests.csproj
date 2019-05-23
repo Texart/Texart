@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Texart.Interface\Texart.Api.csproj" />
+    <ProjectReference Include="..\Texart.Api\Texart.Api.csproj" />
   </ItemGroup>
 
 </Project>
