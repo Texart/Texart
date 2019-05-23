@@ -2,6 +2,8 @@
 
 ## High-level
 
+- [ ] Investigate .NET Core 3.0
+  - [ ] Investigate C# 8.0 (and nullable reference types)
 - [ ] Investigate coloring.
 - [ ] Come up with a documentation plan (e.g. publishing to GitHub Pages)
 - [ ] How to handle errors in plugins?
@@ -14,7 +16,7 @@
 
 - [X] Rename `Texart.Interface` to something like `Texart.Api`.
 - [ ] Merge `Texart.ScriptInterface` with `Texart.Interface`.
-- [ ] Move common helpers (such `ArrayTextData`) to `Texart.Api`.
+- [X] Move common helpers (such `ArrayTextBitmap`) to `Texart.Api`.
   - [ ] `Texart.Builtin` and external plugins should both depend on this assembly.
 
 ## Chore

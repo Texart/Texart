@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-using Texart.Api;
 
-namespace Texart.Builtin.Internal
+namespace Texart.Api
 {
     /// <summary>
-    /// An implementation of <code>ITextBitmap</code> which exposes an underlying
+    /// An implementation of <code>ITextBitmap</code> based on an underlying
     /// one dimensional array.
     /// </summary>
-    internal sealed class ArrayTextBitmap : ITextBitmap
+    public sealed class ArrayTextBitmap : ITextBitmap
     {
         /// <inheritdoc/>
         public int Height { get; }
@@ -31,6 +30,7 @@ namespace Texart.Builtin.Internal
         /// <param name="height">The height of the text data</param>
         public ArrayTextBitmap(char[] characters, int width, int height)
         {
+            // TODO: perhaps these checks should happen in Release too
             Debug.Assert(characters != null);
             Debug.Assert(width > 0);
             Debug.Assert(height > 0);
