@@ -1,5 +1,21 @@
 # `IText*` Types
 
+```flow
+st=>start: Start
+e=>end
+op=>operation: My Operation
+cond=>condition: Yes or No?
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+
+```sequence
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!  ```
+
 ## `ITextBitmap`
 
 `ITextBitmap` is a bitmap of character data – like `char[,]`. The API exposes an indexer, `char this[int x, int y]` just like `char[,]` (2D `char` array).
@@ -18,5 +34,5 @@ In the future, `ITextBitmap` may expose more information about each "pixel" (suc
 
 `ITextBitmapRenderer` serializes `ITextBitmap` to an output `Stream`. The format of the output is implementation-defined.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMDQzMzU2NzBdfQ==
+eyJoaXN0b3J5IjpbLTE2NzA5Mjg0MDZdfQ==
 -->
