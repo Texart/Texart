@@ -21,6 +21,7 @@
 - [ ] Remove `SkiaPropertyAttribute`
   - [ ] Remove useless wrappers around Skia types, `Color`, `Typeface`, `Bitmap` (or at least make them `static`).
 - [X] Rename `Texart.Interface` to something like `Texart.Api`.
+- [ ] Merge `Texart.ScriptInterface` with `Texart.Api`.
 - [X] Move common helpers (such `ArrayTextBitmap`) to `Texart.Api`.
   - [ ] `Texart.Builtin` and external plugins should both depend on this assembly.
 - [ ] Convert some of the `Debug.Assert`s to real checks.
