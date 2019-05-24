@@ -11,7 +11,7 @@ namespace Texart
         {
             using (var output = File.OpenWrite("../../../../meme.gen.png"))
             {
-                var bitmap = SKBitmap.Decode("../../../../meme.jpg");
+                var bitmap = TxContract.NonNull(SKBitmap.Decode("../../../../meme.jpg"));
                 IPlugin builtinPlugin = new Builtin.Plugin();
 
                 // TODO: use JSON stream instead of null
