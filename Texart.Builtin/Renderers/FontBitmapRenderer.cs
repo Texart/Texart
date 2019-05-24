@@ -71,7 +71,7 @@ namespace Texart.Builtin.Renderers
                 paint.SubpixelText = true;
                 paint.DeviceKerningEnabled = false;
 
-                paint.Color = font.Color.SkiaColor;
+                paint.Color = font.Color;
                 var backgroundColor = this.BackgroundColor;
 
                 int textWidth = textBitmap.Width;

@@ -55,7 +55,7 @@ namespace Texart.Api
         /// Gets or sets the foreground color of this font.
         /// </summary>
         /// <see cref="DefaultColor"/>
-        public Color Color { get; set; }
+        public SKColor Color { get; set; }
 
         /// <summary>
         /// Creates a <code>Font</code> with default values with the given typeface.
@@ -89,6 +89,6 @@ namespace Texart.Api
         /// Gets the default value for color.
         /// </summary>
         /// <see cref="Color"/>
-        public static Color DefaultColor => new Color(SKColors.Black);
+        public static SKColor DefaultColor => SKColors.Black;
     }
 }

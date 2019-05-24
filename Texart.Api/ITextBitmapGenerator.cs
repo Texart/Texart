@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using SkiaSharp;
 
 namespace Texart.Api
 {
@@ -37,6 +38,6 @@ namespace Texart.Api
         /// <returns></returns>
         /// <see cref="PixelSamplingRatio"/>
         /// <see cref="Characters"/>
-        Task<ITextBitmap> GenerateAsync(Bitmap bitmap);
+        Task<ITextBitmap> GenerateAsync(SKBitmap bitmap);
     }
 }

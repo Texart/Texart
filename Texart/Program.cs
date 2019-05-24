@@ -1,17 +1,17 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
+using SkiaSharp;
 using Texart.Api;
-using Texart.Plugins;
 
 namespace Texart
 {
-    class Program
+    internal class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             using (var output = File.OpenWrite("../../../../meme.gen.png"))
             {
-                var bitmap = Bitmap.FromFile("../../../../meme.jpg");
+                var bitmap = SKBitmap.Decode("../../../../meme.jpg");
                 IPlugin builtinPlugin = new Builtin.Plugin();
 
                 // TODO: use JSON stream instead of null

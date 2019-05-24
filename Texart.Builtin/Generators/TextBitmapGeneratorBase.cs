@@ -31,15 +31,14 @@ namespace Texart.Builtin.Generators
         public int PixelSamplingRatio { get; protected set; }
 
         /// <inheritdocs/>
-        public async Task<ITextBitmap> GenerateAsync(Bitmap bitmap)
+        public async Task<ITextBitmap> GenerateAsync(SKBitmap bitmap)
         {
             if (bitmap == null) { throw new ArgumentNullException(nameof(bitmap)); }
-            if (bitmap.SkiaBitmap == null) { throw new ArgumentNullException(nameof(bitmap.SkiaBitmap)); }
             if (bitmap.Width % this.PixelSamplingRatio != 0 || bitmap.Height % this.PixelSamplingRatio != 0)
             {
                 throw new ArgumentException($"{nameof(this.PixelSamplingRatio)} must evenly divide both Bitmap width and height.");
             }
-            return await this.DoGenerateTextAsync(bitmap.SkiaBitmap);
+            return await this.DoGenerateTextAsync(bitmap);
         }
 
         /// <summary>
