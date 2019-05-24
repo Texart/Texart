@@ -13,7 +13,7 @@ namespace Texart.Builtin.Renderers
         /// <summary>
         /// The font to paint with.
         /// </summary>
-        public Font Font { get; }
+        public TxFont Font { get; }
 
         /// <summary>
         /// Determines if the output image should be antialiased.
@@ -65,7 +65,7 @@ namespace Texart.Builtin.Renderers
                 paint.IsAutohinted = this.ShouldHint;
 
                 var font = this.Font;
-                paint.Typeface = font.Typeface.SkiaTypeface;
+                paint.Typeface = font.Typeface;
                 paint.TextSize = font.TextSize;
                 paint.TextEncoding = SKTextEncoding.Utf8;
                 paint.SubpixelText = true;
@@ -131,11 +131,11 @@ namespace Texart.Builtin.Renderers
             }
         }
 
-        public FontBitmapRenderer(Font font)
+        public FontBitmapRenderer(TxFont txFont)
         {
-            if (font == null) { throw new ArgumentNullException(nameof(font)); }
-            if (font.Typeface == null) { throw new ArgumentNullException(nameof(font.Typeface)); }
-            this.Font = font;
+            if (txFont == null) { throw new ArgumentNullException(nameof(txFont)); }
+            if (txFont.Typeface == null) { throw new ArgumentNullException(nameof(txFont.Typeface)); }
+            this.Font = txFont;
         }
 
         public static SKColor DefaultBackgroundColor => SKColors.White;
@@ -143,7 +143,8 @@ namespace Texart.Builtin.Renderers
         public static FontBitmapRenderer Create(Lazy<JToken> json)
         {
             // TODO: use json
-            return new FontBitmapRenderer(Api.Font.FromTypeface(Typeface.FromName("Consolas")));
+            var typeface = TxContract.NonNull(SKTypeface.FromFamilyName("Consolas"));
+            return new FontBitmapRenderer(TxFont.FromTypeface(typeface));
         }
     }
 }

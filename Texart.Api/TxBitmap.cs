@@ -9,7 +9,7 @@ namespace Texart.Api
     /// Helpers for image bitmaps.
     /// </summary>
     /// <see cref="SKBitmap"/>
-    public static class Bitmap
+    public static class TxBitmap
     {
         /// <summary>
         /// Returns every possible values for <see cref="ITextBitmapGenerator.PixelSamplingRatio"/>

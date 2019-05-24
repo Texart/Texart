@@ -8,8 +8,8 @@ namespace Texart.Api
     /// properties such as font size, color, and spacing.
     /// For example: "Garamond 12pt Bold", "Courier New 8pt Italic".
     /// </summary>
-    /// <see cref="Typeface"/>
-    public class Font
+    /// <see cref="SKTypeface"/>
+    public class TxFont
     {
         /// <summary>
         /// Gets or sets the amount of spacing reserved for one character in the text data.
@@ -49,7 +49,7 @@ namespace Texart.Api
         /// <summary>
         /// Gets or sets the underlying typeface.
         /// </summary>
-        public Typeface Typeface { get; set; }
+        public SKTypeface Typeface { get; set; }
 
         /// <summary>
         /// Gets or sets the foreground color of this font.
@@ -62,9 +62,9 @@ namespace Texart.Api
         /// </summary>
         /// <param name="typeface">The typeface to create a font from.</param>
         /// <returns>A new <code>Font</code> with the given typeface.</returns>
-        public static Font FromTypeface(Typeface typeface)
+        public static TxFont FromTypeface(SKTypeface typeface)
         {
-            return new Font()
+            return new TxFont()
             {
                 Typeface = typeface,
                 CharacterSpacing = DefaultCharacterSpacing,

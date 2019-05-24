@@ -18,12 +18,13 @@
 
 ## Chore
 
-- [ ] Remove `SkiaPropertyAttribute`
-  - [ ] Remove useless wrappers around Skia types, `Color`, `Typeface`, `Bitmap` (or at least make them `static`).
+- [X] Remove `SkiaPropertyAttribute`
+  - [X] Remove useless wrappers around Skia types, `Color`, `Typeface`, `Bitmap` (or at least make them `static`).
 - [X] Rename `Texart.Interface` to something like `Texart.Api`.
-- [ ] Merge `Texart.ScriptInterface` with `Texart.Api`.
-- [X] Move common helpers (such `ArrayTextBitmap`) to `Texart.Api`.
-  - [ ] `Texart.Builtin` and external plugins should both depend on this assembly.
+- [X] Merge `Texart.ScriptInterface` with `Texart.Api`.
+  - [ ] Delete `Texart.ScriptInterface`.
+- [X] Move common helpers (such as `ArrayTextBitmap`) to `Texart.Api`.
+  - [X] `Texart.Builtin` and external plugins should both depend on this assembly.
 - [ ] Convert some of the `Debug.Assert`s to real checks.
   - [ ] Especially in `Texart.Api` since that will be run by public code.
 - [ ] Investigate an alternative to `mermaidjs` for diagrams in docs since GitHub doesn't support it.

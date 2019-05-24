@@ -16,7 +16,7 @@ namespace Texart.Api
         /// <returns>The provided value if it's not <code>null</code>.</returns>
         public static T NonNull<T>(T value)
         {
-            if (value == null) { throw new ArgumentNullException($"TxContract: {nameof(value)} was null"); }
+            if (value == null) { throw new ArgumentNullException($"TxContract: {nameof(value)} was null!"); }
             return value;
         }
     }
