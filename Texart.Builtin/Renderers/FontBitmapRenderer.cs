@@ -8,10 +8,13 @@ using Texart.Api;
 
 namespace Texart.Builtin.Renderers
 {
-    public sealed class FontBitmapRenderer : ITextBitmapRenderer
+    /// <summary>
+    /// A renderer that paints text to an image using a provided font.
+    /// </summary>
+    internal sealed class FontBitmapRenderer : ITextBitmapRenderer
     {
         /// <summary>
-        /// The font to paint with.
+        /// The font to paint with, including metadata such as size, color, and spacing.
         /// </summary>
         public TxFont Font { get; }
 
@@ -33,7 +36,14 @@ namespace Texart.Builtin.Renderers
         /// <see cref="SKPaint.IsAutohinted"/>
         public bool ShouldHint { get; set; }
 
+        /// <summary>
+        /// The image background color. This is in contrast to <see cref="TxFont.Color"/>.
+        /// </summary>
         public SKColor BackgroundColor { get; set; } = DefaultBackgroundColor;
+        /// <summary>
+        /// The default image background color.
+        /// </summary>
+        public static SKColor DefaultBackgroundColor => SKColors.White;
 
         /// <inheritdocs />
         public Task RenderAsync(ITextBitmap textBitmap, Stream outputStream)
@@ -131,6 +141,10 @@ namespace Texart.Builtin.Renderers
             }
         }
 
+        /// <summary>
+        /// Constructs a renderer with the given font.
+        /// </summary>
+        /// <param name="txFont">The font to use.</param>
         public FontBitmapRenderer(TxFont txFont)
         {
             if (txFont == null) { throw new ArgumentNullException(nameof(txFont)); }
@@ -138,8 +152,11 @@ namespace Texart.Builtin.Renderers
             this.Font = txFont;
         }
 
-        public static SKColor DefaultBackgroundColor => SKColors.White;
-
+        /// <summary>
+        /// Factory function for <see cref="Plugin"/>.
+        /// </summary>
+        /// <param name="json">Input arguments.</param>
+        /// <returns>Constructed instance.</returns>
         public static FontBitmapRenderer Create(Lazy<JToken> json)
         {
             // TODO: use json

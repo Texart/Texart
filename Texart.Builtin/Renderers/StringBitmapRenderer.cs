@@ -13,8 +13,11 @@ namespace Texart.Builtin.Renderers
     /// A renderer that simply writes the text data to the output
     /// as a string.
     /// </summary>
-    public sealed class StringBitmapRenderer : ITextBitmapRenderer
+    internal sealed class StringBitmapRenderer : ITextBitmapRenderer
     {
+        /// <summary>
+        /// The encoding to output as.
+        /// </summary>
         public Encoding Encoding { get; }
 
         /// <inheritdocs/>
@@ -65,6 +68,11 @@ namespace Texart.Builtin.Renderers
             Encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
         }
 
+        /// <summary>
+        /// Factory function for <see cref="Plugin"/>.
+        /// </summary>
+        /// <param name="json">Input arguments.</param>
+        /// <returns>Constructed instance.</returns>
         public static StringBitmapRenderer Create(Lazy<JToken> json)
         {
             // TODO: use json

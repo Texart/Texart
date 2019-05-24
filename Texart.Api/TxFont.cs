@@ -4,7 +4,7 @@ using System;
 namespace Texart.Api
 {
     /// <summary>
-    /// A <code>Font</code> represents a particular <code>Typeface</code> with extra
+    /// A <code>TxFont</code> represents a particular <code>SKTypeface</code> with extra
     /// properties such as font size, color, and spacing.
     /// For example: "Garamond 12pt Bold", "Courier New 8pt Italic".
     /// </summary>

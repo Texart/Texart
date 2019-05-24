@@ -7,8 +7,13 @@ using Texart.Api;
 
 namespace Texart.Builtin.Generators
 {
-    public abstract class TextBitmapGeneratorBase : ITextBitmapGenerator
+    internal abstract class TextBitmapGeneratorBase : ITextBitmapGenerator
     {
+        /// <summary>
+        /// The constructor that should be called from derived types.
+        /// </summary>
+        /// <param name="characters">The character set to use.</param>
+        /// <param name="pixelSamplingRatio"><see cref="ITextBitmapGenerator.PixelSamplingRatio"/></param>
         protected TextBitmapGeneratorBase(IList<char> characters, int pixelSamplingRatio)
         {
             this.Characters = characters ?? throw new ArgumentNullException(nameof(characters));

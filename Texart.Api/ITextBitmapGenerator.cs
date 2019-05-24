@@ -26,8 +26,16 @@ namespace Texart.Api
         /// For example, if <code>PixelSamplingRatio</code> is <code>2</code>, then <code>4</code>
         /// pixels from the image will be used to generate <code>1</code> character.
         /// Consequently, a value of <code>1</code> is loss-less.
+        /// Note that implementations are only required to support ratios that perfectly divide both the width
+        /// and height of the provided bitmap.
+        /// For the sake of maintaining aspect ratio, implementations must "chunk" images evenly on both X and
+        /// Y axes (using this many pixels).
+        /// This creates the unfortunately scenario in the case that the width and height are distinct prime
+        /// numbers (where the only valid sampling ratio is <code>1</code>). In that case, the image should be
+        /// resized or cropped before text generation.
         /// </summary>
         /// <see cref="GenerateAsync"/>
+        /// <see cref="TxBitmap.GetPerfectPixelRatios(SkiaSharp.SKBitmap)"/>
         int PixelSamplingRatio { get; }
 
         /// <summary>

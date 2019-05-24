@@ -9,7 +9,11 @@ using Texart.Api;
 
 namespace Texart.Builtin.Generators
 {
-    public sealed class BrightnessBasedBitmapGenerator : TextBitmapGeneratorBase, ITextBitmapGenerator
+    /// <summary>
+    /// A generator that looks at the average brightness of N-by-N pixels to determine one character
+    /// in the output text. The aggregation is done in parallel, completely on the CPU.
+    /// </summary>
+    internal sealed class BrightnessBasedBitmapGenerator : TextBitmapGeneratorBase, ITextBitmapGenerator
     {
         /// <inheritdocs/>
         public override Task<ITextBitmap> DoGenerateTextAsync(SKBitmap bitmap)
@@ -105,11 +109,21 @@ namespace Texart.Builtin.Generators
             return brightnessValues;
         }
 
+        /// <summary>
+        /// Constructs a generator with the given character set and <see cref="ITextBitmapGenerator.PixelSamplingRatio"/>.
+        /// </summary>
+        /// <param name="characters"></param>
+        /// <param name="pixelSamplingRatio"><see cref="ITextBitmapGenerator.PixelSamplingRatio"/></param>
         public BrightnessBasedBitmapGenerator(IEnumerable<char> characters, int pixelSamplingRatio = 1)
             : base(new List<char>(characters), pixelSamplingRatio)
         {
         }
 
+        /// <summary>
+        /// Factory function for <see cref="Plugin"/>.
+        /// </summary>
+        /// <param name="json">Input arguments.</param>
+        /// <returns>Constructed instance.</returns>
         public static BrightnessBasedBitmapGenerator Create(Lazy<JToken> json)
         {
             // TODO: Use json

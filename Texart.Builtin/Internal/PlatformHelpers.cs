@@ -3,6 +3,9 @@ using System.Text;
 
 namespace Texart.Builtin.Internal
 {
+    /// <summary>
+    /// Internal helpers to default with platform-specific details.
+    /// </summary>
     internal static class PlatformHelpers
     {
         /// <summary>
