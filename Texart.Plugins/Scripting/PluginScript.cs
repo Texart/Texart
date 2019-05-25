@@ -66,7 +66,7 @@ namespace Texart.Plugins.Scripting
         /// <see cref="SourceFile"/>
         public static Script<IPlugin> LoadFrom(string sourceFilePath) => LoadFrom<IPlugin>(sourceFilePath);
 
-        private static LanguageVersion DefaultLanguageVersion => LanguageVersion.CSharp8;
+        private static LanguageVersion DefaultLanguageVersion => LanguageVersion.CSharp7_3;
         private static OptimizationLevel DefaultOptimizationLevel =>
             CompilationDefines.IsRelease ? OptimizationLevel.Release : OptimizationLevel.Debug;
         private static bool DefaultEmitDebugInformation => CompilationDefines.IsDebug;

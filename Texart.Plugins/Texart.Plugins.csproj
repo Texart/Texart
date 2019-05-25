@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Texart.Plugins</AssemblyName>
     <RootNamespace>Texart.Plugins</RootNamespace>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
