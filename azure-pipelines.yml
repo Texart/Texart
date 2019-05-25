@@ -26,7 +26,7 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'Build $(buildConfiguration)'
 - task: DotNetCoreCLI@2
-  displayName: Run Unit Tests ($buildConfiguration)
+  displayName: Run Unit Tests ($(buildConfiguration))
   inputs:
     command: test
     projects: '**/*.Tests/*.csproj'
