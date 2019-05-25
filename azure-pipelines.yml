@@ -20,11 +20,13 @@ variables:
 
 steps:
 - task: DotNetCoreInstaller@0
+  displayName: Install dotnet
   inputs:
     version: '2.2.300'
 - script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+  displayName: 'Build $(buildConfiguration)'
 - task: DotNetCoreCLI@2
+  displayName: Run Unit Tests ($buildConfiguration)
   inputs:
     command: test
     projects: '**/*.Tests/*.csproj'
