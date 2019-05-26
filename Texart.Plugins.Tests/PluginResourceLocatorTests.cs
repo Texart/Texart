@@ -6,13 +6,12 @@ namespace Texart.Plugins.Tests
     internal class PluginResourceLocatorTests
     {
         [Test]
-        public void AllowsDllName()
+        public void AllowsAssemblyAndResource()
         {
-            var locator = AssertValidLocator("file://Texart.SomePlugin.dll/SomeResource");
+            var locator = AssertValidLocator("file:///Texart.SomePlugin.dll//SomeResource");
             Assert.AreEqual(new ReferenceScheme("file"), locator.Scheme);
-            Assert.AreEqual("Texart.SomePlugin.dll", locator.Host);
-            Assert.AreEqual("SomeResource", locator.Path);
-            Assert.AreEqual(new[] { "SomeResource" }, locator.Segments);
+            Assert.AreEqual("Texart.SomePlugin.dll", locator.AssemblyPath);
+            Assert.AreEqual("SomeResource", locator.ResourcePath);
         }
 
         private static PluginResourceLocator AssertValidLocator(string uri)

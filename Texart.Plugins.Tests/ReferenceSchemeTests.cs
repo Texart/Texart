@@ -20,6 +20,10 @@ namespace Texart.Plugins.Tests
         [Test]
         public void AllowsHyphen() => AssertValidScheme("hello-world");
 
+        [Test]
+        public void LowerCasesScheme() =>
+            Assert.AreEqual("file", new ReferenceScheme("FiLe").Scheme);
+
         private static void AssertValidScheme(string scheme)
         {
             ReferenceScheme instance = null;
@@ -32,19 +36,19 @@ namespace Texart.Plugins.Tests
 
             void CheckMatches()
             {
-                Assert.IsTrue(instance.Matches($"{scheme}:hello:world"));
-                Assert.IsTrue(instance.Matches($"{scheme}:"));
+                Assert.IsTrue(instance.Matches($"{scheme}://hello:world"));
+                Assert.IsTrue(instance.Matches($"{scheme}://"));
                 Assert.IsFalse(instance.Matches(scheme));
-                Assert.IsFalse(instance.Matches($"{scheme}hello:world"));
+                Assert.IsFalse(instance.Matches($"{scheme}hello://world"));
             }
             void CheckPrefix()
             {
-                Assert.AreEqual($"{scheme}:", instance.SchemePrefix);
-                Assert.AreEqual($"{scheme}:hello/world", instance.Prefix("hello/world"));
+                Assert.AreEqual($"{scheme}://", instance.SchemePrefix);
+                Assert.AreEqual($"{scheme}://hello/world", instance.Prefix("hello/world"));
             }
             void CheckNormalizePath()
             {
-                Assert.AreEqual(instance.NormalizePath($"{scheme}:hello/world"), "hello/world");
+                Assert.AreEqual(instance.NormalizePath($"{scheme}://hello/world"), "hello/world");
             }
 
             CheckMatches();
@@ -130,9 +134,9 @@ namespace Texart.Plugins.Tests
         public void HasCorrectHashCodes()
         {
             var file1 = new ReferenceScheme("file");
-            var file2 = new ReferenceScheme("file");
+            var file2 = new ReferenceScheme("FILE");
             var https1 = new ReferenceScheme("https");
-            var https2 = new ReferenceScheme("https");
+            var https2 = new ReferenceScheme("HTTPS");
 
             Assert.AreEqual(file1.GetHashCode(), file2.GetHashCode());
             Assert.AreEqual(https1.GetHashCode(), https2.GetHashCode());

@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using Texart.Api;
 
 namespace Texart.Plugins
 {
     /// <summary>
-    /// A URI-like string that is used to identity objects inside a plugin assembly.
+    /// A domain-specific URI-like string that is used to identity a plugin assembly and objects inside it.
     /// The properties and formatting is a strict subset of a URI and thus: all <code>PluginResourceLocator</code>s
     /// are valid (absolute) URIs.
     ///
@@ -22,8 +25,9 @@ namespace Texart.Plugins
     ///
     /// From the above, only the following properties are allowed:
     ///   * scheme: <see cref="PluginResourceLocator.Scheme"/>.
-    ///   * authority: <see cref="PluginResourceLocator.Host"/>. The port is not allowed, however.
-    ///   * path: <see cref="PluginResourceLocator.Segments"/> and <see cref="PluginResourceLocator.Path"/>.
+    ///   * authority: This is required for a URI but in our case, this <b>MUST</b> be empty.
+    ///   * path: The path <b>MUST</b> contain at least one empty segment that is used to partition the path into
+    ///           <see cref="PluginResourceLocator.AssemblyPath"/> and <see cref="PluginResourceLocator.ResourcePath"/>.
     /// These restrictions may be relaxed in the future, but will always be compliant with the latest URI RFC.
     /// </summary>
     public sealed class PluginResourceLocator : IEquatable<PluginResourceLocator>
@@ -32,18 +36,26 @@ namespace Texart.Plugins
         /// The URI scheme. See <see cref="Uri.Scheme"/>.
         /// </summary>
         public ReferenceScheme Scheme => new ReferenceScheme(AsUri.Scheme);
+
         /// <summary>
-        /// The URI authority. See <see cref="Uri.Host"/>.
+        /// The segments in the URI path that locate the plugin <see cref="System.Reflection.Assembly"/> or <see cref="Scripting.SourceFile"/>.
         /// </summary>
-        public string Host => AsUri.Host;
+        public string[] AssemblySegments { get; }
         /// <summary>
-        /// The URI path. See <see cref="Uri.Segments"/>.
+        /// <see cref="AssemblySegments"/> as a path string.
         /// </summary>
-        public string Path => AsUri.PathAndQuery;
+        public string AssemblyPath => string.Join(UriPathSeparator, AssemblySegments);
+
         /// <summary>
-        /// The URI path segments. See <see cref="Uri.Segments"/>
+        /// The segments in the URI path that locate specific resource inside a plugin.
+        /// For example: as a path to <see cref="IPlugin.LookupGenerator"/> or <see cref="IPlugin.LookupRenderer"/>.
         /// </summary>
-        public string[] Segments => AsUri.Segments;
+        public string[] ResourceSegments { get; }
+        /// <summary>
+        /// <see cref="ResourceSegments"/> as a path string.
+        /// </summary>
+        public string ResourcePath => string.Join(UriPathSeparator, ResourceSegments);
+
         /// <summary>
         /// The backing URI object.
         /// </summary>
@@ -56,12 +68,14 @@ namespace Texart.Plugins
         /// <param name="uri">The backing URI.</param>
         private PluginResourceLocator(Uri uri)
         {
-            var checkFailedException = CheckIsValidPluginResourceUri(uri);
+            var (checkFailedException, precomputed) = CheckIsValidPluginResourceUri(uri);
             if (checkFailedException != null)
             {
                 throw checkFailedException;
             }
             AsUri = uri;
+            AssemblySegments = precomputed.AssemblySegments;
+            ResourceSegments = precomputed.ResourceSegments;
         }
 
         /// <summary>
@@ -80,15 +94,45 @@ namespace Texart.Plugins
         ///     <code>true</code> if valid <see cref="PluginResourceLocator"/> URI,
         ///     <code>false</code> otherwise.
         /// </returns>
-        public static bool IsValidResourceLocator(Uri uri) => CheckIsValidPluginResourceUri(uri) == null;
+        public static bool IsValidPluginResourceLocator(Uri uri)
+        {
+            var (exception, _) = CheckIsValidPluginResourceUri(uri);
+            return exception == null;
+        }
 
+        /// <summary>
+        /// Precomputed values for the constructor to use.
+        /// </summary>
+        private readonly struct ComputedSegments
+        {
+            /// <summary>
+            /// See <see cref="PluginResourceLocator.AssemblySegments"/>.
+            /// </summary>
+            public string[] AssemblySegments { get; }
+            /// <summary>
+            /// See <see cref="PluginResourceLocator.ResourceSegments"/>.
+            /// </summary>
+            public string[] ResourceSegments { get; }
+            /// <summary>
+            /// Constructs from precomputed values.
+            /// </summary>
+            /// <param name="assemblySegments"><see cref="AssemblySegments"/></param>
+            /// <param name="resourceSegments"><see cref="ResourceSegments"/></param>
+            public ComputedSegments(string[] assemblySegments, string[] resourceSegments)
+            {
+                Debug.Assert(assemblySegments != null);
+                Debug.Assert(resourceSegments != null);
+                AssemblySegments = assemblySegments;
+                ResourceSegments = resourceSegments;
+            }
+        }
         /// <summary>
         /// Makes sure that the given URI is within the subset of allowed URIs.
         /// Not all URIs are valid <see cref="PluginResourceLocator"/>s.
         /// </summary>
         /// <param name="uri">The URI to check.</param>
         /// <returns>An exception if the URI is invalid, or <code>null</code> if valid.</returns>
-        private static ArgumentException CheckIsValidPluginResourceUri(Uri uri)
+        private static (ArgumentException, ComputedSegments) CheckIsValidPluginResourceUri(Uri uri)
         {
             //
             // Reference: https://tools.ietf.org/html/rfc3986#section-3
@@ -101,30 +145,101 @@ namespace Texart.Plugins
             //     / \ /                        \
             //     urn:example:animal:ferret:nose
             //
-            if (uri == null) { return new ArgumentNullException(nameof(uri)); }
-            if (!uri.IsAbsoluteUri) { return new ArgumentException($"URI must be absolute: {uri}"); }
+            if (uri == null) { return (new ArgumentNullException(nameof(uri)), default); }
+            if (!uri.IsAbsoluteUri)
+            {
+                return (new ArgumentException($"URI must be absolute: {uri}"), default);
+            }
 
             // Scheme check
             // Reference: https://tools.ietf.org/html/rfc3986#section-3.1
             // scheme      = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
-            if (!ReferenceScheme.IsValidScheme(uri.Scheme)) { return new ArgumentException($"URI reference scheme is invalid: {uri.Scheme}"); }
+            if (!ReferenceScheme.IsValidScheme(uri.Scheme))
+            {
+                return (new ArgumentException($"URI reference scheme is invalid: {uri.Scheme}"), default);
+            }
 
             // Authority check
             // Reference: https://tools.ietf.org/html/rfc3986#section-3.2
             //   authority   = [ userinfo "@" ] host [ ":" port ]
-            if (!string.IsNullOrEmpty(uri.UserInfo)) { return new ArgumentException($"URI authority userinfo is not allowed: ${uri.UserInfo}"); }
-            if (!uri.IsDefaultPort) { return new ArgumentException($"URI port is not allowed: {uri.Port}"); }
-
-            // All paths are valid, no check required
+            if (!string.IsNullOrEmpty(uri.Authority))
+            {
+                return (new ArgumentException($"URI authority is not allowed: ${uri.UserInfo}"), default);
+            }
 
             // Query check
-            if (!string.IsNullOrEmpty(uri.Query)) { return new ArgumentException($"URI query is not allowed: {uri.Query}"); }
+            if (!string.IsNullOrEmpty(uri.Query))
+            {
+                return (new ArgumentException($"URI query is not allowed: {uri.Query}"), default);
+            }
+
             // Fragment check
-            if (!string.IsNullOrEmpty(uri.Fragment)) { return new ArgumentException($"URI fragment is not allowed: {uri.Fragment}"); }
+            if (!string.IsNullOrEmpty(uri.Fragment))
+            {
+                return (new ArgumentException($"URI fragment is not allowed: {uri.Fragment}"), default);
+            }
+
+            // Path check
+            var (computeSegmentException, segments) = ComputeSegments(uri.PathAndQuery);
+            if (computeSegmentException != null)
+            {
+                return (computeSegmentException, default);
+            }
 
             // All good!
-            return null;
+            return (null, segments);
         }
+        /// <summary>
+        /// Creates a <see cref="ComputedSegments"/> from segment parts.
+        /// </summary>
+        /// <param name="path">The path to partition.</param>
+        /// <returns>Computed partition.</returns>
+        private static (ArgumentException, ComputedSegments) ComputeSegments(string path)
+        {
+            ReadOnlySpan<string> segments = path.Split(UriPathSeparator);
+            if (!segments.IsEmpty && segments[0] == string.Empty)
+            {
+                // Remove trailing /
+                segments = segments.Slice(1);
+            }
+            var assemblySegments = new List<string>();
+            var resourceSegments = new List<string>();
+            bool emptySegmentFound = false;
+            foreach (var segment in segments)
+            {
+                if (emptySegmentFound)
+                {
+                    resourceSegments.Add(segment);
+                }
+                else if (segment == string.Empty)
+                {
+                    // switch to resource segments
+                    emptySegmentFound = true;
+                    continue;
+                }
+                else
+                {
+                    assemblySegments.Add(segment);
+                }
+            }
+
+            if (!emptySegmentFound)
+            {
+                var exception = new ArgumentException(
+                    $"URI path did not contain an empty segment (for assembly and resource paths partitioning): {path}");
+                return (exception, default);
+            }
+
+            return (null, new ComputedSegments(assemblySegments.ToArray(), resourceSegments.ToArray()));
+        }
+
+        /// <summary>
+        /// Path separator in a URI. Specified in <see href="https://tools.ietf.org/html/rfc3986"/>.
+        /// </summary>
+        private static char UriPathSeparator => '/';
+
+        /// <inheritdoc />
+        public override string ToString() => AsUri.ToString();
 
         /// <inheritdoc />
         public bool Equals(PluginResourceLocator other)

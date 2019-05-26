@@ -1,4 +1,4 @@
-#r "file:./Texart.ScriptInterface.dll"
+#r "file://./Texart.ScriptInterface.dll"
 
 using Texart.ScriptInterface;
 
