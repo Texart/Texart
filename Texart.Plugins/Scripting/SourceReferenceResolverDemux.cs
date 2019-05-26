@@ -31,9 +31,9 @@ namespace Texart.Plugins.Scripting
         {
             var (scheme, resolver) = GetResolverByPath(path);
             var normalizedPath = resolver.NormalizePath(
-                scheme.HasValue ? scheme.Value.NormalizePath(path) : path,
+                scheme != null ? scheme.NormalizePath(path) : path,
                 baseFilePath);
-            return scheme.HasValue ? scheme.Value.Prefix(normalizedPath) : normalizedPath;
+            return scheme != null ? scheme.Prefix(normalizedPath) : normalizedPath;
         }
 
         /// <inheritdoc />
@@ -41,16 +41,16 @@ namespace Texart.Plugins.Scripting
         {
             var (scheme, resolver) = GetResolverByPath(path);
             var resolvedReferencePath = resolver.ResolveReference(
-                scheme.HasValue ? scheme.Value.NormalizePath(path) : path,
+                scheme != null ? scheme.NormalizePath(path) : path,
                 baseFilePath);
-            return scheme.HasValue ? scheme.Value.Prefix(resolvedReferencePath) : resolvedReferencePath;
+            return scheme != null ? scheme.Prefix(resolvedReferencePath) : resolvedReferencePath;
         }
 
         /// <inheritdoc />
         public override Stream OpenRead(string resolvedPath)
         {
             var (scheme, resolver) = GetResolverByPath(resolvedPath);
-            return resolver.OpenRead(scheme.HasValue ? scheme.Value.NormalizePath(resolvedPath) : resolvedPath);
+            return resolver.OpenRead(scheme != null ? scheme.NormalizePath(resolvedPath) : resolvedPath);
         }
 
         /// <summary>
@@ -58,10 +58,10 @@ namespace Texart.Plugins.Scripting
         /// </summary>
         /// <param name="path">The path to check for scheme.</param>
         /// <returns>Matching resolver if found, else the default resolver.</returns>
-        private (ReferenceScheme?, SourceReferenceResolver) GetResolverByPath(string path) =>
+        private (ReferenceScheme, SourceReferenceResolver) GetResolverByPath(string path) =>
             _resolversByScheme
                 .Where(kv => kv.Key.Matches(path))
-                .Select(kv => (new ReferenceScheme?(kv.Key), kv.Value))
+                .Select(kv => (kv.Key, kv.Value))
                 .DefaultIfEmpty((null, _defaultResolver))
                 .First();
 

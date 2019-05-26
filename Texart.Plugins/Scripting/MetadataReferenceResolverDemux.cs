@@ -30,7 +30,7 @@ namespace Texart.Plugins.Scripting
         {
             var (scheme, resolver) = GetResolverByPath(reference);
             return resolver.ResolveReference(
-                scheme.HasValue ? scheme.Value.NormalizePath(reference) : reference,
+                scheme != null ? scheme.NormalizePath(reference) : reference,
                 baseFilePath,
                 properties);
         }
@@ -47,10 +47,10 @@ namespace Texart.Plugins.Scripting
         /// </summary>
         /// <param name="path">The path to check for scheme.</param>
         /// <returns>Matching resolver if found, else the default resolver.</returns>
-        private (ReferenceScheme?, MetadataReferenceResolver) GetResolverByPath(string path) =>
+        private (ReferenceScheme, MetadataReferenceResolver) GetResolverByPath(string path) =>
             _resolversByScheme
                 .Where(kv => kv.Key.Matches(path))
-                .Select(kv => (new ReferenceScheme?(kv.Key), kv.Value))
+                .Select(kv => (kv.Key, kv.Value))
                 .DefaultIfEmpty((null, _defaultResolver))
                 .First();
 
