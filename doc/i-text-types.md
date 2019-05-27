@@ -6,7 +6,7 @@
 
 The internal representation is implementation-defined. The underlying computation can be performed on the fly, or wrap around a pre-populated `char[,]` etc. Implementations are strongly encouraged to be immutable.
 
-A reference implementation, `ArrayTextBitmap`, is provided. The underlying data is stored as `char[]` (1D `char` array).
+A reference implementation, `TxArrayTextBitmap`, is provided. The underlying data is stored as `char[]` (1D `char` array).
 
 In the future, `ITextBitmap` may expose more information about each "pixel" (such as color data).
 

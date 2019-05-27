@@ -6,7 +6,7 @@
   * The executable assembly - contains `Main` in `Program.cs`.
 * `Texart.Api`
   * The commonly used domain interfaces and types, including `ITextBitmap`, `Font` etc.
-  * Also contains reference implementations for some interfaces (e.g. `ArrayTextBitmap`).
+  * Also contains reference implementations for some interfaces (e.g. `TxArrayTextBitmap`).
   * This assembly is accessible from plugins. It's important to not depend on other `Texart.*` assemblies. The job of this assembly is to define the vocabulary types.
 * `Texart.Builtin`
   * Bundled default implementations for `ITextBitmapGenerator`s and `ITextBitmapRenderer`s.

@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Texart.Api
 {
     /// <summary>
-    /// An implementation of <code>ITextBitmap</code> based on an underlying
+    /// An implementation of <see cref="ITextBitmap"/> based on an underlying
     /// one dimensional array.
     /// </summary>
     public sealed class TxArrayTextBitmap : ITextBitmap
@@ -21,9 +21,9 @@ namespace Texart.Api
         private char[] Characters { get; }
 
         /// <summary>
-        /// Constructs an <code>ArrayTextBitmap</code> given the underlying array to use.
-        /// The length of this array must match the provided <code>width</code> and
-        /// <code>height</code>. That is, <code>characters.length == width * height</code>.
+        /// Constructs an <see cref="TxArrayTextBitmap"></see> given the underlying array to use.
+        /// The length of this array must match the provided <c>width</c> and
+        /// <c>height</c>. That is, <c>characters.length == width * height</c>.
         /// </summary>
         /// <param name="characters">The underlying array</param>
         /// <param name="width">The width of the text data</param>
