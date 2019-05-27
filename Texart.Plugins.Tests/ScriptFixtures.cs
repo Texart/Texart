@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.Scripting;
-using NUnit.Framework;
 using Texart.Api;
 using Texart.Plugins.Scripting;
 
@@ -51,12 +49,10 @@ namespace Texart.Plugins.Tests
         /// <param name="fixture">Fixture number.</param>
         /// <param name="relativePath">The relative path from the fixture directory.</param>
         /// <returns>Loaded script.</returns>
-        public static async Task<Script<IPlugin>> LoadFrom(int fixture, string relativePath)
+        public static async Task<PluginScriptCompilation<IPlugin>> LoadFrom(int fixture, string relativePath)
         {
             var pluginScript = PluginScript.LoadFrom(GetPath(fixture, relativePath));
-            var compilationResult = await pluginScript.Compile();
-            Assert.IsEmpty(compilationResult.Diagnostics, "PluginScript diagnostics were not empty");
-            return compilationResult.Script;
+            return await pluginScript.Compile();
         }
 
         /// <summary>
@@ -66,12 +62,10 @@ namespace Texart.Plugins.Tests
         /// <param name="fixture">Fixture number.</param>
         /// <param name="relativePath">The relative path from the fixture directory.</param>
         /// <returns>Loaded script.</returns>
-        public static async Task<Script<T>> LoadFrom<T>(int fixture, string relativePath)
+        public static async Task<PluginScriptCompilation<T>> LoadFrom<T>(int fixture, string relativePath)
         {
             var pluginScript = PluginScript.LoadFrom<T>(GetPath(fixture, relativePath));
-            var compilationResult = await pluginScript.Compile();
-            Assert.IsEmpty(compilationResult.Diagnostics, "PluginScript diagnostics were not empty");
-            return compilationResult.Script;
+            return await pluginScript.Compile();
         }
 
         /// <summary>

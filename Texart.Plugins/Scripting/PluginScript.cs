@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
@@ -10,9 +12,11 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Scripting;
 using Texart.Api;
 using Texart.Plugins.Internal;
+using Texart.Plugins.Scripting.Diagnostics;
 
 namespace Texart.Plugins.Scripting
 {
@@ -38,15 +42,38 @@ namespace Texart.Plugins.Scripting
         }
 
         /// <summary>
+        /// Custom Roslyn analyzers for Texart.
+        /// </summary>
+        private ImmutableArray<DiagnosticAnalyzer> CustomAnalyzers => ImmutableArray.Create<DiagnosticAnalyzer>(
+            new TexartReferenceDirectiveAnalyzer(Script.Options.FilePath));
+
+        /// <summary>
         /// Asynchronously compile the script and return any diagnostics.
         /// </summary>
+        /// @todo Figure out if custom diagnostics can be done in the same pass as the default ones
         /// <returns>A compiled <see cref="Script{T}"/> object with compile diagnostics.</returns>
         public async Task<PluginScriptCompilation<T>> Compile()
         {
-            var syntaxTrees = Script.GetCompilation().SyntaxTrees;
-            var diagnostics = await Task.Run(() => Script.Compile());
-            return new PluginScriptCompilation<T>(Script, diagnostics);
+            // TODO: figure out if Task.Run is actually needed in these cases
+            var compilation = await Task.Run(() => Script.GetCompilation());
+            var customCompilation = compilation.WithAnalyzers(CustomAnalyzers);
+            var customDiagnostics = (await customCompilation.GetAllDiagnosticsAsync())
+                .Where(IsCustomDiagnostic)
+                .ToImmutableArray();
+            var defaultDiagnostics = await Task.Run(() => Script.Compile());
+            return new PluginScriptCompilation<T>(Script, customDiagnostics, defaultDiagnostics);
         }
+
+        /// <summary>
+        /// Determines if <paramref name="diagnostic"/> is one defined in Texart.
+        /// </summary>
+        /// <param name="diagnostic">The <see cref="Diagnostic"/> to check.</param>
+        /// <returns>
+        ///     <c>true</c> if <paramref name="diagnostic"/> is defined in Texart,
+        ///     <c>false</c> otherwise.
+        /// </returns>
+        private static bool IsCustomDiagnostic(Diagnostic diagnostic) =>
+            diagnostic.Id.StartsWith(DiagnosticConstants.TexartDiagnosticIdPrefix);
     }
 
     /// <summary>
@@ -57,28 +84,94 @@ namespace Texart.Plugins.Scripting
     public class PluginScriptCompilation<T>
     {
         /// <summary>
-        /// The pre-configured <see cref="Microsoft.CodeAnalysis.Scripting.Script"/> instance.
-        /// </summary>
-        /// <seealso cref="PluginScript{T}.Script"/>
-        public Script<T> Script { get; }
-        /// <summary>
         /// The diagnostics of compiling <see cref="Script"/>.
         /// </summary>
-        public ImmutableArray<Diagnostic> Diagnostics { get; }
+        public ImmutableArray<Diagnostic> Diagnostics => CustomDiagnostics.AddRange(DefaultDiagnostics);
+
+        /// <summary>
+        /// Custom diagnostics for Texart.
+        /// </summary>
+        public ImmutableArray<Diagnostic> CustomDiagnostics { get; }
+
+        /// <summary>
+        /// Diagnostics directly from the compiler.
+        /// </summary>
+        public ImmutableArray<Diagnostic> DefaultDiagnostics { get; }
+
+        /// <summary>
+        /// A wrapper for <see cref="Script{T}.RunAsync(object,System.Threading.CancellationToken)"/> with custom diagnostics added.
+        /// </summary>
+        /// <param name="globals">See <see cref="Script{T}.RunAsync(object,System.Threading.CancellationToken)"/>.</param>
+        /// <param name="catchException">See <see cref="Script{T}.RunAsync(object,System.Threading.CancellationToken)"/>.</param>
+        /// <param name="cancellationToken">See <see cref="Script{T}.RunAsync(object,System.Threading.CancellationToken)"/>.</param>
+        /// <returns>The <see cref="ScriptState{T}.ReturnValue"/>.</returns>
+        /// <seealso cref="Script{T}.RunAsync(object,System.Threading.CancellationToken)"/>.
+        public async Task<ScriptState<T>> RunAsync(
+            object globals = null,
+            Func<Exception, bool> catchException = null,
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var existingDiagnostics = Diagnostics;
+                if (existingDiagnostics.Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error))
+                {
+                    throw new CompilationErrorException(FormatDiagnosticMessage(existingDiagnostics), existingDiagnostics);
+                }
+                return await Script.RunAsync(globals, catchException, cancellationToken);
+            }
+            catch (CompilationErrorException ex)
+            {
+                if (CustomDiagnostics.IsEmpty)
+                {
+                    throw;
+                }
+                var diagnostics = CustomDiagnostics.AddRange(ex.Diagnostics);
+                throw new CompilationErrorException(FormatDiagnosticMessage(diagnostics), diagnostics);
+            }
+            string FormatDiagnosticMessage(IEnumerable<Diagnostic> diagnostics) =>
+                PluginScript.DiagnosticFormatter.Format(diagnostics.First(), CultureInfo.CurrentCulture);
+        }
+
+        /// <summary>
+        /// A wrapper for <see cref="RunAsync"/> that returns the <see cref="ScriptState{T}.ReturnValue"/> directly.
+        /// </summary>
+        /// <param name="globals">See <see cref="Script{T}.RunAsync(object,System.Threading.CancellationToken)"/>.</param>
+        /// <param name="catchException">See <see cref="Script{T}.RunAsync(object,System.Threading.CancellationToken)"/>.</param>
+        /// <param name="cancellationToken">See <see cref="Script{T}.RunAsync(object,System.Threading.CancellationToken)"/>.</param>
+        /// <returns>The <see cref="ScriptState{T}.ReturnValue"/>.</returns>
+        /// <seealso cref="Script{T}.RunAsync(object,System.Threading.CancellationToken)"/>.
+        public async Task<T> EvaluateAsync(
+            object globals = null,
+            Func<Exception, bool> catchException = null,
+            CancellationToken cancellationToken = default)
+        {
+            var scriptState = await RunAsync(globals, catchException, cancellationToken);
+            return scriptState.ReturnValue;
+        }
 
         /// <summary>
         /// Constructs a <see cref="PluginScript{T}"/> with the provided <see cref="Script{T}"/> instance and
         /// the <see cref="Diagnostic"/> results that were yielded during compilation.
         /// </summary>
         /// <param name="script">The backing <see cref="Script{T}"/> instance.</param>
-        /// <param name="diagnostics">The diagnostics of compiling <paramref name="script"/>.</param>
-        internal PluginScriptCompilation(Script<T> script, ImmutableArray<Diagnostic> diagnostics)
+        /// <param name="customDiagnostics">The custom diagnostics of compiling <paramref name="script"/>.</param>
+        /// <param name="defaultDiagnostics">The default compiler diagnostics of compiling <paramref name="script"/>.</param>
+        internal PluginScriptCompilation(Script<T> script, ImmutableArray<Diagnostic> customDiagnostics, ImmutableArray<Diagnostic> defaultDiagnostics)
         {
             Debug.Assert(script != null);
-            Debug.Assert(diagnostics != null);
+            Debug.Assert(customDiagnostics != null);
+            Debug.Assert(defaultDiagnostics != null);
             this.Script = script;
-            this.Diagnostics = diagnostics;
+            this.CustomDiagnostics = customDiagnostics;
+            this.DefaultDiagnostics = defaultDiagnostics;
         }
+
+        /// <summary>
+        /// The pre-configured <see cref="Microsoft.CodeAnalysis.Scripting.Script"/> instance.
+        /// </summary>
+        /// <seealso cref="PluginScript{T}.Script"/>
+        private Script<T> Script { get; }
     }
 
     /// <summary>
@@ -142,14 +235,10 @@ namespace Texart.Plugins.Scripting
         private static bool DefaultCheckOverflow => false;
         private static int DefaultWarningLevel => 4;
         private static Encoding DefaultFileEncoding => Encoding.UTF8;
-
-        private static Assembly[] DefaultExtraAssemblies => new[]
+        private static Assembly[] DefaultExtraAssemblies => new Assembly[]
         {
-            // This will also bring in the transitive dependencies of Texart.Api, including:
-            // * Newtonsoft.Json
-            // * SkiaSharp
-            // Refer to Texart.Api.csproj for complete list
-            typeof(IPlugin).Assembly,
+            // The Texart Api assembly is now loaded via `TexartApiScriptMetadataResolver`.
+            // This is just for extra goodies now - non-essential.
         };
 
         /// <summary>
@@ -192,11 +281,17 @@ namespace Texart.Plugins.Scripting
         private static MetadataReferenceResolver BuildMetadataReferenceResolver(SourceFile sourceFile)
         {
             var scriptResolver = ScriptMetadataResolver.Default.WithBaseDirectory(Path.GetDirectoryName(sourceFile.FilePath));
+            var texartApiWrappedResolver = new TexartApiScriptMetadataResolver(scriptResolver);
             var resolvers = new Dictionary<ReferenceScheme, MetadataReferenceResolver>
             {
                 {FileReferenceScheme, scriptResolver}
             };
-            return new MetadataReferenceResolverDemux(scriptResolver, resolvers.ToImmutableDictionary());
+            return new MetadataReferenceResolverDemux(texartApiWrappedResolver, resolvers.ToImmutableDictionary());
         }
+
+        /// <summary>
+        /// The internally shared <see cref="Microsoft.CodeAnalysis.DiagnosticFormatter"/> instance.
+        /// </summary>
+        internal static readonly DiagnosticFormatter DiagnosticFormatter = new DiagnosticFormatter();
     }
 }

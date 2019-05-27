@@ -1,3 +1,4 @@
+#r "Texart.Api.dll"
 #r "./Texart.ScriptInterface.dll"
 
 using Texart.ScriptInterface;
