@@ -7,18 +7,18 @@ namespace Texart.Plugins
 {
     /// <summary>
     /// A domain-specific URI-like string that is used to identity a plugin assembly and objects inside it.
-    /// The properties and formatting is a strict subset of a URI and thus: all <code>PluginResourceLocator</code>s
+    /// The properties and formatting is a strict subset of a URI and thus all <see cref="PluginResourceLocator"/>s
     /// are valid (absolute) URIs.
     ///
     /// <see href="https://tools.ietf.org/html/rfc3986#section-3"/> defines the syntax of URIs:
     /// <code>
-    ///     foo://example.com:8042/over/there?name=ferret#nose
-    ///     \_/   \______________/\_________/ \_________/ \__/
-    ///      |           |            |            |        |
-    ///   scheme     authority       path        query   fragment
-    ///      |   _____________________|__
-    ///     / \ /                        \
-    ///     urn:example:animal:ferret:nose
+    /// //    foo://example.com:8042/over/there?name=ferret#nose
+    /// //    \_/   \______________/\_________/ \_________/ \__/
+    /// //     |           |            |            |        |
+    /// //  scheme     authority       path        query   fragment
+    /// //     |   _____________________|__
+    /// //    / \ /                        \
+    /// //    urn:example:animal:ferret:nose
     /// </code>
     /// See <see href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#/media/File:URI_syntax_diagram.png"/> for
     /// a simple diagram.
@@ -26,9 +26,22 @@ namespace Texart.Plugins
     /// From the above, only the following properties are allowed:
     ///   * scheme: <see cref="PluginResourceLocator.Scheme"/>.
     ///   * authority: This is required for a URI but in our case, this <b>MUST</b> be empty.
-    ///   * path: The path <b>MUST</b> contain at least one empty segment that is used to partition the path into
-    ///           <see cref="PluginResourceLocator.AssemblyPath"/> and <see cref="PluginResourceLocator.ResourcePath"/>.
+    ///   * path: The path <b>MUST</b> contain at least one segment containing <see cref="AssemblyResourceSeparator"/>,
+    ///           the <i>last</i> of which is used to partition the path into <see cref="PluginResourceLocator.AssemblyPath"/>
+    ///           and <see cref="PluginResourceLocator.ResourcePath"/>.
+    ///           <see cref="PluginResourceLocator.ResourcePath"/> is allowed to be empty.
     /// These restrictions may be relaxed in the future, but will always be compliant with the latest URI RFC.
+    ///
+    /// <example>
+    /// <code>
+    ///     var locator = PluginResourceLocator.FromUri(new Uri("file:///plugins/Texart.SomePlugin.dll:SomePath/SomeResource"));
+    ///     locator.Scheme;           // new ReferenceScheme("file")
+    ///     locator.AssemblyPath      // "plugins/Texart.SomePlugin.dll
+    ///     locator.AssemblySegments  // new [] { "plugins, "Texart.SomePlugin.dll" }
+    ///     locator.ResourcePath      // "SomePath/SomeResource"
+    ///     locator.ResourceSegments  // new [] { "SomePath", "SomeResource" }
+    /// </code>
+    /// </example>
     /// </summary>
     public sealed class PluginResourceLocator : IEquatable<PluginResourceLocator>
     {
@@ -62,21 +75,12 @@ namespace Texart.Plugins
         public Uri AsUri { get; }
 
         /// <summary>
-        /// Constructs a <see cref="PluginResourceLocator"/> with a backing URI.
-        /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
+        /// Character that is used to partition the URI path into <see cref="AssemblyPath"/> and <see cref="ResourcePath"/>.
+        /// The choice of <c>:</c> is justified by its absence in file names (reasonably). Note that many user agents allow
+        /// <c>:</c> in URI paths (e.g. web browsers). Paths containing <c>:</c> <i>may</i> need to be encoded (<c>%3A</c>
+        /// in this case).
         /// </summary>
-        /// <param name="uri">The backing URI.</param>
-        private PluginResourceLocator(Uri uri)
-        {
-            var (checkFailedException, precomputed) = CheckIsValidPluginResourceUri(uri);
-            if (checkFailedException != null)
-            {
-                throw checkFailedException;
-            }
-            AsUri = uri;
-            AssemblySegments = precomputed.AssemblySegments;
-            ResourceSegments = precomputed.ResourceSegments;
-        }
+        public const char AssemblyResourceSeparator = ':';
 
         /// <summary>
         /// Constructs a <see cref="PluginResourceLocator"/> with a backing URI.
@@ -84,6 +88,13 @@ namespace Texart.Plugins
         /// </summary>
         /// <param name="uri">The URI to build from.</param>
         public static PluginResourceLocator FromUri(Uri uri) => new PluginResourceLocator(uri);
+
+        /// <summary>
+        /// Constructs a <see cref="PluginResourceLocator"/> with a backing URI.
+        /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
+        /// </summary>
+        /// <param name="uri">The URI to build from.</param>
+        public static PluginResourceLocator FromUri(string uri) => FromUri(new Uri(uri));
 
         /// <summary>
         /// Determines if the provided URI is within the subset of allowed URIs.
@@ -98,6 +109,23 @@ namespace Texart.Plugins
         {
             var (exception, _) = CheckIsValidPluginResourceUri(uri);
             return exception == null;
+        }
+
+        /// <summary>
+        /// Constructs a <see cref="PluginResourceLocator"/> with a backing URI.
+        /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
+        /// </summary>
+        /// <param name="uri">The backing URI.</param>
+        private PluginResourceLocator(Uri uri)
+        {
+            var (checkFailedException, precomputed) = CheckIsValidPluginResourceUri(uri);
+            if (checkFailedException != null)
+            {
+                throw checkFailedException;
+            }
+            AsUri = uri;
+            AssemblySegments = precomputed.AssemblySegments;
+            ResourceSegments = precomputed.ResourceSegments;
         }
 
         /// <summary>
@@ -202,33 +230,43 @@ namespace Texart.Plugins
                 // Remove trailing /
                 segments = segments.Slice(1);
             }
+
             var assemblySegments = new List<string>();
             var resourceSegments = new List<string>();
-            bool emptySegmentFound = false;
-            foreach (var segment in segments)
+            bool separatorFound = false;
+            // reverse the segments - the partition is based on the last occurence of the separator
+            for (var i = segments.Length - 1; i >= 0; --i)
             {
-                if (emptySegmentFound)
-                {
-                    resourceSegments.Add(segment);
-                }
-                else if (segment == string.Empty)
-                {
-                    // switch to resource segments
-                    emptySegmentFound = true;
-                    continue;
-                }
-                else
+                var segment = segments[i];
+                if (separatorFound)
                 {
                     assemblySegments.Add(segment);
                 }
+                else
+                {
+                    var separatorIndex = segment.LastIndexOf(AssemblyResourceSeparator);
+                    if (separatorIndex != -1)
+                    {
+                        assemblySegments.Add(segment.Substring(0, separatorIndex));
+                        resourceSegments.Add(segment.Substring(separatorIndex + 1));
+                        separatorFound = true;
+                    }
+                    else
+                    {
+                        resourceSegments.Add(segment);
+                    }
+                }
             }
 
-            if (!emptySegmentFound)
+            if (!separatorFound)
             {
                 var exception = new ArgumentException(
-                    $"URI path did not contain an empty segment (for assembly and resource paths partitioning): {path}");
+                    $"URI path did not contain assembly-resource separator ('{AssemblyResourceSeparator})': {path}");
                 return (exception, default);
             }
+
+            assemblySegments.Reverse();
+            resourceSegments.Reverse();
 
             return (null, new ComputedSegments(assemblySegments.ToArray(), resourceSegments.ToArray()));
         }

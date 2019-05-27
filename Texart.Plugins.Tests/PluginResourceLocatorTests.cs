@@ -8,25 +8,35 @@ namespace Texart.Plugins.Tests
         [Test]
         public void AllowsAssemblyAndResource()
         {
-            var locator = AssertValidLocator("file:///Texart.SomePlugin.dll//SomeResource");
+            var locator = PluginResourceLocator.FromUri("file:///plugins/Texart.SomePlugin.dll:SomePath/SomeResource");
             Assert.AreEqual(new ReferenceScheme("file"), locator.Scheme);
-            Assert.AreEqual("Texart.SomePlugin.dll", locator.AssemblyPath);
-            Assert.AreEqual("SomeResource", locator.ResourcePath);
+            Assert.AreEqual("plugins/Texart.SomePlugin.dll", locator.AssemblyPath);
+            Assert.AreEqual(new [] { "plugins", "Texart.SomePlugin.dll" }, locator.AssemblySegments);
+            Assert.AreEqual("SomePath/SomeResource", locator.ResourcePath);
+            Assert.AreEqual(new[] { "SomePath", "SomeResource" }, locator.ResourceSegments);
         }
 
-        private static PluginResourceLocator AssertValidLocator(string uri)
+        [Test]
+        public void AllowsEmptyResource()
         {
-            PluginResourceLocator instance = null;
-            void CreateInstance()
-            {
-                instance = PluginResourceLocator.FromUri(new Uri(uri));
-            }
-
-            Assert.DoesNotThrow(CreateInstance);
-            Assert.NotNull(instance, $"{nameof(PluginResourceLocator.FromUri)} returned null");
-            return instance;
+            var locator = PluginResourceLocator.FromUri("tx:///plugin.dll:");
+            Assert.AreEqual(new ReferenceScheme("tx"), locator.Scheme);
+            Assert.AreEqual("plugin.dll", locator.AssemblyPath);
+            Assert.AreEqual("", locator.ResourcePath);
+            Assert.AreEqual(new[] { "" }, locator.ResourceSegments);
         }
-            
+
+        [Test]
+        public void AllowsColonsInAssemblyPath()
+        {
+            var locator = PluginResourceLocator.FromUri("tx:///path:to/plugin:foo.dll:resource/path");
+            Assert.AreEqual(new ReferenceScheme("tx"), locator.Scheme);
+            Assert.AreEqual("path:to/plugin:foo.dll", locator.AssemblyPath);
+            Assert.AreEqual(new [] { "path:to", "plugin:foo.dll" }, locator.AssemblySegments);
+            Assert.AreEqual("resource/path", locator.ResourcePath);
+            Assert.AreEqual(new[] { "resource", "path" }, locator.ResourceSegments);
+        }
+
 
         private static void AssertInvalidLocator(string uri)
         {
