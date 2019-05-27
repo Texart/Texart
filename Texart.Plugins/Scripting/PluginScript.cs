@@ -44,8 +44,8 @@ namespace Texart.Plugins.Scripting
         /// <summary>
         /// Custom Roslyn analyzers for Texart.
         /// </summary>
-        private ImmutableArray<DiagnosticAnalyzer> CustomAnalyzers => ImmutableArray.Create<DiagnosticAnalyzer>(
-            new TexartReferenceDirectiveAnalyzer(Script.Options.FilePath));
+        private static ImmutableArray<DiagnosticAnalyzer> CustomAnalyzers => ImmutableArray.Create<DiagnosticAnalyzer>(
+            new RequiredReferencesDirectiveAnalyzer());
 
         /// <summary>
         /// Asynchronously compile the script and return any diagnostics.

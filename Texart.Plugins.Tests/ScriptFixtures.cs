@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using Texart.Api;
@@ -51,7 +52,12 @@ namespace Texart.Plugins.Tests
         /// <returns>Loaded script.</returns>
         public static async Task<PluginScriptCompilation<IPlugin>> LoadFrom(int fixture, string relativePath)
         {
-            var pluginScript = PluginScript.LoadFrom(GetPath(fixture, relativePath));
+            var path = GetPath(fixture, relativePath);
+            if (!relativePath.EndsWith(ScriptingConstants.TexartMainFileSuffix))
+            {
+                throw new ArgumentException($"Attempt to load a non Texart script file: {path}");
+            }
+            var pluginScript = PluginScript.LoadFrom(path);
             return await pluginScript.Compile();
         }
 
@@ -64,7 +70,12 @@ namespace Texart.Plugins.Tests
         /// <returns>Loaded script.</returns>
         public static async Task<PluginScriptCompilation<T>> LoadFrom<T>(int fixture, string relativePath)
         {
-            var pluginScript = PluginScript.LoadFrom<T>(GetPath(fixture, relativePath));
+            var path = GetPath(fixture, relativePath);
+            if (!relativePath.EndsWith(ScriptingConstants.TexartMainFileSuffix))
+            {
+                throw new ArgumentException($"Attempt to load a non Texart script file: {path}");
+            }
+            var pluginScript = PluginScript.LoadFrom<T>(path);
             return await pluginScript.Compile();
         }
 

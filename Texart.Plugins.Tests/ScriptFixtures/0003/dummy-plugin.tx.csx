@@ -1,3 +1,5 @@
+#r "SkiaSharp.dll"
+#r "Newtonsoft.Json.dll"
 #r "Texart.Api.dll"
 
 using System;
