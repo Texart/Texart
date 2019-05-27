@@ -6,26 +6,26 @@ using System.Text.RegularExpressions;
 namespace Texart.Plugins
 {
     /// <summary>
-    /// A <see cref="ReferenceScheme"/> is akin to URI schemes (such as <code>file:</code> and <code>http:</code>).
+    /// A <see cref="ReferenceScheme"/> is akin to URI schemes (such as <c>file:</c> and <c>https:</c>).
     /// As such, it is also case-insensitive.
     ///
-    /// Note that not every valid URI scheme is a valid <code>ResourceScheme</code>. Specifically, the characters,
-    /// <code>+</code>, and <code>.</code>, are not allowed. However, <code>-</code> is allowed. This may relaxed
+    /// Note that not every valid URI scheme is a valid <see cref="ReferenceScheme"/>. Specifically, the characters,
+    /// <c>+</code>, and <c>.</c>, are not allowed. However, <c>-</c> is allowed. This may relaxed
     /// in the future.
     ///
     /// Refer to <see href="https://tools.ietf.org/html/rfc3986#section-3.1"/> for information on URI schemes
     /// (which are valid <see cref="ReferenceScheme"/>s, except for the restrictions listed above).
     /// <code>
-    ///     scheme      = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
+    /// //    scheme      = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
     /// </code>
     ///
     /// Use cases:
-    ///   * As a way to allow custom resolution strategies for <code>#load</code> and <code>#r</code> directives.
+    ///   * As a way to allow custom resolution strategies for <c>#load</c> and <c>#r</c> directives.
     ///     See <see cref="Scripting.MetadataReferenceResolverDemux"/>
     ///     and <see cref="Scripting.SourceReferenceResolverDemux"/>.
     ///   * As part of identify (or locating) objects in a plugin assembly. See <see cref="PluginResourceLocator"/>.
     /// </summary>
-    /// <see cref="Uri.Scheme"/>
+    /// <seealso cref="Uri.Scheme"/>
     public sealed class ReferenceScheme : IComparable<ReferenceScheme>, IEquatable<ReferenceScheme>
     {
         /// <summary>
@@ -47,7 +47,7 @@ namespace Texart.Plugins
         public string SchemePrefix => $"{Scheme}{Uri.SchemeDelimiter}";
 
         /// <summary>
-        /// Checks if the provided string can be a valid scheme. If this returns <code>false</code>,
+        /// Checks if the provided string can be a valid scheme. If this returns <c>false</c>,
         /// then trying to construct with this string will throw an exception.
         /// </summary>
         /// <param name="scheme">The scheme to check.</param>
@@ -81,7 +81,7 @@ namespace Texart.Plugins
 
         /// <summary>
         /// Returns the provided path with this scheme removed.
-        /// <see cref="Matches"/> must return <code>true</code> with the provided path.
+        /// <see cref="Matches"/> must return <c>true</c> with the provided path.
         /// </summary>
         /// <param name="path">the path to remove scheme from</param>
         /// <returns>the path without this scheme</returns>

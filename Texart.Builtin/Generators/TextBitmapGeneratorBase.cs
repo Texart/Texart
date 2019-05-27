@@ -47,7 +47,7 @@ namespace Texart.Builtin.Generators
         }
 
         /// <summary>
-        /// The method that will perform the text generation after <code>bitmap</code> has
+        /// The method that will perform the text generation after <paramref name="bitmap"/> has
         /// been checked for potential errors.
         /// </summary>
         /// <param name="bitmap">The image to generate text data from.</param>

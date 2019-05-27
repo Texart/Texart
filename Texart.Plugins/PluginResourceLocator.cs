@@ -102,8 +102,8 @@ namespace Texart.Plugins
         /// </summary>
         /// <param name="uri">The URI to check.</param>
         /// <returns>
-        ///     <code>true</code> if valid <see cref="PluginResourceLocator"/> URI,
-        ///     <code>false</code> otherwise.
+        ///     <c>true</c> if valid <see cref="PluginResourceLocator"/> URI,
+        ///     <c>false</c> otherwise.
         /// </returns>
         public static bool IsValidPluginResourceLocator(Uri uri)
         {
@@ -159,7 +159,7 @@ namespace Texart.Plugins
         /// Not all URIs are valid <see cref="PluginResourceLocator"/>s.
         /// </summary>
         /// <param name="uri">The URI to check.</param>
-        /// <returns>An exception if the URI is invalid, or <code>null</code> if valid.</returns>
+        /// <returns>An exception if the URI is invalid, or <c>null</c> if valid.</returns>
         private static (ArgumentException, ComputedSegments) CheckIsValidPluginResourceUri(Uri uri)
         {
             //

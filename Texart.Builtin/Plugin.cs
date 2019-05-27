@@ -21,7 +21,7 @@ namespace Texart.Builtin
                 { typeof(BrightnessBasedBitmapGenerator).Name, BrightnessBasedBitmapGenerator.Create },
             };
         /// <summary>
-        /// The default generator when the given name is <code>null</code>.
+        /// The default generator when the given name is <c>null</c>.
         /// </summary>
         private readonly TxFactory<ITextBitmapGenerator, Lazy<JToken>> _defaultGenerator = BrightnessBasedBitmapGenerator.Create;
 
@@ -35,7 +35,7 @@ namespace Texart.Builtin
                 { typeof(FontBitmapRenderer).Name, FontBitmapRenderer.Create },
             };
         /// <summary>
-        /// The default renderer when the given name is <code>null</code>.
+        /// The default renderer when the given name is <c>null</c>.
         /// </summary>
         private readonly TxFactory<ITextBitmapRenderer, Lazy<JToken>> _defaultRenderer = FontBitmapRenderer.Create;
 

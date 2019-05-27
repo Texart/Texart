@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 namespace Texart.Api
 {
     /// <summary>
-    /// An <code>ITextBitmapRenderer</code> writes some text data into an output stream
+    /// An <see cref="ITextBitmapRenderer" /> writes some text data into an output stream
     /// in an implementation-defined format.
     /// </summary>
-    /// <see cref="ITextBitmap"/>
-    /// <see cref="ITextBitmapGenerator"/>
+    /// <seealso cref="ITextBitmap"/>
+    /// <seealso cref="ITextBitmapGenerator"/>
     public interface ITextBitmapRenderer
     {
         /// <summary>

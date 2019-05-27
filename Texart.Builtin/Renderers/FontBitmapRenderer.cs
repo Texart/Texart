@@ -62,10 +62,10 @@ namespace Texart.Builtin.Renderers
 
         /// <summary>
         /// Generates a bitmap using the provided textBitmap and font info. Note that
-        /// you are responsible for calling <code>Dispose</code> on the returned bitmap.
+        /// you are responsible for calling <see cref="IDisposable.Dispose"/> on the returned bitmap.
         /// </summary>
-        /// <param name="textBitmap">The <code>ITextBitmap</code> to read from</param>
-        /// <returns>The generated <code>SKBitmap</code></returns>
+        /// <param name="textBitmap">The <see cref="ITextBitmap"/> to read from.</param>
+        /// <returns>The generated <see cref="SKBitmap"/>.</returns>
         private SKBitmap GenerateBitmap(ITextBitmap textBitmap)
         {
             using (var paint = new SKPaint())

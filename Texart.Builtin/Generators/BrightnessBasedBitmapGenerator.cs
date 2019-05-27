@@ -50,10 +50,10 @@ namespace Texart.Builtin.Generators
         }
 
         /// <summary>
-        /// Generates an array of brightness values (0-255) that represents the <code>Bitmap</code>.
-        /// The length of this array is <code>Width * Height</code>.
+        /// Generates an array of brightness values (0-255) that represents the <see cref="SKBitmap"/>.
+        /// The length of this array is <c>Width * Height</c>.
         /// </summary>
-        /// <returns>An array representing the brightness of each chunk of <code>Bitmap</code></returns>
+        /// <returns>An array representing the brightness of each chunk of <see cref="SKBitmap"/></returns>
         private float[] GenerateBrightnessArray(SKBitmap bitmap)
         {
             var sourceWidth = bitmap.Width;

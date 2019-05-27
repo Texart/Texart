@@ -45,23 +45,22 @@ namespace Texart.Builtin.Renderers
         }
 
         /// <summary>
-        /// Creates a <code>StringBitmapRenderer</code> with <code>DefaultEncoding</code>.
+        /// Creates a <see cref="StringBitmapRenderer"/> with <see cref="PlatformHelpers.DefaultEncoding"/>.
         /// </summary>
-        /// <see cref="PlatformHelpers.DefaultEncoding"/>
-        /// <see cref="StringBitmapRenderer(System.Text.Encoding)"/>
-        /// <see cref="System.Text.Encoding"/>
+        /// <seealso cref="PlatformHelpers.DefaultEncoding"/>
+        /// <seealso cref="StringBitmapRenderer(System.Text.Encoding)"/>
+        /// <seealso cref="System.Text.Encoding"/>
         public StringBitmapRenderer()
             : this(PlatformHelpers.DefaultEncoding)
         {
         }
 
         /// <summary>
-        /// Creates a <code>StringBitmapRenderer</code> with the given encoding.
+        /// Creates a <see cref="StringBitmapRenderer"/> with the given encoding.
         /// </summary>
         /// <param name="encoding">The encoding to write with</param>
         /// <exception cref="ArgumentNullException">
-        ///     Thrown if <code>encoding</code>
-        ///     is <code>null</code>.
+        ///     Thrown if <paramref name="encoding"/> is <c>null</c>.
         /// </exception>
         public StringBitmapRenderer(Encoding encoding)
         {

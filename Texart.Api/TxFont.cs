@@ -4,8 +4,8 @@ using System;
 namespace Texart.Api
 {
     /// <summary>
-    /// A <code>TxFont</code> represents a particular <code>SKTypeface</code> with extra
-    /// properties such as font size, color, and spacing.
+    /// A <see cref="TxFont"/> represents a particular <see cref="SKTypeface"/> with extra properties such as
+    /// font size, color, and spacing.
     /// For example: "Garamond 12pt Bold", "Courier New 8pt Italic".
     /// </summary>
     /// <see cref="SKTypeface"/>
@@ -13,11 +13,10 @@ namespace Texart.Api
     {
         /// <summary>
         /// Gets or sets the amount of spacing reserved for one character in the text data.
-        /// That is, each character is assigned a square grid of length
-        /// <code>CharacterSpacing</code>.
+        /// That is, each character is assigned a square grid of length <c>CharacterSpacing</c>.
         /// </summary>
         /// <see cref="DefaultCharacterSpacing"/>
-        /// <exception cref="ArgumentException">If trying to set a value of less than or equal to <code>0</code></exception>
+        /// <exception cref="ArgumentException">If trying to set a value of less than or equal to <c>0</c></exception>
         public int CharacterSpacing
         {
             get => this._characterSpacing;
@@ -34,7 +33,7 @@ namespace Texart.Api
         /// </summary>
         /// <see cref="SKPaint.TextSize"/>
         /// <see cref="DefaultTextSize"/> 
-        /// <exception cref="ArgumentException">If trying to set a value of less than or equal to <code>0f</code></exception>
+        /// <exception cref="ArgumentException">If trying to set a value of less than or equal to <c>0f</c></exception>
         public float TextSize
         {
             get => this._textSize;
@@ -58,10 +57,10 @@ namespace Texart.Api
         public SKColor Color { get; set; }
 
         /// <summary>
-        /// Creates a <code>Font</code> with default values with the given typeface.
+        /// Creates a <see cref="TxFont"/> with default values with the given typeface.
         /// </summary>
         /// <param name="typeface">The typeface to create a font from.</param>
-        /// <returns>A new <code>Font</code> with the given typeface.</returns>
+        /// <returns>A new <see cref="TxFont"/> with the given typeface.</returns>
         public static TxFont FromTypeface(SKTypeface typeface)
         {
             return new TxFont()

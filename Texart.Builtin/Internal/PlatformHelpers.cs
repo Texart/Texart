@@ -16,7 +16,7 @@ namespace Texart.Builtin.Internal
             RuntimeInformation.IsOSPlatform(OSPlatform.Linux) || RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 
         /// <summary>
-        /// The default <code>Encoding</code> to use. This is ASCII on Windows and UTF-8 on Unices.
+        /// The default <see cref="Encoding"/> to use. This is ASCII on Windows and UTF-8 on Unices.
         /// </summary>
         public static Encoding DefaultEncoding => IsUnix ? Encoding.UTF8 : Encoding.ASCII;
     }

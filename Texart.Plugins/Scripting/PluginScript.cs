@@ -19,16 +19,16 @@ namespace Texart.Plugins.Scripting
     public static class PluginScript
     {
         /// <summary>
-        /// Creates a <code>Script</code> instance that will execute the provided <code>SourceFile</code>.
-        /// The returned <code>Script</code> is pre-configured with Texart-specific compiler options.
+        /// Creates a <see cref="Script"/> instance that will execute the provided <c>SourceFile</c>.
+        /// The returned <see cref="Script"/> is pre-configured with Texart-specific compiler options.
         /// </summary>
         /// <param name="sourceFile">The source file to run.</param>
         /// <returns>Script instance.</returns>
         public static Script<IPlugin> From(SourceFile sourceFile) => From<IPlugin>(sourceFile);
 
         /// <summary>
-        /// Creates a <code>Script</code> instance that will execute the provided <code>SourceFile</code>.
-        /// The returned <code>Script</code> is pre-configured with Texart-specific compiler options.
+        /// Creates a <see cref="Script"/> instance that will execute the provided <c>SourceFile</c>.
+        /// The returned <see cref="Script"/> is pre-configured with Texart-specific compiler options.
         /// </summary>
         /// <typeparam name="T">The return type of the script.</typeparam>
         /// <param name="sourceFile">The source file to run.</param>
@@ -44,9 +44,9 @@ namespace Texart.Plugins.Scripting
         }
 
         /// <summary>
-        /// Creates a <code>Script</code> instance that will execute a <code>SourceFile</code> loaded from
+        /// Creates a <see cref="Script"/> instance that will execute a <c>SourceFile</c> loaded from
         /// the provided path.
-        /// The returned <code>Script</code> is pre-configured with Texart-specific compiler options.
+        /// The returned <see cref="Script"/> is pre-configured with Texart-specific compiler options.
         /// </summary>
         /// <typeparam name="T">The return type of the script.</typeparam>
         /// <param name="sourceFilePath">The file to load source file from.</param>
@@ -56,9 +56,9 @@ namespace Texart.Plugins.Scripting
         public static Script<T> LoadFrom<T>(string sourceFilePath) => From<T>(SourceFile.Load(sourceFilePath));
 
         /// <summary>
-        /// Creates a <code>Script</code> instance that will execute a <code>SourceFile</code> loaded from
+        /// Creates a <see cref="Script"/> instance that will execute a <c>SourceFile</c> loaded from
         /// the provided path.
-        /// The returned <code>Script</code> is pre-configured with Texart-specific compiler options.
+        /// The returned <see cref="Script"/> is pre-configured with Texart-specific compiler options.
         /// </summary>
         /// <param name="sourceFilePath">The file to load source file from.</param>
         /// <returns>Script instance.</returns>
@@ -100,7 +100,7 @@ namespace Texart.Plugins.Scripting
         private static ReferenceScheme FileReferenceScheme => new ReferenceScheme("file");
 
         /// <summary>
-        /// Creates a <code>SourceReferenceResolver</code> that is able to recognize different schemes are forward to
+        /// Creates a <see cref="SourceReferenceResolver"/> that is able to recognize different schemes are forward to
         /// appropriate resolvers. <see cref="SourceReferenceResolverDemux"/>.
         /// </summary>
         /// <param name="sourceFile">The C# script.</param>
@@ -116,7 +116,7 @@ namespace Texart.Plugins.Scripting
         }
 
         /// <summary>
-        /// Creates a <code>MetadataReferenceResolverDemux</code> that is able to recognize different schemes are forward to
+        /// Creates a <see cref="MetadataReferenceResolver"/see> that is able to recognize different schemes are forward to
         /// appropriate resolvers. <see cref="MetadataReferenceResolverDemux"/>.
         /// </summary>
         /// <param name="sourceFile">The C# script.</param>

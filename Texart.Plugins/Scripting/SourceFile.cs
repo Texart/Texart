@@ -19,7 +19,7 @@ namespace Texart.Plugins.Scripting
         public string Text { get; }
 
         /// <summary>
-        /// Creates an instance with the provided <code>FilePath</code> and <code>Text</code> properties.
+        /// Creates an instance with the provided <see cref="FilePath"/> and <see cref="Text"/> properties.
         /// </summary>
         /// <param name="filePath">The path of the source file.</param>
         /// <param name="text">The text in the source file.</param>
@@ -30,15 +30,15 @@ namespace Texart.Plugins.Scripting
         }
 
         /// <summary>
-        /// Creates an instance of <code>SourceFile</code> by open the file at the given path.
-        /// The returned instance's <code>FilePath</code> is guaranteed to be an absolute path.
+        /// Creates an instance of <see cref="SourceFile"/> by open the file at the given path.
+        /// The returned instance's <see cref="FilePath"/> is guaranteed to be an absolute path.
         /// </summary>
         /// <param name="filePath">The file path to load text from.</param>
         /// <param name="encoding">
         ///     The encoding to use to read the file contents.
-        ///     If this is <code>null</code>, then <see cref="Encoding.UTF8"/> is used.
+        ///     If this is <c>null</c>, then <see cref="Encoding.UTF8"/> is used.
         /// </param>
-        /// <returns>A <code>SourceFile</code> instance.</returns>
+        /// <returns>A <c>SourceFile</c> instance.</returns>
         public static SourceFile Load(string filePath, Encoding encoding = null)
         {
             var absolutePath = Path.GetFullPath(filePath);
