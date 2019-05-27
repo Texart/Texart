@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
@@ -14,57 +17,122 @@ using Texart.Plugins.Internal;
 namespace Texart.Plugins.Scripting
 {
     /// <summary>
-    /// Helper methods for creating <see cref="Script{T}"/> instances, flavored for Texart.
+    /// Wrapper around <see cref="Script{T}"/>, flavored for Texart.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class PluginScript<T>
+    {
+        /// <summary>
+        /// The pre-configured <see cref="Microsoft.CodeAnalysis.Scripting.Script"/> instance.
+        /// </summary>
+        private Script<T> Script { get; }
+
+        /// <summary>
+        /// Constructs a <see cref="PluginScript{T}"/> with the provided <see cref="Script{T}"/> instance.
+        /// </summary>
+        /// <param name="script">The backing <see cref="Script{T}"/> instance.</param>
+        internal PluginScript(Script<T> script)
+        {
+            Debug.Assert(script != null);
+            this.Script = script;
+        }
+
+        /// <summary>
+        /// Asynchronously compile the script and return any diagnostics.
+        /// </summary>
+        /// <returns>A compiled <see cref="Script{T}"/> object with compile diagnostics.</returns>
+        public async Task<PluginScriptCompilation<T>> Compile()
+        {
+            var syntaxTrees = Script.GetCompilation().SyntaxTrees;
+            var diagnostics = await Task.Run(() => Script.Compile());
+            return new PluginScriptCompilation<T>(Script, diagnostics);
+        }
+    }
+
+    /// <summary>
+    /// The result of a <see cref="PluginScript{T}"/> compilation.
+    /// </summary>
+    /// <typeparam name="T">The return type of the underling <see cref="Script{T}"/></typeparam>
+    /// <seealso cref="PluginScript{T}.Compile"/>
+    public class PluginScriptCompilation<T>
+    {
+        /// <summary>
+        /// The pre-configured <see cref="Microsoft.CodeAnalysis.Scripting.Script"/> instance.
+        /// </summary>
+        /// <seealso cref="PluginScript{T}.Script"/>
+        public Script<T> Script { get; }
+        /// <summary>
+        /// The diagnostics of compiling <see cref="Script"/>.
+        /// </summary>
+        public ImmutableArray<Diagnostic> Diagnostics { get; }
+
+        /// <summary>
+        /// Constructs a <see cref="PluginScript{T}"/> with the provided <see cref="Script{T}"/> instance and
+        /// the <see cref="Diagnostic"/> results that were yielded during compilation.
+        /// </summary>
+        /// <param name="script">The backing <see cref="Script{T}"/> instance.</param>
+        /// <param name="diagnostics">The diagnostics of compiling <paramref name="script"/>.</param>
+        internal PluginScriptCompilation(Script<T> script, ImmutableArray<Diagnostic> diagnostics)
+        {
+            Debug.Assert(script != null);
+            Debug.Assert(diagnostics != null);
+            this.Script = script;
+            this.Diagnostics = diagnostics;
+        }
+    }
+
+    /// <summary>
+    /// Helper methods for creating <see cref="PluginScript{T}"/> instances.
     /// </summary>
     public static class PluginScript
     {
         /// <summary>
-        /// Creates a <see cref="Script"/> instance that will execute the provided <see cref="SourceFile"/>.
-        /// The returned <see cref="Script"/> is pre-configured with Texart-specific compiler options.
+        /// Creates a <see cref="PluginScript"/> instance that will execute the provided <see cref="SourceFile"/>.
+        /// The returned <see cref="PluginScript"/> is pre-configured with Texart-specific compiler options.
         /// </summary>
         /// <param name="sourceFile">The source file to run.</param>
         /// <returns>Script instance.</returns>
-        public static Script<IPlugin> From(SourceFile sourceFile) => From<IPlugin>(sourceFile);
+        public static PluginScript<IPlugin> From(SourceFile sourceFile) => From<IPlugin>(sourceFile);
 
         /// <summary>
-        /// Creates a <see cref="Script"/> instance that will execute the provided <see cref="SourceFile"/>.
-        /// The returned <see cref="Script"/> is pre-configured with Texart-specific compiler options.
+        /// Creates a <see cref="PluginScript"/> instance that will execute the provided <see cref="SourceFile"/>.
+        /// The returned <see cref="PluginScript"/> is pre-configured with Texart-specific compiler options.
         /// </summary>
         /// <typeparam name="T">The return type of the script.</typeparam>
         /// <param name="sourceFile">The source file to run.</param>
         /// <returns>Script instance</returns>
-        public static Script<T> From<T>(SourceFile sourceFile)
+        public static PluginScript<T> From<T>(SourceFile sourceFile)
         {
             if (sourceFile == null) throw new ArgumentNullException(nameof(sourceFile));
             var scriptOptions = BaseScriptOptions
                 .WithFilePath(sourceFile.FilePath)
                 .WithSourceResolver(BuildSourceReferenceResolver(sourceFile))
                 .WithMetadataResolver(BuildMetadataReferenceResolver(sourceFile));
-            return CSharpScript.Create<T>(sourceFile.Text, scriptOptions);
+            return new PluginScript<T>(CSharpScript.Create<T>(sourceFile.Text, scriptOptions));
         }
 
         /// <summary>
-        /// Creates a <see cref="Script"/> instance that will execute a <see cref="SourceFile"/> loaded from
+        /// Creates a <see cref="PluginScript"/> instance that will execute a <see cref="SourceFile"/> loaded from
         /// the provided path.
-        /// The returned <see cref="Script"/> is pre-configured with Texart-specific compiler options.
+        /// The returned <see cref="PluginScript"/> is pre-configured with Texart-specific compiler options.
         /// </summary>
         /// <typeparam name="T">The return type of the script.</typeparam>
         /// <param name="sourceFilePath">The file to load source file from.</param>
         /// <returns>Script instance.</returns>
         /// <see cref="From(SourceFile)"/>
         /// <see cref="SourceFile"/>
-        public static Script<T> LoadFrom<T>(string sourceFilePath) => From<T>(SourceFile.Load(sourceFilePath));
+        public static PluginScript<T> LoadFrom<T>(string sourceFilePath) => From<T>(SourceFile.Load(sourceFilePath));
 
         /// <summary>
-        /// Creates a <see cref="Script"/> instance that will execute a <see cref="SourceFile"/> loaded from
+        /// Creates a <see cref="PluginScript"/> instance that will execute a <see cref="SourceFile"/> loaded from
         /// the provided path.
-        /// The returned <see cref="Script"/> is pre-configured with Texart-specific compiler options.
+        /// The returned <see cref="PluginScript"/> is pre-configured with Texart-specific compiler options.
         /// </summary>
         /// <param name="sourceFilePath">The file to load source file from.</param>
         /// <returns>Script instance.</returns>
         /// <see cref="From(SourceFile)"/>
         /// <see cref="SourceFile"/>
-        public static Script<IPlugin> LoadFrom(string sourceFilePath) => LoadFrom<IPlugin>(sourceFilePath);
+        public static PluginScript<IPlugin> LoadFrom(string sourceFilePath) => LoadFrom<IPlugin>(sourceFilePath);
 
         private static LanguageVersion DefaultLanguageVersion => LanguageVersion.CSharp7_3;
         private static OptimizationLevel DefaultOptimizationLevel =>

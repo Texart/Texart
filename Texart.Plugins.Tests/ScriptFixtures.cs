@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Scripting;
+using NUnit.Framework;
 using Texart.Api;
 using Texart.Plugins.Scripting;
 
@@ -49,8 +51,13 @@ namespace Texart.Plugins.Tests
         /// <param name="fixture">Fixture number.</param>
         /// <param name="relativePath">The relative path from the fixture directory.</param>
         /// <returns>Loaded script.</returns>
-        public static Script<IPlugin> LoadFrom(int fixture, string relativePath) =>
-            PluginScript.LoadFrom(GetPath(fixture, relativePath));
+        public static async Task<Script<IPlugin>> LoadFrom(int fixture, string relativePath)
+        {
+            var pluginScript = PluginScript.LoadFrom(GetPath(fixture, relativePath));
+            var compilationResult = await pluginScript.Compile();
+            Assert.IsEmpty(compilationResult.Diagnostics, "PluginScript diagnostics were not empty");
+            return compilationResult.Script;
+        }
 
         /// <summary>
         /// Loads a plugin script from the provided fixture and relative path.
@@ -59,8 +66,13 @@ namespace Texart.Plugins.Tests
         /// <param name="fixture">Fixture number.</param>
         /// <param name="relativePath">The relative path from the fixture directory.</param>
         /// <returns>Loaded script.</returns>
-        public static Script<T> LoadFrom<T>(int fixture, string relativePath) =>
-            PluginScript.LoadFrom<T>(GetPath(fixture, relativePath));
+        public static async Task<Script<T>> LoadFrom<T>(int fixture, string relativePath)
+        {
+            var pluginScript = PluginScript.LoadFrom<T>(GetPath(fixture, relativePath));
+            var compilationResult = await pluginScript.Compile();
+            Assert.IsEmpty(compilationResult.Diagnostics, "PluginScript diagnostics were not empty");
+            return compilationResult.Script;
+        }
 
         /// <summary>
         /// Verifies that the fixture number is in range.
