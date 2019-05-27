@@ -34,7 +34,7 @@ namespace Texart.Plugins
     ///
     /// <example>
     /// <code>
-    ///     var locator = PluginResourceLocator.FromUri(new Uri("file:///plugins/Texart.SomePlugin.dll:SomePath/SomeResource"));
+    ///     var locator = PluginResourceLocator.FromUri("file:///plugins/Texart.SomePlugin.dll:SomePath/SomeResource");
     ///     locator.Scheme;           // new ReferenceScheme("file")
     ///     locator.AssemblyPath      // "plugins/Texart.SomePlugin.dll
     ///     locator.AssemblySegments  // new [] { "plugins, "Texart.SomePlugin.dll" }
