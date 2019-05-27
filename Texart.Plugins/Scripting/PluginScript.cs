@@ -116,7 +116,7 @@ namespace Texart.Plugins.Scripting
         }
 
         /// <summary>
-        /// Creates a <see cref="MetadataReferenceResolver"/see> that is able to recognize different schemes are forward to
+        /// Creates a <see cref="MetadataReferenceResolver"/> that is able to recognize different schemes are forward to
         /// appropriate resolvers. <see cref="MetadataReferenceResolverDemux"/>.
         /// </summary>
         /// <param name="sourceFile">The C# script.</param>
