@@ -13,6 +13,7 @@
 - [ ] Implement argument parsing.
   - [ ] Group arguments by prefixes to figure out which ones are passed to plugins. (e.g `--generator-*` and `--renderer-*`).
   - Add interfaces in `Texart.Api` to support common CLI arguments deserialization.
+- [ ] Require `#r "Texart.Api.dll"` or similar directive at the top of `.csx` files. This will improve auto-complete experience.
 
 ## Chore
 
