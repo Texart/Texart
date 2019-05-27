@@ -2,7 +2,7 @@
 
 ## `ITextBitmap`
 
-`ITextBitmap` is a bitmap of character data – like `char[,]`. The API exposes an indexer, `char this[int x, int y]` just like `char[,]` (2D `char` array).
+`ITextBitmap` is a bitmap of character data – like `char[,]`. The API exposes an indexer-like method, `char ChatAt(int x, int y)` just like `char[,]` (2D `char` array).
 
 The internal representation is implementation-defined. The underlying computation can be performed on the fly, or wrap around a pre-populated `char[,]` etc. Implementations are strongly encouraged to be immutable.
 

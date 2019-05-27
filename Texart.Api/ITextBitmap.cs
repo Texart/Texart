@@ -5,12 +5,12 @@
         /// <summary>
         /// Gets the width of the text data.
         /// </summary>
-        /// <see cref="this[int, int]"/>
+        /// <see cref="CharAt(int, int)"/>
         int Width { get; }
         /// <summary>
         /// Gets the width of the text data.
         /// </summary>
-        /// <see cref="this[int, int]"/>
+        /// <see cref="CharAt(int, int)"/>
         int Height { get; }
 
         /// <summary>
@@ -21,6 +21,6 @@
         /// <returns>The character at the given position</returns>
         /// <see cref="Height"/>
         /// <see cref="Width"/>
-        char this[int x, int y] { get; }
+        char CharAt(int x, int y);
     }
 }

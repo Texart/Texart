@@ -42,13 +42,10 @@ namespace Texart.Api
         }
 
         /// <inheritdocs/>
-        public char this[int x, int y]
+        public char CharAt(int x, int y)
         {
-            get
-            {
-                CheckCoordinate(x, y);
-                return Characters[y * Width + x];
-            }
+            CheckCoordinate(x, y);
+            return Characters[y * Width + x];
         }
 
         /// <summary>

@@ -115,7 +115,7 @@ namespace Texart.Builtin.Renderers
                     {
                         Parallel.For(0, textWidth, x =>
                         {
-                            string charAsString = textBitmap[x, y].ToString();
+                            string charAsString = textBitmap.CharAt(x, y).ToString();
 
                             // dimensions of actual printed chars
                             float charWidth = paint.MeasureText(charAsString);
@@ -129,7 +129,7 @@ namespace Texart.Builtin.Renderers
                             float textY = (y * characterSpacing) + (characterSpacing * 0.75f);
 
                             canvas.DrawText(
-                                text: textBitmap[x, y].ToString(),
+                                text: textBitmap.CharAt(x, y).ToString(),
                                 x: textX,
                                 y: textY,
                                 paint: paint

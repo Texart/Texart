@@ -35,7 +35,7 @@ namespace Texart.Builtin.Renderers
                 {
                     for (var x = 0; x < textBitmap.Width; ++x)
                     {
-                        writer.Write((char)textBitmap[x, y]);
+                        writer.Write((char)textBitmap.CharAt(x, y));
                     }
                     writer.Write(writer.NewLine);
                 }
