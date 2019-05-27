@@ -87,6 +87,8 @@ namespace Texart.Plugins
         /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
         /// </summary>
         /// <param name="uri">The URI to build from.</param>
+        /// <exception cref="ArgumentNullException">If <paramref name="uri"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">If the URI is not valid.</exception>
         public static PluginResourceLocator FromUri(Uri uri) => new PluginResourceLocator(uri);
 
         /// <summary>
@@ -94,6 +96,8 @@ namespace Texart.Plugins
         /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
         /// </summary>
         /// <param name="uri">The URI to build from.</param>
+        /// <exception cref="ArgumentNullException">If <paramref name="uri"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">If the URI is not valid.</exception>
         public static PluginResourceLocator FromUri(string uri) => FromUri(new Uri(uri));
 
         /// <summary>
@@ -159,7 +163,7 @@ namespace Texart.Plugins
         /// Not all URIs are valid <see cref="PluginResourceLocator"/>s.
         /// </summary>
         /// <param name="uri">The URI to check.</param>
-        /// <returns>An exception if the URI is invalid, or <c>null</c> if valid.</returns>
+        /// <returns>An exception if the URI is invalid, or <see cref="ComputedSegments"/> if valid.</returns>
         private static (ArgumentException, ComputedSegments) CheckIsValidPluginResourceUri(Uri uri)
         {
             //

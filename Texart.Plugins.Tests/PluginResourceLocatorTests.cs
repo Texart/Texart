@@ -37,6 +37,30 @@ namespace Texart.Plugins.Tests
             Assert.AreEqual(new[] { "resource", "path" }, locator.ResourceSegments);
         }
 
+        // Also tests against relative URLs
+        [Test]
+        public void RejectsNoScheme() => AssertInvalidLocator("///a");
+
+        [Test]
+        public void RejectsNoColon() => AssertInvalidLocator("tx:///a");
+
+        [Test]
+        public void RejectsAuthority() => AssertInvalidLocator("tx://authority/a:c");
+
+        [Test]
+        public void RejectsNoPath() => AssertInvalidLocator("tx:///");
+
+        [Test]
+        public void RejectsQuery() => AssertInvalidLocator("tx:///a:c?hello=world");
+
+        [Test]
+        public void RejectsEmptyQuery() => AssertInvalidLocator("tx:///a:c?");
+
+        [Test]
+        public void RejectsFragment() => AssertInvalidLocator("tx:///a:c#hello");
+
+        [Test]
+        public void RejectsEmptyFragment() => AssertInvalidLocator("tx:///a:c#");
 
         private static void AssertInvalidLocator(string uri)
         {
