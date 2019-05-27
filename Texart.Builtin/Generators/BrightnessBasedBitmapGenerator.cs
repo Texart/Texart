@@ -112,8 +112,8 @@ namespace Texart.Builtin.Generators
         /// <summary>
         /// Constructs a generator with the given character set and <see cref="ITextBitmapGenerator.PixelSamplingRatio"/>.
         /// </summary>
-        /// <param name="characters"></param>
-        /// <param name="pixelSamplingRatio"><see cref="ITextBitmapGenerator.PixelSamplingRatio"/></param>
+        /// <param name="characters">The set of characters to use in the generation.</param>
+        /// <param name="pixelSamplingRatio">See <see cref="ITextBitmapGenerator.PixelSamplingRatio"/>.</param>
         public BrightnessBasedBitmapGenerator(IEnumerable<char> characters, int pixelSamplingRatio = 1)
             : base(new List<char>(characters), pixelSamplingRatio)
         {

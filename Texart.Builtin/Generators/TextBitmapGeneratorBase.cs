@@ -30,7 +30,7 @@ namespace Texart.Builtin.Generators
         }
 
         /// <inheritdocs/>
-        public IList<char> Characters { get; protected set; }
+        protected IList<char> Characters { get; set; }
 
         /// <inheritdocs/>
         public int PixelSamplingRatio { get; protected set; }

@@ -13,13 +13,6 @@ namespace Texart.Api
     public interface ITextBitmapGenerator
     {
         /// <summary>
-        /// Gets the available characters that will be used in the generated text.
-        /// This listed shall be sorted from brightest characters to darkest characters.
-        /// The definitions of dark and bright are implementation-defined.
-        /// </summary>
-        IList<char> Characters { get; }
-
-        /// <summary>
         /// Gets the ratio of source resolution to generated resolution. That is, one
         /// pixel in the generated text will come from sampling <code>Math.Pow(PixelSamplingRatio, 2)</code>
         /// pixels.
