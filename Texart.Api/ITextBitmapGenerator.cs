@@ -5,11 +5,11 @@ using SkiaSharp;
 namespace Texart.Api
 {
     /// <summary>
-    /// An <code>ITextBitmapGenerator</code> is used to generate <code>ITextBitmap</code>s given
+    /// An <see cref="ITextBitmapGenerator"/> is used to generate <see cref="ITextBitmap"/>s given
     /// some configuration options.
     /// </summary>
-    /// <see cref="ITextBitmap"/>
-    /// <see cref="ITextBitmapRenderer"/>
+    /// <seealso cref="ITextBitmap"/>
+    /// <seealso cref="ITextBitmapRenderer"/>
     public interface ITextBitmapGenerator
     {
         /// <summary>
