@@ -35,7 +35,7 @@ namespace Texart.Api
         ///     If a plugin exports a "default" type, use <code>null</code>.
         /// </param>
         /// <returns>Factory function for <see cref="ITextBitmapGenerator"/></returns>
-        Factory<ITextBitmapGenerator, Lazy<JToken>> LookupGenerator(string name);
+        TxFactory<ITextBitmapGenerator, Lazy<JToken>> LookupGenerator(string name);
 
         /// <summary>
         /// Available names of <see cref="ITextBitmapRenderer"/>. Every name listed here
@@ -54,6 +54,6 @@ namespace Texart.Api
         ///     If a plugin exports a "default" type, use <code>null</code>.
         /// </param>
         /// <returns>Factory function for <see cref="ITextBitmapRenderer"/></returns>
-        Factory<ITextBitmapRenderer, Lazy<JToken>> LookupRenderer(string name);
+        TxFactory<ITextBitmapRenderer, Lazy<JToken>> LookupRenderer(string name);
     }
 }

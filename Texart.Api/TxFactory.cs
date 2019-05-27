@@ -7,5 +7,5 @@
     /// <typeparam name="TInput">The argument type.</typeparam>
     /// <param name="input">The input argument.</param>
     /// <returns>Constructed result.</returns>
-    public delegate TResult Factory<out TResult, in TInput>(TInput input);
+    public delegate TResult TxFactory<out TResult, in TInput>(TInput input);
 }

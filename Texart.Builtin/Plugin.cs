@@ -15,21 +15,21 @@ namespace Texart.Builtin
         /// <summary>
         /// Mapping of names to <see cref="ITextBitmapGenerator"/> factory functions.
         /// </summary>
-        private readonly IDictionary<string, Factory<ITextBitmapGenerator, Lazy<JToken>>> _generators =
-            new Dictionary<string, Factory<ITextBitmapGenerator, Lazy<JToken>>>
+        private readonly IDictionary<string, TxFactory<ITextBitmapGenerator, Lazy<JToken>>> _generators =
+            new Dictionary<string, TxFactory<ITextBitmapGenerator, Lazy<JToken>>>
             {
                 { typeof(BrightnessBasedBitmapGenerator).Name, BrightnessBasedBitmapGenerator.Create },
             };
         /// <summary>
         /// The default generator when the given name is <code>null</code>.
         /// </summary>
-        private readonly Factory<ITextBitmapGenerator, Lazy<JToken>> _defaultGenerator = BrightnessBasedBitmapGenerator.Create;
+        private readonly TxFactory<ITextBitmapGenerator, Lazy<JToken>> _defaultGenerator = BrightnessBasedBitmapGenerator.Create;
 
         /// <summary>
         /// Mapping of names to <see cref="ITextBitmapRenderer"/> factory functions.
         /// </summary>
-        private readonly IDictionary<string, Factory<ITextBitmapRenderer, Lazy<JToken>>> _renderers =
-            new Dictionary<string, Factory<ITextBitmapRenderer, Lazy<JToken>>>
+        private readonly IDictionary<string, TxFactory<ITextBitmapRenderer, Lazy<JToken>>> _renderers =
+            new Dictionary<string, TxFactory<ITextBitmapRenderer, Lazy<JToken>>>
             {
                 { typeof(StringBitmapRenderer).Name, StringBitmapRenderer.Create },
                 { typeof(FontBitmapRenderer).Name, FontBitmapRenderer.Create },
@@ -37,13 +37,13 @@ namespace Texart.Builtin
         /// <summary>
         /// The default renderer when the given name is <code>null</code>.
         /// </summary>
-        private readonly Factory<ITextBitmapRenderer, Lazy<JToken>> _defaultRenderer = FontBitmapRenderer.Create;
+        private readonly TxFactory<ITextBitmapRenderer, Lazy<JToken>> _defaultRenderer = FontBitmapRenderer.Create;
 
         /// <inheritdoc />
         public IEnumerable<string> AvailableGenerators => _generators.Keys;
 
         /// <inheritdoc />
-        public Factory<ITextBitmapGenerator, Lazy<JToken>> LookupGenerator(string name)
+        public TxFactory<ITextBitmapGenerator, Lazy<JToken>> LookupGenerator(string name)
         {
             if (name == null)
             {
@@ -60,7 +60,7 @@ namespace Texart.Builtin
         public IEnumerable<string> AvailableRenderers => _renderers.Keys;
 
         /// <inheritdoc />
-        public Factory<ITextBitmapRenderer, Lazy<JToken>> LookupRenderer(string name)
+        public TxFactory<ITextBitmapRenderer, Lazy<JToken>> LookupRenderer(string name)
         {
             if (name == null)
             {

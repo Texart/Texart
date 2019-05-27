@@ -45,7 +45,7 @@ namespace Texart.Builtin.Generators
                 targetData[index] = characters[charactersCount - scaledCharacterIndex - 1];
             });
 
-            ITextBitmap textBitmap = new ArrayTextBitmap(targetData, targetWidth, targetHeight);
+            ITextBitmap textBitmap = new TxArrayTextBitmap(targetData, targetWidth, targetHeight);
             return Task.FromResult(textBitmap);
         }
 

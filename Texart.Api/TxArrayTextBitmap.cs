@@ -7,7 +7,7 @@ namespace Texart.Api
     /// An implementation of <code>ITextBitmap</code> based on an underlying
     /// one dimensional array.
     /// </summary>
-    public sealed class ArrayTextBitmap : ITextBitmap
+    public sealed class TxArrayTextBitmap : ITextBitmap
     {
         /// <inheritdoc/>
         public int Height { get; }
@@ -28,7 +28,7 @@ namespace Texart.Api
         /// <param name="characters">The underlying array</param>
         /// <param name="width">The width of the text data</param>
         /// <param name="height">The height of the text data</param>
-        public ArrayTextBitmap(char[] characters, int width, int height)
+        public TxArrayTextBitmap(char[] characters, int width, int height)
         {
             // TODO: perhaps these checks should happen in Release too
             Debug.Assert(characters != null);

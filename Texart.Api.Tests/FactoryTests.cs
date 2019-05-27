@@ -13,7 +13,7 @@ namespace Texart.Api.Tests
         public void AllowsDelegateBehavior()
         {
             // sanity check to make sure that it can be used like a delegate
-            Factory<int, Lazy<JToken>> factory = json => 5;
+            TxFactory<int, Lazy<JToken>> factory = json => 5;
             int factoryResult = factory(new Lazy<JToken>(() => throw new NotImplementedException()));
             Assert.AreEqual(5, factoryResult);
         }
@@ -22,7 +22,7 @@ namespace Texart.Api.Tests
         public void AllowsJsonParsing()
         {
             // sanity check to make sure the API allows JSON passing
-            Factory<int, Lazy<JToken>> factory = json =>
+            TxFactory<int, Lazy<JToken>> factory = json =>
             {
                 var serializer = new JsonSerializer();
                 var data = json.Value.ToObject<AllowsJsonParsingSampleData>(serializer);
