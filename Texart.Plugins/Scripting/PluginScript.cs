@@ -19,7 +19,7 @@ namespace Texart.Plugins.Scripting
     public static class PluginScript
     {
         /// <summary>
-        /// Creates a <see cref="Script"/> instance that will execute the provided <c>SourceFile</c>.
+        /// Creates a <see cref="Script"/> instance that will execute the provided <see cref="SourceFile"/>.
         /// The returned <see cref="Script"/> is pre-configured with Texart-specific compiler options.
         /// </summary>
         /// <param name="sourceFile">The source file to run.</param>
@@ -27,7 +27,7 @@ namespace Texart.Plugins.Scripting
         public static Script<IPlugin> From(SourceFile sourceFile) => From<IPlugin>(sourceFile);
 
         /// <summary>
-        /// Creates a <see cref="Script"/> instance that will execute the provided <c>SourceFile</c>.
+        /// Creates a <see cref="Script"/> instance that will execute the provided <see cref="SourceFile"/>.
         /// The returned <see cref="Script"/> is pre-configured with Texart-specific compiler options.
         /// </summary>
         /// <typeparam name="T">The return type of the script.</typeparam>
@@ -44,7 +44,7 @@ namespace Texart.Plugins.Scripting
         }
 
         /// <summary>
-        /// Creates a <see cref="Script"/> instance that will execute a <c>SourceFile</c> loaded from
+        /// Creates a <see cref="Script"/> instance that will execute a <see cref="SourceFile"/> loaded from
         /// the provided path.
         /// The returned <see cref="Script"/> is pre-configured with Texart-specific compiler options.
         /// </summary>
@@ -56,7 +56,7 @@ namespace Texart.Plugins.Scripting
         public static Script<T> LoadFrom<T>(string sourceFilePath) => From<T>(SourceFile.Load(sourceFilePath));
 
         /// <summary>
-        /// Creates a <see cref="Script"/> instance that will execute a <c>SourceFile</c> loaded from
+        /// Creates a <see cref="Script"/> instance that will execute a <see cref="SourceFile"/> loaded from
         /// the provided path.
         /// The returned <see cref="Script"/> is pre-configured with Texart-specific compiler options.
         /// </summary>
