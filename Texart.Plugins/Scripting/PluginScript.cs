@@ -186,7 +186,7 @@ namespace Texart.Plugins.Scripting
         /// </summary>
         /// <param name="sourceFile">The source file to run.</param>
         /// <returns>Script instance.</returns>
-        public static PluginScript<IPlugin> From(SourceFile sourceFile) => From<IPlugin>(sourceFile);
+        public static PluginScript<ITxPlugin> From(SourceFile sourceFile) => From<ITxPlugin>(sourceFile);
 
         /// <summary>
         /// Creates a <see cref="PluginScript"/> instance that will execute the provided <see cref="SourceFile"/>.
@@ -226,7 +226,7 @@ namespace Texart.Plugins.Scripting
         /// <returns>Script instance.</returns>
         /// <see cref="From(SourceFile)"/>
         /// <see cref="SourceFile"/>
-        public static PluginScript<IPlugin> LoadFrom(string sourceFilePath) => LoadFrom<IPlugin>(sourceFilePath);
+        public static PluginScript<ITxPlugin> LoadFrom(string sourceFilePath) => LoadFrom<ITxPlugin>(sourceFilePath);
 
         /// <summary>
         /// The language version to use to compile Texart scripts. Ideally, this should be the same as the version

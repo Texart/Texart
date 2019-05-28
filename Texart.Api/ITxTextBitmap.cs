@@ -1,15 +1,15 @@
 ﻿namespace Texart.Api
 {
     /// <summary>
-    /// `ITextBitmap` is a bitmap of character data – like <c>char[,]</c>.
+    /// An <see cref="ITxTextBitmap"/> is a bitmap of character data – like <c>char[,]</c>.
     ///
-    /// The API exposes an indexer-like method, <c>char ChatAt(int x, int y)</c> just like <c>char[,]</c>.
+    /// The API exposes an indexer-like method, <c>char ChatAt(int x, int y)</c> for 2D-array-like access.
     /// The internal representation is implementation-defined. The underlying computation can be performed
     /// on the fly, or wrap around a pre-populated <c>char[,]</c>. etc.
     ///
     /// Implementations are strongly encouraged to be immutable.
     /// </summary>
-    public interface ITextBitmap
+    public interface ITxTextBitmap
     {
         /// <summary>
         /// Gets the width of the text data.

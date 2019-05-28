@@ -61,7 +61,7 @@ namespace Texart.Plugins
 
         /// <summary>
         /// The segments in the URI path that locate specific resource inside a plugin.
-        /// For example: as a path to <see cref="IPlugin.LookupGenerator"/> or <see cref="IPlugin.LookupRenderer"/>.
+        /// For example: as a path to <see cref="ITxPlugin.LookupGenerator"/> or <see cref="ITxPlugin.LookupRenderer"/>.
         /// </summary>
         public string[] ResourceSegments { get; }
         /// <summary>

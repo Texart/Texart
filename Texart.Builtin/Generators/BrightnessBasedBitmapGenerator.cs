@@ -1,9 +1,7 @@
-﻿using System;
-using SkiaSharp;
+﻿using SkiaSharp;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using Texart.Builtin.Internal;
 using Texart.Api;
 
@@ -13,10 +11,10 @@ namespace Texart.Builtin.Generators
     /// A generator that looks at the average brightness of N-by-N pixels to determine one character
     /// in the output text. The aggregation is done in parallel, completely on the CPU.
     /// </summary>
-    internal sealed class BrightnessBasedBitmapGenerator : TextBitmapGeneratorBase, ITextBitmapGenerator
+    internal sealed class BrightnessBasedBitmapGenerator : TxTextBitmapGeneratorBase, ITxTextBitmapGenerator
     {
         /// <inheritdocs/>
-        public override Task<ITextBitmap> DoGenerateTextAsync(SKBitmap bitmap)
+        public override Task<ITxTextBitmap> DoGenerateTextAsync(SKBitmap bitmap)
         {
             var characters = this.Characters;
             var charactersCount = characters.Count;
@@ -45,8 +43,8 @@ namespace Texart.Builtin.Generators
                 targetData[index] = characters[charactersCount - scaledCharacterIndex - 1];
             });
 
-            ITextBitmap textBitmap = new TxArrayTextBitmap(targetData, targetWidth, targetHeight);
-            return Task.FromResult(textBitmap);
+            ITxTextBitmap txTextBitmap = new TxArrayTxTextBitmap(targetData, targetWidth, targetHeight);
+            return Task.FromResult(txTextBitmap);
         }
 
         /// <summary>
@@ -110,10 +108,10 @@ namespace Texart.Builtin.Generators
         }
 
         /// <summary>
-        /// Constructs a generator with the given character set and <see cref="ITextBitmapGenerator.PixelSamplingRatio"/>.
+        /// Constructs a generator with the given character set and <see cref="ITxTextBitmapGenerator.PixelSamplingRatio"/>.
         /// </summary>
         /// <param name="characters">The set of characters to use in the generation.</param>
-        /// <param name="pixelSamplingRatio">See <see cref="ITextBitmapGenerator.PixelSamplingRatio"/>.</param>
+        /// <param name="pixelSamplingRatio">See <see cref="ITxTextBitmapGenerator.PixelSamplingRatio"/>.</param>
         public BrightnessBasedBitmapGenerator(IEnumerable<char> characters, int pixelSamplingRatio = 1)
             : base(new List<char>(characters), pixelSamplingRatio)
         {
@@ -122,11 +120,11 @@ namespace Texart.Builtin.Generators
         /// <summary>
         /// Factory function for <see cref="Plugin"/>.
         /// </summary>
-        /// <param name="json">Input arguments.</param>
+        /// <param name="args">Input arguments.</param>
         /// <returns>Constructed instance.</returns>
-        public static BrightnessBasedBitmapGenerator Create(Lazy<JToken> json)
+        public static BrightnessBasedBitmapGenerator Create(TxArguments args)
         {
-            // TODO: Use json
+            // TODO: Use arguments
             return new BrightnessBasedBitmapGenerator(CharacterSets.Basic, 1);
         }
 

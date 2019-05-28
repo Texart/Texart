@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 using Texart.Builtin.Generators;
 using Texart.Builtin.Renderers;
 using Texart.Api;
@@ -8,28 +7,28 @@ using Texart.Api;
 namespace Texart.Builtin
 {
     /// <summary>
-    /// The plugin implementation for the built in <see cref="ITextBitmapGenerator"/> and <see cref="ITextBitmapRenderer"/> types.
+    /// The plugin implementation for the built in <see cref="ITxTextBitmapGenerator"/> and <see cref="ITxTextBitmapRenderer"/> types.
      /// </summary>
-    public sealed class Plugin : IPlugin
+    public sealed class Plugin : ITxPlugin
     {
         /// <summary>
-        /// Mapping of names to <see cref="ITextBitmapGenerator"/> factory functions.
+        /// Mapping of names to <see cref="ITxTextBitmapGenerator"/> factory functions.
         /// </summary>
-        private readonly IDictionary<string, TxFactory<ITextBitmapGenerator, Lazy<JToken>>> _generators =
-            new Dictionary<string, TxFactory<ITextBitmapGenerator, Lazy<JToken>>>
+        private readonly IDictionary<string, TxFactory<ITxTextBitmapGenerator, TxArguments>> _generators =
+            new Dictionary<string, TxFactory<ITxTextBitmapGenerator, TxArguments>>
             {
                 { typeof(BrightnessBasedBitmapGenerator).Name, BrightnessBasedBitmapGenerator.Create }
             };
         /// <summary>
         /// The default generator when the given name is <c>null</c>.
         /// </summary>
-        private readonly TxFactory<ITextBitmapGenerator, Lazy<JToken>> _defaultGenerator = BrightnessBasedBitmapGenerator.Create;
+        private readonly TxFactory<ITxTextBitmapGenerator, TxArguments> _defaultGenerator = BrightnessBasedBitmapGenerator.Create;
 
         /// <summary>
-        /// Mapping of names to <see cref="ITextBitmapRenderer"/> factory functions.
+        /// Mapping of names to <see cref="ITxTextBitmapRenderer"/> factory functions.
         /// </summary>
-        private readonly IDictionary<string, TxFactory<ITextBitmapRenderer, Lazy<JToken>>> _renderers =
-            new Dictionary<string, TxFactory<ITextBitmapRenderer, Lazy<JToken>>>
+        private readonly IDictionary<string, TxFactory<ITxTextBitmapRenderer, TxArguments>> _renderers =
+            new Dictionary<string, TxFactory<ITxTextBitmapRenderer, TxArguments>>
             {
                 { typeof(StringBitmapRenderer).Name, StringBitmapRenderer.Create },
                 { typeof(FontBitmapRenderer).Name, FontBitmapRenderer.Create },
@@ -37,13 +36,13 @@ namespace Texart.Builtin
         /// <summary>
         /// The default renderer when the given name is <c>null</c>.
         /// </summary>
-        private readonly TxFactory<ITextBitmapRenderer, Lazy<JToken>> _defaultRenderer = FontBitmapRenderer.Create;
+        private readonly TxFactory<ITxTextBitmapRenderer, TxArguments> _defaultRenderer = FontBitmapRenderer.Create;
 
         /// <inheritdoc />
         public IEnumerable<string> AvailableGenerators => _generators.Keys;
 
         /// <inheritdoc />
-        public TxFactory<ITextBitmapGenerator, Lazy<JToken>> LookupGenerator(string name)
+        public TxFactory<ITxTextBitmapGenerator, TxArguments> LookupGenerator(string name)
         {
             if (name == null)
             {
@@ -53,14 +52,14 @@ namespace Texart.Builtin
             {
                 return factory;
             }
-            throw new ArgumentException($"No {nameof(ITextBitmapGenerator)} named '{name}' exists.");
+            throw new ArgumentException($"No {nameof(ITxTextBitmapGenerator)} named '{name}' exists.");
         }
 
         /// <inheritdoc />
         public IEnumerable<string> AvailableRenderers => _renderers.Keys;
 
         /// <inheritdoc />
-        public TxFactory<ITextBitmapRenderer, Lazy<JToken>> LookupRenderer(string name)
+        public TxFactory<ITxTextBitmapRenderer, TxArguments> LookupRenderer(string name)
         {
             if (name == null)
             {
@@ -70,7 +69,7 @@ namespace Texart.Builtin
             {
                 return factory;
             }
-            throw new ArgumentException($"No {nameof(ITextBitmapRenderer)} named '{name}' exists.");
+            throw new ArgumentException($"No {nameof(ITxTextBitmapRenderer)} named '{name}' exists.");
         }
     }
 }

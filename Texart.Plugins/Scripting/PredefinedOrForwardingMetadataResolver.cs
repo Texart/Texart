@@ -4,7 +4,6 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
-using Newtonsoft.Json.Linq;
 using SkiaSharp;
 using Texart.Api;
 
@@ -24,16 +23,12 @@ namespace Texart.Plugins.Scripting
         {
             // The <c>Texart.Api.dll</c> assembly.
             // This will also bring in the transitive dependencies of Texart.Api, including:
-            // * Newtonsoft.Json
             // * SkiaSharp
             // Refer to Texart.Api.csproj for complete list
-            {ScriptingConstants.TexartReferenceFileName, typeof(IPlugin).Assembly},
+            {ScriptingConstants.TexartReferenceFileName, typeof(ITxPlugin).Assembly},
             // The <c>SkiaSharp.dll</c> assembly.
             // Our public API depends Skia in several places.
-            {ScriptingConstants.SkiaSharpReferenceFileName, typeof(SKBitmap).Assembly},
-            // The <c>Newtonsoft.Json.dll</c> assembly.
-            // Our public API also depends on JSON (for arguments to plugins)
-            {ScriptingConstants.NewtonsoftJsonReferenceFileName, typeof(JToken).Assembly},
+            {ScriptingConstants.SkiaSharpReferenceFileName, typeof(SKBitmap).Assembly}
         }.ToImmutableDictionary();
 
         /// <summary>

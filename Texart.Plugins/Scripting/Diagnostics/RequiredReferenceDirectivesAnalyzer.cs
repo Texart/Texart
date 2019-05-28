@@ -24,8 +24,7 @@ namespace Texart.Plugins.Scripting.Diagnostics
         /// <seealso cref="ScriptingConstants.TexartScriptFileSuffix"/>
         public static readonly ImmutableArray<string> RequiredReferences = ImmutableArray.Create(
             ScriptingConstants.TexartReferenceFileName,
-            ScriptingConstants.SkiaSharpReferenceFileName,
-            ScriptingConstants.NewtonsoftJsonReferenceFileName);
+            ScriptingConstants.SkiaSharpReferenceFileName);
 
         /// <summary>
         /// See <see cref="DiagnosticDescriptor.Title"/>.

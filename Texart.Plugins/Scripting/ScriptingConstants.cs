@@ -1,4 +1,5 @@
-﻿using Texart.Plugins.Scripting.Diagnostics;
+﻿using Texart.Api;
+using Texart.Plugins.Scripting.Diagnostics;
 
 namespace Texart.Plugins.Scripting
 {
@@ -8,7 +9,7 @@ namespace Texart.Plugins.Scripting
     internal static class ScriptingConstants
     {
         /// <summary>
-        /// The Texart Api assembly file name. For types like <see cref="Texart.Api.IPlugin"/>.
+        /// The Texart Api assembly file name. For types like <see cref="ITxPlugin"/>.
         /// Used by <see cref="RequiredReferenceDirectivesAnalyzer"/> and <see cref="PredefinedOrForwardingMetadataResolver"/>
         /// </summary>
         /// <seealso cref="RequiredReferenceDirectivesAnalyzer.RequiredReferences"/>
@@ -21,13 +22,6 @@ namespace Texart.Plugins.Scripting
         /// <seealso cref="RequiredReferenceDirectivesAnalyzer.RequiredReferences"/>
         /// <seealso cref="PredefinedOrForwardingMetadataResolver.WhitelistedAssemblies"/>
         public const string SkiaSharpReferenceFileName = "SkiaSharp.dll";
-        /// <summary>
-        /// The Texart Api assembly file name. For types like <see cref="Newtonsoft.Json.JsonConvert"/>.
-        /// Used by <see cref="RequiredReferenceDirectivesAnalyzer"/> and <see cref="PredefinedOrForwardingMetadataResolver"/>
-        /// </summary>
-        /// <seealso cref="RequiredReferenceDirectivesAnalyzer.RequiredReferences"/>
-        /// <seealso cref="PredefinedOrForwardingMetadataResolver.WhitelistedAssemblies"/>
-        public const string NewtonsoftJsonReferenceFileName = "Newtonsoft.Json.dll";
 
         /// <summary>
         /// The suffix for Texart script files.
