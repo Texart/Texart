@@ -1,7 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("Texart.Plugins.Tests")]
-namespace Texart.Plugins.Scripting
+﻿namespace Texart.Plugins.Scripting
 {
     /// <summary>
     /// Helper class containing constants floating around the scripting logic implementation.

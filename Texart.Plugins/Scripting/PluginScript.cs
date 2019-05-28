@@ -232,12 +232,12 @@ namespace Texart.Plugins.Scripting
         /// The language version to use to compile Texart scripts. Ideally, this should be the same as the version
         /// used to compile Texart.
         /// </summary>
-        private static LanguageVersion DefaultLanguageVersion => LanguageVersion.CSharp7_3;
+        internal static LanguageVersion DefaultLanguageVersion => LanguageVersion.CSharp7_3;
         /// <summary>
         /// The default optimization level to compile Texart scripts.
         /// </summary>
         /// <seealso cref="ScriptOptions.OptimizationLevel"/>
-        private static OptimizationLevel DefaultOptimizationLevel =>
+        internal static OptimizationLevel DefaultOptimizationLevel =>
 #if DEBUG
             OptimizationLevel.Debug;
 #else
@@ -247,7 +247,7 @@ namespace Texart.Plugins.Scripting
         /// Whether or not debug info will be available in the compilation for Texart scripts.
         /// </summary>
         /// <seealso cref="ScriptOptions.EmitDebugInformation"/>
-        private static bool DefaultEmitDebugInformation =>
+        internal static bool DefaultEmitDebugInformation =>
 #if DEBUG
             true;
 #else
@@ -257,26 +257,26 @@ namespace Texart.Plugins.Scripting
         /// Whether the <c>unsafe</c> keyword is allowed.
         /// </summary>
         /// <seealso cref="ScriptOptions.AllowUnsafe"/>
-        private static bool DefaultAllowUnsafe => false;
+        internal static bool DefaultAllowUnsafe => false;
         /// <summary>
         /// Whether overflow is checked by default (<c>checked { }</c> or <c>unchecked { }</c>).
         /// </summary>
         /// <seealso cref="ScriptOptions.CheckOverflow"/>
-        private static bool DefaultCheckOverflow => false;
+        internal static bool DefaultCheckOverflow => false;
         /// <summary>
         /// Warning level of compiler. <c>4</c> is the max.
         /// </summary>
         /// <seealso cref="ScriptOptions.WarningLevel"/>
-        private static int DefaultWarningLevel => 4;
+        internal static int DefaultWarningLevel => 4;
         /// <summary>
         /// The file encoding of the Texart script source file.
         /// </summary>
         /// <seealso cref="ScriptOptions.FileEncoding"/>
-        private static Encoding DefaultFileEncoding => Encoding.UTF8;
+        internal static Encoding DefaultFileEncoding => Encoding.UTF8;
         /// <summary>
         /// Extra assemblies (and transitive dependencies) to load in Texart scripts.
         /// </summary>
-        private static Assembly[] DefaultExtraAssemblies => new Assembly[]
+        internal static Assembly[] DefaultExtraAssemblies => new Assembly[]
         {
             // The Texart Api assembly is now loaded via `TexartApiScriptMetadataResolver`.
             // This is just for extra goodies now - non-essential.

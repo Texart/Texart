@@ -34,11 +34,11 @@ namespace Texart.Plugins.Scripting.Diagnostics
         /// <summary>
         /// See <see cref="DiagnosticDescriptor.MessageFormat"/>.
         /// </summary>
-        private const string ScriptMustReferenceFormat = "Texart scripts must reference {0} before other code. Add \'#r \"{0}\"' at the top of the file.";
+        internal const string ScriptMustReferenceFormat = "Texart scripts must reference {0} before other code. Add \'#r \"{0}\"' at the top of the file.";
         /// <summary>
         /// See <see cref="DiagnosticDescriptor.MessageFormat"/>.
         /// </summary>
-        private const string LoadDirectiveNotAllowedBeforeFormat = "#load directive is not allowed before all required references";
+        internal const string LoadDirectiveNotAllowedBeforeFormat = "#load directive is not allowed before all required references";
         /// <summary>
         /// See <see cref="DiagnosticDescriptor.Description"/>.
         /// </summary>
@@ -74,7 +74,7 @@ namespace Texart.Plugins.Scripting.Diagnostics
         /// Checks script files for <see cref="RequiredReferences"/>.
         /// </summary>
         /// <param name="context">The analysis context.</param>
-        private static void AnalyzeRequiredReferences(SyntaxNodeAnalysisContext context)
+        private void AnalyzeRequiredReferences(SyntaxNodeAnalysisContext context)
         {
             Debug.Assert(context.Node.IsKind(SyntaxKind.CompilationUnit));
             var compilationUnit = (CompilationUnitSyntax)context.Node;
@@ -86,7 +86,7 @@ namespace Texart.Plugins.Scripting.Diagnostics
             }
 
             var triviaList = compilationUnit.GetLeadingTrivia();
-            var remainingReferences = new SortedSet<string>(RequiredReferences);
+            var remainingReferences = new SortedSet<string>(_requiredReferences);
             for (
                 var currentTriviaIndex = 0;
                 remainingReferences.Any() && currentTriviaIndex < triviaList.Count;
@@ -117,8 +117,8 @@ namespace Texart.Plugins.Scripting.Diagnostics
                 }
 
                 var referenceDirective = (ReferenceDirectiveTriviaSyntax)directive;
-                // Checking RequiredReferences allows duplicate references
-                if (!RequiredReferences.Contains(referenceDirective.File.ValueText))
+                // Checking _requiredReferences instead allows duplicate references
+                if (!_requiredReferences.Contains(referenceDirective.File.ValueText))
                 {
                     context.ReportDiagnostic(Diagnostic.Create(
                         Descriptor, referenceDirective.File.GetLocation(),
@@ -145,10 +145,10 @@ namespace Texart.Plugins.Scripting.Diagnostics
         ///     <c>true</c> if the syntax tree is from a texart script,
         ///     <c>false</c> otherwise.
         /// </returns>
-        private static bool IsTexartScript(SyntaxTree syntaxTree)
+        private bool IsTexartScript(SyntaxTree syntaxTree)
         {
             var filePath = syntaxTree.FilePath;
-            return filePath != null && filePath.EndsWith(ScriptingConstants.TexartScriptFileSuffix);
+            return filePath != null && filePath.EndsWith(_texartScriptFileSuffix);
         }
 
         /// <summary>
@@ -166,5 +166,37 @@ namespace Texart.Plugins.Scripting.Diagnostics
         /// <seealso cref="FormatReference"/>
         private static IEnumerable<string> FormatReferences(IEnumerable<string> references) =>
             references.Select(reference => $"* {FormatReference(reference)}");
+
+        /// <summary>
+        /// See <see cref="RequiredReferences"/>. This is here mostly for unit tests.
+        /// </summary>
+        private readonly ImmutableArray<string> _requiredReferences;
+        /// <summary>
+        /// See <see cref="ScriptingConstants.TexartScriptFileSuffix"/>. This is here mostly for unit tests.
+        /// </summary>
+        private readonly string _texartScriptFileSuffix;
+
+        /// <summary>
+        /// Constructs a <see cref="RequiredReferencesDirectiveAnalyzer"/> that checks for <see cref="RequiredReferences"/>
+        /// in files ending with <see cref="ScriptingConstants.TexartScriptFileSuffix"/>.
+        /// </summary>
+        public RequiredReferencesDirectiveAnalyzer() :
+            this(RequiredReferences, ScriptingConstants.TexartScriptFileSuffix)
+        {
+        }
+
+        /// <summary>
+        /// Internal constructor that allows rebinding the required references and expected file suffix.
+        /// This is here mostly for unit tests.
+        /// </summary>
+        /// <param name="requiredReferences">Custom requirements. See <see cref="RequiredReferences"/>.</param>
+        /// <param name="texartScriptFileSuffix">Custom script suffix. See <see cref="ScriptingConstants.TexartScriptFileSuffix"/>.</param>
+        internal RequiredReferencesDirectiveAnalyzer(ImmutableArray<string> requiredReferences, string texartScriptFileSuffix)
+        {
+            Debug.Assert(requiredReferences != null);
+            Debug.Assert(texartScriptFileSuffix != null);
+            this._requiredReferences = requiredReferences;
+            this._texartScriptFileSuffix = texartScriptFileSuffix;
+        }
     }
 }
