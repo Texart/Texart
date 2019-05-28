@@ -14,7 +14,7 @@ namespace Texart.Api
     /// Using types defined in the following contexts are unified by this interface:
     ///   * Within Texart code
     ///   * Within a separately compiled assembly (this is what a "real plugin" is)
-    ///   * Within a .csx file that will be interpreted at runtime
+    ///   * Within a .tx.csx file that will be interpreted at runtime
     /// </summary>
     public interface IPlugin
     {

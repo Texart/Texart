@@ -53,7 +53,7 @@ namespace Texart.Plugins.Tests
         public static async Task<PluginScriptCompilation<IPlugin>> LoadFrom(int fixture, string relativePath)
         {
             var path = GetPath(fixture, relativePath);
-            if (!relativePath.EndsWith(ScriptingConstants.TexartMainFileSuffix))
+            if (!relativePath.EndsWith(ScriptingConstants.TexartScriptFileSuffix))
             {
                 throw new ArgumentException($"Attempt to load a non Texart script file: {path}");
             }
@@ -71,7 +71,7 @@ namespace Texart.Plugins.Tests
         public static async Task<PluginScriptCompilation<T>> LoadFrom<T>(int fixture, string relativePath)
         {
             var path = GetPath(fixture, relativePath);
-            if (!relativePath.EndsWith(ScriptingConstants.TexartMainFileSuffix))
+            if (!relativePath.EndsWith(ScriptingConstants.TexartScriptFileSuffix))
             {
                 throw new ArgumentException($"Attempt to load a non Texart script file: {path}");
             }

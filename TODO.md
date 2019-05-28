@@ -2,6 +2,10 @@
 
 ## Reach
 
+- [ ] Improve `BrightnessBasedGenerator` implementation.
+  - [ ] Switch from ASCII to UTF-8 encoding on all platforms.
+- [ ] Multi-image / video support.
+  - [ ] Genetic algorithm to create GIF from different iterations.
 - [ ] Investigate coloring.
 
 ## High-level
@@ -12,8 +16,9 @@
 - [ ] How to handle errors in plugins?
 - [ ] Implement argument parsing.
   - [ ] Group arguments by prefixes to figure out which ones are passed to plugins. (e.g `--generator-*` and `--renderer-*`).
+  - [ ] Allow shortcut for generators and renderers with the same name in the same plugin.
   - Add interfaces in `Texart.Api` to support common CLI arguments deserialization.
-- [ ] Require `#r "Texart.Api.dll"` or similar directive at the top of `.csx` files. This will improve auto-complete experience.
+- [X] Require `#r "Texart.Api.dll"` or similar directive at the top of `.csx` files. This will improve auto-complete experience.
 
 ## Chore
 

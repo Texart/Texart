@@ -15,7 +15,6 @@ using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Scripting;
 using Texart.Api;
-using Texart.Plugins.Internal;
 using Texart.Plugins.Scripting.Diagnostics;
 
 namespace Texart.Plugins.Scripting
@@ -116,6 +115,7 @@ namespace Texart.Plugins.Scripting
                 var existingDiagnostics = Diagnostics;
                 if (existingDiagnostics.Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error))
                 {
+                    // diagnostics exist from compilation, no need to call RunAsync
                     throw new CompilationErrorException(FormatDiagnosticMessage(existingDiagnostics), existingDiagnostics);
                 }
                 return await Script.RunAsync(globals, catchException, cancellationToken);
@@ -124,6 +124,7 @@ namespace Texart.Plugins.Scripting
             {
                 if (CustomDiagnostics.IsEmpty)
                 {
+                    // without custom diagnostics, no change is necessary
                     throw;
                 }
                 var diagnostics = CustomDiagnostics.AddRange(ex.Diagnostics);
@@ -227,14 +228,54 @@ namespace Texart.Plugins.Scripting
         /// <see cref="SourceFile"/>
         public static PluginScript<IPlugin> LoadFrom(string sourceFilePath) => LoadFrom<IPlugin>(sourceFilePath);
 
+        /// <summary>
+        /// The language version to use to compile Texart scripts. Ideally, this should be the same as the version
+        /// used to compile Texart.
+        /// </summary>
         private static LanguageVersion DefaultLanguageVersion => LanguageVersion.CSharp7_3;
+        /// <summary>
+        /// The default optimization level to compile Texart scripts.
+        /// </summary>
+        /// <seealso cref="ScriptOptions.OptimizationLevel"/>
         private static OptimizationLevel DefaultOptimizationLevel =>
-            CompilationDefines.IsRelease ? OptimizationLevel.Release : OptimizationLevel.Debug;
-        private static bool DefaultEmitDebugInformation => CompilationDefines.IsDebug;
+#if DEBUG
+            OptimizationLevel.Debug;
+#else
+            OptimizationLevel.Release;
+#endif
+        /// <summary>
+        /// Whether or not debug info will be available in the compilation for Texart scripts.
+        /// </summary>
+        /// <seealso cref="ScriptOptions.EmitDebugInformation"/>
+        private static bool DefaultEmitDebugInformation =>
+#if DEBUG
+            true;
+#else
+            false;
+#endif
+        /// <summary>
+        /// Whether the <c>unsafe</c> keyword is allowed.
+        /// </summary>
+        /// <seealso cref="ScriptOptions.AllowUnsafe"/>
         private static bool DefaultAllowUnsafe => false;
+        /// <summary>
+        /// Whether overflow is checked by default (<c>checked { }</c> or <c>unchecked { }</c>).
+        /// </summary>
+        /// <seealso cref="ScriptOptions.CheckOverflow"/>
         private static bool DefaultCheckOverflow => false;
+        /// <summary>
+        /// Warning level of compiler. <c>4</c> is the max.
+        /// </summary>
+        /// <seealso cref="ScriptOptions.WarningLevel"/>
         private static int DefaultWarningLevel => 4;
+        /// <summary>
+        /// The file encoding of the Texart script source file.
+        /// </summary>
+        /// <seealso cref="ScriptOptions.FileEncoding"/>
         private static Encoding DefaultFileEncoding => Encoding.UTF8;
+        /// <summary>
+        /// Extra assemblies (and transitive dependencies) to load in Texart scripts.
+        /// </summary>
         private static Assembly[] DefaultExtraAssemblies => new Assembly[]
         {
             // The Texart Api assembly is now loaded via `TexartApiScriptMetadataResolver`.
@@ -254,8 +295,6 @@ namespace Texart.Plugins.Scripting
             .WithFileEncoding(DefaultFileEncoding)
             .AddReferences(DefaultExtraAssemblies);
 
-        private static ReferenceScheme FileReferenceScheme => new ReferenceScheme("file");
-
         /// <summary>
         /// Creates a <see cref="SourceReferenceResolver"/> that is able to recognize different schemes are forward to
         /// appropriate resolvers. <see cref="SourceReferenceResolverDemux"/>.
@@ -267,7 +306,7 @@ namespace Texart.Plugins.Scripting
             var fileResolver = new SourceFileResolver(ImmutableArray<string>.Empty, Path.GetDirectoryName(sourceFile.FilePath));
             var resolvers = new Dictionary<ReferenceScheme, SourceReferenceResolver>
             {
-                {FileReferenceScheme, fileResolver}
+                {ReferenceScheme.File, fileResolver}
             };
             return new SourceReferenceResolverDemux(fileResolver, resolvers.ToImmutableDictionary());
         }
@@ -281,10 +320,10 @@ namespace Texart.Plugins.Scripting
         private static MetadataReferenceResolver BuildMetadataReferenceResolver(SourceFile sourceFile)
         {
             var scriptResolver = ScriptMetadataResolver.Default.WithBaseDirectory(Path.GetDirectoryName(sourceFile.FilePath));
-            var texartApiWrappedResolver = new TexartApiScriptMetadataResolver(scriptResolver);
+            var texartApiWrappedResolver = new PredefinedOrForwardingMetadataResolver(scriptResolver);
             var resolvers = new Dictionary<ReferenceScheme, MetadataReferenceResolver>
             {
-                {FileReferenceScheme, scriptResolver}
+                {ReferenceScheme.File, scriptResolver}
             };
             return new MetadataReferenceResolverDemux(texartApiWrappedResolver, resolvers.ToImmutableDictionary());
         }

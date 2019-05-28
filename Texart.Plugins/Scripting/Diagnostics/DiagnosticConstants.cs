@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using Microsoft.CodeAnalysis;
+﻿using Microsoft.CodeAnalysis;
 
 namespace Texart.Plugins.Scripting.Diagnostics
 {

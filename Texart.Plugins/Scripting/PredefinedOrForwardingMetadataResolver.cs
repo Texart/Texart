@@ -10,12 +10,17 @@ using Texart.Api;
 
 namespace Texart.Plugins.Scripting
 {
-    internal sealed class TexartApiScriptMetadataResolver : MetadataReferenceResolver, IEquatable<TexartApiScriptMetadataResolver>
+    /// <summary>
+    /// A <see cref="MetadataReferenceResolver"/> that either resolves from a predefined whitelist of assemblies (<see cref="WhitelistedAssemblies"/>),
+    /// or forwards the call to an underlying <see cref="MetadataReferenceResolver"/> instance.
+    /// </summary>
+    internal sealed class PredefinedOrForwardingMetadataResolver : MetadataReferenceResolver, IEquatable<PredefinedOrForwardingMetadataResolver>
     {
         /// <summary>
-        /// Special cases for assemblies.
+        /// Assemblies that are treated specially. These assemblies are resolved to pre-defined assemblies rather than
+        /// checking the file system.
         /// </summary>
-        private static readonly Dictionary<string, Assembly> WhitelistedAssemblies = new Dictionary<string, Assembly>
+        public static readonly ImmutableDictionary<string, Assembly> WhitelistedAssemblies = new Dictionary<string, Assembly>
         {
             // The <c>Texart.Api.dll</c> assembly.
             // This will also bring in the transitive dependencies of Texart.Api, including:
@@ -26,13 +31,13 @@ namespace Texart.Plugins.Scripting
             // The <c>SkiaSharp.dll</c> assembly.
             // Our public API depends Skia in several places.
             {ScriptingConstants.SkiaSharpReferenceFileName, typeof(SKBitmap).Assembly},
-            // The <c>Newtonsoft.Json.dll</c>.
+            // The <c>Newtonsoft.Json.dll</c> assembly.
             // Our public API also depends on JSON (for arguments to plugins)
             {ScriptingConstants.NewtonsoftJsonReferenceFileName, typeof(JToken).Assembly},
-        };
+        }.ToImmutableDictionary();
 
         /// <summary>
-        /// The underlying resolver to which we forward our calls, except for the <c>Texart.Api.dll</c> special case.
+        /// The underlying resolver to which we forward our calls, except for <see cref="WhitelistedAssemblies"/>.
         /// </summary>
         private readonly MetadataReferenceResolver _underlyingResolver;
 
@@ -46,7 +51,7 @@ namespace Texart.Plugins.Scripting
         /// Constructs a resolver backed by the provided underlying resolver.
         /// </summary>
         /// <param name="underlyingResolver">See <see cref="_underlyingResolver"/></param>
-        public TexartApiScriptMetadataResolver(MetadataReferenceResolver underlyingResolver)
+        public PredefinedOrForwardingMetadataResolver(MetadataReferenceResolver underlyingResolver)
         {
             Debug.Assert(underlyingResolver != null);
             this._underlyingResolver = underlyingResolver;
@@ -84,7 +89,7 @@ namespace Texart.Plugins.Scripting
         }
 
         /// <inheritdoc />
-        public bool Equals(TexartApiScriptMetadataResolver other)
+        public bool Equals(PredefinedOrForwardingMetadataResolver other)
         {
             if (other is null) return false;
             return ReferenceEquals(this, other) || Equals(_underlyingResolver, other._underlyingResolver);
@@ -92,7 +97,7 @@ namespace Texart.Plugins.Scripting
 
         /// <inheritdoc />
         public override bool Equals(object obj) =>
-            ReferenceEquals(this, obj) || obj is TexartApiScriptMetadataResolver other && Equals(other);
+            ReferenceEquals(this, obj) || obj is PredefinedOrForwardingMetadataResolver other && Equals(other);
 
         /// <inheritdoc />
         public override int GetHashCode() =>
