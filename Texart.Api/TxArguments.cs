@@ -1008,14 +1008,14 @@ namespace Texart.Api
             if (other is null) return false;
             return ReferenceEquals(this, other) || AsImmutableDictionary.Equals(other.AsImmutableDictionary);
         }
-        
+
         /// <inheritdoc cref="object.Equals(object)"/>
         public override bool Equals(object obj) =>
             ReferenceEquals(this, obj) || obj is TxArguments other && Equals(other);
 
         /// <inheritdoc cref="object.GetHashCode"/>
         public override int GetHashCode() => AsImmutableDictionary.GetHashCode();
-        
+
         /// <summary>
         /// Compares two <see cref="TxArguments"/>s for equality. Two <see cref="TxArguments"/>s are
         /// only considered equal iff <see cref="AsImmutableDictionary"/> are equal.

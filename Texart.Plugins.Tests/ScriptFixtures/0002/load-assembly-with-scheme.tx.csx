@@ -1,5 +1,4 @@
 #r "Texart.Api.dll"
-#r "Newtonsoft.Json.dll"
 #r "SkiaSharp.dll"
 #r "file://./Texart.ScriptInterface.dll"
 

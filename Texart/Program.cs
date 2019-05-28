@@ -13,11 +13,10 @@ namespace Texart
             {
                 var bitmap = TxContract.NonNull(SKBitmap.Decode("../../../../meme.jpg"));
                 IPlugin builtinPlugin = new Builtin.Plugin();
-
-                // TODO: use JSON stream instead of null
-                var textBitmapGenerator = builtinPlugin.LookupGenerator("BrightnessBasedBitmapGenerator")(null);
+                
+                var textBitmapGenerator = builtinPlugin.LookupGenerator("BrightnessBasedBitmapGenerator")(TxArguments.Empty);
                 var textBitmap = await textBitmapGenerator.GenerateAsync(bitmap);
-                var textBitmapRenderer = builtinPlugin.LookupRenderer("FontBitmapRenderer")(null);
+                var textBitmapRenderer = builtinPlugin.LookupRenderer("FontBitmapRenderer")(TxArguments.Empty);
                 await textBitmapRenderer.RenderAsync(textBitmap, output);
             }
         }

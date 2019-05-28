@@ -21,13 +21,6 @@ namespace Texart.Plugins.Scripting
         /// <seealso cref="RequiredReferenceDirectivesAnalyzer.RequiredReferences"/>
         /// <seealso cref="PredefinedOrForwardingMetadataResolver.WhitelistedAssemblies"/>
         public const string SkiaSharpReferenceFileName = "SkiaSharp.dll";
-        /// <summary>
-        /// The Texart Api assembly file name. For types like <see cref="Newtonsoft.Json.JsonConvert"/>.
-        /// Used by <see cref="RequiredReferenceDirectivesAnalyzer"/> and <see cref="PredefinedOrForwardingMetadataResolver"/>
-        /// </summary>
-        /// <seealso cref="RequiredReferenceDirectivesAnalyzer.RequiredReferences"/>
-        /// <seealso cref="PredefinedOrForwardingMetadataResolver.WhitelistedAssemblies"/>
-        public const string NewtonsoftJsonReferenceFileName = "Newtonsoft.Json.dll";
 
         /// <summary>
         /// The suffix for Texart script files.
