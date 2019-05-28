@@ -335,4 +335,26 @@ using System;
             VerifyCSharpDiagnostic(code, expected);
         }
     }
+
+    internal class RequireReferenceDirectivesAnalyzerSkipFilesTests : DiagnosticVerifier
+    {
+        // A crazy extension for scripts to make sure that any input file gets ignored by the analyzer
+        protected override DiagnosticAnalyzer CSharpDiagnosticAnalyzer =>
+            new RequiredReferenceDirectivesAnalyzer(
+                RequiredReferenceDirectivesAnalyzer.RequiredReferences, ".crazy-extension");
+        protected override LanguageVersion CSharpLanguageVersion => PluginScript.DefaultLanguageVersion;
+        protected override SourceCodeKind CSharpSourceCodeKind => SourceCodeKind.Script;
+
+        [Test]
+        public void IgnoresNonScriptFile()
+        {
+            const string code = @"
+#load ""foo.csx""
+namespace Foo
+{
+    class Program { }
+}";
+            VerifyCSharpDiagnostic(code);
+        }
+    }
 }
