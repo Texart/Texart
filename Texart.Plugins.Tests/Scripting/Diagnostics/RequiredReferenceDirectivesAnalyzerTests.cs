@@ -281,6 +281,25 @@ namespace Foo {}";
         }
 
         [Test]
+        public void RejectsUnknownDirective()
+        {
+            const string code = @"
+#r ""A.dll""
+#r ""B.dll""
+#unknown
+#r ""C.dll""";
+            var expected = new DiagnosticResult
+            {
+                Id = DiagnosticConstants.TexartReferenceDirectiveAnalyzerId,
+                Message = string.Format(
+                    RequiredReferenceDirectivesAnalyzer.DirectiveNotRecognizedFormat, "unknown", @"""C.dll"""),
+                Severity = DiagnosticSeverity.Error,
+                Locations = new[] {new DiagnosticResultLocation(string.Empty, 4, 1)}
+            };
+            VerifyCSharpDiagnostic(code, expected);
+        }
+
+        [Test]
         public void RejectsOneMissingReference()
         {
             const string code = @"
