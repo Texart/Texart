@@ -1,3 +1,6 @@
+#r "Texart.Api.dll"
+#r "Newtonsoft.Json.dll"
+#r "SkiaSharp.dll"
 #r "./Texart.ScriptInterface.dll"
 
 using Texart.ScriptInterface;

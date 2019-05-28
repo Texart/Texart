@@ -29,6 +29,23 @@ namespace Texart.Plugins
     public sealed class ReferenceScheme : IComparable<ReferenceScheme>, IEquatable<ReferenceScheme>
     {
         /// <summary>
+        /// Scheme for <c>file</c> protocol.
+        /// </summary>
+        public static ReferenceScheme File => new ReferenceScheme("file");
+        /// <summary>
+        /// Scheme for <c>http</c> protocol.
+        /// </summary>
+        public static ReferenceScheme Http => new ReferenceScheme("http");
+        /// <summary>
+        /// Scheme for <c>https</c> protocol.
+        /// </summary>
+        public static ReferenceScheme Https => new ReferenceScheme("https");
+        /// <summary>
+        /// Scheme for <c>tx</c> protocol.
+        /// </summary>
+        public static ReferenceScheme Tx => new ReferenceScheme("tx");
+
+        /// <summary>
         /// All valid schemes must match this regex.
         /// <see href="https://tools.ietf.org/html/rfc3986#section-3.1"/>
         /// </summary>
