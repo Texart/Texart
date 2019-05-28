@@ -70,11 +70,11 @@ namespace Texart.Builtin.Renderers
         {
             using (var paint = new SKPaint())
             {
-                paint.IsAntialias = this.ShouldAntialias;
-                paint.IsDither = this.ShouldDither;
-                paint.IsAutohinted = this.ShouldHint;
+                paint.IsAntialias = ShouldAntialias;
+                paint.IsDither = ShouldDither;
+                paint.IsAutohinted = ShouldHint;
 
-                var font = this.Font;
+                var font = Font;
                 paint.Typeface = font.Typeface;
                 paint.TextSize = font.TextSize;
                 paint.TextEncoding = SKTextEncoding.Utf8;
@@ -82,7 +82,7 @@ namespace Texart.Builtin.Renderers
                 paint.DeviceKerningEnabled = false;
 
                 paint.Color = font.Color;
-                var backgroundColor = this.BackgroundColor;
+                var backgroundColor = BackgroundColor;
 
                 int textWidth = textBitmap.Width;
                 int textHeight = textBitmap.Height;
@@ -149,7 +149,7 @@ namespace Texart.Builtin.Renderers
         {
             if (txFont == null) { throw new ArgumentNullException(nameof(txFont)); }
             if (txFont.Typeface == null) { throw new ArgumentNullException(nameof(txFont.Typeface)); }
-            this.Font = txFont;
+            Font = txFont;
         }
 
         /// <summary>
