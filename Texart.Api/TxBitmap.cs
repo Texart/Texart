@@ -12,7 +12,7 @@ namespace Texart.Api
     public static class TxBitmap
     {
         /// <summary>
-        /// Returns every possible values for <see cref="ITextBitmapGenerator.PixelSamplingRatio"/>
+        /// Returns every possible values for <see cref="ITxTextBitmapGenerator.PixelSamplingRatio"/>
         /// for the given image bitmap. This value depends only on the bitmap size, not it's pixel
         /// data.
         /// <see cref="GetPerfectPixelRatios(int, int)"/>
@@ -23,7 +23,7 @@ namespace Texart.Api
             GetPerfectPixelRatios(bitmap.Width, bitmap.Height);
 
         /// <summary>
-        /// Returns every possible values for <see cref="ITextBitmapGenerator.PixelSamplingRatio"/>
+        /// Returns every possible values for <see cref="ITxTextBitmapGenerator.PixelSamplingRatio"/>
         /// for the given dimensions.
         /// </summary>
         /// <param name="width">The width of bitmap to check.</param>

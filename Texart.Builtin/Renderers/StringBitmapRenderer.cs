@@ -12,7 +12,7 @@ namespace Texart.Builtin.Renderers
     /// A renderer that simply writes the text data to the output
     /// as a string.
     /// </summary>
-    internal sealed class StringBitmapRenderer : ITextBitmapRenderer
+    internal sealed class StringBitmapRenderer : ITxTextBitmapRenderer
     {
         /// <summary>
         /// The encoding to output as.
@@ -20,9 +20,9 @@ namespace Texart.Builtin.Renderers
         public Encoding Encoding { get; }
 
         /// <inheritdocs/>
-        public Task RenderAsync(ITextBitmap textBitmap, Stream outputStream)
+        public Task RenderAsync(ITxTextBitmap txTextBitmap, Stream outputStream)
         {
-            Debug.Assert(textBitmap != null);
+            Debug.Assert(txTextBitmap != null);
             Debug.Assert(outputStream != null);
 
             outputStream = (outputStream is BufferedStream) ?
@@ -30,11 +30,11 @@ namespace Texart.Builtin.Renderers
 
             using (TextWriter writer = new StreamWriter(outputStream, Encoding))
             {
-                for (var y = 0; y < textBitmap.Height; ++y)
+                for (var y = 0; y < txTextBitmap.Height; ++y)
                 {
-                    for (var x = 0; x < textBitmap.Width; ++x)
+                    for (var x = 0; x < txTextBitmap.Width; ++x)
                     {
-                        writer.Write((char)textBitmap.CharAt(x, y));
+                        writer.Write((char)txTextBitmap.CharAt(x, y));
                     }
                     writer.Write(writer.NewLine);
                 }

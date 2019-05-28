@@ -10,7 +10,7 @@ namespace Texart.Builtin.Renderers
     /// <summary>
     /// A renderer that paints text to an image using a provided font.
     /// </summary>
-    internal sealed class FontBitmapRenderer : ITextBitmapRenderer
+    internal sealed class FontBitmapRenderer : ITxTextBitmapRenderer
     {
         /// <summary>
         /// The font to paint with, including metadata such as size, color, and spacing.
@@ -45,12 +45,12 @@ namespace Texart.Builtin.Renderers
         public static SKColor DefaultBackgroundColor => SKColors.White;
 
         /// <inheritdocs />
-        public Task RenderAsync(ITextBitmap textBitmap, Stream outputStream)
+        public Task RenderAsync(ITxTextBitmap txTextBitmap, Stream outputStream)
         {
-            Debug.Assert(textBitmap != null);
+            Debug.Assert(txTextBitmap != null);
             Debug.Assert(outputStream != null);
 
-            using (SKBitmap bitmap = GenerateBitmap(textBitmap))
+            using (SKBitmap bitmap = GenerateBitmap(txTextBitmap))
             using (SKImage image = SKImage.FromBitmap(bitmap))
             {
                 image.Encode().SaveTo(outputStream);
@@ -63,9 +63,9 @@ namespace Texart.Builtin.Renderers
         /// Generates a bitmap using the provided textBitmap and font info. Note that
         /// you are responsible for calling <see cref="IDisposable.Dispose"/> on the returned bitmap.
         /// </summary>
-        /// <param name="textBitmap">The <see cref="ITextBitmap"/> to read from.</param>
+        /// <param name="txTextBitmap">The <see cref="ITxTextBitmap"/> to read from.</param>
         /// <returns>The generated <see cref="SKBitmap"/>.</returns>
-        private SKBitmap GenerateBitmap(ITextBitmap textBitmap)
+        private SKBitmap GenerateBitmap(ITxTextBitmap txTextBitmap)
         {
             using (var paint = new SKPaint())
             {
@@ -83,8 +83,8 @@ namespace Texart.Builtin.Renderers
                 paint.Color = font.Color;
                 var backgroundColor = BackgroundColor;
 
-                int textWidth = textBitmap.Width;
-                int textHeight = textBitmap.Height;
+                int textWidth = txTextBitmap.Width;
+                int textHeight = txTextBitmap.Height;
 
                 // spacing reserved for a single character
                 SKFontMetrics fontMetrics = paint.FontMetrics;
@@ -114,7 +114,7 @@ namespace Texart.Builtin.Renderers
                     {
                         Parallel.For(0, textWidth, x =>
                         {
-                            string charAsString = textBitmap.CharAt(x, y).ToString();
+                            string charAsString = txTextBitmap.CharAt(x, y).ToString();
 
                             // dimensions of actual printed chars
                             float charWidth = paint.MeasureText(charAsString);
@@ -128,7 +128,7 @@ namespace Texart.Builtin.Renderers
                             float textY = (y * characterSpacing) + (characterSpacing * 0.75f);
 
                             canvas.DrawText(
-                                text: textBitmap.CharAt(x, y).ToString(),
+                                text: txTextBitmap.CharAt(x, y).ToString(),
                                 x: textX,
                                 y: textY,
                                 paint: paint

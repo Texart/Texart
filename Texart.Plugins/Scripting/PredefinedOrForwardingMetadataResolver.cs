@@ -25,7 +25,7 @@ namespace Texart.Plugins.Scripting
             // This will also bring in the transitive dependencies of Texart.Api, including:
             // * SkiaSharp
             // Refer to Texart.Api.csproj for complete list
-            {ScriptingConstants.TexartReferenceFileName, typeof(IPlugin).Assembly},
+            {ScriptingConstants.TexartReferenceFileName, typeof(ITxPlugin).Assembly},
             // The <c>SkiaSharp.dll</c> assembly.
             // Our public API depends Skia in several places.
             {ScriptingConstants.SkiaSharpReferenceFileName, typeof(SKBitmap).Assembly}

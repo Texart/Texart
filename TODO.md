@@ -18,7 +18,6 @@
   - [ ] Group arguments by prefixes to figure out which ones are passed to plugins. (e.g `--generator-*` and `--renderer-*`).
   - [ ] Allow shortcut for generators and renderers with the same name in the same plugin.
   - Add interfaces in `Texart.Api` to support common CLI arguments deserialization.
-- [X] Require `#r "Texart.Api.dll"` or similar directive at the top of `.csx` files. This will improve auto-complete experience.
 
 ## Chore
 

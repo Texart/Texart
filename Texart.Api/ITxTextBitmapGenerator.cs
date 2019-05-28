@@ -5,12 +5,12 @@ using SkiaSharp;
 namespace Texart.Api
 {
     /// <summary>
-    /// An <see cref="ITextBitmapGenerator"/> is used to generate <see cref="ITextBitmap"/>s given
+    /// An <see cref="ITxTextBitmapGenerator"/> is used to generate <see cref="ITxTextBitmap"/>s given
     /// some configuration options.
     /// </summary>
-    /// <seealso cref="ITextBitmap"/>
-    /// <seealso cref="ITextBitmapRenderer"/>
-    public interface ITextBitmapGenerator
+    /// <seealso cref="ITxTextBitmap"/>
+    /// <seealso cref="ITxTextBitmapRenderer"/>
+    public interface ITxTextBitmapGenerator
     {
         /// <summary>
         /// Gets the ratio of source resolution to generated resolution. That is, one
@@ -32,11 +32,11 @@ namespace Texart.Api
         int PixelSamplingRatio { get; }
 
         /// <summary>
-        /// Generates a <see cref="ITextBitmap"/> with the <see cref="PixelSamplingRatio"/> adjusted dimensions.
+        /// Generates a <see cref="ITxTextBitmap"/> with the <see cref="PixelSamplingRatio"/> adjusted dimensions.
         /// </summary>
         /// <param name="bitmap">The bitmap to generate data from.</param>
         /// <returns></returns>
         /// <seealso cref="PixelSamplingRatio"/>
-        Task<ITextBitmap> GenerateAsync(SKBitmap bitmap);
+        Task<ITxTextBitmap> GenerateAsync(SKBitmap bitmap);
     }
 }

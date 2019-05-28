@@ -7,14 +7,14 @@ using Texart.Api;
 
 namespace Texart.Builtin.Generators
 {
-    internal abstract class TextBitmapGeneratorBase : ITextBitmapGenerator
+    internal abstract class TxTextBitmapGeneratorBase : ITxTextBitmapGenerator
     {
         /// <summary>
         /// The constructor that should be called from derived types.
         /// </summary>
         /// <param name="characters">The character set to use.</param>
-        /// <param name="pixelSamplingRatio"><see cref="ITextBitmapGenerator.PixelSamplingRatio"/></param>
-        protected TextBitmapGeneratorBase(IList<char> characters, int pixelSamplingRatio)
+        /// <param name="pixelSamplingRatio"><see cref="ITxTextBitmapGenerator.PixelSamplingRatio"/></param>
+        protected TxTextBitmapGeneratorBase(IList<char> characters, int pixelSamplingRatio)
         {
             this.Characters = characters ?? throw new ArgumentNullException(nameof(characters));
             if (Characters.Count < 1)
@@ -36,7 +36,7 @@ namespace Texart.Builtin.Generators
         public int PixelSamplingRatio { get; protected set; }
 
         /// <inheritdocs/>
-        public async Task<ITextBitmap> GenerateAsync(SKBitmap bitmap)
+        public async Task<ITxTextBitmap> GenerateAsync(SKBitmap bitmap)
         {
             if (bitmap == null) { throw new ArgumentNullException(nameof(bitmap)); }
             if (bitmap.Width % this.PixelSamplingRatio != 0 || bitmap.Height % this.PixelSamplingRatio != 0)
@@ -52,8 +52,8 @@ namespace Texart.Builtin.Generators
         /// </summary>
         /// <param name="bitmap">The image to generate text data from.</param>
         /// <returns>The generated text data.</returns>
-        /// <see cref="ITextBitmapGenerator.GenerateAsync"/>
-        public abstract Task<ITextBitmap> DoGenerateTextAsync(SKBitmap bitmap);
+        /// <see cref="ITxTextBitmapGenerator.GenerateAsync"/>
+        public abstract Task<ITxTextBitmap> DoGenerateTextAsync(SKBitmap bitmap);
 
         /// <summary>
         /// Gets the width for the given bitmap adjusted for the sampling ratio.

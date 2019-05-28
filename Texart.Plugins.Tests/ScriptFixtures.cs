@@ -50,7 +50,7 @@ namespace Texart.Plugins.Tests
         /// <param name="fixture">Fixture number.</param>
         /// <param name="relativePath">The relative path from the fixture directory.</param>
         /// <returns>Loaded script.</returns>
-        public static async Task<PluginScriptCompilation<IPlugin>> LoadFrom(int fixture, string relativePath)
+        public static async Task<PluginScriptCompilation<ITxPlugin>> LoadFrom(int fixture, string relativePath)
         {
             var path = GetPath(fixture, relativePath);
             if (!relativePath.EndsWith(ScriptingConstants.TexartScriptFileSuffix))

@@ -7,18 +7,18 @@ using System.Collections.Immutable;
 using SkiaSharp;
 using Texart.Api;
 
-sealed class DummyPlugin : IPlugin
+sealed class DummyPlugin : ITxPlugin
 {
     public IEnumerable<string> AvailableGenerators => ImmutableArray<string>.Empty;
 
-    public TxFactory<ITextBitmapGenerator, TxArguments> LookupGenerator(string name)
+    public TxFactory<ITxTextBitmapGenerator, TxArguments> LookupGenerator(string name)
     {
         throw new NotImplementedException();
     }
 
     public IEnumerable<string> AvailableRenderers => ImmutableArray<string>.Empty;
 
-    public TxFactory<ITextBitmapRenderer, TxArguments> LookupRenderer(string name)
+    public TxFactory<ITxTextBitmapRenderer, TxArguments> LookupRenderer(string name)
     {
         throw new NotImplementedException();
     }

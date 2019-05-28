@@ -6,7 +6,7 @@ using System.Diagnostics;
 namespace Texart.Api
 {
     /// <summary>
-    /// A <see cref="TxArguments"/> is used to pass arguments to <see cref="IPlugin"/>. The keys and values are
+    /// A <see cref="TxArguments"/> is used to pass arguments to <see cref="ITxPlugin"/>. The keys and values are
     /// both stored as <see cref="string"/>.
     /// Accessor methods, such as <see cref="GetValue{T}(string,TryParseFunc{T},T)"/> and
     /// <see cref="TryGetValue{T}(string,out T, TryParseFunc{T}"/> are provided to extract and parse values to any type.

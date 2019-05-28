@@ -12,7 +12,7 @@ namespace Texart
             using (var output = File.OpenWrite("../../../../meme.gen.png"))
             {
                 var bitmap = TxContract.NonNull(SKBitmap.Decode("../../../../meme.jpg"));
-                IPlugin builtinPlugin = new Builtin.Plugin();
+                ITxPlugin builtinPlugin = new Builtin.Plugin();
                 
                 var textBitmapGenerator = builtinPlugin.LookupGenerator("BrightnessBasedBitmapGenerator")(TxArguments.Empty);
                 var textBitmap = await textBitmapGenerator.GenerateAsync(bitmap);
