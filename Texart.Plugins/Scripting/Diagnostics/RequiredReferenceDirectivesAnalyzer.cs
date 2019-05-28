@@ -37,7 +37,7 @@ namespace Texart.Plugins.Scripting.Diagnostics
         /// See <see cref="DiagnosticDescriptor.MessageFormat"/>.
         /// </summary>
         internal const string ScriptMustReferenceFormat =
-            @"Texart script must reference one of {0} before other code. Add '#r ""<reference>""' at the top of the file.";
+            @"Texart script must reference {0} before other code. Add '#r ""<reference>""' at the top of the file.";
 
         /// <summary>
         /// See <see cref="DiagnosticDescriptor.MessageFormat"/>.
@@ -227,13 +227,23 @@ namespace Texart.Plugins.Scripting.Diagnostics
             references.Select(reference => $"* {FormatReference(reference)}");
 
         /// <summary>
-        /// Formats multiple references as a comma-delimited inline list of assembly names.
+        /// Formats multiple references as an inline list of assembly names.
         /// </summary>
         /// <param name="references">The reference file names.</param>
         /// <returns>The formatted directive code.</returns>
         /// <seealso cref="Quote"/>
-        private static string FormatInlineReferences(IEnumerable<string> references) =>
-            string.Join(", ", references.Select(Quote));
+        private static string FormatInlineReferences(ICollection<string> references)
+        {
+            switch (references.Count)
+            {
+                case 0:
+                    return string.Empty;
+                case 1:
+                    return Quote(references.First());
+                default:
+                    return $"one of {string.Join(", ", references.Select(Quote))}";
+            }
+        }
 
         /// <summary>
         /// Wraps <paramref name="s"/> in quotes, <c>"</c>.

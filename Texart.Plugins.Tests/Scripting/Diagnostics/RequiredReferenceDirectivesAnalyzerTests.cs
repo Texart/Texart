@@ -154,7 +154,7 @@ namespace Foo {}";
                 {
                     Id = DiagnosticConstants.TexartReferenceDirectiveAnalyzerId,
                     Message = string.Format(
-                        RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, @"""A.dll"", ""B.dll"", ""C.dll"""),
+                        RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, @"one of ""A.dll"", ""B.dll"", ""C.dll"""),
                     Severity = DiagnosticSeverity.Error,
                     Locations = new[] {new DiagnosticResultLocation(string.Empty, 2, 1)}
                 },
@@ -170,7 +170,7 @@ namespace Foo {}";
                 {
                     Id = DiagnosticConstants.TexartReferenceDirectiveAnalyzerId,
                     Message = string.Format(
-                        RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, @"""B.dll"", ""C.dll"""),
+                        RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, @"one of ""B.dll"", ""C.dll"""),
                     Severity = DiagnosticSeverity.Error,
                     Locations = new[] {new DiagnosticResultLocation(string.Empty, 4, 1)}
                 },
@@ -235,7 +235,7 @@ namespace Foo {}";
                 {
                     Id = DiagnosticConstants.TexartReferenceDirectiveAnalyzerId,
                     Message = string.Format(
-                        RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, @"""B.dll"", ""C.dll"""),
+                        RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, @"one of ""B.dll"", ""C.dll"""),
                     Severity = DiagnosticSeverity.Error,
                     Locations = new[] { new DiagnosticResultLocation(string.Empty, 3, 1) }
                 },
@@ -264,7 +264,7 @@ namespace Foo {}";
                 {
                     Id = DiagnosticConstants.TexartReferenceDirectiveAnalyzerId,
                     Message = string.Format(
-                        RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, @"""B.dll"", ""C.dll"""),
+                        RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, @"one of ""B.dll"", ""C.dll"""),
                     Severity = DiagnosticSeverity.Error,
                     Locations = new[] { new DiagnosticResultLocation(string.Empty, 3, 1) }
                 },
