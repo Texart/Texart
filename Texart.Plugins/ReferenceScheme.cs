@@ -86,7 +86,7 @@ namespace Texart.Plugins
                 throw new ArgumentException($"{nameof(scheme)} is not valid: {scheme}");
             }
 
-            this.Scheme = scheme.ToLower();
+            Scheme = scheme.ToLower();
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Texart.Plugins
         /// <returns>the path without this scheme</returns>
         public string NormalizePath(string path)
         {
-            Debug.Assert(this.Matches(path));
+            Debug.Assert(Matches(path));
             return path.Substring(SchemePrefix.Length);
         }
         /// <summary>

@@ -18,7 +18,7 @@ namespace Texart.Builtin
         private readonly IDictionary<string, TxFactory<ITextBitmapGenerator, Lazy<JToken>>> _generators =
             new Dictionary<string, TxFactory<ITextBitmapGenerator, Lazy<JToken>>>
             {
-                { typeof(BrightnessBasedBitmapGenerator).Name, BrightnessBasedBitmapGenerator.Create },
+                { typeof(BrightnessBasedBitmapGenerator).Name, BrightnessBasedBitmapGenerator.Create }
             };
         /// <summary>
         /// The default generator when the given name is <c>null</c>.

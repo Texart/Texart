@@ -21,8 +21,8 @@ namespace Texart.Plugins.Scripting
         /// <param name="resolversByScheme">The lookup table for different schemes.</param>
         public MetadataReferenceResolverDemux(MetadataReferenceResolver defaultResolver, ImmutableDictionary<ReferenceScheme, MetadataReferenceResolver> resolversByScheme)
         {
-            this._defaultResolver = defaultResolver ?? throw new ArgumentNullException(nameof(defaultResolver));
-            this._resolversByScheme = resolversByScheme ?? throw new ArgumentNullException(nameof(resolversByScheme));
+            _defaultResolver = defaultResolver ?? throw new ArgumentNullException(nameof(defaultResolver));
+            _resolversByScheme = resolversByScheme ?? throw new ArgumentNullException(nameof(resolversByScheme));
         }
 
         /// <inheritdoc />
@@ -67,8 +67,8 @@ namespace Texart.Plugins.Scripting
             }
             switch (other)
             {
-                case MetadataReferenceResolverDemux resolver when resolver.GetType() == this.GetType():
-                    return this.Equals(resolver);
+                case MetadataReferenceResolverDemux resolver when resolver.GetType() == GetType():
+                    return Equals(resolver);
                 default:
                     return false;
             }

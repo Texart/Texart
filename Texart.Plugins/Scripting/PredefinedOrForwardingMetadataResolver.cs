@@ -54,7 +54,7 @@ namespace Texart.Plugins.Scripting
         public PredefinedOrForwardingMetadataResolver(MetadataReferenceResolver underlyingResolver)
         {
             Debug.Assert(underlyingResolver != null);
-            this._underlyingResolver = underlyingResolver;
+            _underlyingResolver = underlyingResolver;
         }
 
         /// <inheritdoc />

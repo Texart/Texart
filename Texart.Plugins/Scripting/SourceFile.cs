@@ -23,7 +23,7 @@ namespace Texart.Plugins.Scripting
         /// </summary>
         /// <param name="filePath">The path of the source file.</param>
         /// <param name="text">The text in the source file.</param>
-        public SourceFile(string filePath, string text)
+        private SourceFile(string filePath, string text)
         {
             FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
             Text = text ?? throw new ArgumentNullException(nameof(text));

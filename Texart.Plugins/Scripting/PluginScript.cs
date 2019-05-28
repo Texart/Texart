@@ -23,7 +23,7 @@ namespace Texart.Plugins.Scripting
     /// Wrapper around <see cref="Script{T}"/>, flavored for Texart.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class PluginScript<T>
+    public sealed class PluginScript<T>
     {
         /// <summary>
         /// The pre-configured <see cref="Microsoft.CodeAnalysis.Scripting.Script"/> instance.
@@ -37,7 +37,7 @@ namespace Texart.Plugins.Scripting
         internal PluginScript(Script<T> script)
         {
             Debug.Assert(script != null);
-            this.Script = script;
+            Script = script;
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Texart.Plugins.Scripting
     /// </summary>
     /// <typeparam name="T">The return type of the underling <see cref="Script{T}"/></typeparam>
     /// <seealso cref="PluginScript{T}.Compile"/>
-    public class PluginScriptCompilation<T>
+    public sealed class PluginScriptCompilation<T>
     {
         /// <summary>
         /// The diagnostics of compiling <see cref="Script"/>.
@@ -163,9 +163,9 @@ namespace Texart.Plugins.Scripting
             Debug.Assert(script != null);
             Debug.Assert(customDiagnostics != null);
             Debug.Assert(defaultDiagnostics != null);
-            this.Script = script;
-            this.CustomDiagnostics = customDiagnostics;
-            this.DefaultDiagnostics = defaultDiagnostics;
+            Script = script;
+            CustomDiagnostics = customDiagnostics;
+            DefaultDiagnostics = defaultDiagnostics;
         }
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace Texart.Plugins.Scripting
         /// The default optimization level to compile Texart scripts.
         /// </summary>
         /// <seealso cref="ScriptOptions.OptimizationLevel"/>
-        internal static OptimizationLevel DefaultOptimizationLevel =>
+        private static OptimizationLevel DefaultOptimizationLevel =>
 #if DEBUG
             OptimizationLevel.Debug;
 #else
@@ -247,7 +247,7 @@ namespace Texart.Plugins.Scripting
         /// Whether or not debug info will be available in the compilation for Texart scripts.
         /// </summary>
         /// <seealso cref="ScriptOptions.EmitDebugInformation"/>
-        internal static bool DefaultEmitDebugInformation =>
+        private static bool DefaultEmitDebugInformation =>
 #if DEBUG
             true;
 #else
@@ -257,26 +257,26 @@ namespace Texart.Plugins.Scripting
         /// Whether the <c>unsafe</c> keyword is allowed.
         /// </summary>
         /// <seealso cref="ScriptOptions.AllowUnsafe"/>
-        internal static bool DefaultAllowUnsafe => false;
+        private static bool DefaultAllowUnsafe => false;
         /// <summary>
         /// Whether overflow is checked by default (<c>checked { }</c> or <c>unchecked { }</c>).
         /// </summary>
         /// <seealso cref="ScriptOptions.CheckOverflow"/>
-        internal static bool DefaultCheckOverflow => false;
+        private static bool DefaultCheckOverflow => false;
         /// <summary>
         /// Warning level of compiler. <c>4</c> is the max.
         /// </summary>
         /// <seealso cref="ScriptOptions.WarningLevel"/>
-        internal static int DefaultWarningLevel => 4;
+        private static int DefaultWarningLevel => 4;
         /// <summary>
         /// The file encoding of the Texart script source file.
         /// </summary>
         /// <seealso cref="ScriptOptions.FileEncoding"/>
-        internal static Encoding DefaultFileEncoding => Encoding.UTF8;
+        private static Encoding DefaultFileEncoding => Encoding.UTF8;
         /// <summary>
         /// Extra assemblies (and transitive dependencies) to load in Texart scripts.
         /// </summary>
-        internal static Assembly[] DefaultExtraAssemblies => new Assembly[]
+        private static Assembly[] DefaultExtraAssemblies => new Assembly[]
         {
             // The Texart Api assembly is now loaded via `TexartApiScriptMetadataResolver`.
             // This is just for extra goodies now - non-essential.

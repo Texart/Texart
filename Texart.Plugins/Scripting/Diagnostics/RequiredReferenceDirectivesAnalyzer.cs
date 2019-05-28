@@ -280,8 +280,8 @@ namespace Texart.Plugins.Scripting.Diagnostics
         {
             Debug.Assert(requiredReferences != null);
             Debug.Assert(texartScriptFileSuffix != null);
-            this._requiredReferences = requiredReferences;
-            this._texartScriptFileSuffix = texartScriptFileSuffix;
+            _requiredReferences = requiredReferences;
+            _texartScriptFileSuffix = texartScriptFileSuffix;
         }
     }
 }
