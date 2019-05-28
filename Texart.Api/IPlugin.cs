@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
 
 namespace Texart.Api
 {
@@ -8,12 +6,9 @@ namespace Texart.Api
     /// A plugin represents a collection of named <see cref="ITextBitmapGenerator"/> and <see cref="ITextBitmapRenderer"/>.
     /// The plugin abstraction allows sharing these types across assembly boundaries.
     ///
-    /// A JSON value may be passed to the plugin if they contained types require additional arguments. The format of this
-    /// JSON value is implementation-defined.
-    ///
     /// Using types defined in the following contexts are unified by this interface:
     ///   * Within Texart code
-    ///   * Within a separately compiled assembly (this is what a "real plugin" is)
+    ///   * Within a separately compiled assembly
     ///   * Within a .tx.csx file that will be interpreted at runtime
     /// </summary>
     public interface IPlugin
@@ -25,17 +20,16 @@ namespace Texart.Api
         IEnumerable<string> AvailableGenerators { get; }
 
         /// <summary>
-        /// Returns a factory function that constructs an <see cref="ITextBitmapGenerator"/>
-        /// identified by the given named. The factory function also accepts a JSON value that
-        /// can be used to pass arguments required to create the instance. The format of this
-        /// JSON value is implementation-defined.
+        /// Returns a factory function that constructs an <see cref="ITextBitmapGenerator"/> identified by
+        /// <paramref name="name"/>. The factory function accepts a <see cref="TxArguments"/> which can be used
+        /// configure the instance. The format of the arguments is implementation-defined.
         /// </summary>
         /// <param name="name">
         ///     The name to look up. Check <see cref="AvailableGenerators"/>.
         ///     If a plugin exports a "default" type, use <c>null</c>.
         /// </param>
         /// <returns>Factory function for <see cref="ITextBitmapGenerator"/></returns>
-        TxFactory<ITextBitmapGenerator, Lazy<JToken>> LookupGenerator(string name);
+        TxFactory<ITextBitmapGenerator, TxArguments> LookupGenerator(string name);
 
         /// <summary>
         /// Available names of <see cref="ITextBitmapRenderer"/>. Every name listed here
@@ -44,16 +38,15 @@ namespace Texart.Api
         IEnumerable<string> AvailableRenderers { get; }
 
         /// <summary>
-        /// Returns a factory function that constructs an <see cref="ITextBitmapRenderer"/>
-        /// identified by the given named. The factory function also accepts a JSON value that
-        /// can be used to pass arguments required to create the instance. The format of this
-        /// JSON value is implementation-defined.
+        /// Returns a factory function that constructs an <see cref="ITextBitmapRenderer"/> identified by
+        /// <paramref name="name"/>. The factory function accepts a <see cref="TxArguments"/> which can be used
+        /// configure the instance. The format of the arguments is implementation-defined.
         /// </summary>
         /// <param name="name">
         ///     The name to look up. Check <see cref="AvailableRenderers"/>.
         ///     If a plugin exports a "default" type, use <c>null</c>.
         /// </param>
         /// <returns>Factory function for <see cref="ITextBitmapRenderer"/></returns>
-        TxFactory<ITextBitmapRenderer, Lazy<JToken>> LookupRenderer(string name);
+        TxFactory<ITextBitmapRenderer, TxArguments> LookupRenderer(string name);
     }
 }

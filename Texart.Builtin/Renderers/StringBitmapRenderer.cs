@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using Texart.Builtin.Internal;
 using Texart.Api;
 
@@ -70,11 +69,11 @@ namespace Texart.Builtin.Renderers
         /// <summary>
         /// Factory function for <see cref="Plugin"/>.
         /// </summary>
-        /// <param name="json">Input arguments.</param>
+        /// <param name="args">Input arguments.</param>
         /// <returns>Constructed instance.</returns>
-        public static StringBitmapRenderer Create(Lazy<JToken> json)
+        public static StringBitmapRenderer Create(TxArguments args)
         {
-            // TODO: use json
+            // TODO: use args
             return new StringBitmapRenderer();
         }
     }

@@ -1,18 +1,20 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 
 namespace Texart.Api
 {
     /// <summary>
-    /// A <see cref="TxArgumentDictionary"/> is used to pass arguments to <see cref="IPlugin"/>. The keys and values are
+    /// A <see cref="TxArguments"/> is used to pass arguments to <see cref="IPlugin"/>. The keys and values are
     /// both stored as <see cref="string"/>.
     /// Accessor methods, such as <see cref="GetValue{T}(string,TryParseFunc{T},T)"/> and
     /// <see cref="TryGetValue{T}(string,out T, TryParseFunc{T}"/> are provided to extract and parse values to any type.
     /// Helper methods are provided for accessing primitive types (<see cref="Type.IsPrimitive"/>) and
     /// <see cref="string"/>.
+    /// A <see cref="TxArguments"/> is immutable.
     /// </summary>
-    public sealed class TxArgumentDictionary : IEquatable<TxArgumentDictionary>
+    public sealed class TxArguments : IEquatable<TxArguments>
     {
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="sbyte"/>. If the key is not found, or the
@@ -867,7 +869,7 @@ namespace Texart.Api
         }
 
         /// <summary>
-        /// The result type of a lookup operation on <see cref="TxArgumentDictionary"/>.
+        /// The result type of a lookup operation on <see cref="TxArguments"/>.
         /// </summary>
         /// <see cref="LookupResult"/>
         public enum LookupResultType
@@ -887,7 +889,7 @@ namespace Texart.Api
             ParsingError
         }
         /// <summary>
-        /// The result of a lookup operation on <see cref="TxArgumentDictionary"/>. This type is implicitly convertible
+        /// The result of a lookup operation on <see cref="TxArguments"/>. This type is implicitly convertible
         /// to <c>bool</c>.
         /// </summary>
         public readonly struct LookupResult : IEquatable<LookupResult>
@@ -976,16 +978,32 @@ namespace Texart.Api
         public ImmutableDictionary<string, string> AsImmutableDictionary { get; }
         
         /// <summary>
-        /// Creates a <see cref="TxArgumentDictionary"/> with the provided arguments dictionary.
+        /// Creates a <see cref="TxArguments"/> with the provided arguments dictionary.
         /// </summary>
         /// <param name="arguments">The underlying arguments dictionary.</param>
-        public TxArgumentDictionary(ImmutableDictionary<string, string> arguments)
+        public TxArguments(ImmutableDictionary<string, string> arguments)
         {
             AsImmutableDictionary = arguments ?? throw new ArgumentNullException(nameof(arguments));
         }
+        
+        /// <summary>
+        /// Creates a <see cref="TxArguments"/> with the provided arguments dictionary.
+        /// </summary>
+        /// <param name="arguments">The underlying arguments dictionary.</param>
+        public TxArguments(Dictionary<string, string> arguments)
+        {
+            AsImmutableDictionary = arguments?.ToImmutableDictionary() ?? throw new ArgumentNullException(nameof(arguments));
+        }
+        
+        /// <summary>
+        /// An empty <see cref="TxArguments"/> instance.
+        /// </summary>
+        /// <seealso cref="ImmutableDictionary{TKey,TValue}.Empty"/>
+        public static readonly TxArguments Empty = new TxArguments(
+            ImmutableDictionary<string, string>.Empty);
 
         /// <inheritdoc cref="IEquatable{T}.Equals(T)"/>
-        public bool Equals(TxArgumentDictionary other)
+        public bool Equals(TxArguments other)
         {
             if (other is null) return false;
             return ReferenceEquals(this, other) || AsImmutableDictionary.Equals(other.AsImmutableDictionary);
@@ -993,13 +1011,13 @@ namespace Texart.Api
         
         /// <inheritdoc cref="object.Equals(object)"/>
         public override bool Equals(object obj) =>
-            ReferenceEquals(this, obj) || obj is TxArgumentDictionary other && Equals(other);
+            ReferenceEquals(this, obj) || obj is TxArguments other && Equals(other);
 
         /// <inheritdoc cref="object.GetHashCode"/>
         public override int GetHashCode() => AsImmutableDictionary.GetHashCode();
         
         /// <summary>
-        /// Compares two <see cref="TxArgumentDictionary"/>s for equality. Two <see cref="TxArgumentDictionary"/>s are
+        /// Compares two <see cref="TxArguments"/>s for equality. Two <see cref="TxArguments"/>s are
         /// only considered equal iff <see cref="AsImmutableDictionary"/> are equal.
         /// </summary>
         /// <param name="left">The left-hand side of the equality.</param>
@@ -1008,10 +1026,10 @@ namespace Texart.Api
         ///     <c>true</c> if <paramref name="left"/> is equal to <paramref name="right"/>,
         ///     <c>false</c> otherwise.
         /// </returns>
-        public static bool operator ==(TxArgumentDictionary left, TxArgumentDictionary right) => Equals(left, right);
+        public static bool operator ==(TxArguments left, TxArguments right) => Equals(left, right);
 
         /// <summary>
-        /// Compares two <see cref="TxArgumentDictionary"/>s for inequality. Two <see cref="TxArgumentDictionary"/>s are
+        /// Compares two <see cref="TxArguments"/>s for inequality. Two <see cref="TxArguments"/>s are
         /// only considered unequal iff <see cref="AsImmutableDictionary"/> are unequal.
         /// </summary>
         /// <param name="left">The left-hand side of the inequality.</param>
@@ -1020,6 +1038,6 @@ namespace Texart.Api
         ///     <c>false</c> if <paramref name="left"/> is equal to <paramref name="right"/>,
         ///     <c>true</c> otherwise.
         /// </returns>
-        public static bool operator !=(TxArgumentDictionary left, TxArgumentDictionary right) => !(left == right);
+        public static bool operator !=(TxArguments left, TxArguments right) => !(left == right);
     }
 }
