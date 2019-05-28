@@ -18,7 +18,7 @@ namespace Texart.Plugins.Scripting.Diagnostics
         public const string TexartDiagnosticIdPrefix = "TX";
 
         /// <summary>
-        /// The <see cref="DiagnosticDescriptor.Id"/> for <see cref="RequiredReferencesDirectiveAnalyzer"/>.
+        /// The <see cref="DiagnosticDescriptor.Id"/> for <see cref="RequiredReferenceDirectivesAnalyzer"/>.
         /// </summary>
         public const string TexartReferenceDirectiveAnalyzerId = "TX1001";
     }

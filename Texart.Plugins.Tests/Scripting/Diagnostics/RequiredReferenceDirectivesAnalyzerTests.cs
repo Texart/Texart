@@ -9,12 +9,12 @@ using Texart.Plugins.Scripting.Diagnostics;
 
 namespace Texart.Plugins.Tests.Scripting.Diagnostics
 {
-    internal class RequiredReferencesDirectiveAnalyzerTests : DiagnosticVerifier
+    internal class RequiredReferenceDirectivesAnalyzerTests : DiagnosticVerifier
     {
         private static ImmutableArray<string> RequiredReferences => ImmutableArray.Create(
             "B.dll", "A.dll", "C.dll");
         protected override DiagnosticAnalyzer CSharpDiagnosticAnalyzer =>
-            new RequiredReferencesDirectiveAnalyzer(RequiredReferences, string.Empty);
+            new RequiredReferenceDirectivesAnalyzer(RequiredReferences, string.Empty);
         protected override LanguageVersion CSharpLanguageVersion => PluginScript.DefaultLanguageVersion;
         protected override SourceCodeKind CSharpSourceCodeKind => SourceCodeKind.Script;
 
@@ -52,7 +52,7 @@ namespace Texart.Plugins.Tests.Scripting.Diagnostics
             {
                 Id = DiagnosticConstants.TexartReferenceDirectiveAnalyzerId,
                 Message = string.Format(
-                    RequiredReferencesDirectiveAnalyzer.ScriptMustReferenceFormat, "B.dll"),
+                    RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, "B.dll"),
                 Severity = DiagnosticSeverity.Error,
                 Locations = new[] { new DiagnosticResultLocation(string.Empty, 4, 4) }
             };
@@ -70,7 +70,7 @@ namespace Texart.Plugins.Tests.Scripting.Diagnostics
             var expected = new DiagnosticResult
             {
                 Id = DiagnosticConstants.TexartReferenceDirectiveAnalyzerId,
-                Message = RequiredReferencesDirectiveAnalyzer.LoadDirectiveNotAllowedBeforeFormat,
+                Message = RequiredReferenceDirectivesAnalyzer.LoadDirectiveNotAllowedBeforeFormat,
                 Severity = DiagnosticSeverity.Error,
                 Locations = new[] { new DiagnosticResultLocation(string.Empty, 3, 1) }
             };
@@ -89,7 +89,7 @@ namespace Texart.Plugins.Tests.Scripting.Diagnostics
                 new DiagnosticResult
                 {
                     Id = DiagnosticConstants.TexartReferenceDirectiveAnalyzerId,
-                    Message = RequiredReferencesDirectiveAnalyzer.LoadDirectiveNotAllowedBeforeFormat,
+                    Message = RequiredReferenceDirectivesAnalyzer.LoadDirectiveNotAllowedBeforeFormat,
                     Severity = DiagnosticSeverity.Error,
                     Locations = new[] { new DiagnosticResultLocation(string.Empty, 3, 1) }
                 },
@@ -97,7 +97,7 @@ namespace Texart.Plugins.Tests.Scripting.Diagnostics
                 {
                     Id = DiagnosticConstants.TexartReferenceDirectiveAnalyzerId,
                     Message = string.Format(
-                        RequiredReferencesDirectiveAnalyzer.ScriptMustReferenceFormat, "C.dll"),
+                        RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, "C.dll"),
                     Severity = DiagnosticSeverity.Error,
                     Locations = new[] { new DiagnosticResultLocation(string.Empty, 4, 11) }
                 },
@@ -115,7 +115,7 @@ namespace Texart.Plugins.Tests.Scripting.Diagnostics
             {
                 Id = DiagnosticConstants.TexartReferenceDirectiveAnalyzerId,
                 Message = string.Format(
-                    RequiredReferencesDirectiveAnalyzer.ScriptMustReferenceFormat, "C.dll"),
+                    RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, "C.dll"),
                 Severity = DiagnosticSeverity.Error,
                 Locations = new[] { new DiagnosticResultLocation(string.Empty, 3, 11) }
             };
@@ -136,7 +136,7 @@ using System;
                 {
                     Id = DiagnosticConstants.TexartReferenceDirectiveAnalyzerId,
                     Message = string.Format(
-                        RequiredReferencesDirectiveAnalyzer.ScriptMustReferenceFormat, "A.dll"),
+                        RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, "A.dll"),
                     Severity = DiagnosticSeverity.Error,
                     Locations = new[] { new DiagnosticResultLocation(string.Empty, 2, 11) }
                 },
@@ -144,7 +144,7 @@ using System;
                 {
                     Id = DiagnosticConstants.TexartReferenceDirectiveAnalyzerId,
                     Message = string.Format(
-                        RequiredReferencesDirectiveAnalyzer.ScriptMustReferenceFormat, "B.dll"),
+                        RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, "B.dll"),
                     Severity = DiagnosticSeverity.Error,
                     Locations = new[] { new DiagnosticResultLocation(string.Empty, 2, 11) }
                 },
@@ -152,7 +152,7 @@ using System;
                 {
                     Id = DiagnosticConstants.TexartReferenceDirectiveAnalyzerId,
                     Message = string.Format(
-                        RequiredReferencesDirectiveAnalyzer.ScriptMustReferenceFormat, "C.dll"),
+                        RequiredReferenceDirectivesAnalyzer.ScriptMustReferenceFormat, "C.dll"),
                     Severity = DiagnosticSeverity.Error,
                     Locations = new[] { new DiagnosticResultLocation(string.Empty, 2, 11) }
                 },

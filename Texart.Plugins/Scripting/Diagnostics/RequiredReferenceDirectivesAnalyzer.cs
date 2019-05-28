@@ -13,10 +13,10 @@ namespace Texart.Plugins.Scripting.Diagnostics
     /// A <see cref="DiagnosticAnalyzer"/> for C# that ensures that all the required assembly references are present.
     /// This diagnostic is only available for <c>.tx.csx</c> files.
     /// </summary>
-    /// <seealso cref="RequiredReferencesDirectiveAnalyzer.RequiredReferences"/>
+    /// <seealso cref="RequiredReferenceDirectivesAnalyzer.RequiredReferences"/>
     /// <seealso cref="ScriptingConstants.TexartScriptFileSuffix"/>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class RequiredReferencesDirectiveAnalyzer : DiagnosticAnalyzer
+    public class RequiredReferenceDirectivesAnalyzer : DiagnosticAnalyzer
     {
         /// <summary>
         /// The file names that MUST be <c>#r</c>'d at the top of Texart script files.
@@ -177,10 +177,10 @@ namespace Texart.Plugins.Scripting.Diagnostics
         private readonly string _texartScriptFileSuffix;
 
         /// <summary>
-        /// Constructs a <see cref="RequiredReferencesDirectiveAnalyzer"/> that checks for <see cref="RequiredReferences"/>
+        /// Constructs a <see cref="RequiredReferenceDirectivesAnalyzer"/> that checks for <see cref="RequiredReferences"/>
         /// in files ending with <see cref="ScriptingConstants.TexartScriptFileSuffix"/>.
         /// </summary>
-        public RequiredReferencesDirectiveAnalyzer() :
+        public RequiredReferenceDirectivesAnalyzer() :
             this(RequiredReferences, ScriptingConstants.TexartScriptFileSuffix)
         {
         }
@@ -191,7 +191,7 @@ namespace Texart.Plugins.Scripting.Diagnostics
         /// </summary>
         /// <param name="requiredReferences">Custom requirements. See <see cref="RequiredReferences"/>.</param>
         /// <param name="texartScriptFileSuffix">Custom script suffix. See <see cref="ScriptingConstants.TexartScriptFileSuffix"/>.</param>
-        internal RequiredReferencesDirectiveAnalyzer(ImmutableArray<string> requiredReferences, string texartScriptFileSuffix)
+        internal RequiredReferenceDirectivesAnalyzer(ImmutableArray<string> requiredReferences, string texartScriptFileSuffix)
         {
             Debug.Assert(requiredReferences != null);
             Debug.Assert(texartScriptFileSuffix != null);
