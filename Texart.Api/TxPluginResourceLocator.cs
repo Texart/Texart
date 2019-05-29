@@ -527,7 +527,7 @@ namespace Texart.Api
             if (!separatorFound)
             {
                 var exception = new FormatException(
-                    $"URI path did not contain assembly-resource separator ('{AssemblyResourceSeparator})': {path}");
+                    $"URI path did not contain assembly-resource separator ('{AssemblyResourceSeparator}'): {path}");
                 return (exception, default);
             }
 

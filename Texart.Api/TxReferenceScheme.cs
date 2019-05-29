@@ -80,7 +80,7 @@ namespace Texart.Api
         {
             if (!IsValidScheme(scheme))
             {
-                throw new ArgumentException($"{nameof(scheme)} is not valid: {scheme}");
+                throw new FormatException($"{nameof(scheme)} is not valid: {scheme}");
             }
 
             Scheme = scheme.ToLower();
@@ -147,6 +147,19 @@ namespace Texart.Api
         /// <param name="rhs">The right hand side of the inequality.</param>
         /// <returns>Whether the two instances refer to different schemes or not.</returns>
         public static bool operator !=(TxReferenceScheme lhs, TxReferenceScheme rhs) => !(lhs == rhs);
+
+        /// <summary>
+        /// A <see cref="FormatException"/> is thrown when an attempt is made to create <see cref="TxReferenceScheme"/>
+        /// with an invalid string.
+        /// </summary>
+        public sealed class FormatException : System.FormatException
+        {
+            /// <summary>
+            /// Creates an exception with <see cref="Exception.Message"/> set to <paramref name="message"/>.
+            /// </summary>
+            /// <param name="message">The exception message.</param>
+            internal FormatException(string message) : base(message) { }
+        }
     }
 
 

@@ -100,10 +100,7 @@ namespace Texart.Api.Tests
 
         private static void AssertInvalidScheme(string scheme)
         {
-            var ex = Assert.Throws<ArgumentException>(() => new TxReferenceScheme(scheme));
-            Assert.IsTrue(
-                ex.Message.StartsWith("scheme is not valid"),
-                "Exception was thrown but not because of invalid scheme");
+            Assert.Throws<TxReferenceScheme.FormatException>(() => new TxReferenceScheme(scheme));
         }
 
         [Test]
