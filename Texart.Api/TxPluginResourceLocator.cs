@@ -89,9 +89,10 @@ namespace Texart.Api
         /// <summary>
         /// Character that is used to partition the URI path into <see cref="AssemblyPath"/> and <see cref="ResourcePath"/>.
         /// The choice of <c>:</c> is justified by its absence in file names (reasonably). Note that many user agents allow
-        /// <c>:</c> in URI paths (e.g. web browsers). Paths containing <c>:</c> <i>may</i> need to be encoded (<c>%3A</c>
+        /// <c>:</c> in URI paths (e.g. web browsers). Paths containing <c>:</c> <i>may</i> need to be URI-encoded (<c>%3A</c>
         /// in this case).
         /// </summary>
+        /// <seealso cref="Uri.EscapeUriString"/>
         public const char AssemblyResourceSeparator = ':';
 
         /// <summary>
@@ -100,7 +101,7 @@ namespace Texart.Api
         /// </summary>
         /// <param name="uri">The URI to build from.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="uri"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">If the URI is not valid.</exception>
+        /// <exception cref="FormatException">If the URI is not valid.</exception>
         public static TxPluginResourceLocator Of(Uri uri) => new TxPluginResourceLocator(uri);
 
         /// <summary>
@@ -109,7 +110,7 @@ namespace Texart.Api
         /// </summary>
         /// <param name="uri">The URI to build from.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="uri"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">If the URI is not valid.</exception>
+        /// <exception cref="FormatException">If the URI is not valid.</exception>
         /// <seealso cref="Uri(string, UriKind)"/>
         public static TxPluginResourceLocator Of(string uri) => Of(new Uri(uri, UriKind.Absolute));
 
@@ -134,10 +135,10 @@ namespace Texart.Api
         /// <param name="relativeResource">The relative resource path. See <see cref="TxPluginResourceLocator.ResourcePath"/>.</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="relativeResource"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">If the relative resource path is not valid.</exception>
+        /// <exception cref="FormatException">If the relative resource path is not valid.</exception>
         public static RelativeResourceLocator OfRelativeResource(string relativeResource)
         {
-            var (checkFailedException, relative) = RelativeResourceLocator.CheckIsValidRelativePath(relativeResource);
+            var (checkFailedException, relative) = RelativeResourceLocator.CheckIsValidRelativeResourcePath(relativeResource);
             if (checkFailedException != null)
             {
                 throw checkFailedException;
@@ -155,7 +156,7 @@ namespace Texart.Api
         /// </returns>
         public static bool IsWellFormedRelativeResourceString(string relativeResource)
         {
-            var (checkFailedException, _) = RelativeResourceLocator.CheckIsValidRelativePath(relativeResource);
+            var (checkFailedException, _) = RelativeResourceLocator.CheckIsValidRelativeResourcePath(relativeResource);
             return checkFailedException == null;
         }
 
@@ -169,7 +170,7 @@ namespace Texart.Api
         ///     <paramref name="scheme"/>
         /// </returns>
         /// <exception cref="ArgumentNullException">If <paramref name="scheme"/> is <c>null</c></exception>
-        /// <exception cref="ArgumentException">If the scheme is not valid.</exception>
+        /// <exception cref="FormatException">If the scheme is not valid.</exception>
         public TxPluginResourceLocator WithScheme(string scheme) =>
             WithScheme(new TxReferenceScheme(scheme));
 
@@ -226,7 +227,7 @@ namespace Texart.Api
         ///     <paramref name="relativeResourceLocator"/>
         /// </returns>
         /// <exception cref="ArgumentNullException">If <paramref name="relativeResourceLocator"/> is <c>null</c></exception>
-        /// <exception cref="ArgumentException">If the resource path is not valid.</exception>
+        /// <exception cref="FormatException">If the resource path is not valid.</exception>
         public TxPluginResourceLocator WithRelativeResource(string relativeResourceLocator) =>
             WithRelativeResource(OfRelativeResource(relativeResourceLocator));
 
@@ -284,11 +285,19 @@ namespace Texart.Api
             /// <param name="relativePath">The relative URI path to check.</param>
             /// <returns>An exception if the URI is invalid, or <see cref="RelativeResourceLocator"/> if valid.</returns>
             /// <seealso cref="TxPluginResourceLocator.CheckIsValidPluginResourceUri"/>
-            internal static (ArgumentException, RelativeResourceLocator) CheckIsValidRelativePath(string relativePath)
+            internal static (Exception, RelativeResourceLocator) CheckIsValidRelativeResourcePath(string relativePath)
             {
                 if (relativePath == null)
                 {
                     return (new ArgumentNullException(nameof(relativePath)), default);
+                }
+
+                if (relativePath.Contains(AssemblyResourceSeparator))
+                {
+                    return (
+                        new FormatException(
+                            $"URI relative resource must not contain \"{AssemblyResourceSeparator}\": {relativePath}"),
+                        default);
                 }
 
                 // We temporarily prefix with a dummy character so that leading slashes don't get discarded by Uri
@@ -300,51 +309,43 @@ namespace Texart.Api
                 if (!Uri.TryCreate(prefixedRelativePath, UriKind.Relative, out var relativeUri) ||
                     !Uri.TryCreate(dummyBaseUri, relativeUri, out var absoluteUri))
                 {
-                    return (new ArgumentException($"URI path must be valid relative URI: {relativePath}"), default);
+                    return (new FormatException($"URI path must be valid relative URI: {relativePath}"), default);
                 }
                 Debug.Assert(absoluteUri.IsAbsoluteUri);
 
                 // Query check
                 if (!string.IsNullOrEmpty(absoluteUri.Query))
                 {
-                    return (new ArgumentException($"URI query is not allowed: {absoluteUri.Query}"), default);
+                    return (new FormatException($"URI query is not allowed: {absoluteUri.Query}"), default);
                 }
 
                 // Fragment check
                 if (!string.IsNullOrEmpty(absoluteUri.Fragment))
                 {
-                    return (new ArgumentException($"URI fragment is not allowed: {absoluteUri.Fragment}"), default);
+                    return (new FormatException($"URI fragment is not allowed: {absoluteUri.Fragment}"), default);
                 }
 
                 // Path check
                 var expectedPathPrefix = $"{UriPathSeparator}{dummyPrefixChar}";
                 var absolutePath = absoluteUri.AbsolutePath;
                 Debug.Assert(absolutePath.StartsWith(expectedPathPrefix));
-                var (computeRelativeException, relative) = ComputeRelative(absolutePath.Substring(expectedPathPrefix.Length));
-                if (computeRelativeException != null)
-                {
-                    return (computeRelativeException, null);
-                }
+                var relative = ComputeRelative(absolutePath.Substring(expectedPathPrefix.Length));
 
                 // All good!
                 return (null, relative);
             }
 
             /// <summary>
-            /// Creates a <see cref="RelativeResourceLocator"/> from URI path, or an <see cref="ArgumentException"/> on failure.
+            /// Creates a <see cref="RelativeResourceLocator"/> from URI path.
             /// </summary>
             /// <param name="path">The path to sanitize.</param>
             /// <returns>Computed relative resource path.</returns>
-            private static (ArgumentException, RelativeResourceLocator) ComputeRelative(string path)
+            private static RelativeResourceLocator ComputeRelative(string path)
             {
                 Debug.Assert(path != null);
-                // We must encode the assembly separator character since the last occurence is used to distinguish
-                // between assembly and resource segments.
-                Debug.Assert(AssemblyResourceSeparator == ':', "Update the encoded character below");
-                const string assemblyResourceSeparatorEncoded = @"%3A";
-                var sanitizedPath = path.Replace(AssemblyResourceSeparator.ToString(), assemblyResourceSeparatorEncoded);
-                var segments = sanitizedPath.Split(UriPathSeparator);
-                return (null, new RelativeResourceLocator(segments.ToImmutableArray()));
+                Debug.Assert(!path.Contains(AssemblyResourceSeparator));
+                return new RelativeResourceLocator(
+                    path.Split(UriPathSeparator).ToImmutableArray());
             }
 
             /// <inheritdoc cref="object.ToString"/>
@@ -423,7 +424,7 @@ namespace Texart.Api
         /// </summary>
         /// <param name="uri">The URI to check.</param>
         /// <returns>An exception if the URI is invalid, or <see cref="RelativeResourceLocator"/> if valid.</returns>
-        private static (ArgumentException, ComputedSegments) CheckIsValidPluginResourceUri(Uri uri)
+        private static (Exception, ComputedSegments) CheckIsValidPluginResourceUri(Uri uri)
         {
             //
             // Reference: https://tools.ietf.org/html/rfc3986#section-3
@@ -439,7 +440,7 @@ namespace Texart.Api
             if (uri == null) { return (new ArgumentNullException(nameof(uri)), default); }
             if (!uri.IsAbsoluteUri)
             {
-                return (new ArgumentException($"URI must be absolute: {uri}"), default);
+                return (new FormatException($"URI must be absolute: {uri}"), default);
             }
 
             // Scheme check
@@ -447,7 +448,7 @@ namespace Texart.Api
             // scheme      = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
             if (!TxReferenceScheme.IsValidScheme(uri.Scheme))
             {
-                return (new ArgumentException($"URI reference scheme is invalid: {uri.Scheme}"), default);
+                return (new FormatException($"URI reference scheme is invalid: {uri.Scheme}"), default);
             }
 
             // Authority check
@@ -455,19 +456,19 @@ namespace Texart.Api
             //   authority   = [ userinfo "@" ] host [ ":" port ]
             if (!string.IsNullOrEmpty(uri.Authority))
             {
-                return (new ArgumentException($"URI authority is not allowed: ${uri.UserInfo}"), default);
+                return (new FormatException($"URI authority is not allowed: ${uri.UserInfo}"), default);
             }
 
             // Query check
             if (!string.IsNullOrEmpty(uri.Query))
             {
-                return (new ArgumentException($"URI query is not allowed: {uri.Query}"), default);
+                return (new FormatException($"URI query is not allowed: {uri.Query}"), default);
             }
 
             // Fragment check
             if (!string.IsNullOrEmpty(uri.Fragment))
             {
-                return (new ArgumentException($"URI fragment is not allowed: {uri.Fragment}"), default);
+                return (new FormatException($"URI fragment is not allowed: {uri.Fragment}"), default);
             }
 
             // Path check
@@ -482,11 +483,11 @@ namespace Texart.Api
         }
 
         /// <summary>
-        /// Creates a <see cref="ComputedSegments"/> from segment parts, or an <see cref="ArgumentException"/> on failure.
+        /// Creates a <see cref="ComputedSegments"/> from segment parts, or an <see cref="Exception"/> on failure.
         /// </summary>
         /// <param name="path">The path to partition.</param>
         /// <returns>Computed partition.</returns>
-        private static (ArgumentException, ComputedSegments) ComputeSegments(string path)
+        private static (Exception, ComputedSegments) ComputeSegments(string path)
         {
             Debug.Assert(path != null);
             ReadOnlySpan<string> segments = path.Split(UriPathSeparator);
@@ -499,7 +500,7 @@ namespace Texart.Api
             var assemblySegments = new List<string>();
             var resourceSegments = new List<string>();
             bool separatorFound = false;
-            // reverse the segments - the partition is based on the last occurence of the separator
+            // reverse the segments: the partition of assembly path and resource path is based on the last occurence of the separator
             for (var i = segments.Length - 1; i >= 0; --i)
             {
                 var segment = segments[i];
@@ -525,7 +526,7 @@ namespace Texart.Api
 
             if (!separatorFound)
             {
-                var exception = new ArgumentException(
+                var exception = new FormatException(
                     $"URI path did not contain assembly-resource separator ('{AssemblyResourceSeparator})': {path}");
                 return (exception, default);
             }
@@ -540,6 +541,19 @@ namespace Texart.Api
 
             return (null, new ComputedSegments(
                 assemblySegments.ToImmutableArray(), new RelativeResourceLocator(resourceSegments.ToImmutableArray())));
+        }
+
+        /// <summary>
+        /// A <see cref="FormatException"/> is thrown when an attempt is made to create <see cref="TxPluginResourceLocator"/>
+        /// or <see cref="TxPluginResourceLocator.RelativeResourceLocator"/> with an invalid string.
+        /// </summary>
+        public sealed class FormatException : System.FormatException
+        {
+            /// <summary>
+            /// Creates an exception with <see cref="Exception.Message"/> set to <paramref name="message"/>.
+            /// </summary>
+            /// <param name="message">The exception message.</param>
+            internal FormatException(string message) : base(message) { }
         }
 
         /// <summary>

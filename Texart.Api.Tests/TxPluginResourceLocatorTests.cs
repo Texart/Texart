@@ -82,10 +82,7 @@ namespace Texart.Api.Tests
 
         private static void AssertInvalidLocator(string uri)
         {
-            var ex = Assert.Throws<ArgumentException>(() => TxPluginResourceLocator.Of(uri));
-            Assert.IsTrue(
-                ex.Message.StartsWith("URI "),
-                "Exception was thrown but not because of invalid locator");
+            Assert.Throws<TxPluginResourceLocator.FormatException>(() => TxPluginResourceLocator.Of(uri));
             Assert.IsFalse(TxPluginResourceLocator.IsWellFormedResourceLocatorUri(new Uri(uri)));
         }
 
@@ -139,6 +136,9 @@ namespace Texart.Api.Tests
             }
 
             [Test]
+            public void RejectsColon() => AssertInvalidRelative("resource/:path");
+
+            [Test]
             public void RejectsQuery() => AssertInvalidRelative("c?hello=world");
 
             [Test]
@@ -152,11 +152,8 @@ namespace Texart.Api.Tests
 
             private static void AssertInvalidRelative(string relativePath)
             {
-                var ex = Assert.Throws<ArgumentException>(
+                Assert.Throws<TxPluginResourceLocator.FormatException>(
                     () => TxPluginResourceLocator.OfRelativeResource(relativePath));
-                Assert.IsTrue(
-                    ex.Message.StartsWith("URI "),
-                    "Exception was thrown but not because of invalid relative");
                 Assert.IsFalse(
                     TxPluginResourceLocator.IsWellFormedRelativeResourceString(relativePath));
             }
