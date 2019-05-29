@@ -8,10 +8,11 @@ namespace Texart.Api.Tests
         [Test]
         public void AllowsAbsoluteUriAssemblyAndResource()
         {
-            var locator = TxPluginResourceLocator.FromUri("file:///plugins/Texart.SomePlugin.dll:SomePath/SomeResource");
+            var locator = TxPluginResourceLocator.Of("file:///plugins/Texart.SomePlugin.dll:SomePath/SomeResource");
             Assert.AreEqual(new TxReferenceScheme("file"), locator.Scheme);
             Assert.AreEqual("plugins/Texart.SomePlugin.dll", locator.AssemblyPath);
             Assert.AreEqual(new [] { "plugins", "Texart.SomePlugin.dll" }, locator.AssemblySegments);
+            Assert.AreEqual(TxPluginResourceLocator.OfRelativeResource("SomePath/SomeResource"), locator.RelativeResource);
             Assert.AreEqual("SomePath/SomeResource", locator.ResourcePath);
             Assert.AreEqual(new[] { "SomePath", "SomeResource" }, locator.ResourceSegments);
 
@@ -22,31 +23,34 @@ namespace Texart.Api.Tests
         [Test]
         public void AllowsEmptyResource()
         {
-            var locator = TxPluginResourceLocator.FromUri("tx:///plugin.dll:");
+            var locator = TxPluginResourceLocator.Of("tx:///plugin.dll:");
             Assert.AreEqual(new TxReferenceScheme("tx"), locator.Scheme);
             Assert.AreEqual("plugin.dll", locator.AssemblyPath);
-            Assert.AreEqual("", locator.ResourcePath);
-            Assert.AreEqual(new[] { "" }, locator.ResourceSegments);
+            Assert.AreEqual(TxPluginResourceLocator.OfRelativeResource(string.Empty), locator.RelativeResource);
+            Assert.AreEqual(string.Empty, locator.ResourcePath);
+            Assert.AreEqual(new[] { string.Empty }, locator.ResourceSegments);
         }
 
         [Test]
         public void AllowsColonsInAssemblyPath()
         {
-            var locator = TxPluginResourceLocator.FromUri("tx:///path:to/plugin:foo.dll:resource/path");
+            var locator = TxPluginResourceLocator.Of("tx:///path:to/plugin:foo.dll:resource/path");
             Assert.AreEqual(new TxReferenceScheme("tx"), locator.Scheme);
             Assert.AreEqual("path:to/plugin:foo.dll", locator.AssemblyPath);
             Assert.AreEqual(new [] { "path:to", "plugin:foo.dll" }, locator.AssemblySegments);
+            Assert.AreEqual(TxPluginResourceLocator.OfRelativeResource("resource/path"), locator.RelativeResource);
             Assert.AreEqual("resource/path", locator.ResourcePath);
             Assert.AreEqual(new[] { "resource", "path" }, locator.ResourceSegments);
         }
 
         [Test]
-        public void AllowsEmptySegments()
+        public void AllowsEmptyAssemblyAndResource()
         {
-            var locator = TxPluginResourceLocator.FromUri("tx:///:");
+            var locator = TxPluginResourceLocator.Of("tx:///:");
             Assert.AreEqual(new TxReferenceScheme("tx"), locator.Scheme);
             Assert.AreEqual(string.Empty, locator.AssemblyPath);
             Assert.AreEqual(new [] { string.Empty }, locator.AssemblySegments);
+            Assert.AreEqual(TxPluginResourceLocator.OfRelativeResource(string.Empty), locator.RelativeResource);
             Assert.AreEqual(string.Empty, locator.ResourcePath);
             Assert.AreEqual(new[] { string.Empty }, locator.ResourceSegments);
         }
@@ -78,7 +82,7 @@ namespace Texart.Api.Tests
 
         private static void AssertInvalidLocator(string uri)
         {
-            var ex = Assert.Throws<ArgumentException>(() => TxPluginResourceLocator.FromUri(new Uri(uri)));
+            var ex = Assert.Throws<ArgumentException>(() => TxPluginResourceLocator.Of(uri));
             Assert.IsTrue(
                 ex.Message.StartsWith("URI "),
                 "Exception was thrown but not because of invalid locator");
@@ -86,76 +90,75 @@ namespace Texart.Api.Tests
         }
 
         /// <summary>
-        /// Tests for <see cref="TxPluginResourceLocator.Relative"/>.
+        /// Tests for <see cref="TxPluginResourceLocator.RelativeResourceLocator"/>.
         /// </summary>
-        internal class RelativeTests
+        internal class RelativeResourceTests
         {
             [Test]
-            public void AllowsRelativeAssemblyAndResource()
+            public void AllowsResource()
             {
-                var relative = TxPluginResourceLocator.Relative.FromRelativePath("/plugins/Texart.SomePlugin.dll:SomePath/SomeResource");
-                Assert.AreEqual("plugins/Texart.SomePlugin.dll", relative.AssemblyPath);
-                Assert.AreEqual(new [] { "plugins", "Texart.SomePlugin.dll" }, relative.AssemblySegments);
+                var relative = TxPluginResourceLocator.OfRelativeResource("SomePath/SomeResource");
                 Assert.AreEqual("SomePath/SomeResource", relative.ResourcePath);
                 Assert.AreEqual(new[] { "SomePath", "SomeResource" }, relative.ResourceSegments);
+                Assert.AreEqual(
+                    TxPluginResourceLocator.Of("tx:///assembly.dll:SomePath/SomeResource").RelativeResource,
+                    relative);
 
-                Assert.IsTrue(TxPluginResourceLocator.Relative.IsWellFormedRelativePathString(
-                    "/plugins/Texart.SomePlugin.dll:SomePath/SomeResource"));
+                Assert.IsTrue(TxPluginResourceLocator.IsWellFormedRelativeResourceString(
+                    "SomePath/SomeResource"));
             }
 
             [Test]
             public void AllowsEmptyResource()
             {
-                var relative = TxPluginResourceLocator.Relative.FromRelativePath("/plugin.dll:");
-                Assert.AreEqual("plugin.dll", relative.AssemblyPath);
-                Assert.AreEqual("", relative.ResourcePath);
-                Assert.AreEqual(new[] { "" }, relative.ResourceSegments);
-            }
-
-            [Test]
-            public void AllowsColonsInAssemblyPath()
-            {
-                var relative = TxPluginResourceLocator.Relative.FromRelativePath("/path:to/plugin:foo.dll:resource/path");
-                Assert.AreEqual("path:to/plugin:foo.dll", relative.AssemblyPath);
-                Assert.AreEqual(new [] { "path:to", "plugin:foo.dll" }, relative.AssemblySegments);
-                Assert.AreEqual("resource/path", relative.ResourcePath);
-                Assert.AreEqual(new[] { "resource", "path" }, relative.ResourceSegments);
-            }
-
-            [Test]
-            public void AllowsEmptySegments()
-            {
-                var relative = TxPluginResourceLocator.Relative.FromRelativePath("/:");
-                Assert.AreEqual(string.Empty, relative.AssemblyPath);
-                Assert.AreEqual(new [] { string.Empty }, relative.AssemblySegments);
+                var relative = TxPluginResourceLocator.OfRelativeResource(string.Empty);
                 Assert.AreEqual(string.Empty, relative.ResourcePath);
                 Assert.AreEqual(new[] { string.Empty }, relative.ResourceSegments);
+                Assert.AreEqual(
+                    TxPluginResourceLocator.Of("tx:///assembly.dll:").RelativeResource,
+                    relative);
             }
 
             [Test]
-            public void RejectsNoPath() => AssertInvalidRelative("/");
+            public void AllowsLeadingSlash()
+            {
+                var relative = TxPluginResourceLocator.OfRelativeResource("/resource/path");
+                Assert.AreEqual("/resource/path", relative.ResourcePath);
+                Assert.AreEqual(new[] { string.Empty, "resource", "path" }, relative.ResourceSegments);
+                Assert.AreEqual(
+                    TxPluginResourceLocator.Of("tx:///assembly.dll:/resource/path").RelativeResource,
+                    relative);
+            }
 
             [Test]
-            public void RejectsQuery() => AssertInvalidRelative("/a:c?hello=world");
+            public void AllowsEmptyWithLeadingSlash()
+            {
+                var relative = TxPluginResourceLocator.OfRelativeResource("/");
+                Assert.AreEqual("/", relative.ResourcePath);
+                Assert.AreEqual(new[] { string.Empty, string.Empty }, relative.ResourceSegments);
+            }
 
             [Test]
-            public void RejectsEmptyQuery() => AssertInvalidRelative("/a:c?");
+            public void RejectsQuery() => AssertInvalidRelative("c?hello=world");
 
             [Test]
-            public void RejectsFragment() => AssertInvalidRelative("/a:c#hello");
+            public void RejectsEmptyQuery() => AssertInvalidRelative("c?");
 
             [Test]
-            public void RejectsEmptyFragment() => AssertInvalidRelative("/a:c#");
+            public void RejectsFragment() => AssertInvalidRelative("c#hello");
+
+            [Test]
+            public void RejectsEmptyFragment() => AssertInvalidRelative("c#");
 
             private static void AssertInvalidRelative(string relativePath)
             {
                 var ex = Assert.Throws<ArgumentException>(
-                    () => TxPluginResourceLocator.Relative.FromRelativePath(relativePath));
+                    () => TxPluginResourceLocator.OfRelativeResource(relativePath));
                 Assert.IsTrue(
                     ex.Message.StartsWith("URI "),
                     "Exception was thrown but not because of invalid relative");
                 Assert.IsFalse(
-                    TxPluginResourceLocator.Relative.IsWellFormedRelativePathString(relativePath));
+                    TxPluginResourceLocator.IsWellFormedRelativeResourceString(relativePath));
             }
         }
     }

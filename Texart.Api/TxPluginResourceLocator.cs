@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 
@@ -8,7 +9,7 @@ namespace Texart.Api
     /// <summary>
     /// A domain-specific URI-like string that is used to identity a plugin assembly and objects inside it.
     /// The properties and formatting is a strict subset of a URI and thus all <see cref="TxPluginResourceLocator"/>s
-    /// are valid (absolute) URIs. Relative URIs can be represented by <see cref="TxPluginResourceLocator.Relative"/>
+    /// are valid (absolute) URIs. Relative resource URIs can be represented by <see cref="RelativeResourceLocator"/>
     /// instead.
     ///
     /// <see href="https://tools.ietf.org/html/rfc3986#section-3"/> defines the syntax of URIs:
@@ -43,38 +44,47 @@ namespace Texart.Api
     ///     locator.ResourceSegments  // new [] { "SomePath", "SomeResource" }
     /// </code>
     /// </example>
-    /// <seealso cref="TxPluginResourceLocator.Relative"/>
+    /// <seealso cref="RelativeResourceLocator"/>
     public sealed class TxPluginResourceLocator : IEquatable<TxPluginResourceLocator>
     {
         /// <summary>
         /// The URI scheme.
         /// </summary>
         /// <seealso cref="Uri.Scheme"/>
-        public TxReferenceScheme Scheme => new TxReferenceScheme(AsUri.Scheme);
+        public TxReferenceScheme Scheme { get; }
 
         /// <summary>
         /// The segments in the URI path that locate the plugin <see cref="System.Reflection.Assembly"/> or script.
         /// </summary>
-        public IReadOnlyList<string> AssemblySegments { get; }
+        public ImmutableArray<string> AssemblySegments { get; }
         /// <summary>
-        /// <see cref="AssemblySegments"/> as a path string.
+        /// <see cref="AssemblySegments"/> as a URI path string.
         /// </summary>
         public string AssemblyPath => string.Join(UriPathSeparator, AssemblySegments);
 
         /// <summary>
+        /// The resource path as a locator.
+        /// </summary>
+        public RelativeResourceLocator RelativeResource { get; }
+        /// <summary>
         /// The segments in the URI path that locate specific resource inside a plugin.
         /// For example: as a path to <see cref="ITxPlugin.LookupGenerator"/> or <see cref="ITxPlugin.LookupRenderer"/>.
         /// </summary>
-        public IReadOnlyList<string> ResourceSegments { get; }
+        public ImmutableArray<string> ResourceSegments => RelativeResource.ResourceSegments;
         /// <summary>
-        /// <see cref="ResourceSegments"/> as a path string.
+        /// Backing field for <see cref="ResourcePath"/> which stored the cached value if it was previously computed.
         /// </summary>
-        public string ResourcePath => string.Join(UriPathSeparator, ResourceSegments);
+        private string _resourcePathBackingField;
+        /// <summary>
+        /// <see cref="ResourceSegments"/> as a URI path string.
+        /// </summary>
+        public string ResourcePath =>
+            _resourcePathBackingField = _resourcePathBackingField ?? string.Join(UriPathSeparator, ResourceSegments);
 
         /// <summary>
-        /// The backing URI object.
+        /// The URI representation of <c>this</c>.
         /// </summary>
-        public Uri AsUri { get; }
+        public Uri AsUri => new Uri(ToString(), UriKind.Absolute);
 
         /// <summary>
         /// Character that is used to partition the URI path into <see cref="AssemblyPath"/> and <see cref="ResourcePath"/>.
@@ -85,23 +95,23 @@ namespace Texart.Api
         public const char AssemblyResourceSeparator = ':';
 
         /// <summary>
-        /// Constructs a <see cref="TxPluginResourceLocator"/> with a backing URI.
+        /// Constructs a <see cref="TxPluginResourceLocator"/> from a URI.
         /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
         /// </summary>
         /// <param name="uri">The URI to build from.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="uri"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">If the URI is not valid.</exception>
-        public static TxPluginResourceLocator FromUri(Uri uri) => new TxPluginResourceLocator(uri);
+        public static TxPluginResourceLocator Of(Uri uri) => new TxPluginResourceLocator(uri);
 
         /// <summary>
-        /// Constructs a <see cref="TxPluginResourceLocator"/> with a backing URI.
+        /// Constructs a <see cref="TxPluginResourceLocator"/> from an absolute URI.
         /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
         /// </summary>
         /// <param name="uri">The URI to build from.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="uri"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">If the URI is not valid.</exception>
-        /// <seealso cref="Uri(string)"/>
-        public static TxPluginResourceLocator FromUri(string uri) => FromUri(new Uri(uri));
+        /// <seealso cref="Uri(string, UriKind)"/>
+        public static TxPluginResourceLocator Of(string uri) => Of(new Uri(uri, UriKind.Absolute));
 
         /// <summary>
         /// Determines if the provided URI is within the subset of allowed URIs.
@@ -119,43 +129,138 @@ namespace Texart.Api
         }
 
         /// <summary>
-        /// Constructs a <see cref="TxPluginResourceLocator"/> with a backing URI.
-        /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
+        /// Constructs a <see cref="RelativeResourceLocator"/> from the provided relative URI path.
         /// </summary>
-        /// <param name="uri">The backing URI.</param>
-        private TxPluginResourceLocator(Uri uri)
+        /// <param name="relativeResource">The relative resource path. See <see cref="TxPluginResourceLocator.ResourcePath"/>.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">If <paramref name="relativeResource"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentException">If the relative resource path is not valid.</exception>
+        public static RelativeResourceLocator OfRelativeResource(string relativeResource)
         {
-            var (checkFailedException, relative) = CheckIsValidPluginResourceUri(uri);
+            var (checkFailedException, relative) = RelativeResourceLocator.CheckIsValidRelativePath(relativeResource);
             if (checkFailedException != null)
             {
                 throw checkFailedException;
             }
-            AsUri = uri;
-            AssemblySegments = relative.AssemblySegments;
-            ResourceSegments = relative.ResourceSegments;
+            return relative;
         }
 
         /// <summary>
-        /// A <see cref="Relative"/> represents the <see cref="Uri.AbsolutePath"/> part of
-        /// <see cref="TxPluginResourceLocator"/>. Specifically, <see cref="AssemblySegments"/> and
-        /// <see cref="ResourceSegments"/>.
+        /// Determines if the given resource path is valid for <see cref="TxPluginResourceLocator"/>.
         /// </summary>
-        public sealed class Relative : IEquatable<Relative>
+        /// <param name="relativeResource">The relative URI path to check.</param>
+        /// <returns>
+        ///     <c>true</c> if valid for <see cref="ResourcePath"/>,
+        ///     <c>false</c> otherwise.
+        /// </returns>
+        public static bool IsWellFormedRelativeResourceString(string relativeResource)
         {
-            /// <summary>
-            /// See <see cref="TxPluginResourceLocator.AssemblySegments"/>.
-            /// </summary>
-            public IReadOnlyList<string> AssemblySegments { get; }
+            var (checkFailedException, _) = RelativeResourceLocator.CheckIsValidRelativePath(relativeResource);
+            return checkFailedException == null;
+        }
 
-            /// <summary>
-            /// <see cref="AssemblySegments"/> as a path string.
-            /// </summary>
-            public string AssemblyPath => string.Join(UriPathSeparator, AssemblySegments);
+        /// <summary>
+        /// Creates a new <see cref="TxPluginResourceLocator"/> with <see cref="Scheme"/> replaced with
+        /// <paramref name="scheme"/>.
+        /// </summary>
+        /// <param name="scheme">The new <see cref="TxReferenceScheme"/>.</param>
+        /// <returns>
+        ///     A new <see cref="TxPluginResourceLocator"/> with <see cref="Scheme"/> replaced with
+        ///     <paramref name="scheme"/>
+        /// </returns>
+        /// <exception cref="ArgumentNullException">If <paramref name="scheme"/> is <c>null</c></exception>
+        /// <exception cref="ArgumentException">If the scheme is not valid.</exception>
+        public TxPluginResourceLocator WithScheme(string scheme) =>
+            WithScheme(new TxReferenceScheme(scheme));
 
+        /// <summary>
+        /// Creates a new <see cref="TxPluginResourceLocator"/> with <see cref="Scheme"/> replaced with
+        /// <paramref name="scheme"/>.
+        /// </summary>
+        /// <param name="scheme">The new <see cref="TxReferenceScheme"/>.</param>
+        /// <returns>
+        ///     A new <see cref="TxPluginResourceLocator"/> with <see cref="Scheme"/> replaced with
+        ///     <paramref name="scheme"/>
+        /// </returns>
+        /// <exception cref="ArgumentNullException">If <paramref name="scheme"/> is <c>null</c></exception>
+        public TxPluginResourceLocator WithScheme(TxReferenceScheme scheme)
+        {
+            if (scheme == null)
+            {
+                throw new ArgumentNullException(nameof(scheme));
+            }
+            // also pass backing field since the resource path is not modified
+            return new TxPluginResourceLocator(
+                scheme, new ComputedSegments(AssemblySegments, RelativeResource), _resourcePathBackingField);
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="TxPluginResourceLocator"/> with <see cref="AssemblyPath"/> replaced with
+        /// <paramref name="assemblyPath"/>.
+        /// </summary>
+        /// <param name="assemblyPath">The new <see cref="AssemblyPath"/>.</param>
+        /// <returns>
+        ///     A new <see cref="TxPluginResourceLocator"/> with <see cref="AssemblyPath"/> replaced with
+        ///     <paramref name="assemblyPath"/>
+        /// </returns>
+        /// <exception cref="ArgumentNullException">If <paramref name="assemblyPath"/> is <c>null</c></exception>
+        public TxPluginResourceLocator WithAssemblyPath(string assemblyPath)
+        {
+            if (assemblyPath == null)
+            {
+                throw new ArgumentNullException(nameof(assemblyPath));
+            }
+            var assemblySegments = assemblyPath.Split(UriPathSeparator).ToImmutableArray();
+            // also pass backing field since the resource path is not modified
+            return new TxPluginResourceLocator(
+                Scheme, new ComputedSegments(assemblySegments, RelativeResource), _resourcePathBackingField);
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="TxPluginResourceLocator"/> with <see cref="RelativeResource"/> replaced with
+        /// <paramref name="relativeResourceLocator"/>.
+        /// </summary>
+        /// <param name="relativeResourceLocator">The new <see cref="RelativeResourceLocator"/>.</param>
+        /// <returns>
+        ///     A new <see cref="TxPluginResourceLocator"/> with <see cref="ResourcePath"/> replaced with
+        ///     <paramref name="relativeResourceLocator"/>
+        /// </returns>
+        /// <exception cref="ArgumentNullException">If <paramref name="relativeResourceLocator"/> is <c>null</c></exception>
+        /// <exception cref="ArgumentException">If the resource path is not valid.</exception>
+        public TxPluginResourceLocator WithRelativeResource(string relativeResourceLocator) =>
+            WithRelativeResource(OfRelativeResource(relativeResourceLocator));
+
+        /// <summary>
+        /// Creates a new <see cref="TxPluginResourceLocator"/> with <see cref="RelativeResource"/> replaced with
+        /// <paramref name="relativeResourceLocator"/>.
+        /// </summary>
+        /// <param name="relativeResourceLocator"></param>
+        /// <returns>
+        ///     A new <see cref="TxPluginResourceLocator"/> with <see cref="ResourcePath"/> replaced with
+        ///     <paramref name="relativeResourceLocator"/>
+        /// </returns>
+        /// <exception cref="ArgumentNullException">If <paramref name="relativeResourceLocator"/> is <c>null</c></exception>
+        public TxPluginResourceLocator WithRelativeResource(RelativeResourceLocator relativeResourceLocator)
+        {
+            if (relativeResourceLocator == null)
+            {
+                throw new ArgumentNullException(nameof(relativeResourceLocator));
+            }
+            // the resource path needs to be recalculated, so don't pass backing field
+            return new TxPluginResourceLocator(
+                Scheme, new ComputedSegments(AssemblySegments, relativeResourceLocator), null);
+        }
+
+        /// <summary>
+        /// A <see cref="RelativeResourceLocator"/> represents the <see cref="ResourcePath"/> part of <see cref="TxPluginResourceLocator"/>.
+        /// It represents a resource relative to <see cref="AssemblyPath"/>.
+        /// </summary>
+        public sealed class RelativeResourceLocator : IEquatable<RelativeResourceLocator>
+        {
             /// <summary>
             /// See <see cref="TxPluginResourceLocator.ResourceSegments"/>.
             /// </summary>
-            public IReadOnlyList<string> ResourceSegments { get; }
+            public ImmutableArray<string> ResourceSegments { get; }
 
             /// <summary>
             /// <see cref="ResourceSegments"/> as a path string.
@@ -163,47 +268,13 @@ namespace Texart.Api
             public string ResourcePath => string.Join(UriPathSeparator, ResourceSegments);
 
             /// <summary>
-            /// Constructs a <see cref="Relative"/> from the provided relative URI path.
-            /// </summary>
-            /// <param name="relativePath">The relative URI path. See <see cref="Uri.AbsolutePath"/>.</param>
-            /// <returns></returns>
-            /// <exception cref="ArgumentNullException">If <paramref name="relativePath"/> is <c>null</c>.</exception>
-            /// <exception cref="ArgumentException">If the relative path is not valid.</exception>
-            public static Relative FromRelativePath(string relativePath)
-            {
-                var (checkFailedException, relative) = CheckIsValidRelativePath(relativePath);
-                if (checkFailedException != null)
-                {
-                    throw checkFailedException;
-                }
-                return relative;
-            }
-
-            /// <summary>
-            /// Determines if the given path is valid for <see cref="TxPluginResourceLocator"/>.
-            /// </summary>
-            /// <param name="relativePath">The relative URI path to check.</param>
-            /// <returns>
-            ///     <c>true</c> if valid <see cref="TxPluginResourceLocator"/> URI,
-            ///     <c>false</c> otherwise.
-            /// </returns>
-            public static bool IsWellFormedRelativePathString(string relativePath)
-            {
-                var (checkFailedException, _) = CheckIsValidRelativePath(relativePath);
-                return checkFailedException == null;
-            }
-
-            /// <summary>
-            /// Constructs a <see cref="Relative"/> from the provided segments. The arguments are not checked to see if
+            /// Constructs a <see cref="RelativeResourceLocator"/> from the provided segments. The arguments are not checked to see if
             /// they are valid.
             /// </summary>
-            /// <param name="assemblySegments">See <see cref="AssemblySegments"/>.</param>
             /// <param name="resourceSegments">See <see cref="ResourceSegments"/>.</param>
-            internal Relative(IReadOnlyList<string> assemblySegments, IReadOnlyList<string> resourceSegments)
+            internal RelativeResourceLocator(ImmutableArray<string> resourceSegments)
             {
-                Debug.Assert(assemblySegments != null);
                 Debug.Assert(resourceSegments != null);
-                AssemblySegments = assemblySegments;
                 ResourceSegments = resourceSegments;
             }
 
@@ -211,18 +282,22 @@ namespace Texart.Api
             /// Makes sure that the given path is valid for <see cref="TxPluginResourceLocator"/>.
             /// </summary>
             /// <param name="relativePath">The relative URI path to check.</param>
-            /// <returns>An exception if the URI is invalid, or <see cref="Relative"/> if valid.</returns>
+            /// <returns>An exception if the URI is invalid, or <see cref="RelativeResourceLocator"/> if valid.</returns>
             /// <seealso cref="TxPluginResourceLocator.CheckIsValidPluginResourceUri"/>
-            private static (ArgumentException, Relative) CheckIsValidRelativePath(string relativePath)
+            internal static (ArgumentException, RelativeResourceLocator) CheckIsValidRelativePath(string relativePath)
             {
                 if (relativePath == null)
                 {
                     return (new ArgumentNullException(nameof(relativePath)), default);
                 }
 
+                // We temporarily prefix with a dummy character so that leading slashes don't get discarded by Uri
+                const char dummyPrefixChar = AssemblyResourceSeparator;
+                var prefixedRelativePath = $"{dummyPrefixChar}{relativePath}";
+
                 // TODO: Make static in C# 8.0
                 var dummyBaseUri = new Uri("dummy:///", UriKind.Absolute);
-                if (!Uri.TryCreate(relativePath, UriKind.Relative, out var relativeUri) ||
+                if (!Uri.TryCreate(prefixedRelativePath, UriKind.Relative, out var relativeUri) ||
                     !Uri.TryCreate(dummyBaseUri, relativeUri, out var absoluteUri))
                 {
                     return (new ArgumentException($"URI path must be valid relative URI: {relativePath}"), default);
@@ -242,7 +317,10 @@ namespace Texart.Api
                 }
 
                 // Path check
-                var (computeRelativeException, relative) = ComputeRelative(absoluteUri.AbsolutePath);
+                var expectedPathPrefix = $"{UriPathSeparator}{dummyPrefixChar}";
+                var absolutePath = absoluteUri.AbsolutePath;
+                Debug.Assert(absolutePath.StartsWith(expectedPathPrefix));
+                var (computeRelativeException, relative) = ComputeRelative(absolutePath.Substring(expectedPathPrefix.Length));
                 if (computeRelativeException != null)
                 {
                     return (computeRelativeException, null);
@@ -252,49 +330,100 @@ namespace Texart.Api
                 return (null, relative);
             }
 
+            /// <summary>
+            /// Creates a <see cref="RelativeResourceLocator"/> from URI path, or an <see cref="ArgumentException"/> on failure.
+            /// </summary>
+            /// <param name="path">The path to sanitize.</param>
+            /// <returns>Computed relative resource path.</returns>
+            private static (ArgumentException, RelativeResourceLocator) ComputeRelative(string path)
+            {
+                Debug.Assert(path != null);
+                // We must encode the assembly separator character since the last occurence is used to distinguish
+                // between assembly and resource segments.
+                Debug.Assert(AssemblyResourceSeparator == ':', "Update the encoded character below");
+                const string assemblyResourceSeparatorEncoded = @"%3A";
+                var sanitizedPath = path.Replace(AssemblyResourceSeparator.ToString(), assemblyResourceSeparatorEncoded);
+                var segments = sanitizedPath.Split(UriPathSeparator);
+                return (null, new RelativeResourceLocator(segments.ToImmutableArray()));
+            }
+
             /// <inheritdoc cref="object.ToString"/>
-            public override string ToString() => $"{AssemblyPath}{ResourcePath}";
+            public override string ToString() => ResourcePath;
 
             /// <inheritdoc cref="IEquatable{T}.Equals(T)"/>
-            public bool Equals(Relative other)
+            public bool Equals(RelativeResourceLocator other)
             {
                 if (ReferenceEquals(null, other)) return false;
-                if (ReferenceEquals(this, other)) return true;
-                return AssemblySegments.SequenceEqual(other.AssemblySegments) &&
-                       ResourceSegments.SequenceEqual(other.ResourceSegments);
+                return ReferenceEquals(this, other) || ResourceSegments.SequenceEqual(other.ResourceSegments);
             }
 
             /// <inheritdoc cref="object.Equals(object)"/>
             public override bool Equals(object obj) =>
-                ReferenceEquals(this, obj) || obj is Relative other && Equals(other);
+                ReferenceEquals(this, obj) || obj is RelativeResourceLocator other && Equals(other);
 
             /// <inheritdoc cref="object.GetHashCode"/>
-            public override int GetHashCode() => HashCode.Combine(AssemblySegments, ResourceSegments);
+            public override int GetHashCode()
+            {
+                var hashCode = new HashCode();
+                foreach (var segment in ResourceSegments)
+                {
+                    hashCode.Add(segment);
+                }
+                return hashCode.ToHashCode();
+            }
 
             /// <summary>
-            /// Compares two <see cref="Relative"/> for equality.
+            /// Compares two <see cref="RelativeResourceLocator"/> for equality.
             /// </summary>
             /// <param name="lhs">The left hand side of the equality.</param>
             /// <param name="rhs">The right hand side of the equality.</param>
-            /// <returns>Whether the two instances refer to the same relative paths or not.</returns>
-            public static bool operator ==(Relative lhs, Relative rhs) => Equals(lhs, rhs);
+            /// <returns>Whether the two instances refer to the same resource paths or not.</returns>
+            public static bool operator ==(RelativeResourceLocator lhs, RelativeResourceLocator rhs) => Equals(lhs, rhs);
 
             /// <summary>
-            /// Compares two <see cref="Relative"/> for inequality.
+            /// Compares two <see cref="RelativeResourceLocator"/> for inequality.
             /// </summary>
             /// <param name="lhs">The left hand side of the inequality.</param>
             /// <param name="rhs">The right hand side of the inequality.</param>
-            /// <returns>Whether the two instances refer to different relative paths or not.</returns>
-            public static bool operator !=(Relative lhs, Relative rhs) => !(lhs == rhs);
+            /// <returns>Whether the two instances refer to different resource paths or not.</returns>
+            public static bool operator !=(RelativeResourceLocator lhs, RelativeResourceLocator rhs) => !(lhs == rhs);
         }
 
+        /// <summary>
+        /// A <see cref="ComputedSegments"/> represents the <see cref="Uri.AbsolutePath"/> part of
+        /// <see cref="TxPluginResourceLocator"/>. Specifically, <see cref="AssemblySegments"/> and
+        /// <see cref="ResourceSegments"/>.
+        /// </summary>
+        private readonly struct ComputedSegments
+        {
+            /// <summary>
+            /// See <see cref="TxPluginResourceLocator.AssemblySegments"/>.
+            /// </summary>
+            public ImmutableArray<string> AssemblySegments { get; }
+            /// <summary>
+            /// See <see cref="TxPluginResourceLocator.RelativeResource"/>.
+            /// </summary>
+            public RelativeResourceLocator RelativeResource { get; }
+            /// <summary>
+            /// Constructs a <see cref="ComputedSegments"/> with pre-computed values.
+            /// </summary>
+            /// <param name="assemblySegments">The pre-computed assembly path segments.</param>
+            /// <param name="relativeResource">The pre-computed relative resource path.</param>
+            public ComputedSegments(ImmutableArray<string> assemblySegments, RelativeResourceLocator relativeResource)
+            {
+                Debug.Assert(assemblySegments != null);
+                Debug.Assert(relativeResource != null);
+                AssemblySegments = assemblySegments;
+                RelativeResource = relativeResource;
+            }
+        }
         /// <summary>
         /// Makes sure that the given URI is within the subset of allowed URIs.
         /// Not all URIs are valid <see cref="TxPluginResourceLocator"/>s.
         /// </summary>
         /// <param name="uri">The URI to check.</param>
-        /// <returns>An exception if the URI is invalid, or <see cref="Relative"/> if valid.</returns>
-        private static (ArgumentException, Relative) CheckIsValidPluginResourceUri(Uri uri)
+        /// <returns>An exception if the URI is invalid, or <see cref="RelativeResourceLocator"/> if valid.</returns>
+        private static (ArgumentException, ComputedSegments) CheckIsValidPluginResourceUri(Uri uri)
         {
             //
             // Reference: https://tools.ietf.org/html/rfc3986#section-3
@@ -342,7 +471,7 @@ namespace Texart.Api
             }
 
             // Path check
-            var (computeSegmentException, segments) = ComputeRelative(uri.AbsolutePath);
+            var (computeSegmentException, segments) = ComputeSegments(uri.AbsolutePath);
             if (computeSegmentException != null)
             {
                 return (computeSegmentException, default);
@@ -353,12 +482,13 @@ namespace Texart.Api
         }
 
         /// <summary>
-        /// Creates a <see cref="Relative"/> from segment parts.
+        /// Creates a <see cref="ComputedSegments"/> from segment parts, or an <see cref="ArgumentException"/> on failure.
         /// </summary>
         /// <param name="path">The path to partition.</param>
         /// <returns>Computed partition.</returns>
-        private static (ArgumentException, Relative) ComputeRelative(string path)
+        private static (ArgumentException, ComputedSegments) ComputeSegments(string path)
         {
+            Debug.Assert(path != null);
             ReadOnlySpan<string> segments = path.Split(UriPathSeparator);
             if (!segments.IsEmpty && segments[0] == string.Empty)
             {
@@ -403,7 +533,50 @@ namespace Texart.Api
             assemblySegments.Reverse();
             resourceSegments.Reverse();
 
-            return (null, new Relative(assemblySegments.ToArray(), resourceSegments.ToArray()));
+            // No need to recompute resource segments again, but the results must be consistent.
+            Debug.Assert(IsWellFormedRelativeResourceString(string.Join(UriPathSeparator, resourceSegments)));
+            // Make sure that the choice not to escape is valid.
+            Debug.Assert(!resourceSegments.Any(segment => segment.Contains(AssemblyResourceSeparator)));
+
+            return (null, new ComputedSegments(
+                assemblySegments.ToImmutableArray(), new RelativeResourceLocator(resourceSegments.ToImmutableArray())));
+        }
+
+        /// <summary>
+        /// Constructs a <see cref="TxPluginResourceLocator"/> from a URI.
+        /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
+        /// </summary>
+        /// <param name="uri">The URI to parse.</param>
+        private TxPluginResourceLocator(Uri uri)
+        {
+            var (checkFailedException, computedSegments) = CheckIsValidPluginResourceUri(uri);
+            if (checkFailedException != null)
+            {
+                throw checkFailedException;
+            }
+            Debug.Assert(uri.IsAbsoluteUri);
+            Scheme = new TxReferenceScheme(uri.Scheme);
+            AssemblySegments = computedSegments.AssemblySegments;
+            RelativeResource = computedSegments.RelativeResource;
+        }
+
+        /// <summary>
+        /// Constructs a <see cref="TxPluginResourceLocator"/> with the specified components.
+        /// </summary>
+        /// <param name="scheme">The new URI scheme</param>
+        /// <param name="computedSegments">Precomputed <see cref="AssemblyPath"/> and <see cref="RelativeResource"/></param>
+        /// <param name="resourcePathBackingField">
+        ///     Optimization that allows setting <see cref="_resourcePathBackingField"/> if it remains unchanged from a
+        ///     previous object. Be careful not to set this if the resource path has changed!
+        /// </param>
+        private TxPluginResourceLocator(TxReferenceScheme scheme, ComputedSegments computedSegments,
+            string resourcePathBackingField)
+        {
+            Debug.Assert(scheme != null);
+            Scheme = scheme;
+            AssemblySegments = computedSegments.AssemblySegments;
+            RelativeResource = computedSegments.RelativeResource;
+            _resourcePathBackingField = resourcePathBackingField;
         }
 
         /// <summary>
@@ -412,13 +585,20 @@ namespace Texart.Api
         private static char UriPathSeparator => '/';
 
         /// <inheritdoc cref="object.ToString"/>
-        public override string ToString() => AsUri.ToString();
+        public override string ToString() =>
+            $"{Scheme}{Uri.SchemeDelimiter}{UriPathSeparator}{AssemblyPath}{AssemblyResourceSeparator}{ResourcePath}";
 
         /// <inheritdoc cref="IEquatable{T}.Equals(T)"/>
         public bool Equals(TxPluginResourceLocator other)
         {
             if (other is null) return false;
-            return ReferenceEquals(this, other) || AsUri.Equals(other.AsUri);
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            return Scheme.Equals(other.Scheme) &&
+                   AssemblySegments.SequenceEqual(other.AssemblySegments) &&
+                   RelativeResource == other.RelativeResource;
         }
 
         /// <inheritdoc cref="object.Equals(object)"/>
@@ -426,7 +606,20 @@ namespace Texart.Api
             ReferenceEquals(this, obj) || obj is TxPluginResourceLocator other && Equals(other);
 
         /// <inheritdoc cref="object.GetHashCode"/>
-        public override int GetHashCode() => AsUri.GetHashCode();
+        public override int GetHashCode()
+        {
+            var hashCode = new HashCode();
+            hashCode.Add(Scheme);
+            foreach (var segment in AssemblySegments)
+            {
+                hashCode.Add(segment);
+            }
+            foreach (var segment in ResourceSegments)
+            {
+                hashCode.Add(segment);
+            }
+            return hashCode.ToHashCode();
+        }
 
         /// <summary>
         /// Compares two <see cref="TxPluginResourceLocator"/> for equality.

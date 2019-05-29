@@ -22,7 +22,7 @@ namespace Texart.Api
         /// <summary>
         /// Returns a factory function that constructs an <see cref="ITxTextBitmapGenerator"/> identified by
         /// <paramref name="name"/>, or a locator which represents a redirects to another lookup
-        /// (<see cref="TxPluginResourceLocator"/> or <see cref="TxPluginResourceLocator.Relative"/>).
+        /// (<see cref="TxPluginResourceLocator"/> or <see cref="TxPluginResourceLocator.RelativeResourceLocator"/>).
         /// </summary>
         /// <param name="name">
         ///     The name to look up. This name should appear in <see cref="AvailableGenerators"/> but not required.
@@ -31,7 +31,7 @@ namespace Texart.Api
         /// <returns>A resource specification for <see cref="ITxTextBitmapGenerator"/></returns>
         /// <seealso cref="TxPluginResource.OfFactory{T}"/>
         /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator)"/>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.Relative)"/>
+        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.RelativeResourceLocator)"/>
         TxPluginResource<ITxTextBitmapGenerator> LookupGenerator(string name);
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Texart.Api
         /// <summary>
         /// Returns a factory function that constructs an <see cref="ITxTextBitmapRenderer"/> identified by
         /// <paramref name="name"/>, or a locator which represents a redirects to another lookup
-        /// (<see cref="TxPluginResourceLocator"/> or <see cref="TxPluginResourceLocator.Relative"/>).
+        /// (<see cref="TxPluginResourceLocator"/> or <see cref="TxPluginResourceLocator.RelativeResourceLocator"/>).
         /// </summary>
         /// <param name="name">
         ///     The name to look up. This name should appear in <see cref="AvailableRenderers"/> but not required.
@@ -52,7 +52,7 @@ namespace Texart.Api
         /// <returns>A resource specification for <see cref="ITxTextBitmapRenderer"/></returns>
         /// <seealso cref="TxPluginResource.OfFactory{T}"/>
         /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator)"/>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.Relative)"/>
+        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.RelativeResourceLocator)"/>
         TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(string name);
     }
 }
