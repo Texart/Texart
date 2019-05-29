@@ -58,7 +58,7 @@ namespace Texart.Api
         /// </summary>
         public ImmutableArray<string> AssemblySegments { get; }
         /// <summary>
-        /// <see cref="AssemblySegments"/> as a URI path string.
+        /// <see cref="AssemblySegments"/> as a URI path string. The format is "path/to/plugin.dll".
         /// </summary>
         public string AssemblyPath => string.Join(UriPathSeparator, AssemblySegments);
 
@@ -76,7 +76,7 @@ namespace Texart.Api
         /// </summary>
         private string _resourcePathBackingField;
         /// <summary>
-        /// <see cref="ResourceSegments"/> as a URI path string.
+        /// <see cref="ResourceSegments"/> as a URI path string. The format is "path/to/resource".
         /// </summary>
         public string ResourcePath =>
             _resourcePathBackingField = _resourcePathBackingField ?? string.Join(UriPathSeparator, ResourceSegments);
@@ -206,13 +206,14 @@ namespace Texart.Api
         ///     <paramref name="assemblyPath"/>
         /// </returns>
         /// <exception cref="ArgumentNullException">If <paramref name="assemblyPath"/> is <c>null</c></exception>
+        /// <exception cref="FormatException">If the assembly path is not valid.</exception>
         public TxPluginResourceLocator WithAssemblyPath(string assemblyPath)
         {
-            if (assemblyPath == null)
+            var (assemblySegmentsException, assemblySegments) = CheckIsValidAssemblyPath(assemblyPath);
+            if (assemblySegmentsException != null)
             {
-                throw new ArgumentNullException(nameof(assemblyPath));
+                throw assemblySegmentsException;
             }
-            var assemblySegments = assemblyPath.Split(UriPathSeparator).ToImmutableArray();
             // also pass backing field since the resource path is not modified
             return new TxPluginResourceLocator(
                 Scheme, new ComputedSegments(assemblySegments, RelativeResource), _resourcePathBackingField);
@@ -305,10 +306,8 @@ namespace Texart.Api
                 const char dummyPrefixChar = AssemblyResourceSeparator;
                 var prefixedRelativePath = $"{dummyPrefixChar}{relativePath}";
 
-                // TODO: Make static in C# 8.0
-                var dummyBaseUri = new Uri("dummy:///", UriKind.Absolute);
                 if (!Uri.TryCreate(prefixedRelativePath, UriKind.Relative, out var relativeUri) ||
-                    !Uri.TryCreate(dummyBaseUri, relativeUri, out var absoluteUri))
+                    !Uri.TryCreate(DummyBaseUri, relativeUri, out var absoluteUri))
                 {
                     return (new FormatException($"URI path must be valid relative URI: {relativePath}"), default);
                 }
@@ -337,7 +336,7 @@ namespace Texart.Api
             }
 
             /// <summary>
-            /// Creates a <see cref="RelativeResourceLocator"/> from URI path.
+            /// Creates a <see cref="RelativeResourceLocator"/> from the URI path, <paramref name="path"/>.
             /// </summary>
             /// <param name="path">The path to sanitize.</param>
             /// <returns>Computed relative resource path.</returns>
@@ -651,5 +650,79 @@ namespace Texart.Api
         /// <param name="rhs">The right hand side of the inequality.</param>
         /// <returns>Whether the two instances refer to different URIs or not.</returns>
         public static bool operator !=(TxPluginResourceLocator lhs, TxPluginResourceLocator rhs) => !(lhs == rhs);
+
+        /// <summary>
+        /// Makes sure that the given path is valid for <see cref="AssemblyPath"/>.
+        /// </summary>
+        /// <param name="assemblyPath">The assembly URI path to check.</param>
+        /// <returns>An exception if the URI is invalid, or <see cref="ImmutableArray{T}"/> if valid.</returns>
+        /// <seealso cref="TxPluginResourceLocator.CheckIsValidPluginResourceUri"/>
+        private static (Exception, ImmutableArray<string>) CheckIsValidAssemblyPath(string assemblyPath)
+        {
+            //
+            // Reference: https://tools.ietf.org/html/rfc3986#section-3
+            //
+            //     foo://example.com:8042/over/there?name=ferret#nose
+            //     \_/   \______________/\_________/ \_________/ \__/
+            //      |           |            |            |        |
+            //   scheme     authority       path        query   fragment
+            //      |   _____________________|__
+            //     / \ /                        \
+            //     urn:example:animal:ferret:nose
+            //
+            if (assemblyPath == null)
+            {
+                return (new ArgumentNullException(nameof(assemblyPath)), default);
+            }
+
+            // We temporarily prefix with a dummy character so that leading slashes don't get discarded by Uri
+            const char dummyPrefixChar = AssemblyResourceSeparator;
+            var prefixedAssemblyPath = $"{dummyPrefixChar}{assemblyPath}";
+
+            if (!Uri.TryCreate(prefixedAssemblyPath, UriKind.Relative, out var relativeUri) ||
+                !Uri.TryCreate(DummyBaseUri, relativeUri, out var absoluteUri))
+            {
+                return (new FormatException($"URI path must be valid relative URI: {assemblyPath}"), default);
+            }
+            Debug.Assert(absoluteUri.IsAbsoluteUri);
+
+            // Query check
+            if (!string.IsNullOrEmpty(absoluteUri.Query))
+            {
+                return (new FormatException($"URI query is not allowed: {absoluteUri.Query}"), default);
+            }
+
+            // Fragment check
+            if (!string.IsNullOrEmpty(absoluteUri.Fragment))
+            {
+                return (new FormatException($"URI fragment is not allowed: {absoluteUri.Fragment}"), default);
+            }
+
+            // Path check
+            var expectedPathPrefix = $"{UriPathSeparator}{dummyPrefixChar}";
+            var absolutePath = absoluteUri.AbsolutePath;
+            Debug.Assert(absolutePath.StartsWith(expectedPathPrefix));
+            var assemblySegments = ComputeAssemblySegments(absolutePath.Substring(expectedPathPrefix.Length));
+
+            // All good!
+            return (null, assemblySegments);
+        }
+
+        /// <summary>
+        /// Creates a <see cref="ImmutableArray{T}"/> for <see cref="AssemblySegments"/> from the URI path,
+        /// <paramref name="path"/>.
+        /// </summary>
+        /// <param name="path">The path to sanitize.</param>
+        /// <returns>Computed assembly path.</returns>
+        private static ImmutableArray<string> ComputeAssemblySegments(string path)
+        {
+            Debug.Assert(path != null);
+            return path.Split(UriPathSeparator).ToImmutableArray();
+        }
+
+        /// <summary>
+        /// An absolute URI that is used to create dummy URIs from relative URIs.
+        /// </summary>
+        private static readonly Uri DummyBaseUri = new Uri("dummy:///", UriKind.Absolute);
     }
 }
