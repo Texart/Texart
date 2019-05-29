@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using Texart.Builtin.Generators;
 using Texart.Builtin.Renderers;
 using Texart.Api;
@@ -14,35 +15,39 @@ namespace Texart.Builtin
         /// <summary>
         /// Mapping of names to <see cref="ITxTextBitmapGenerator"/> factory functions.
         /// </summary>
-        private readonly IDictionary<string, TxFactory<ITxTextBitmapGenerator, TxArguments>> _generators =
-            new Dictionary<string, TxFactory<ITxTextBitmapGenerator, TxArguments>>
+        private readonly ImmutableDictionary<string, TxPluginResource<ITxTextBitmapGenerator>> _generators =
+            new Dictionary<string, TxPluginResource<ITxTextBitmapGenerator>>
             {
-                { typeof(BrightnessBasedBitmapGenerator).Name, BrightnessBasedBitmapGenerator.Create }
-            };
+                { typeof(BrightnessBasedBitmapGenerator).Name, TxPluginResource.OfGeneratorFactory(BrightnessBasedBitmapGenerator.Create) }
+            }.ToImmutableDictionary();
+
         /// <summary>
         /// The default generator when the given name is <c>null</c>.
         /// </summary>
-        private readonly TxFactory<ITxTextBitmapGenerator, TxArguments> _defaultGenerator = BrightnessBasedBitmapGenerator.Create;
+        private readonly TxPluginResource<ITxTextBitmapGenerator> _defaultGenerator =
+            TxPluginResource.OfGeneratorFactory(BrightnessBasedBitmapGenerator.Create);
 
         /// <summary>
         /// Mapping of names to <see cref="ITxTextBitmapRenderer"/> factory functions.
         /// </summary>
-        private readonly IDictionary<string, TxFactory<ITxTextBitmapRenderer, TxArguments>> _renderers =
-            new Dictionary<string, TxFactory<ITxTextBitmapRenderer, TxArguments>>
+        private readonly ImmutableDictionary<string, TxPluginResource<ITxTextBitmapRenderer>> _renderers =
+            new Dictionary<string, TxPluginResource<ITxTextBitmapRenderer>>
             {
-                { typeof(StringBitmapRenderer).Name, StringBitmapRenderer.Create },
-                { typeof(FontBitmapRenderer).Name, FontBitmapRenderer.Create },
-            };
+                { typeof(StringBitmapRenderer).Name, TxPluginResource.OfRendererFactory(StringBitmapRenderer.Create) },
+                { typeof(FontBitmapRenderer).Name, TxPluginResource.OfRendererFactory(FontBitmapRenderer.Create) }
+            }.ToImmutableDictionary();
+
         /// <summary>
         /// The default renderer when the given name is <c>null</c>.
         /// </summary>
-        private readonly TxFactory<ITxTextBitmapRenderer, TxArguments> _defaultRenderer = FontBitmapRenderer.Create;
+        private readonly TxPluginResource<ITxTextBitmapRenderer> _defaultRenderer =
+            TxPluginResource.OfRendererFactory(FontBitmapRenderer.Create);
+
+        /// <inheritdoc cref="ITxPlugin.AvailableGenerators"/>
+        IEnumerable<string> ITxPlugin.AvailableGenerators => _generators.Keys;
 
         /// <inheritdoc />
-        public IEnumerable<string> AvailableGenerators => _generators.Keys;
-
-        /// <inheritdoc />
-        public TxFactory<ITxTextBitmapGenerator, TxArguments> LookupGenerator(string name)
+        TxPluginResource<ITxTextBitmapGenerator> ITxPlugin.LookupGenerator(string name)
         {
             if (name == null)
             {
@@ -55,11 +60,11 @@ namespace Texart.Builtin
             throw new ArgumentException($"No {nameof(ITxTextBitmapGenerator)} named '{name}' exists.");
         }
 
-        /// <inheritdoc />
-        public IEnumerable<string> AvailableRenderers => _renderers.Keys;
+        /// <inheritdoc cref="ITxPlugin.AvailableRenderers"/>
+        IEnumerable<string> ITxPlugin.AvailableRenderers => _renderers.Keys;
 
-        /// <inheritdoc />
-        public TxFactory<ITxTextBitmapRenderer, TxArguments> LookupRenderer(string name)
+        /// <inheritdoc cref="ITxPlugin.LookupRenderer"/>
+        TxPluginResource<ITxTextBitmapRenderer> ITxPlugin.LookupRenderer(string name)
         {
             if (name == null)
             {

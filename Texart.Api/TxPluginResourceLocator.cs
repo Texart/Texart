@@ -8,7 +8,8 @@ namespace Texart.Api
     /// <summary>
     /// A domain-specific URI-like string that is used to identity a plugin assembly and objects inside it.
     /// The properties and formatting is a strict subset of a URI and thus all <see cref="TxPluginResourceLocator"/>s
-    /// are valid (absolute) URIs.
+    /// are valid (absolute) URIs. Relative URIs can be represented by <see cref="TxPluginResourceLocator.Relative"/>
+    /// instead.
     ///
     /// <see href="https://tools.ietf.org/html/rfc3986#section-3"/> defines the syntax of URIs:
     /// <code>
@@ -31,7 +32,7 @@ namespace Texart.Api
     ///           and <see cref="TxPluginResourceLocator.ResourcePath"/>.
     ///           <see cref="TxPluginResourceLocator.ResourcePath"/> is allowed to be empty.
     /// These restrictions may be relaxed in the future, but will always be compliant with the latest URI RFC.
-    ///
+    /// </summary>
     /// <example>
     /// <code>
     ///     var locator = PluginResourceLocator.FromUri("file:///plugins/Texart.SomePlugin.dll:SomePath/SomeResource");
@@ -42,7 +43,7 @@ namespace Texart.Api
     ///     locator.ResourceSegments  // new [] { "SomePath", "SomeResource" }
     /// </code>
     /// </example>
-    /// </summary>
+    /// <seealso cref="TxPluginResourceLocator.Relative"/>
     public sealed class TxPluginResourceLocator : IEquatable<TxPluginResourceLocator>
     {
         /// <summary>

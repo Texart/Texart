@@ -11,14 +11,14 @@ sealed class DummyPlugin : ITxPlugin
 {
     public IEnumerable<string> AvailableGenerators => ImmutableArray<string>.Empty;
 
-    public TxFactory<ITxTextBitmapGenerator, TxArguments> LookupGenerator(string name)
+    public TxPluginResource<ITxTextBitmapGenerator> LookupGenerator(string name)
     {
         throw new NotImplementedException();
     }
 
     public IEnumerable<string> AvailableRenderers => ImmutableArray<string>.Empty;
 
-    public TxFactory<ITxTextBitmapRenderer, TxArguments> LookupRenderer(string name)
+    public TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(string name)
     {
         throw new NotImplementedException();
     }
