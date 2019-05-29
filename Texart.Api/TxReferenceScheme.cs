@@ -1,49 +1,46 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Diagnostics.SymbolStore;
 using System.Text.RegularExpressions;
 
-namespace Texart.Plugins
+namespace Texart.Api
 {
     /// <summary>
-    /// A <see cref="ReferenceScheme"/> is akin to URI schemes (such as <c>file:</c> and <c>https:</c>).
+    /// A <see cref="TxReferenceScheme"/> is akin to URI schemes (such as <c>file:</c> and <c>https:</c>).
     /// As such, it is also case-insensitive.
     ///
-    /// Note that not every valid URI scheme is a valid <see cref="ReferenceScheme"/>. Specifically, the characters,
-    /// <c>+</code>, and <c>.</c>, are not allowed. However, <c>-</c> is allowed. This may relaxed
+    /// Note that not every valid URI scheme is a valid <see cref="TxReferenceScheme"/>. Specifically, the characters,
+    /// <c>+</c>, and <c>.</c>, are not allowed. However, <c>-</c> is allowed. This may relaxed
     /// in the future.
     ///
     /// Refer to <see href="https://tools.ietf.org/html/rfc3986#section-3.1"/> for information on URI schemes
-    /// (which are valid <see cref="ReferenceScheme"/>s, except for the restrictions listed above).
+    /// (which are valid <see cref="TxReferenceScheme"/>s, except for the restrictions listed above).
     /// <code>
     /// //    scheme      = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
     /// </code>
     ///
     /// Use cases:
     ///   * As a way to allow custom resolution strategies for <c>#load</c> and <c>#r</c> directives.
-    ///     See <see cref="Scripting.MetadataReferenceResolverDemux"/>
-    ///     and <see cref="Scripting.SourceReferenceResolverDemux"/>.
-    ///   * As part of identify (or locating) objects in a plugin assembly. See <see cref="PluginResourceLocator"/>.
+    ///   * As part of identify (or locating) objects in a plugin assembly. See <see cref="TxPluginResourceLocator"/>.
     /// </summary>
     /// <seealso cref="Uri.Scheme"/>
-    public sealed class ReferenceScheme : IComparable<ReferenceScheme>, IEquatable<ReferenceScheme>
+    public sealed class TxReferenceScheme : IComparable<TxReferenceScheme>, IEquatable<TxReferenceScheme>
     {
         /// <summary>
         /// Scheme for <c>file</c> protocol.
         /// </summary>
-        public static ReferenceScheme File => new ReferenceScheme("file");
+        public static TxReferenceScheme File => new TxReferenceScheme("file");
         /// <summary>
         /// Scheme for <c>http</c> protocol.
         /// </summary>
-        public static ReferenceScheme Http => new ReferenceScheme("http");
+        public static TxReferenceScheme Http => new TxReferenceScheme("http");
         /// <summary>
         /// Scheme for <c>https</c> protocol.
         /// </summary>
-        public static ReferenceScheme Https => new ReferenceScheme("https");
+        public static TxReferenceScheme Https => new TxReferenceScheme("https");
         /// <summary>
         /// Scheme for <c>tx</c> protocol.
         /// </summary>
-        public static ReferenceScheme Tx => new ReferenceScheme("tx");
+        public static TxReferenceScheme Tx => new TxReferenceScheme("tx");
 
         /// <summary>
         /// All valid schemes must match this regex.
@@ -79,7 +76,7 @@ namespace Texart.Plugins
         /// Constructs a scheme from the given string. It must match <see cref="SchemeRegex"/>.
         /// </summary>
         /// <param name="scheme"></param>
-        public ReferenceScheme(string scheme)
+        public TxReferenceScheme(string scheme)
         {
             if (!IsValidScheme(scheme))
             {
@@ -118,11 +115,11 @@ namespace Texart.Plugins
         public override string ToString() => Scheme;
 
         /// <inheritdoc />
-        public int CompareTo(ReferenceScheme other) =>
+        public int CompareTo(TxReferenceScheme other) =>
             string.Compare(Scheme, other.Scheme, StringComparison.Ordinal);
 
         /// <inheritdoc />
-        public bool Equals(ReferenceScheme other)
+        public bool Equals(TxReferenceScheme other)
         {
             if (other is null) return false;
             return ReferenceEquals(this, other) || string.Equals(Scheme, other.Scheme);
@@ -130,26 +127,26 @@ namespace Texart.Plugins
 
         /// <inheritdoc />
         public override bool Equals(object obj) =>
-            ReferenceEquals(this, obj) || obj is ReferenceScheme other && Equals(other);
+            ReferenceEquals(this, obj) || obj is TxReferenceScheme other && Equals(other);
 
         /// <inheritdoc />
         public override int GetHashCode() => Scheme != null ? Scheme.GetHashCode() : 0;
 
         /// <summary>
-        /// Compares two <see cref="ReferenceScheme"/> for equality.
+        /// Compares two <see cref="TxReferenceScheme"/> for equality.
         /// </summary>
         /// <param name="lhs">The left hand side of the equality.</param>
         /// <param name="rhs">The right hand side of the equality.</param>
         /// <returns>Whether the two instances refer to the same scheme or not.</returns>
-        public static bool operator ==(ReferenceScheme lhs, ReferenceScheme rhs) => Equals(lhs, rhs);
+        public static bool operator ==(TxReferenceScheme lhs, TxReferenceScheme rhs) => Equals(lhs, rhs);
 
         /// <summary>
-        /// Compares two <see cref="ReferenceScheme"/> for inequality.
+        /// Compares two <see cref="TxReferenceScheme"/> for inequality.
         /// </summary>
         /// <param name="lhs">The left hand side of the inequality.</param>
         /// <param name="rhs">The right hand side of the inequality.</param>
         /// <returns>Whether the two instances refer to different schemes or not.</returns>
-        public static bool operator !=(ReferenceScheme lhs, ReferenceScheme rhs) => !(lhs == rhs);
+        public static bool operator !=(TxReferenceScheme lhs, TxReferenceScheme rhs) => !(lhs == rhs);
     }
 
 
