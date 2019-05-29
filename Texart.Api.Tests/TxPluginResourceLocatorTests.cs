@@ -136,7 +136,17 @@ namespace Texart.Api.Tests
             }
 
             [Test]
-            public void RejectsColon() => AssertInvalidRelative("resource/:path");
+            public void PreservesLeadingSlashes()
+            {
+                var relative = TxPluginResourceLocator.OfRelativeResource("///hello");
+                Assert.AreEqual("///hello", relative.ResourcePath);
+                Assert.AreEqual(
+                    new[] { string.Empty, string.Empty, string.Empty, "hello" },
+                    relative.ResourceSegments);
+            }
+
+            [Test]
+            public void RejectsColon() => AssertInvalidRelative("resource/pa:th");
 
             [Test]
             public void RejectsQuery() => AssertInvalidRelative("c?hello=world");
