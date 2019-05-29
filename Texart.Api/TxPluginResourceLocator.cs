@@ -32,7 +32,6 @@ namespace Texart.Api
     ///           <see cref="TxPluginResourceLocator.ResourcePath"/> is allowed to be empty.
     /// These restrictions may be relaxed in the future, but will always be compliant with the latest URI RFC.
     ///
-    /// The following example shows an absolute URI:
     /// <example>
     /// <code>
     ///     var locator = PluginResourceLocator.FromUri("file:///plugins/Texart.SomePlugin.dll:SomePath/SomeResource");
