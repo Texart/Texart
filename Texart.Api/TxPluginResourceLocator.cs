@@ -130,10 +130,11 @@ namespace Texart.Api
         }
 
         /// <summary>
-        /// Constructs a <see cref="RelativeResourceLocator"/> from the provided relative URI path.
+        /// Constructs a <see cref="RelativeResourceLocator"/> from the provided relative URI path. <paramref name="relativeResource"/>
+        /// cannot contain <see cref="AssemblyResourceSeparator"/>.
         /// </summary>
         /// <param name="relativeResource">The relative resource path. See <see cref="TxPluginResourceLocator.ResourcePath"/>.</param>
-        /// <returns></returns>
+        /// <returns>A <see cref="RelativeResourceLocator"/> from parsing <paramref name="relativeResource"/>.</returns>
         /// <exception cref="ArgumentNullException">If <paramref name="relativeResource"/> is <c>null</c>.</exception>
         /// <exception cref="FormatException">If the relative resource path is not valid.</exception>
         public static RelativeResourceLocator OfRelativeResource(string relativeResource)
@@ -280,7 +281,7 @@ namespace Texart.Api
             }
 
             /// <summary>
-            /// Makes sure that the given path is valid for <see cref="TxPluginResourceLocator"/>.
+            /// Makes sure that the given path is valid for <see cref="TxPluginResourceLocator.ResourcePath"/>.
             /// </summary>
             /// <param name="relativePath">The relative URI path to check.</param>
             /// <returns>An exception if the URI is invalid, or <see cref="RelativeResourceLocator"/> if valid.</returns>
