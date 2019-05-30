@@ -2,24 +2,25 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Texart.Api;
 
 namespace Texart.Plugins.Scripting
 {
     /// <summary>
-    /// A metadata reference resolver that selects one of multiple resolvers based on a matching <see cref="ReferenceScheme"/>.
+    /// A metadata reference resolver that selects one of multiple resolvers based on a matching <see cref="TxReferenceScheme"/>.
     /// In the case where there is no matching scheme, it uses the default resolver as a fallback.
     /// </summary>
     public sealed class MetadataReferenceResolverDemux : MetadataReferenceResolver, IEquatable<MetadataReferenceResolverDemux>
     {
         private readonly MetadataReferenceResolver _defaultResolver;
-        private readonly ImmutableDictionary<ReferenceScheme, MetadataReferenceResolver> _resolversByScheme;
+        private readonly ImmutableDictionary<TxReferenceScheme, MetadataReferenceResolver> _resolversByScheme;
 
         /// <summary>
         /// Creates an instance with a default fallback resolver, and a lookup table for different schemes.
         /// </summary>
         /// <param name="defaultResolver">The fallback resolvers.</param>
         /// <param name="resolversByScheme">The lookup table for different schemes.</param>
-        public MetadataReferenceResolverDemux(MetadataReferenceResolver defaultResolver, ImmutableDictionary<ReferenceScheme, MetadataReferenceResolver> resolversByScheme)
+        public MetadataReferenceResolverDemux(MetadataReferenceResolver defaultResolver, ImmutableDictionary<TxReferenceScheme, MetadataReferenceResolver> resolversByScheme)
         {
             _defaultResolver = defaultResolver ?? throw new ArgumentNullException(nameof(defaultResolver));
             _resolversByScheme = resolversByScheme ?? throw new ArgumentNullException(nameof(resolversByScheme));
@@ -47,7 +48,7 @@ namespace Texart.Plugins.Scripting
         /// </summary>
         /// <param name="path">The path to check for scheme.</param>
         /// <returns>Matching resolver if found, else the default resolver.</returns>
-        private (ReferenceScheme, MetadataReferenceResolver) GetResolverByPath(string path) =>
+        private (TxReferenceScheme, MetadataReferenceResolver) GetResolverByPath(string path) =>
             _resolversByScheme
                 .Where(kv => kv.Key.Matches(path))
                 .Select(kv => (kv.Key, kv.Value))

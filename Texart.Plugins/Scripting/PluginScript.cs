@@ -304,9 +304,9 @@ namespace Texart.Plugins.Scripting
         private static SourceReferenceResolver BuildSourceReferenceResolver(SourceFile sourceFile)
         {
             var fileResolver = new SourceFileResolver(ImmutableArray<string>.Empty, Path.GetDirectoryName(sourceFile.FilePath));
-            var resolvers = new Dictionary<ReferenceScheme, SourceReferenceResolver>
+            var resolvers = new Dictionary<TxReferenceScheme, SourceReferenceResolver>
             {
-                {ReferenceScheme.File, fileResolver}
+                {TxReferenceScheme.File, fileResolver}
             };
             return new SourceReferenceResolverDemux(fileResolver, resolvers.ToImmutableDictionary());
         }
@@ -321,9 +321,9 @@ namespace Texart.Plugins.Scripting
         {
             var scriptResolver = ScriptMetadataResolver.Default.WithBaseDirectory(Path.GetDirectoryName(sourceFile.FilePath));
             var texartApiWrappedResolver = new PredefinedOrForwardingMetadataResolver(scriptResolver);
-            var resolvers = new Dictionary<ReferenceScheme, MetadataReferenceResolver>
+            var resolvers = new Dictionary<TxReferenceScheme, MetadataReferenceResolver>
             {
-                {ReferenceScheme.File, scriptResolver}
+                {TxReferenceScheme.File, scriptResolver}
             };
             return new MetadataReferenceResolverDemux(texartApiWrappedResolver, resolvers.ToImmutableDictionary());
         }

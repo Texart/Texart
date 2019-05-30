@@ -3,24 +3,25 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Texart.Api;
 
 namespace Texart.Plugins.Scripting
 {
     /// <summary>
-    /// A source reference resolver that selects one of multiple resolvers based on a matching <see cref="ReferenceScheme"/>.
+    /// A source reference resolver that selects one of multiple resolvers based on a matching <see cref="TxReferenceScheme"/>.
     /// In the case where there is no matching scheme, it uses the default resolver as a fallback.
     /// </summary>
     public sealed class SourceReferenceResolverDemux : SourceReferenceResolver, IEquatable<SourceReferenceResolverDemux>
     {
         private readonly SourceReferenceResolver _defaultResolver;
-        private readonly ImmutableDictionary<ReferenceScheme, SourceReferenceResolver> _resolversByScheme;
+        private readonly ImmutableDictionary<TxReferenceScheme, SourceReferenceResolver> _resolversByScheme;
 
         /// <summary>
         /// Creates an instance with a default fallback resolver, and a lookup table for different schemes.
         /// </summary>
         /// <param name="defaultResolver">The fallback resolvers.</param>
         /// <param name="resolversByScheme">The lookup table for different schemes.</param>
-        public SourceReferenceResolverDemux(SourceReferenceResolver defaultResolver, ImmutableDictionary<ReferenceScheme, SourceReferenceResolver> resolversByScheme)
+        public SourceReferenceResolverDemux(SourceReferenceResolver defaultResolver, ImmutableDictionary<TxReferenceScheme, SourceReferenceResolver> resolversByScheme)
         {
             _defaultResolver = defaultResolver ?? throw new ArgumentNullException(nameof(defaultResolver));
             _resolversByScheme = resolversByScheme ?? throw new ArgumentNullException(nameof(resolversByScheme));
@@ -58,7 +59,7 @@ namespace Texart.Plugins.Scripting
         /// </summary>
         /// <param name="path">The path to check for scheme.</param>
         /// <returns>Matching resolver if found, else the default resolver.</returns>
-        private (ReferenceScheme, SourceReferenceResolver) GetResolverByPath(string path) =>
+        private (TxReferenceScheme, SourceReferenceResolver) GetResolverByPath(string path) =>
             _resolversByScheme
                 .Where(kv => kv.Key.Matches(path))
                 .Select(kv => (kv.Key, kv.Value))

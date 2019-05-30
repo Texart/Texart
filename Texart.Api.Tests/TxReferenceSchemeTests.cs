@@ -1,9 +1,9 @@
 using System;
 using NUnit.Framework;
 
-namespace Texart.Plugins.Tests
+namespace Texart.Api.Tests
 {
-    internal class ReferenceSchemeTests
+    internal class TxReferenceSchemeTests
     {
         [Test]
         public void AllowsSimple() => AssertValidScheme("hello");
@@ -22,14 +22,14 @@ namespace Texart.Plugins.Tests
 
         [Test]
         public void LowerCasesScheme() =>
-            Assert.AreEqual("file", new ReferenceScheme("FiLe").Scheme);
+            Assert.AreEqual("file", new TxReferenceScheme("FiLe").Scheme);
 
         private static void AssertValidScheme(string scheme)
         {
-            ReferenceScheme instance = null;
+            TxReferenceScheme instance = null;
             void CreateInstance()
             {
-                instance = new ReferenceScheme(scheme);
+                instance = new TxReferenceScheme(scheme);
             }
             Assert.DoesNotThrow(CreateInstance);
             Assert.AreEqual(scheme, instance.Scheme);
@@ -100,17 +100,14 @@ namespace Texart.Plugins.Tests
 
         private static void AssertInvalidScheme(string scheme)
         {
-            var ex = Assert.Throws<ArgumentException>(() => new ReferenceScheme(scheme));
-            Assert.IsTrue(
-                ex.Message.StartsWith("scheme is not valid"),
-                "Exception was thrown but not because of invalid scheme");
+            Assert.Throws<TxReferenceScheme.FormatException>(() => new TxReferenceScheme(scheme));
         }
 
         [Test]
         public void HasCorrectEquality()
         {
-            var file1 = new ReferenceScheme("file");
-            var file2 = new ReferenceScheme("file");
+            var file1 = new TxReferenceScheme("file");
+            var file2 = new TxReferenceScheme("file");
 
             Assert.IsTrue(file1 == file2);
             Assert.IsTrue(file2 == file1);
@@ -121,8 +118,8 @@ namespace Texart.Plugins.Tests
         [Test]
         public void HasCorrectInequality()
         {
-            var file = new ReferenceScheme("file");
-            var https = new ReferenceScheme("https");
+            var file = new TxReferenceScheme("file");
+            var https = new TxReferenceScheme("https");
 
             Assert.IsFalse(file == https);
             Assert.IsFalse(https == file);
@@ -133,10 +130,10 @@ namespace Texart.Plugins.Tests
         [Test]
         public void HasCorrectHashCodes()
         {
-            var file1 = new ReferenceScheme("file");
-            var file2 = new ReferenceScheme("FILE");
-            var https1 = new ReferenceScheme("https");
-            var https2 = new ReferenceScheme("HTTPS");
+            var file1 = new TxReferenceScheme("file");
+            var file2 = new TxReferenceScheme("FILE");
+            var https1 = new TxReferenceScheme("https");
+            var https2 = new TxReferenceScheme("HTTPS");
 
             Assert.AreEqual(file1.GetHashCode(), file2.GetHashCode());
             Assert.AreEqual(https1.GetHashCode(), https2.GetHashCode());
