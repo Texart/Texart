@@ -87,6 +87,11 @@ namespace Texart.Api
         public Uri AsUri => new Uri(ToString(), UriKind.Absolute);
 
         /// <summary>
+        /// <c>this</c> without <see cref="RelativeResource"/>.
+        /// </summary>
+        public TxPluginResourceLocator WithoutRelativeResource => WithRelativeResource(string.Empty);
+
+        /// <summary>
         /// Character that is used to partition the URI path into <see cref="AssemblyPath"/> and <see cref="ResourcePath"/>.
         /// The choice of <c>:</c> is justified by its absence in file names (reasonably). Note that many user agents allow
         /// <c>:</c> in URI paths (e.g. web browsers). Paths containing <c>:</c> <i>may</i> need to be URI-encoded (<c>%3A</c>
@@ -96,7 +101,7 @@ namespace Texart.Api
         public const char AssemblyResourceSeparator = ':';
 
         /// <summary>
-        /// Constructs a <see cref="TxPluginResourceLocator"/> from a URI.
+        /// Constructs a <see cref="TxPluginResourceLocator"/> from an absolute URI.
         /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
         /// </summary>
         /// <param name="uri">The URI to build from.</param>
@@ -105,12 +110,14 @@ namespace Texart.Api
         public static TxPluginResourceLocator Of(Uri uri) => new TxPluginResourceLocator(uri);
 
         /// <summary>
-        /// Constructs a <see cref="TxPluginResourceLocator"/> from an absolute URI.
+        /// Constructs a <see cref="TxPluginResourceLocator"/> from an absolute URI. The escaping semantics
+        /// are defined by the <see cref="Uri"/> class.
         /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
         /// </summary>
         /// <param name="uri">The URI to build from.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="uri"/> is <c>null</c>.</exception>
         /// <exception cref="FormatException">If the URI is not valid.</exception>
+        /// <seealso cref="Of(Uri)"/>
         /// <seealso cref="Uri(string, UriKind)"/>
         public static TxPluginResourceLocator Of(string uri) => Of(new Uri(uri, UriKind.Absolute));
 
@@ -131,7 +138,7 @@ namespace Texart.Api
 
         /// <summary>
         /// Constructs a <see cref="RelativeResourceLocator"/> from the provided relative URI path. <paramref name="relativeResource"/>
-        /// cannot contain <see cref="AssemblyResourceSeparator"/>.
+        /// cannot contain <see cref="AssemblyResourceSeparator"/>. The escaping semantics are defined by the <see cref="Uri"/> class.
         /// </summary>
         /// <param name="relativeResource">The relative resource path. See <see cref="TxPluginResourceLocator.ResourcePath"/>.</param>
         /// <returns>A <see cref="RelativeResourceLocator"/> from parsing <paramref name="relativeResource"/>.</returns>
@@ -172,8 +179,17 @@ namespace Texart.Api
         /// </returns>
         /// <exception cref="ArgumentNullException">If <paramref name="scheme"/> is <c>null</c></exception>
         /// <exception cref="FormatException">If the scheme is not valid.</exception>
-        public TxPluginResourceLocator WithScheme(string scheme) =>
-            WithScheme(new TxReferenceScheme(scheme));
+        public TxPluginResourceLocator WithScheme(string scheme)
+        {
+            try
+            {
+                return WithScheme(new TxReferenceScheme(scheme));
+            }
+            catch (TxReferenceScheme.FormatException ex)
+            {
+                throw new FormatException($"URI scheme is not valid: {scheme}", ex);
+            }
+        }
 
         /// <summary>
         /// Creates a new <see cref="TxPluginResourceLocator"/> with <see cref="Scheme"/> replaced with
@@ -198,7 +214,7 @@ namespace Texart.Api
 
         /// <summary>
         /// Creates a new <see cref="TxPluginResourceLocator"/> with <see cref="AssemblyPath"/> replaced with
-        /// <paramref name="assemblyPath"/>.
+        /// <paramref name="assemblyPath"/>. The escaping semantics are defined by the <see cref="Uri"/> class.
         /// </summary>
         /// <param name="assemblyPath">The new <see cref="AssemblyPath"/>.</param>
         /// <returns>
@@ -221,7 +237,7 @@ namespace Texart.Api
 
         /// <summary>
         /// Creates a new <see cref="TxPluginResourceLocator"/> with <see cref="RelativeResource"/> replaced with
-        /// <paramref name="relativeResourceLocator"/>.
+        /// <paramref name="relativeResourceLocator"/>. The escaping semantics are defined by the <see cref="Uri"/> class.
         /// </summary>
         /// <param name="relativeResourceLocator">The new <see cref="RelativeResourceLocator"/>.</param>
         /// <returns>
@@ -456,7 +472,7 @@ namespace Texart.Api
             //   authority   = [ userinfo "@" ] host [ ":" port ]
             if (!string.IsNullOrEmpty(uri.Authority))
             {
-                return (new FormatException($"URI authority is not allowed: ${uri.UserInfo}"), default);
+                return (new FormatException($"URI authority is not allowed: ${uri.Authority}"), default);
             }
 
             // Query check
@@ -513,9 +529,16 @@ namespace Texart.Api
                     var separatorIndex = segment.LastIndexOf(AssemblyResourceSeparator);
                     if (separatorIndex != -1)
                     {
+                        separatorFound = true;
                         assemblySegments.Add(segment.Substring(0, separatorIndex));
                         resourceSegments.Add(segment.Substring(separatorIndex + 1));
-                        separatorFound = true;
+                        //if (separatorIndex != segment.Length - 1)
+                        //{
+                        //    // only add non-empty strings
+                        //    var resourceSegment = segment.Substring(separatorIndex + 1);
+                        //    Debug.Assert(resourceSegment != string.Empty);
+                        //    resourceSegments.Add(resourceSegment);
+                        //}
                     }
                     else
                     {
@@ -554,6 +577,13 @@ namespace Texart.Api
             /// </summary>
             /// <param name="message">The exception message.</param>
             internal FormatException(string message) : base(message) { }
+            /// <summary>
+            /// Creates an exception with <see cref="Exception.Message"/> set to <paramref name="message"/>
+            /// and <see cref="Exception.InnerException"/> set to <paramref name="innerException"/>.
+            /// </summary>
+            /// <param name="message">The exception message.</param>
+            /// <param name="innerException">The inner exception that caused this.</param>
+            internal FormatException(string message, Exception innerException) : base(message, innerException) { }
         }
 
         /// <summary>
