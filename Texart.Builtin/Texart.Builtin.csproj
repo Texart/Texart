@@ -2,7 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <LangVersion>8.0</LangVersion>
+    <AssemblyName>Texart.Builtin</AssemblyName>
+    <RootNamespace>Texart.Builtin</RootNamespace>
+    <LangVersion>8</LangVersion>
+    <NullableContextOptions>disable</NullableContextOptions>
   </PropertyGroup>
 
   <ItemGroup>

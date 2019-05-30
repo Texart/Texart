@@ -110,7 +110,7 @@ namespace Texart.Api
                 case MemberKind.Locator: return new TxPluginResource<T>(resource._locator);
                 case MemberKind.RelativeLocator: return new TxPluginResource<T>(resource._relativeLocator);
             }
-            Debug.Assert(false, "Unreachable code!");
+            Debug.Fail("Unreachable code!");
             return null;
         }
 
@@ -254,7 +254,7 @@ namespace Texart.Api
                     case TxPluginResource.MemberKind.Locator: return _locator;
                     case TxPluginResource.MemberKind.RelativeLocator: return _relativeLocator;
                 }
-                Debug.Assert(false, "Unreachable code!");
+                Debug.Fail("Unreachable code!");
                 return null;
             }
         }
@@ -323,7 +323,7 @@ namespace Texart.Api
                 case TxPluginResource.MemberKind.Locator: return Equals(_locator, other._locator);
                 case TxPluginResource.MemberKind.RelativeLocator: return Equals(_relativeLocator, other._relativeLocator);
             }
-            Debug.Assert(false, "Unreachable code!");
+            Debug.Fail("Unreachable code!");
             return false;
         }
 

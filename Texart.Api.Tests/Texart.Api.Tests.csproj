@@ -5,7 +5,8 @@
 
     <IsPackable>false</IsPackable>
 
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>8</LangVersion>
+    <NullableContextOptions>disable</NullableContextOptions>
   </PropertyGroup>
 
   <ItemGroup>

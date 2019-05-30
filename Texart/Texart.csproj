@@ -4,7 +4,10 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <StartupObject>Texart.Program</StartupObject>
-    <LangVersion>8.0</LangVersion>
+    <AssemblyName>Texart</AssemblyName>
+    <RootNamespace>Texart</RootNamespace>
+    <LangVersion>8</LangVersion>
+    <NullableContextOptions>disable</NullableContextOptions>
   </PropertyGroup>
 
   <ItemGroup>

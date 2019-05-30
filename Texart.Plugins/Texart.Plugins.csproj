@@ -4,7 +4,8 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyName>Texart.Plugins</AssemblyName>
     <RootNamespace>Texart.Plugins</RootNamespace>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>8</LangVersion>
+    <NullableContextOptions>disable</NullableContextOptions>
   </PropertyGroup>
 
   <ItemGroup>
