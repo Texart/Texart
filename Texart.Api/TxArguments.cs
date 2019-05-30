@@ -255,7 +255,7 @@ namespace Texart.Api
         /// <seealso cref="GetSingle(string)"/>
         /// <seealso cref="GetDouble(string)"/>
         /// <seealso cref="GetBool(string)"/>
-        public T GetValue<T>(string key, TryParseFunc<T> tryParse)
+        public T GetValue<T>(string key, TryParseFunc<T> tryParse) where T : struct
         {
             if (key == null) { throw new ArgumentNullException(nameof(key)); }
             Debug.Assert(tryParse != null);
@@ -527,7 +527,7 @@ namespace Texart.Api
         /// <seealso cref="GetSingle(string,float)"/>
         /// <seealso cref="GetDouble(string,double)"/>
         /// <seealso cref="GetBool(string,bool)"/>
-        public T GetValue<T>(string key, TryParseFunc<T> tryParse, T defaultValue)
+        public T GetValue<T>(string key, TryParseFunc<T> tryParse, T defaultValue) where T : struct
         {
             if (key == null) { throw new ArgumentNullException(nameof(key)); }
             Debug.Assert(tryParse != null);
@@ -854,7 +854,41 @@ namespace Texart.Api
         /// </returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
         /// <seealso cref="GetValue{T}(string,TryParseFunc{T})"/>
-        public LookupResult TryGetValue<T>(string key, out T value, TryParseFunc<T> tryParse)
+        /// <seealso cref="TryGetValueAsRef{T}(string,out T,TryParseFunc{T})"/>
+        public LookupResult TryGetValue<T>(string key, out T value, TryParseFunc<T> tryParse) where T : struct
+        {
+            if (key == null) { throw new ArgumentNullException(nameof(key)); }
+            Debug.Assert(tryParse != null);
+            if (AsImmutableDictionary.TryGetValue(key, out var stringValue))
+            {
+                return tryParse(stringValue, out value)
+                    ? LookupResult.Success
+                    : LookupResult.ParsingError;
+            }
+            value = default;
+            return LookupResult.MissingKey;
+        }
+
+        /// <summary>
+        /// Retrieves the value at <paramref name="key"/> as <typeparamref name="T"/>.
+        /// If the key is not found, then <paramref name="value"/> is set to <c>null</c> and
+        /// <see cref="LookupResult.MissingKey"/> is returned.
+        /// If the key is found, but cannot be converted to <typeparamref name="T"/> (via <paramref name="tryParse"/>),
+        /// <paramref name="value"/> is set to <c>default</c> and <see cref="LookupResult.ParsingError"/> is returned.
+        /// </summary>
+        /// <param name="key">The key to look up.</param>
+        /// <param name="value">The parsed value associated with <paramref name="key"/></param>
+        /// <param name="tryParse">The conversion function from <c>string</c> to <typeparamref name="T"/>.</param>
+        /// <typeparam name="T">The desired value type.</typeparam>
+        /// <returns>
+        ///     <see cref="LookupResult.Success"/> if the key exists, and can be converted to <typeparamref name="T"/>.
+        ///     <see cref="LookupResult.ParsingError"/> if the key exists, but cannot be converted to <typeparamref name="T"/>.
+        ///     <see cref="LookupResult.MissingKey"/> if the key does not exist.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
+        /// <seealso cref="GetValue{T}(string,TryParseFunc{T})"/>
+        /// <seealso cref="TryGetValue{T}(string,out T,TryParseFunc{T})"/>
+        public LookupResult TryGetValueAsRef<T>(string key, out T? value, TryParseFunc<T> tryParse) where T : class
         {
             if (key == null) { throw new ArgumentNullException(nameof(key)); }
             Debug.Assert(tryParse != null);

@@ -26,29 +26,29 @@ namespace Texart.Api.Tests
 
         private static void AssertValidScheme(string scheme)
         {
-            TxReferenceScheme instance = null;
+            TxReferenceScheme? instance = null;
             void CreateInstance()
             {
                 instance = new TxReferenceScheme(scheme);
             }
             Assert.DoesNotThrow(CreateInstance);
-            Assert.AreEqual(scheme, instance.Scheme);
+            Assert.AreEqual(scheme, instance!.Scheme);
 
             void CheckMatches()
             {
-                Assert.IsTrue(instance.Matches($"{scheme}://hello:world"));
-                Assert.IsTrue(instance.Matches($"{scheme}://"));
-                Assert.IsFalse(instance.Matches(scheme));
-                Assert.IsFalse(instance.Matches($"{scheme}hello://world"));
+                Assert.IsTrue(instance!.Matches($"{scheme}://hello:world"));
+                Assert.IsTrue(instance!.Matches($"{scheme}://"));
+                Assert.IsFalse(instance!.Matches(scheme));
+                Assert.IsFalse(instance!.Matches($"{scheme}hello://world"));
             }
             void CheckPrefix()
             {
-                Assert.AreEqual($"{scheme}://", instance.SchemePrefix);
-                Assert.AreEqual($"{scheme}://hello/world", instance.Prefix("hello/world"));
+                Assert.AreEqual($"{scheme}://", instance!.SchemePrefix);
+                Assert.AreEqual($"{scheme}://hello/world", instance!.Prefix("hello/world"));
             }
             void CheckNormalizePath()
             {
-                Assert.AreEqual(instance.NormalizePath($"{scheme}://hello/world"), "hello/world");
+                Assert.AreEqual(instance!.NormalizePath($"{scheme}://hello/world"), "hello/world");
             }
 
             CheckMatches();

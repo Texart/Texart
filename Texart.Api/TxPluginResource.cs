@@ -106,12 +106,12 @@ namespace Texart.Api
         {
             switch (resource.ActiveMemberKind)
             {
-                case MemberKind.Factory: return new TxPluginResource<T>(resource._factory);
-                case MemberKind.Locator: return new TxPluginResource<T>(resource._locator);
-                case MemberKind.RelativeLocator: return new TxPluginResource<T>(resource._relativeLocator);
+                case MemberKind.Factory: return new TxPluginResource<T>(resource._factory!);
+                case MemberKind.Locator: return new TxPluginResource<T>(resource._locator!);
+                case MemberKind.RelativeLocator: return new TxPluginResource<T>(resource._relativeLocator!);
             }
             Debug.Fail("Unreachable code!");
-            return null;
+            throw new InvalidOperationException();
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace Texart.Api
                     throw new TxPluginResource.InactiveUnionMemberAccessException(
                         TxPluginResource.MemberKind.Factory, ActiveMemberKind);
                 }
-                return _factory;
+                return _factory!;
             }
         }
 
@@ -217,7 +217,7 @@ namespace Texart.Api
                     throw new TxPluginResource.InactiveUnionMemberAccessException(
                         TxPluginResource.MemberKind.Locator, ActiveMemberKind);
                 }
-                return _locator;
+                return _locator!;
             }
         }
 
@@ -236,7 +236,7 @@ namespace Texart.Api
                     throw new TxPluginResource.InactiveUnionMemberAccessException(
                         TxPluginResource.MemberKind.RelativeLocator, ActiveMemberKind);
                 }
-                return _relativeLocator;
+                return _relativeLocator!;
             }
         }
 
@@ -250,12 +250,12 @@ namespace Texart.Api
             {
                 switch (ActiveMemberKind)
                 {
-                    case TxPluginResource.MemberKind.Factory: return _factory;
-                    case TxPluginResource.MemberKind.Locator: return _locator;
-                    case TxPluginResource.MemberKind.RelativeLocator: return _relativeLocator;
+                    case TxPluginResource.MemberKind.Factory: return _factory!;
+                    case TxPluginResource.MemberKind.Locator: return _locator!;
+                    case TxPluginResource.MemberKind.RelativeLocator: return _relativeLocator!;
                 }
                 Debug.Fail("Unreachable code!");
-                return null;
+                throw new InvalidOperationException();
             }
         }
 
@@ -296,17 +296,17 @@ namespace Texart.Api
         /// The factory union member, or <c>null</c> if <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.Factory"/>.
         /// </summary>
         // ReSharper disable once InconsistentNaming
-        internal readonly TxFactory<T, TxArguments> _factory;
+        internal readonly TxFactory<T, TxArguments>? _factory;
         /// <summary>
         /// The locator union member, or <c>null</c> if <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.Locator"/>.
         /// </summary>
         // ReSharper disable once InconsistentNaming
-        internal readonly TxPluginResourceLocator _locator;
+        internal readonly TxPluginResourceLocator? _locator;
         /// <summary>
         /// The relative locator union member, or <c>null</c> if <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.RelativeLocator"/>.
         /// </summary>
         // ReSharper disable once InconsistentNaming
-        internal readonly TxPluginResourceLocator.RelativeLocator _relativeLocator;
+        internal readonly TxPluginResourceLocator.RelativeLocator? _relativeLocator;
 
         /// <inheritdoc cref="object.ToString"/>
         public override string ToString() => $"{typeof(TxPluginResource<T>).Name}({ActiveMemberKind}){{{ActiveMember}}}";

@@ -48,7 +48,7 @@ namespace Texart.Api
         /// <summary>
         /// Gets or sets the underlying typeface.
         /// </summary>
-        public SKTypeface Typeface { get; set; }
+        public SKTypeface? Typeface { get; set; }
 
         /// <summary>
         /// Gets or sets the foreground color of this font.

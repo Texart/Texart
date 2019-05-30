@@ -138,7 +138,7 @@ namespace Texart.Api
         /// <param name="lhs">The left hand side of the equality.</param>
         /// <param name="rhs">The right hand side of the equality.</param>
         /// <returns>Whether the two instances refer to the same scheme or not.</returns>
-        public static bool operator ==(TxReferenceScheme lhs, TxReferenceScheme rhs) => Equals(lhs, rhs);
+        public static bool operator ==(TxReferenceScheme? lhs, TxReferenceScheme? rhs) => Equals(lhs, rhs);
 
         /// <summary>
         /// Compares two <see cref="TxReferenceScheme"/> for inequality.
@@ -146,7 +146,7 @@ namespace Texart.Api
         /// <param name="lhs">The left hand side of the inequality.</param>
         /// <param name="rhs">The right hand side of the inequality.</param>
         /// <returns>Whether the two instances refer to different schemes or not.</returns>
-        public static bool operator !=(TxReferenceScheme lhs, TxReferenceScheme rhs) => !(lhs == rhs);
+        public static bool operator !=(TxReferenceScheme? lhs, TxReferenceScheme? rhs) => !(lhs == rhs);
 
         /// <summary>
         /// A <see cref="FormatException"/> is thrown when an attempt is made to create <see cref="TxReferenceScheme"/>

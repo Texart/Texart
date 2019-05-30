@@ -20,7 +20,7 @@ namespace Texart.Plugins.Tests.Scripting.Diagnostics.TestHelpers
         /// <summary>
         /// Get the CSharp analyzer being tested - to be implemented in non-abstract class
         /// </summary>
-        protected virtual DiagnosticAnalyzer CSharpDiagnosticAnalyzer => null;
+        protected virtual DiagnosticAnalyzer? CSharpDiagnosticAnalyzer => null;
         /// <summary>
         /// Get the CSharp language version - to be implemented in non-abstract class
         /// </summary>
@@ -60,7 +60,7 @@ namespace Texart.Plugins.Tests.Scripting.Diagnostics.TestHelpers
         }
 
         /// <summary>
-        /// General method that gets a collection of actual diagnostics found in the source after the analyzer is run, 
+        /// General method that gets a collection of actual diagnostics found in the source after the analyzer is run,
         /// then verifies each of them.
         /// </summary>
         /// <param name="sources">An array of strings to create source documents from to run the analyzers on</param>

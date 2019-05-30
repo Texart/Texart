@@ -7,7 +7,7 @@
     <AssemblyName>Texart</AssemblyName>
     <RootNamespace>Texart</RootNamespace>
     <LangVersion>8</LangVersion>
-    <NullableContextOptions>disable</NullableContextOptions>
+    <NullableContextOptions>enable</NullableContextOptions>
   </PropertyGroup>
 
   <ItemGroup>

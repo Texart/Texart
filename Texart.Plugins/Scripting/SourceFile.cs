@@ -39,15 +39,13 @@ namespace Texart.Plugins.Scripting
         ///     If this is <c>null</c>, then <see cref="Encoding.UTF8"/> is used.
         /// </param>
         /// <returns>A <c>SourceFile</c> instance.</returns>
-        public static SourceFile Load(string filePath, Encoding encoding = null)
+        public static SourceFile Load(string filePath, Encoding? encoding = null)
         {
             var absolutePath = Path.GetFullPath(filePath);
 
-            using (var file = File.OpenRead(absolutePath))
-            using (var reader = new StreamReader(file, encoding ?? Encoding.UTF8))
-            {
-                return new SourceFile(absolutePath, reader.ReadToEnd());
-            }
+            using var file = File.OpenRead(absolutePath);
+            using var reader = new StreamReader(file, encoding ?? Encoding.UTF8);
+            return new SourceFile(absolutePath, reader.ReadToEnd());
         }
 
         /// <inheritdoc />

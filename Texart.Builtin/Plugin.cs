@@ -61,7 +61,7 @@ namespace Texart.Builtin
         /// <inheritdoc cref="ITxPlugin.LookupGenerator" />
         TxPluginResource<ITxTextBitmapGenerator> ITxPlugin.LookupGenerator(Locator locator)
         {
-            if (locator == null)
+            if (locator.ResourcePath == string.Empty)
             {
                 return _defaultGenerator;
             }
@@ -78,7 +78,7 @@ namespace Texart.Builtin
         /// <inheritdoc cref="ITxPlugin.LookupRenderer"/>
         TxPluginResource<ITxTextBitmapRenderer> ITxPlugin.LookupRenderer(Locator locator)
         {
-            if (locator == null)
+            if (locator.ResourcePath == string.Empty)
             {
                 return _defaultRenderer;
             }

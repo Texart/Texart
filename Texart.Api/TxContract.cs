@@ -17,7 +17,7 @@ namespace Texart.Api
         /// <param name="value">The value to check.</param>
         /// <param name="valueExpr">Caller argument expression of <paramref name="value"/></param>
         /// <returns>The provided value if it's not <c>null</c>.</returns>
-        public static T NonNull<T>(T value, [CallerArgumentExpression("value")] string valueExpr = null)
+        public static T NonNull<T>(T value, [CallerArgumentExpression("value")] string? valueExpr = null)
         {
             if (value == null) { throw new ArgumentNullException($"TxContract: {valueExpr ?? nameof(value)} was null!"); }
             return value;

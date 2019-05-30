@@ -5,7 +5,7 @@
     <AssemblyName>Texart.Api</AssemblyName>
     <RootNamespace>Texart.Api</RootNamespace>
     <LangVersion>8</LangVersion>
-    <NullableContextOptions>disable</NullableContextOptions>
+    <NullableContextOptions>enable</NullableContextOptions>
   </PropertyGroup>
 
   <ItemGroup>

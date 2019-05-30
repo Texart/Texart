@@ -106,8 +106,8 @@ namespace Texart.Plugins.Scripting
         /// <returns>The <see cref="ScriptState{T}.ReturnValue"/>.</returns>
         /// <seealso cref="Script{T}.RunAsync(object,System.Threading.CancellationToken)"/>.
         public async Task<ScriptState<T>> RunAsync(
-            object globals = null,
-            Func<Exception, bool> catchException = null,
+            object? globals = null,
+            Func<Exception, bool>? catchException = null,
             CancellationToken cancellationToken = default)
         {
             try
@@ -143,8 +143,8 @@ namespace Texart.Plugins.Scripting
         /// <returns>The <see cref="ScriptState{T}.ReturnValue"/>.</returns>
         /// <seealso cref="Script{T}.RunAsync(object,System.Threading.CancellationToken)"/>.
         public async Task<T> EvaluateAsync(
-            object globals = null,
-            Func<Exception, bool> catchException = null,
+            object? globals = null,
+            Func<Exception, bool>? catchException = null,
             CancellationToken cancellationToken = default)
         {
             var scriptState = await RunAsync(globals, catchException, cancellationToken);
