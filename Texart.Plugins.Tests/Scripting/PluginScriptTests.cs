@@ -12,7 +12,7 @@ namespace Texart.Plugins.Tests.Scripting
         {
             const int fixture = 1;
             var script = await ScriptFixtures.LoadFrom<int>(fixture, "load-script.tx.csx");
-            var result = (await script.RunAsync()).ReturnValue;
+            var result = await script.EvaluateAsync();
             Assert.AreEqual(42, result);
         }
 
@@ -22,7 +22,7 @@ namespace Texart.Plugins.Tests.Scripting
             const int fixture = 1;
             // TODO: set up actual tests
             var script = await ScriptFixtures.LoadFrom<int>(fixture, "load-script-with-scheme.tx.csx");
-            var result = (await script.RunAsync()).ReturnValue;
+            var result = await script.EvaluateAsync();
             Assert.AreEqual(42, result);
         }
 
@@ -31,7 +31,7 @@ namespace Texart.Plugins.Tests.Scripting
         {
             const int fixture = 2;
             var script = await ScriptFixtures.LoadFrom<int>(fixture, "load-assembly.tx.csx");
-            var result = (await script.RunAsync()).ReturnValue;
+            var result = await script.EvaluateAsync();
             Assert.AreEqual(42, result);
         }
 
@@ -40,7 +40,7 @@ namespace Texart.Plugins.Tests.Scripting
         {
             const int fixture = 2;
             var script = await ScriptFixtures.LoadFrom<int>(fixture, "load-assembly-with-scheme.tx.csx");
-            var result = (await script.RunAsync()).ReturnValue;
+            var result = await script.EvaluateAsync();
             Assert.AreEqual(42, result);
         }
 

@@ -80,7 +80,7 @@ namespace Texart.Api
         /// <see cref="ResourceSegments"/> as a URI path string. The format is "path/to/resource".
         /// </summary>
         public string ResourcePath =>
-            _resourcePathBackingField = _resourcePathBackingField ?? string.Join(UriPathSeparator, ResourceSegments);
+            _resourcePathBackingField ??= string.Join(UriPathSeparator, ResourceSegments);
 
         /// <summary>
         /// The URI representation of <c>this</c>.
@@ -99,7 +99,7 @@ namespace Texart.Api
         /// in this case).
         /// </summary>
         /// <seealso cref="Uri.EscapeUriString"/>
-        public const char AssemblyResourceSeparator = ':';
+        private const char AssemblyResourceSeparator = ':';
 
         /// <summary>
         /// Constructs a <see cref="TxPluginResourceLocator"/> from an absolute URI.
@@ -510,7 +510,7 @@ namespace Texart.Api
             ReadOnlySpan<string> segments = path.Split(UriPathSeparator);
             if (!segments.IsEmpty && segments[0] == string.Empty)
             {
-                // Remove trailing /
+                // Remove leading /
                 segments = segments.Slice(1);
             }
 

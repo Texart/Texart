@@ -67,77 +67,75 @@ namespace Texart.Builtin.Renderers
         /// <returns>The generated <see cref="SKBitmap"/>.</returns>
         private SKBitmap GenerateBitmap(ITxTextBitmap txTextBitmap)
         {
-            using (var paint = new SKPaint())
+            using var paint = new SKPaint
             {
-                paint.IsAntialias = ShouldAntialias;
-                paint.IsDither = ShouldDither;
-                paint.IsAutohinted = ShouldHint;
+                IsAntialias = ShouldAntialias,
+                IsDither = ShouldDither,
+                IsAutohinted = ShouldHint,
+                Typeface = Font.Typeface,
+                TextSize = Font.TextSize,
+                TextEncoding = SKTextEncoding.Utf8,
+                SubpixelText = true,
+                DeviceKerningEnabled = false,
+                Color = Font.Color
+            };
 
-                var font = Font;
-                paint.Typeface = font.Typeface;
-                paint.TextSize = font.TextSize;
-                paint.TextEncoding = SKTextEncoding.Utf8;
-                paint.SubpixelText = true;
-                paint.DeviceKerningEnabled = false;
+            var backgroundColor = BackgroundColor;
 
-                paint.Color = font.Color;
-                var backgroundColor = BackgroundColor;
+            int textWidth = txTextBitmap.Width;
+            int textHeight = txTextBitmap.Height;
 
-                int textWidth = txTextBitmap.Width;
-                int textHeight = txTextBitmap.Height;
+            // spacing reserved for a single character
+            SKFontMetrics fontMetrics = paint.FontMetrics;
+            int characterSpacing = Font.CharacterSpacing;
 
-                // spacing reserved for a single character
-                SKFontMetrics fontMetrics = paint.FontMetrics;
-                int characterSpacing = font.CharacterSpacing;
+            Debug.Assert(characterSpacing > 0);
 
-                Debug.Assert(characterSpacing > 0);
+            // bitmap may not be big enough for all text if using
+            // non-monospace characters and/or characterSize is not
+            // sufficient. Too bad.
+            int bitmapWidth = characterSpacing * textWidth;
+            int bitmapHeight = characterSpacing * textHeight;
 
-                // bitmap may not be big enough for all text if using
-                // non-monospace characters and/or characterSize is not
-                // sufficient. Too bad.
-                int bitmapWidth = characterSpacing * textWidth;
-                int bitmapHeight = characterSpacing * textHeight;
+            Debug.Assert(bitmapWidth > 0);
+            Debug.Assert(bitmapHeight > 0);
 
-                Debug.Assert(bitmapWidth > 0);
-                Debug.Assert(bitmapHeight > 0);
-
-                // NOTE: this will need to be disposed by the caller.
-                var bitmap = new SKBitmap(
-                    bitmapWidth, bitmapHeight,
-                    SKImageInfo.PlatformColorType, SKAlphaType.Premul
-                );
-                using (var canvas = new SKCanvas(bitmap))
+            // NOTE: this will need to be disposed by the caller.
+            var bitmap = new SKBitmap(
+                bitmapWidth, bitmapHeight,
+                SKImageInfo.PlatformColorType, SKAlphaType.Premul
+            );
+            using (var canvas = new SKCanvas(bitmap))
+            {
+                bitmap.Erase(backgroundColor);
+                var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 1 };
+                Parallel.For(0, textHeight, parallelOptions, y =>
                 {
-                    bitmap.Erase(backgroundColor);
-                    var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = 1 };
-                    Parallel.For(0, textHeight, parallelOptions, y =>
+                    Parallel.For(0, textWidth, x =>
                     {
-                        Parallel.For(0, textWidth, x =>
-                        {
-                            string charAsString = txTextBitmap.CharAt(x, y).ToString();
+                        string charAsString = txTextBitmap.CharAt(x, y).ToString();
 
-                            // dimensions of actual printed chars
-                            float charWidth = paint.MeasureText(charAsString);
-                            float charHeight = -fontMetrics.Ascent;
-                            Debug.Assert(charWidth > 0);
-                            Debug.Assert(charHeight > 0);
+                        // dimensions of actual printed chars
+                        float charWidth = paint.MeasureText(charAsString);
+                        float charHeight = -fontMetrics.Ascent;
+                        Debug.Assert(charWidth > 0);
+                        Debug.Assert(charHeight > 0);
 
-                            // the actual position to render them.
-                            // they should be centered in the space allocated to them.
-                            float textX = (x * characterSpacing) + (characterSpacing - charWidth) * 0.5f;
-                            float textY = (y * characterSpacing) + (characterSpacing * 0.75f);
+                        // the actual position to render them.
+                        // they should be centered in the space allocated to them.
+                        float textX = (x * characterSpacing) + (characterSpacing - charWidth) * 0.5f;
+                        float textY = (y * characterSpacing) + (characterSpacing * 0.75f);
 
-                            canvas.DrawText(
-                                text: txTextBitmap.CharAt(x, y).ToString(),
-                                x: textX,
-                                y: textY,
-                                paint: paint
-                            );
-                        });
+                        canvas.DrawText(
+                            text: txTextBitmap.CharAt(x, y).ToString(),
+                            x: textX,
+                            y: textY,
+                            paint: paint
+                        );
                     });
-                }
-                return bitmap;
+                });
             }
+            return bitmap;
         }
 
         /// <summary>

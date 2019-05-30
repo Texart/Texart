@@ -7,7 +7,7 @@ namespace Texart.Api
     /// An implementation of <see cref="ITxTextBitmap"/> based on an underlying
     /// one dimensional array.
     /// </summary>
-    public sealed class TxArrayTxTextBitmap : ITxTextBitmap
+    public sealed class TxArrayTextBitmap : ITxTextBitmap
     {
         /// <inheritdoc/>
         public int Height { get; }
@@ -21,14 +21,14 @@ namespace Texart.Api
         private char[] Characters { get; }
 
         /// <summary>
-        /// Constructs an <see cref="TxArrayTxTextBitmap"></see> given the underlying array to use.
+        /// Constructs an <see cref="TxArrayTextBitmap"></see> given the underlying array to use.
         /// The length of this array must match the provided <c>width</c> and
         /// <c>height</c>. That is, <c>characters.length == width * height</c>.
         /// </summary>
         /// <param name="characters">The underlying array</param>
         /// <param name="width">The width of the text data</param>
         /// <param name="height">The height of the text data</param>
-        public TxArrayTxTextBitmap(char[] characters, int width, int height)
+        public TxArrayTextBitmap(char[] characters, int width, int height)
         {
             // TODO: perhaps these checks should happen in Release too
             Debug.Assert(characters != null);

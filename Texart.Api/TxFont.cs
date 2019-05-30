@@ -19,11 +19,11 @@ namespace Texart.Api
         /// <exception cref="ArgumentException">If trying to set a value of less than or equal to <c>0</c></exception>
         public int CharacterSpacing
         {
-            get => this._characterSpacing;
+            get => _characterSpacing;
             set
             {
                 if (value <= 0) { throw new ArgumentException($"{nameof(CharacterSpacing)} must be positive"); }
-                this._characterSpacing = value;
+                _characterSpacing = value;
             }
         }
         private int _characterSpacing = DefaultCharacterSpacing;
@@ -32,15 +32,15 @@ namespace Texart.Api
         /// Gets or sets the point size of the font.
         /// </summary>
         /// <see cref="SKPaint.TextSize"/>
-        /// <see cref="DefaultTextSize"/> 
+        /// <see cref="DefaultTextSize"/>
         /// <exception cref="ArgumentException">If trying to set a value of less than or equal to <c>0f</c></exception>
         public float TextSize
         {
-            get => this._textSize;
+            get => _textSize;
             set
             {
                 if (value <= 0f) { throw new ArgumentException($"{nameof(this.TextSize)} must be positive"); }
-                this._textSize = value;
+                _textSize = value;
             }
         }
         private float _textSize = DefaultTextSize;
@@ -63,7 +63,7 @@ namespace Texart.Api
         /// <returns>A new <see cref="TxFont"/> with the given typeface.</returns>
         public static TxFont FromTypeface(SKTypeface typeface)
         {
-            return new TxFont()
+            return new TxFont
             {
                 Typeface = typeface,
                 CharacterSpacing = DefaultCharacterSpacing,

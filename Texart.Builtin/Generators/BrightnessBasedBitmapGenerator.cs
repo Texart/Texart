@@ -43,7 +43,7 @@ namespace Texart.Builtin.Generators
                 targetData[index] = characters[charactersCount - scaledCharacterIndex - 1];
             });
 
-            ITxTextBitmap txTextBitmap = new TxArrayTxTextBitmap(targetData, targetWidth, targetHeight);
+            ITxTextBitmap txTextBitmap = new TxArrayTextBitmap(targetData, targetWidth, targetHeight);
             return Task.FromResult(txTextBitmap);
         }
 

@@ -16,7 +16,7 @@ namespace Texart.Builtin.Generators
         /// <param name="pixelSamplingRatio"><see cref="ITxTextBitmapGenerator.PixelSamplingRatio"/></param>
         protected TxTextBitmapGeneratorBase(IList<char> characters, int pixelSamplingRatio)
         {
-            this.Characters = characters ?? throw new ArgumentNullException(nameof(characters));
+            Characters = characters ?? throw new ArgumentNullException(nameof(characters));
             if (Characters.Count < 1)
             {
                 throw new ArgumentException($"{nameof(characters)} must have at least 1 character.");
@@ -26,7 +26,7 @@ namespace Texart.Builtin.Generators
             {
                 throw new ArgumentException($"{nameof(pixelSamplingRatio)} must be at least 1.");
             }
-            this.PixelSamplingRatio = pixelSamplingRatio;
+            PixelSamplingRatio = pixelSamplingRatio;
         }
 
         /// <inheritdocs/>
@@ -63,8 +63,8 @@ namespace Texart.Builtin.Generators
         /// <see cref="PixelSamplingRatio"/>
         protected int WidthFor(SKBitmap bitmap)
         {
-            Debug.Assert(bitmap.Width % this.PixelSamplingRatio == 0);
-            return bitmap.Width / this.PixelSamplingRatio;
+            Debug.Assert(bitmap.Width % PixelSamplingRatio == 0);
+            return bitmap.Width / PixelSamplingRatio;
         }
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace Texart.Builtin.Generators
         /// <see cref="PixelSamplingRatio"/>
         protected int HeightFor(SKBitmap bitmap)
         {
-            Debug.Assert(bitmap.Height % this.PixelSamplingRatio == 0);
-            return bitmap.Height / this.PixelSamplingRatio;
+            Debug.Assert(bitmap.Height % PixelSamplingRatio == 0);
+            return bitmap.Height / PixelSamplingRatio;
         }
     }
 }
