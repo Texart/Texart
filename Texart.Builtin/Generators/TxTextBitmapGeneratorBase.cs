@@ -38,7 +38,7 @@ namespace Texart.Builtin.Generators
         /// <inheritdocs/>
         public async Task<ITxTextBitmap> GenerateAsync(SKBitmap bitmap)
         {
-            if (bitmap == null) { throw new ArgumentNullException(nameof(bitmap)); }
+            if (bitmap is null) { throw new ArgumentNullException(nameof(bitmap)); }
             if (bitmap.Width % this.PixelSamplingRatio != 0 || bitmap.Height % this.PixelSamplingRatio != 0)
             {
                 throw new ArgumentException($"{nameof(this.PixelSamplingRatio)} must evenly divide both Bitmap width and height.");

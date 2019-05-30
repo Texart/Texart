@@ -144,8 +144,8 @@ namespace Texart.Builtin.Renderers
         /// <param name="txFont">The font to use.</param>
         public FontBitmapRenderer(TxFont txFont)
         {
-            if (txFont == null) { throw new ArgumentNullException(nameof(txFont)); }
-            if (txFont.Typeface == null) { throw new ArgumentNullException(nameof(txFont.Typeface)); }
+            if (txFont is null) { throw new ArgumentNullException(nameof(txFont)); }
+            if (txFont.Typeface is null) { throw new ArgumentNullException(nameof(txFont.Typeface)); }
             Font = txFont;
         }
 

@@ -134,7 +134,7 @@ namespace Texart.Api
         public static bool IsWellFormedResourceLocatorUri(Uri uri)
         {
             var (exception, _) = CheckIsValidPluginResourceUri(uri);
-            return exception == null;
+            return exception is null;
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace Texart.Api
         public static bool IsWellFormedRelativeResourceString(string relativeResource)
         {
             var (checkFailedException, _) = RelativeLocator.CheckIsValidRelativeResourcePath(relativeResource);
-            return checkFailedException == null;
+            return checkFailedException is null;
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace Texart.Api
         /// <exception cref="ArgumentNullException">If <paramref name="scheme"/> is <c>null</c></exception>
         public TxPluginResourceLocator WithScheme(TxReferenceScheme scheme)
         {
-            if (scheme == null)
+            if (scheme is null)
             {
                 throw new ArgumentNullException(nameof(scheme));
             }
@@ -262,7 +262,7 @@ namespace Texart.Api
         /// <exception cref="ArgumentNullException">If <paramref name="relativeLocator"/> is <c>null</c></exception>
         public TxPluginResourceLocator WithRelativeResource(RelativeLocator relativeLocator)
         {
-            if (relativeLocator == null)
+            if (relativeLocator is null)
             {
                 throw new ArgumentNullException(nameof(relativeLocator));
             }
@@ -306,7 +306,7 @@ namespace Texart.Api
             /// <seealso cref="TxPluginResourceLocator.CheckIsValidPluginResourceUri"/>
             internal static (Exception, RelativeLocator) CheckIsValidRelativeResourcePath(string relativePath)
             {
-                if (relativePath == null)
+                if (relativePath is null)
                 {
                     return (new ArgumentNullException(nameof(relativePath)), default);
                 }
@@ -454,7 +454,7 @@ namespace Texart.Api
             //     / \ /                        \
             //     urn:example:animal:ferret:nose
             //
-            if (uri == null) { return (new ArgumentNullException(nameof(uri)), default); }
+            if (uri is null) { return (new ArgumentNullException(nameof(uri)), default); }
             if (!uri.IsAbsoluteUri)
             {
                 return (new FormatException($"URI must be absolute: {uri}"), default);
@@ -701,7 +701,7 @@ namespace Texart.Api
             //     / \ /                        \
             //     urn:example:animal:ferret:nose
             //
-            if (assemblyPath == null)
+            if (assemblyPath is null)
             {
                 return (new ArgumentNullException(nameof(assemblyPath)), default);
             }

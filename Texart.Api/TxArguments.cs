@@ -221,7 +221,7 @@ namespace Texart.Api
         /// <seealso cref="TryGetValue(string,out string)"/>
         public string GetString(string key)
         {
-            if (key == null) { throw new ArgumentNullException(nameof(key)); }
+            if (key is null) { throw new ArgumentNullException(nameof(key)); }
             return AsImmutableDictionary.TryGetValue(key, out var value)
                 ? value
                 : throw new ArgumentException($"No key found: \"{key}\"");
@@ -257,7 +257,7 @@ namespace Texart.Api
         /// <seealso cref="GetBool(string)"/>
         public T GetValue<T>(string key, TryParseFunc<T> tryParse)
         {
-            if (key == null) { throw new ArgumentNullException(nameof(key)); }
+            if (key is null) { throw new ArgumentNullException(nameof(key)); }
             Debug.Assert(tryParse != null);
             var lookupResult = TryGetValue(key, out var value, tryParse);
             switch (lookupResult.Type)
@@ -493,7 +493,7 @@ namespace Texart.Api
         /// <seealso cref="TryGetValue(string,out string)"/>
         public string GetString(string key, string defaultValue)
         {
-            if (key == null) { throw new ArgumentNullException(nameof(key)); }
+            if (key is null) { throw new ArgumentNullException(nameof(key)); }
             return AsImmutableDictionary.TryGetValue(key, out var value)
                 ? value
                 : defaultValue;
@@ -529,7 +529,7 @@ namespace Texart.Api
         /// <seealso cref="GetBool(string,bool)"/>
         public T GetValue<T>(string key, TryParseFunc<T> tryParse, T defaultValue)
         {
-            if (key == null) { throw new ArgumentNullException(nameof(key)); }
+            if (key is null) { throw new ArgumentNullException(nameof(key)); }
             Debug.Assert(tryParse != null);
             var lookupResult = TryGetValue(key, out var value, tryParse);
             switch (lookupResult.Type)
@@ -821,7 +821,7 @@ namespace Texart.Api
         /// <seealso cref="GetString(string)"/>
         public LookupResult TryGetValue(string key, out string value)
         {
-            if (key == null) { throw new ArgumentNullException(nameof(key)); }
+            if (key is null) { throw new ArgumentNullException(nameof(key)); }
             return AsImmutableDictionary.TryGetValue(key, out value)
                 ? LookupResult.Success
                 : LookupResult.MissingKey;
@@ -856,7 +856,7 @@ namespace Texart.Api
         /// <seealso cref="GetValue{T}(string,TryParseFunc{T})"/>
         public LookupResult TryGetValue<T>(string key, out T value, TryParseFunc<T> tryParse)
         {
-            if (key == null) { throw new ArgumentNullException(nameof(key)); }
+            if (key is null) { throw new ArgumentNullException(nameof(key)); }
             Debug.Assert(tryParse != null);
             if (AsImmutableDictionary.TryGetValue(key, out var stringValue))
             {
