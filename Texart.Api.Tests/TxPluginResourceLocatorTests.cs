@@ -243,6 +243,75 @@ namespace Texart.Api.Tests
             Assert.AreEqual(new[] { "hello", "%20wor%3Ald" }, locator.ResourceSegments.ToList());
         }
 
+        [Test]
+        public void HasCorrectUriRepresentation()
+        {
+            var locator = TxPluginResourceLocator.Of("tx:///plugin%20.dll:hello/%20wor%3Ald");
+            Assert.AreEqual(
+                new Uri("tx:///plugin%20.dll:hello/%20wor%3Ald", UriKind.Absolute),
+                locator.AsUri);
+        }
+
+        [Test]
+        public void HasCorrectEquality()
+        {
+            var locator1 = TxPluginResourceLocator.Of("tx:///plugin%20.dll:hello/%20wor%3Ald");
+            var locator2 = TxPluginResourceLocator.Of("tx:///plugin%20.dll:hello/%20wor%3Ald");
+
+            Assert.IsTrue(locator1 == locator2);
+            Assert.IsTrue(locator2 == locator1);
+            Assert.IsFalse(locator1 != locator2);
+            Assert.IsFalse(locator2 != locator1);
+        }
+
+        [Test]
+        public void HasCorrectInequalityWithScheme()
+        {
+            var locator1 = TxPluginResourceLocator.Of("file:///plugin%20.dll:hello/%20wor%3Ald");
+            var locator2 = TxPluginResourceLocator.Of("tx:///plugin%20.dll:hello/%20wor%3Ald");
+
+            Assert.IsFalse(locator1 == locator2);
+            Assert.IsFalse(locator2 == locator1);
+            Assert.IsTrue(locator1 != locator2);
+            Assert.IsTrue(locator2 != locator1);
+        }
+
+        [Test]
+        public void HasCorrectInequalityWithAssemblyPath()
+        {
+            var locator1 = TxPluginResourceLocator.Of("tx:///hello/world.dll:hello/%20wor%3Ald");
+            var locator2 = TxPluginResourceLocator.Of("tx:///plugin%20.dll:hello/%20wor%3Ald");
+
+            Assert.IsFalse(locator1 == locator2);
+            Assert.IsFalse(locator2 == locator1);
+            Assert.IsTrue(locator1 != locator2);
+            Assert.IsTrue(locator2 != locator1);
+        }
+
+        [Test]
+        public void HasCorrectInequalityWithResourcePath()
+        {
+            var locator1 = TxPluginResourceLocator.Of("tx:///plugin%20.dll:world/%20hel%3Alo");
+            var locator2 = TxPluginResourceLocator.Of("tx:///plugin%20.dll:hello/%20wor%3Ald");
+
+            Assert.IsFalse(locator1 == locator2);
+            Assert.IsFalse(locator2 == locator1);
+            Assert.IsTrue(locator1 != locator2);
+            Assert.IsTrue(locator2 != locator1);
+        }
+
+        [Test]
+        public void HasCorrectHashCodes()
+        {
+            var locator1 = TxPluginResourceLocator.Of("tx:///plugin%20.dll:world/%20hel%3Alo");
+            var locator2 = TxPluginResourceLocator.Of("tx:///plugin%20.dll:hello/%20wor%3Ald");
+            var locator3 = TxPluginResourceLocator.Of("tx:///plugin%20.dll:world/%20hel%3Alo");
+            var locator4 = TxPluginResourceLocator.Of("tx:///plugin%20.dll:hello/%20wor%3Ald");
+
+            Assert.AreEqual(locator1.GetHashCode(), locator3.GetHashCode());
+            Assert.AreEqual(locator2.GetHashCode(), locator4.GetHashCode());
+        }
+
         /// <summary>
         /// Tests for <see cref="TxPluginResourceLocator.RelativeResourceLocator"/>.
         /// </summary>

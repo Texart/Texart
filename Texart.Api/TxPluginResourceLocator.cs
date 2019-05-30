@@ -33,6 +33,7 @@ namespace Texart.Api
     ///           and <see cref="TxPluginResourceLocator.ResourcePath"/>.
     ///           <see cref="TxPluginResourceLocator.ResourcePath"/> is allowed to be empty.
     /// These restrictions may be relaxed in the future, but will always be compliant with the latest URI RFC.
+    /// Note that the current restrictions imply that http or https schemes cannot be used, since they require a hostname.
     /// </summary>
     /// <example>
     /// <code>
