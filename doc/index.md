@@ -14,8 +14,6 @@
 * `Texart.Plugins`
   * Types and logic that faciliates loading "plugins" that provide implementations for `ITxTextBitmapGenerator` and `ITxTextBitmapRenderer`.
   * Allows loading assemblies as well as scripts.
-* `Texart.ScriptInterface` (to be renamed)
-  * The (additional) API that is provided to plugins. Note that plugins also have access to `Texart.Api`.
 
 ## Important Types
 
