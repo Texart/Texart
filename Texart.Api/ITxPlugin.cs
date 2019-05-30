@@ -17,42 +17,42 @@ namespace Texart.Api
         /// Available names of <see cref="ITxTextBitmapGenerator"/>. Every name listed here must be valid when calling
         /// <see cref="LookupGenerator"/>.
         /// </summary>
-        IEnumerable<string> AvailableGenerators { get; }
+        IEnumerable<TxPluginResourceLocator.RelativeLocator> AvailableGenerators { get; }
 
         /// <summary>
         /// Returns a factory function that constructs an <see cref="ITxTextBitmapGenerator"/> identified by
-        /// <paramref name="name"/>, or a locator which represents a redirects to another lookup
-        /// (<see cref="TxPluginResourceLocator"/> or <see cref="TxPluginResourceLocator.RelativeResourceLocator"/>).
+        /// <paramref name="locator"/>, or a "redirect" locator which represents another lookup
+        /// (<see cref="TxPluginResourceLocator"/> or <see cref="TxPluginResourceLocator.RelativeLocator"/>).
         /// </summary>
-        /// <param name="name">
-        ///     The name to look up. This name should appear in <see cref="AvailableGenerators"/> but not required.
+        /// <param name="locator">
+        ///     The resource to look up. This name should appear in <see cref="AvailableGenerators"/> but not required.
         ///     If a plugin exports a "default" type, then the type should be available as <c>null</c>.
         /// </param>
         /// <returns>A resource specification for <see cref="ITxTextBitmapGenerator"/></returns>
         /// <seealso cref="TxPluginResource.OfFactory{T}"/>
         /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator)"/>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.RelativeResourceLocator)"/>
-        TxPluginResource<ITxTextBitmapGenerator> LookupGenerator(string name);
+        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.RelativeLocator)"/>
+        TxPluginResource<ITxTextBitmapGenerator> LookupGenerator(TxPluginResourceLocator locator);
 
         /// <summary>
         /// Available names of <see cref="ITxTextBitmapRenderer"/>. Every name listed here must be valid when calling
         /// <see cref="LookupRenderer"/>.
         /// </summary>
-        IEnumerable<string> AvailableRenderers { get; }
+        IEnumerable<TxPluginResourceLocator.RelativeLocator> AvailableRenderers { get; }
 
         /// <summary>
         /// Returns a factory function that constructs an <see cref="ITxTextBitmapRenderer"/> identified by
-        /// <paramref name="name"/>, or a locator which represents a redirects to another lookup
-        /// (<see cref="TxPluginResourceLocator"/> or <see cref="TxPluginResourceLocator.RelativeResourceLocator"/>).
+        /// <paramref name="locator"/>, or a "redirect" locator which represents another lookup
+        /// (<see cref="TxPluginResourceLocator"/> or <see cref="TxPluginResourceLocator.RelativeLocator"/>).
         /// </summary>
-        /// <param name="name">
-        ///     The name to look up. This name should appear in <see cref="AvailableRenderers"/> but not required.
+        /// <param name="locator">
+        ///     The resource to look up. This identity should appear in <see cref="AvailableRenderers"/> but not required.
         ///     If a plugin exports a "default" type, then the type should be available as <c>null</c>.
         /// </param>
         /// <returns>A resource specification for <see cref="ITxTextBitmapRenderer"/></returns>
         /// <seealso cref="TxPluginResource.OfFactory{T}"/>
         /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator)"/>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.RelativeResourceLocator)"/>
-        TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(string name);
+        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.RelativeLocator)"/>
+        TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(TxPluginResourceLocator locator);
     }
 }

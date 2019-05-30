@@ -7,18 +7,24 @@ using Texart.Api;
 
 namespace Texart.Builtin
 {
+    using Locator = TxPluginResourceLocator;
+    using RelativeLocator = TxPluginResourceLocator.RelativeLocator;
+
     /// <summary>
     /// The plugin implementation for the built in <see cref="ITxTextBitmapGenerator"/> and <see cref="ITxTextBitmapRenderer"/> types.
-     /// </summary>
+    /// </summary>
     public sealed class Plugin : ITxPlugin
     {
         /// <summary>
         /// Mapping of names to <see cref="ITxTextBitmapGenerator"/> factory functions.
         /// </summary>
-        private readonly ImmutableDictionary<string, TxPluginResource<ITxTextBitmapGenerator>> _generators =
-            new Dictionary<string, TxPluginResource<ITxTextBitmapGenerator>>
+        private readonly ImmutableDictionary<RelativeLocator, TxPluginResource<ITxTextBitmapGenerator>> _generators =
+            new Dictionary<RelativeLocator, TxPluginResource<ITxTextBitmapGenerator>>
             {
-                { typeof(BrightnessBasedBitmapGenerator).Name, TxPluginResource.OfGeneratorFactory(BrightnessBasedBitmapGenerator.Create) }
+                {
+                    Locator.OfRelativeResource(typeof(BrightnessBasedBitmapGenerator).Name),
+                    TxPluginResource.OfGeneratorFactory(BrightnessBasedBitmapGenerator.Create)
+                }
             }.ToImmutableDictionary();
 
         /// <summary>
@@ -30,11 +36,17 @@ namespace Texart.Builtin
         /// <summary>
         /// Mapping of names to <see cref="ITxTextBitmapRenderer"/> factory functions.
         /// </summary>
-        private readonly ImmutableDictionary<string, TxPluginResource<ITxTextBitmapRenderer>> _renderers =
-            new Dictionary<string, TxPluginResource<ITxTextBitmapRenderer>>
+        private readonly ImmutableDictionary<RelativeLocator, TxPluginResource<ITxTextBitmapRenderer>> _renderers =
+            new Dictionary<RelativeLocator, TxPluginResource<ITxTextBitmapRenderer>>
             {
-                { typeof(StringBitmapRenderer).Name, TxPluginResource.OfRendererFactory(StringBitmapRenderer.Create) },
-                { typeof(FontBitmapRenderer).Name, TxPluginResource.OfRendererFactory(FontBitmapRenderer.Create) }
+                {
+                    TxPluginResourceLocator.OfRelativeResource(typeof(StringBitmapRenderer).Name),
+                    TxPluginResource.OfRendererFactory(StringBitmapRenderer.Create)
+                },
+                {
+                    TxPluginResourceLocator.OfRelativeResource(typeof(FontBitmapRenderer).Name),
+                    TxPluginResource.OfRendererFactory(FontBitmapRenderer.Create)
+                }
             }.ToImmutableDictionary();
 
         /// <summary>
@@ -44,37 +56,37 @@ namespace Texart.Builtin
             TxPluginResource.OfRendererFactory(FontBitmapRenderer.Create);
 
         /// <inheritdoc cref="ITxPlugin.AvailableGenerators"/>
-        IEnumerable<string> ITxPlugin.AvailableGenerators => _generators.Keys;
+        IEnumerable<RelativeLocator> ITxPlugin.AvailableGenerators => _generators.Keys;
 
-        /// <inheritdoc />
-        TxPluginResource<ITxTextBitmapGenerator> ITxPlugin.LookupGenerator(string name)
+        /// <inheritdoc cref="ITxPlugin.LookupGenerator" />
+        TxPluginResource<ITxTextBitmapGenerator> ITxPlugin.LookupGenerator(Locator locator)
         {
-            if (name == null)
+            if (locator == null)
             {
                 return _defaultGenerator;
             }
-            if (_generators.TryGetValue(name, out var factory))
+            if (_generators.TryGetValue(locator.RelativeResource, out var factory))
             {
                 return factory;
             }
-            throw new ArgumentException($"No {nameof(ITxTextBitmapGenerator)} named '{name}' exists.");
+            throw new ArgumentException($"No {nameof(ITxTextBitmapGenerator)} named '{locator.RelativeResource}' exists.");
         }
 
         /// <inheritdoc cref="ITxPlugin.AvailableRenderers"/>
-        IEnumerable<string> ITxPlugin.AvailableRenderers => _renderers.Keys;
+        IEnumerable<RelativeLocator> ITxPlugin.AvailableRenderers => _renderers.Keys;
 
         /// <inheritdoc cref="ITxPlugin.LookupRenderer"/>
-        TxPluginResource<ITxTextBitmapRenderer> ITxPlugin.LookupRenderer(string name)
+        TxPluginResource<ITxTextBitmapRenderer> ITxPlugin.LookupRenderer(Locator locator)
         {
-            if (name == null)
+            if (locator == null)
             {
                 return _defaultRenderer;
             }
-            if (_renderers.TryGetValue(name, out var factory))
+            if (_renderers.TryGetValue(locator.RelativeResource, out var factory))
             {
                 return factory;
             }
-            throw new ArgumentException($"No {nameof(ITxTextBitmapRenderer)} named '{name}' exists.");
+            throw new ArgumentException($"No {nameof(ITxTextBitmapRenderer)} named '{locator.RelativeResource}' exists.");
         }
     }
 }

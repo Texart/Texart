@@ -23,7 +23,7 @@ namespace Texart.Api
         /// <seealso cref="OfGeneratorFactory{T}"/>
         /// <seealso cref="OfRendererFactory{T}"/>
         /// <seealso cref="OfLocator{T}(TxPluginResourceLocator)"/>
-        /// <seealso cref="OfLocator{T}(TxPluginResourceLocator.RelativeResourceLocator)"/>
+        /// <seealso cref="OfLocator{T}(TxPluginResourceLocator.RelativeLocator)"/>
         public static TxPluginResource<T> OfFactory<T>(TxFactory<T, TxArguments> factory) =>
             new TxPluginResource<T>(factory);
 
@@ -67,7 +67,7 @@ namespace Texart.Api
         /// <typeparam name="T">The type of resource.</typeparam>
         /// <returns>A <see cref="TxPluginResource{T}"/> with <paramref name="locator"/> as the active member.</returns>
         /// <seealso cref="OfFactory{T}"/>
-        /// <seealso cref="OfLocator{T}(TxPluginResourceLocator.RelativeResourceLocator)"/>
+        /// <seealso cref="OfLocator{T}(TxPluginResourceLocator.RelativeLocator)"/>
         public static TxPluginResource<T> OfLocator<T>(TxPluginResourceLocator locator) =>
             new TxPluginResource<T>(locator);
 
@@ -87,7 +87,7 @@ namespace Texart.Api
         /// </returns>
         /// <seealso cref="OfFactory{T}"/>
         /// <seealso cref="OfLocator{T}(TxPluginResourceLocator)"/>
-        public static TxPluginResource<T> OfLocator<T>(TxPluginResourceLocator.RelativeResourceLocator relativeResourceLocatorLocator) =>
+        public static TxPluginResource<T> OfLocator<T>(TxPluginResourceLocator.RelativeLocator relativeResourceLocatorLocator) =>
             new TxPluginResource<T>(relativeResourceLocatorLocator);
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace Texart.Api
         /// <exception cref="TxPluginResource.InactiveUnionMemberAccessException">
         ///     If the <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.RelativeLocator"/>.
         /// </exception>
-        public TxPluginResourceLocator.RelativeResourceLocator RelativeLocator {
+        public TxPluginResourceLocator.RelativeLocator RelativeLocator {
             get
             {
                 if (ActiveMemberKind != TxPluginResource.MemberKind.RelativeLocator)
@@ -285,8 +285,8 @@ namespace Texart.Api
         /// Creates a <see cref="TxPluginResource{T}"/> with <see cref="ActiveMemberKind"/> of <see cref="TxPluginResource.MemberKind.RelativeLocator"/>.
         /// </summary>
         /// <param name="relativeResourceLocatorLocator">The active relative locator instance.</param>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.RelativeResourceLocator)"/>
-        internal TxPluginResource(TxPluginResourceLocator.RelativeResourceLocator relativeResourceLocatorLocator)
+        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.RelativeLocator)"/>
+        internal TxPluginResource(TxPluginResourceLocator.RelativeLocator relativeResourceLocatorLocator)
         {
             _relativeLocator = relativeResourceLocatorLocator;
             ActiveMemberKind = TxPluginResource.MemberKind.RelativeLocator;
@@ -306,7 +306,7 @@ namespace Texart.Api
         /// The relative locator union member, or <c>null</c> if <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.RelativeLocator"/>.
         /// </summary>
         // ReSharper disable once InconsistentNaming
-        internal readonly TxPluginResourceLocator.RelativeResourceLocator _relativeLocator;
+        internal readonly TxPluginResourceLocator.RelativeLocator _relativeLocator;
 
         /// <inheritdoc cref="object.ToString"/>
         public override string ToString() => $"{typeof(TxPluginResource<T>).Name}({ActiveMemberKind}){{{ActiveMember}}}";

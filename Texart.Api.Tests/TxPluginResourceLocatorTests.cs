@@ -313,7 +313,7 @@ namespace Texart.Api.Tests
         }
 
         /// <summary>
-        /// Tests for <see cref="TxPluginResourceLocator.RelativeResourceLocator"/>.
+        /// Tests for <see cref="TxPluginResourceLocator.RelativeLocator"/>.
         /// </summary>
         internal class RelativeResourceTests
         {

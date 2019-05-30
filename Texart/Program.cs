@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using SkiaSharp;
 using Texart.Api;
@@ -15,10 +16,10 @@ namespace Texart
                 ITxPlugin builtinPlugin = new Builtin.Plugin();
 
                 var textBitmapGenerator = builtinPlugin
-                    .LookupGenerator("BrightnessBasedBitmapGenerator")
+                    .LookupGenerator(TxPluginResourceLocator.Of("tx:///:BrightnessBasedBitmapGenerator"))
                     .Factory(TxArguments.Empty);
                 var textBitmapRenderer = builtinPlugin
-                    .LookupRenderer("FontBitmapRenderer")
+                    .LookupRenderer(TxPluginResourceLocator.Of("tx:///:FontBitmapRenderer"))
                     .Factory(TxArguments.Empty);
                 var textBitmap = await textBitmapGenerator.GenerateAsync(bitmap);
                 await textBitmapRenderer.RenderAsync(textBitmap, output);
