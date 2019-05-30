@@ -27,15 +27,6 @@ namespace Texart.Plugins.Tests.Scripting.Diagnostics.TestHelpers
         }
 
         /// <summary>
-        /// Returns the codefix being tested (VB) - to be implemented in non-abstract class
-        /// </summary>
-        /// <returns>The CodeFixProvider to be used for VisualBasic code</returns>
-        protected virtual CodeFixProvider GetBasicCodeFixProvider()
-        {
-            return null;
-        }
-
-        /// <summary>
         /// Called to test a C# codefix when applied on the inputted string as a source
         /// </summary>
         /// <param name="oldSource">A class in the form of a string before the CodeFix was applied to it</param>

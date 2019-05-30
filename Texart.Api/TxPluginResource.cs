@@ -111,7 +111,7 @@ namespace Texart.Api
                 case MemberKind.RelativeLocator: return new TxPluginResource<T>(resource._relativeLocator);
             }
             Debug.Fail("Unreachable code!");
-            return null;
+            throw new InvalidOperationException();
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace Texart.Api
                     case TxPluginResource.MemberKind.RelativeLocator: return _relativeLocator;
                 }
                 Debug.Fail("Unreachable code!");
-                return null;
+                throw new InvalidOperationException();
             }
         }
 
