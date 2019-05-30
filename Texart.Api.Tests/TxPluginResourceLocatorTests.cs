@@ -404,6 +404,42 @@ namespace Texart.Api.Tests
                 Assert.IsFalse(
                     TxPluginResourceLocator.IsWellFormedRelativeResourceString(relativePath));
             }
+
+            [Test]
+            public void HasCorrectEquality()
+            {
+                var locator1 = TxPluginResourceLocator.OfRelativeResource("/resource%20/pa%3Ath");
+                var locator2 = TxPluginResourceLocator.OfRelativeResource("/resource%20/pa%3Ath");
+
+                Assert.IsTrue(locator1 == locator2);
+                Assert.IsTrue(locator2 == locator1);
+                Assert.IsFalse(locator1 != locator2);
+                Assert.IsFalse(locator2 != locator1);
+            }
+
+            [Test]
+            public void HasCorrectInequality()
+            {
+                var locator1 = TxPluginResourceLocator.OfRelativeResource("/resource%20/pa%3Ath");
+                var locator2 = TxPluginResourceLocator.OfRelativeResource("resource%20/path");
+
+                Assert.IsFalse(locator1 == locator2);
+                Assert.IsFalse(locator2 == locator1);
+                Assert.IsTrue(locator1 != locator2);
+                Assert.IsTrue(locator2 != locator1);
+            }
+
+            [Test]
+            public void HasCorrectHashCodes()
+            {
+                var locator1 = TxPluginResourceLocator.OfRelativeResource("/resource%20/pa%3Ath");
+                var locator2 = TxPluginResourceLocator.OfRelativeResource("resource%20/path");
+                var locator3 = TxPluginResourceLocator.OfRelativeResource("/resource%20/pa%3Ath");
+                var locator4 = TxPluginResourceLocator.OfRelativeResource("resource%20/path");
+
+                Assert.AreEqual(locator1.GetHashCode(), locator3.GetHashCode());
+                Assert.AreEqual(locator2.GetHashCode(), locator4.GetHashCode());
+            }
         }
     }
 }
