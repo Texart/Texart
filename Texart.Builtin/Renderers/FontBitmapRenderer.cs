@@ -1,5 +1,6 @@
 ﻿using SkiaSharp;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -15,48 +16,53 @@ namespace Texart.Builtin.Renderers
         /// <summary>
         /// The font to paint with, including metadata such as size, color, and spacing.
         /// </summary>
-        public TxFont Font { get; }
+        private TxFont Font { get; }
 
         /// <summary>
         /// Determines if the output image should be antialiased.
         /// </summary>
         /// <see cref="SKPaint.IsAntialias"/>
-        public bool ShouldAntialias { get; set; }
+        private bool ShouldAntialias { get; set; }
 
         /// <summary>
         /// Determines if the output image should be dithered.
         /// </summary>
         /// <see cref="SKPaint.IsDither"/>
-        public bool ShouldDither { get; set; }
+        private bool ShouldDither { get; set; }
 
         /// <summary>
         /// Determines if font hinting is enabled.
         /// </summary>
         /// <see cref="SKPaint.IsAutohinted"/>
-        public bool ShouldHint { get; set; }
+        private bool ShouldHint { get; set; }
 
         /// <summary>
         /// The image background color. This is in contrast to <see cref="TxFont.Color"/>.
         /// </summary>
-        public SKColor BackgroundColor { get; set; } = DefaultBackgroundColor;
+        private SKColor BackgroundColor { get; set; } = DefaultBackgroundColor;
         /// <summary>
         /// The default image background color.
         /// </summary>
-        public static SKColor DefaultBackgroundColor => SKColors.White;
+        private static SKColor DefaultBackgroundColor => SKColors.White;
 
         /// <inheritdocs />
-        public Task RenderAsync(ITxTextBitmap txTextBitmap, Stream outputStream)
+        public async Task RenderAsync(IAsyncEnumerable<ITxTextBitmap> textBitmaps, Stream outputStream)
         {
-            Debug.Assert(txTextBitmap != null);
+            Debug.Assert(textBitmaps != null);
             Debug.Assert(outputStream != null);
-
-            using (SKBitmap bitmap = GenerateBitmap(txTextBitmap))
-            using (SKImage image = SKImage.FromBitmap(bitmap))
+            var didOutput = false;
+            await foreach (var textBitmap in textBitmaps)
             {
+                // TODO: Implement tiling when multiple images (and helper types in Texart.Api)
+                if (didOutput)
+                {
+                    throw new InvalidOperationException("Only one output can be created");
+                }
+                using SKBitmap bitmap = GenerateBitmap(textBitmap);
+                using SKImage image = SKImage.FromBitmap(bitmap);
                 image.Encode().SaveTo(outputStream);
+                didOutput = true;
             }
-
-            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -142,7 +148,7 @@ namespace Texart.Builtin.Renderers
         /// Constructs a renderer with the given font.
         /// </summary>
         /// <param name="txFont">The font to use.</param>
-        public FontBitmapRenderer(TxFont txFont)
+        private FontBitmapRenderer(TxFont txFont)
         {
             if (txFont is null) { throw new ArgumentNullException(nameof(txFont)); }
             if (txFont.Typeface is null) { throw new ArgumentNullException(nameof(txFont.Typeface)); }
