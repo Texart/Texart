@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 namespace Texart.Plugins.Tests.Scripting
 {
+    [TestFixture]
     internal class PluginScriptTests
     {
         [Test]
