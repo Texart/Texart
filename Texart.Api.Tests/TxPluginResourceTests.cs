@@ -25,14 +25,6 @@ namespace Texart.Api.Tests
             AssertActiveMember(resource, MemberKind.Locator, locator);
         }
 
-        [Test]
-        public void HoldsRelativeLocator()
-        {
-            var locator = TxPluginResourceLocator.OfRelativeResource("world2");
-            var resource = TxPluginResource.OfLocator<object>(locator);
-            AssertActiveMember(resource, MemberKind.RelativeLocator, locator);
-        }
-
         private static void AssertActiveMember<T>(TxPluginResource<T> resource, MemberKind expectedKind, object expected)
         {
             Assert.AreEqual(expectedKind, resource.ActiveMemberKind);

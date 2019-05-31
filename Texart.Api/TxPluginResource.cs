@@ -23,7 +23,6 @@ namespace Texart.Api
         /// <seealso cref="OfGeneratorFactory{T}"/>
         /// <seealso cref="OfRendererFactory{T}"/>
         /// <seealso cref="OfLocator{T}(TxPluginResourceLocator)"/>
-        /// <seealso cref="OfLocator{T}(TxPluginResourceLocator.RelativeLocator)"/>
         public static TxPluginResource<T> OfFactory<T>(TxFactory<T, TxArguments> factory) =>
             new TxPluginResource<T>(factory);
 
@@ -67,28 +66,46 @@ namespace Texart.Api
         /// <typeparam name="T">The type of resource.</typeparam>
         /// <returns>A <see cref="TxPluginResource{T}"/> with <paramref name="locator"/> as the active member.</returns>
         /// <seealso cref="OfFactory{T}"/>
-        /// <seealso cref="OfLocator{T}(TxPluginResourceLocator.RelativeLocator)"/>
+        /// <seealso cref="OfGeneratorLocator(TxPluginResourceLocator)"/>
+        /// <seealso cref="OfRendererLocator(TxPluginResourceLocator)"/>
         public static TxPluginResource<T> OfLocator<T>(TxPluginResourceLocator locator) =>
             new TxPluginResource<T>(locator);
 
         /// <summary>
         /// Creates a <see cref="TxPluginResource{T}"/> with <see cref="TxPluginResource{T}.ActiveMemberKind"/> set to
-        /// <see cref="MemberKind.RelativeLocator"/> and <see cref="TxPluginResource{T}.RelativeLocator"/> set to
-        /// <paramref name="relativeLocator"/>.
+        /// <see cref="MemberKind.Locator"/> and <see cref="TxPluginResource{T}.Locator"/> set to
+        /// <paramref name="locator"/>.
         ///
-        /// The locator is a relative URI identifying the location where a plugin believes the demanded resource can be
-        /// found. The new lookup will be performed on the same <see cref="ITxPlugin"/> instance that returns this.
+        /// The locator is an absolute URI identifying the location where a plugin believes the demanded resource can be
+        /// found. This includes a <see cref="TxReferenceScheme"/>, <see cref="TxPluginResourceLocator.AssemblyPath"/>,
+        /// and <see cref="TxPluginResourceLocator.ResourcePath"/>.
         ///
         /// </summary>
-        /// <param name="relativeLocator">The active relative locator.</param>
+        /// <param name="locator">The active locator.</param>
         /// <typeparam name="T">The type of resource.</typeparam>
-        /// <returns>
-        ///     A <see cref="TxPluginResource{T}"/> with <paramref name="relativeLocator"/> as the active member.
-        /// </returns>
-        /// <seealso cref="OfFactory{T}"/>
+        /// <returns>A <see cref="TxPluginResource{T}"/> with <paramref name="locator"/> as the active member.</returns>
         /// <seealso cref="OfLocator{T}(TxPluginResourceLocator)"/>
-        public static TxPluginResource<T> OfLocator<T>(TxPluginResourceLocator.RelativeLocator relativeLocator) =>
-            new TxPluginResource<T>(relativeLocator);
+        /// <seealso cref="OfRendererLocator(TxPluginResourceLocator)"/>
+        public static TxPluginResource<ITxTextBitmapGenerator> OfGeneratorLocator(TxPluginResourceLocator locator) =>
+            new TxPluginResource<ITxTextBitmapGenerator>(locator);
+
+        /// <summary>
+        /// Creates a <see cref="TxPluginResource{T}"/> with <see cref="TxPluginResource{T}.ActiveMemberKind"/> set to
+        /// <see cref="MemberKind.Locator"/> and <see cref="TxPluginResource{T}.Locator"/> set to
+        /// <paramref name="locator"/>.
+        ///
+        /// The locator is an absolute URI identifying the location where a plugin believes the demanded resource can be
+        /// found. This includes a <see cref="TxReferenceScheme"/>, <see cref="TxPluginResourceLocator.AssemblyPath"/>,
+        /// and <see cref="TxPluginResourceLocator.ResourcePath"/>.
+        ///
+        /// </summary>
+        /// <param name="locator">The active locator.</param>
+        /// <typeparam name="T">The type of resource.</typeparam>
+        /// <returns>A <see cref="TxPluginResource{T}"/> with <paramref name="locator"/> as the active member.</returns>
+        /// <seealso cref="OfFactory{T}"/>
+        /// <seealso cref="OfGeneratorLocator(TxPluginResourceLocator)"/>
+        public static TxPluginResource<ITxTextBitmapRenderer> OfRendererLocator(TxPluginResourceLocator locator) =>
+            new TxPluginResource<ITxTextBitmapRenderer>(locator);
 
         /// <summary>
         /// Widens the type <typeparamref name="TU"/> to <typeparamref name="T"/>. <see cref="TxPluginResource{T}"/> can
