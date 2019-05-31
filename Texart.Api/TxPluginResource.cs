@@ -82,7 +82,6 @@ namespace Texart.Api
         ///
         /// </summary>
         /// <param name="locator">The active locator.</param>
-        /// <typeparam name="T">The type of resource.</typeparam>
         /// <returns>A <see cref="TxPluginResource{T}"/> with <paramref name="locator"/> as the active member.</returns>
         /// <seealso cref="OfLocator{T}(TxPluginResourceLocator)"/>
         /// <seealso cref="OfRendererLocator(TxPluginResourceLocator)"/>
@@ -100,7 +99,6 @@ namespace Texart.Api
         ///
         /// </summary>
         /// <param name="locator">The active locator.</param>
-        /// <typeparam name="T">The type of resource.</typeparam>
         /// <returns>A <see cref="TxPluginResource{T}"/> with <paramref name="locator"/> as the active member.</returns>
         /// <seealso cref="OfFactory{T}"/>
         /// <seealso cref="OfGeneratorLocator(TxPluginResourceLocator)"/>
@@ -125,7 +123,6 @@ namespace Texart.Api
             {
                 case MemberKind.Factory: return new TxPluginResource<T>(resource._factory);
                 case MemberKind.Locator: return new TxPluginResource<T>(resource._locator);
-                case MemberKind.RelativeLocator: return new TxPluginResource<T>(resource._relativeLocator);
                 default:
                     Debug.Fail("Unreachable code!");
                     throw new InvalidOperationException();
@@ -145,11 +142,7 @@ namespace Texart.Api
             /// <summary>
             /// Kind indicating that <see cref="TxPluginResource{T}.Locator"/> is the <see cref="TxPluginResource{T}.ActiveMember"/>.
             /// </summary>
-            Locator,
-            /// <summary>
-            /// Kind indicating that <see cref="TxPluginResource{T}.RelativeLocator"/> is the <see cref="TxPluginResource{T}.ActiveMember"/>.
-            /// </summary>
-            RelativeLocator
+            Locator
         }
 
         /// <summary>
@@ -240,27 +233,8 @@ namespace Texart.Api
         }
 
         /// <summary>
-        /// The relative locator member of the union if the <see cref="ActiveMemberKind"/> is
-        /// <see cref="TxPluginResource.MemberKind.RelativeLocator"/>. Throws an exception otherwise.
-        /// </summary>
-        /// <exception cref="TxPluginResource.InactiveUnionMemberAccessException">
-        ///     If the <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.RelativeLocator"/>.
-        /// </exception>
-        public TxPluginResourceLocator.RelativeLocator RelativeLocator {
-            get
-            {
-                if (ActiveMemberKind != TxPluginResource.MemberKind.RelativeLocator)
-                {
-                    throw new TxPluginResource.InactiveUnionMemberAccessException(
-                        TxPluginResource.MemberKind.RelativeLocator, ActiveMemberKind);
-                }
-                return _relativeLocator;
-            }
-        }
-
-        /// <summary>
-        /// The currently active member of the union. This will be one of <see cref="Factory"/>, <see cref="Locator"/>,
-        /// or <see cref="RelativeLocator"/> - depending on <see cref="ActiveMemberKind"/>.
+        /// The currently active member of the union. This will be one of <see cref="Factory"/> or <see cref="Locator"/>
+        /// depending on <see cref="ActiveMemberKind"/>.
         /// </summary>
         public object ActiveMember
         {
@@ -270,7 +244,6 @@ namespace Texart.Api
                 {
                     case TxPluginResource.MemberKind.Factory: return _factory;
                     case TxPluginResource.MemberKind.Locator: return _locator;
-                    case TxPluginResource.MemberKind.RelativeLocator: return _relativeLocator;
                     default:
                         Debug.Fail("Unreachable code!");
                         throw new InvalidOperationException();
@@ -301,17 +274,6 @@ namespace Texart.Api
         }
 
         /// <summary>
-        /// Creates a <see cref="TxPluginResource{T}"/> with <see cref="ActiveMemberKind"/> of <see cref="TxPluginResource.MemberKind.RelativeLocator"/>.
-        /// </summary>
-        /// <param name="relativeResourceLocatorLocator">The active relative locator instance.</param>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.RelativeLocator)"/>
-        internal TxPluginResource(TxPluginResourceLocator.RelativeLocator relativeResourceLocatorLocator)
-        {
-            _relativeLocator = relativeResourceLocatorLocator;
-            ActiveMemberKind = TxPluginResource.MemberKind.RelativeLocator;
-        }
-
-        /// <summary>
         /// The factory union member, or <c>null</c> if <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.Factory"/>.
         /// </summary>
         // ReSharper disable once InconsistentNaming
@@ -321,11 +283,6 @@ namespace Texart.Api
         /// </summary>
         // ReSharper disable once InconsistentNaming
         internal readonly TxPluginResourceLocator _locator;
-        /// <summary>
-        /// The relative locator union member, or <c>null</c> if <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.RelativeLocator"/>.
-        /// </summary>
-        // ReSharper disable once InconsistentNaming
-        internal readonly TxPluginResourceLocator.RelativeLocator _relativeLocator;
 
         /// <inheritdoc cref="object.ToString"/>
         public override string ToString() => $"{typeof(TxPluginResource<T>).Name}({ActiveMemberKind}){{{ActiveMember}}}";
@@ -340,7 +297,6 @@ namespace Texart.Api
             {
                 case TxPluginResource.MemberKind.Factory: return Equals(_factory, other._factory);
                 case TxPluginResource.MemberKind.Locator: return Equals(_locator, other._locator);
-                case TxPluginResource.MemberKind.RelativeLocator: return Equals(_relativeLocator, other._relativeLocator);
                 default:
                     Debug.Fail("Unreachable code!");
                     return false;
@@ -363,9 +319,6 @@ namespace Texart.Api
                     break;
                 case TxPluginResource.MemberKind.Locator:
                     hashCode.Add(_locator);
-                    break;
-                case TxPluginResource.MemberKind.RelativeLocator:
-                    hashCode.Add(_relativeLocator);
                     break;
                 default:
                     Debug.Fail("Unreachable code!");

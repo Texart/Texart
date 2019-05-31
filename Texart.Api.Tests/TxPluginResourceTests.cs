@@ -33,17 +33,10 @@ namespace Texart.Api.Tests
                 case MemberKind.Factory:
                     Assert.AreEqual(expected, resource.Factory);
                     Assert.Throws<InactiveUnionMemberAccessException>(() => { var _ = resource.Locator; });
-                    Assert.Throws<InactiveUnionMemberAccessException>(() => { var _ = resource.RelativeLocator; });
                     break;
                 case MemberKind.Locator:
                     Assert.AreEqual(expected, resource.Locator);
                     Assert.Throws<InactiveUnionMemberAccessException>(() => { var _ = resource.Factory; });
-                    Assert.Throws<InactiveUnionMemberAccessException>(() => { var _ = resource.RelativeLocator; });
-                    break;
-                case MemberKind.RelativeLocator:
-                    Assert.AreEqual(expected, resource.RelativeLocator);
-                    Assert.Throws<InactiveUnionMemberAccessException>(() => { var _ = resource.Factory; });
-                    Assert.Throws<InactiveUnionMemberAccessException>(() => { var _ = resource.Locator; });
                     break;
                 default:
                     Assert.Fail($"Unknown member kind: {expectedKind}");
