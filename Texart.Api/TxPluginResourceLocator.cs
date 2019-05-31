@@ -25,6 +25,17 @@ namespace Texart.Api
     /// See <see href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#/media/File:URI_syntax_diagram.png"/> for
     /// a simple diagram.
     ///
+    /// The anatomy of a <see cref="TxPluginResourceLocator"/> looks like:
+    /// <code>
+    /// //  Scheme        AssemblyPath       ResourcePath
+    /// //    |       ________|________   _______|______
+    /// //   /\      /                 \ /              \
+    /// //   foo:///path/to/assembly.dll:path/to/resource
+    /// //       \/                    |
+    /// //       |                     |
+    /// // (empty Authority)  AssemblyResourceSeparator (:)
+    /// </code>
+    ///
     /// From the above, only the following properties are allowed:
     ///   * scheme: <see cref="TxPluginResourceLocator.Scheme"/>.
     ///   * authority: This is required for a URI but in our case, this <b>MUST</b> be empty.
