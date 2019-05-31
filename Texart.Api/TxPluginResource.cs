@@ -109,9 +109,10 @@ namespace Texart.Api
                 case MemberKind.Factory: return new TxPluginResource<T>(resource._factory);
                 case MemberKind.Locator: return new TxPluginResource<T>(resource._locator);
                 case MemberKind.RelativeLocator: return new TxPluginResource<T>(resource._relativeLocator);
+                default:
+                    Debug.Fail("Unreachable code!");
+                    throw new InvalidOperationException();
             }
-            Debug.Fail("Unreachable code!");
-            throw new InvalidOperationException();
         }
 
         /// <summary>
@@ -253,9 +254,10 @@ namespace Texart.Api
                     case TxPluginResource.MemberKind.Factory: return _factory;
                     case TxPluginResource.MemberKind.Locator: return _locator;
                     case TxPluginResource.MemberKind.RelativeLocator: return _relativeLocator;
+                    default:
+                        Debug.Fail("Unreachable code!");
+                        throw new InvalidOperationException();
                 }
-                Debug.Fail("Unreachable code!");
-                throw new InvalidOperationException();
             }
         }
 
@@ -322,9 +324,10 @@ namespace Texart.Api
                 case TxPluginResource.MemberKind.Factory: return Equals(_factory, other._factory);
                 case TxPluginResource.MemberKind.Locator: return Equals(_locator, other._locator);
                 case TxPluginResource.MemberKind.RelativeLocator: return Equals(_relativeLocator, other._relativeLocator);
+                default:
+                    Debug.Fail("Unreachable code!");
+                    return false;
             }
-            Debug.Fail("Unreachable code!");
-            return false;
         }
 
         /// <inheritdoc cref="object.Equals(object)"/>
@@ -346,6 +349,9 @@ namespace Texart.Api
                     break;
                 case TxPluginResource.MemberKind.RelativeLocator:
                     hashCode.Add(_relativeLocator);
+                    break;
+                default:
+                    Debug.Fail("Unreachable code!");
                     break;
             }
             return hashCode.ToHashCode();
