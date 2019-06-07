@@ -22,7 +22,7 @@ namespace Texart.Api
         /// <returns>A <see cref="TxPluginResource{T}"/> with <paramref name="factory"/> as the active member.</returns>
         /// <seealso cref="OfGeneratorFactory{T}"/>
         /// <seealso cref="OfRendererFactory{T}"/>
-        /// <seealso cref="OfLocator{T}(TxPluginResourceLocator)"/>
+        /// <seealso cref="Redirect{T}"/>
         public static TxPluginResource<T> OfFactory<T>(TxFactory<T, TxArguments> factory) =>
             new TxPluginResource<T>(factory);
 
@@ -54,56 +54,74 @@ namespace Texart.Api
 
         /// <summary>
         /// Creates a <see cref="TxPluginResource{T}"/> with <see cref="TxPluginResource{T}.ActiveMemberKind"/> set to
-        /// <see cref="MemberKind.Locator"/> and <see cref="TxPluginResource{T}.Locator"/> set to
-        /// <paramref name="locator"/>.
+        /// <see cref="MemberKind.Redirect"/> and <see cref="TxPluginResource{T}.Redirect"/> set to a <see cref="ResourceRedirect"/>
+        /// with <paramref name="locator"/> and <paramref name="argumentsTransformer"/>.
         ///
-        /// The locator is an absolute URI identifying the location where a plugin believes the demanded resource can be
+        /// The <paramref name="locator"/> is an absolute URI identifying the location where a plugin believes the demanded resource can be
         /// found. This includes a <see cref="TxReferenceScheme"/>, <see cref="TxPluginResourceLocator.AssemblyPath"/>,
         /// and <see cref="TxPluginResourceLocator.ResourcePath"/>.
-        ///
         /// </summary>
-        /// <param name="locator">The active locator.</param>
-        /// <typeparam name="T">The type of resource.</typeparam>
-        /// <returns>A <see cref="TxPluginResource{T}"/> with <paramref name="locator"/> as the active member.</returns>
+        ///
+        /// <param name="locator">The redirect locator. See <see cref="ResourceRedirect.Locator"/>.</param>
+        /// <param name="argumentsTransformer">
+        ///     The argument transformation to pass to the locator. See <see cref="ResourceRedirect.ArgumentsTransformer"/>.
+        /// </param>
+        /// <returns>A <see cref="TxPluginResource{T}"/> with a <see cref="ResourceRedirect"/> as the active member.</returns>
         /// <seealso cref="OfFactory{T}"/>
-        /// <seealso cref="OfGeneratorLocator(TxPluginResourceLocator)"/>
-        /// <seealso cref="OfRendererLocator(TxPluginResourceLocator)"/>
-        public static TxPluginResource<T> OfLocator<T>(TxPluginResourceLocator locator) =>
-            new TxPluginResource<T>(locator);
+        /// <seealso cref="RedirectGenerator"/>
+        /// <seealso cref="RedirectRenderer"/>
+        public static TxPluginResource<T> Redirect<T>(
+            TxPluginResourceLocator locator,
+            Func<TxArguments, TxArguments> argumentsTransformer = null) =>
+            new TxPluginResource<T>(new ResourceRedirect(locator, argumentsTransformer));
 
         /// <summary>
         /// Creates a <see cref="TxPluginResource{T}"/> with <see cref="TxPluginResource{T}.ActiveMemberKind"/> set to
-        /// <see cref="MemberKind.Locator"/> and <see cref="TxPluginResource{T}.Locator"/> set to
-        /// <paramref name="locator"/>.
+        /// <see cref="MemberKind.Redirect"/> and <see cref="TxPluginResource{T}.Redirect"/> set to a <see cref="ResourceRedirect"/>
+        /// with <paramref name="locator"/> and <paramref name="argumentsTransformer"/>.
         ///
-        /// The locator is an absolute URI identifying the location where a plugin believes the demanded resource can be
+        /// The <paramref name="locator"/> is an absolute URI identifying the location where a plugin believes the demanded resource can be
         /// found. This includes a <see cref="TxReferenceScheme"/>, <see cref="TxPluginResourceLocator.AssemblyPath"/>,
         /// and <see cref="TxPluginResourceLocator.ResourcePath"/>.
-        ///
         /// </summary>
-        /// <param name="locator">The active locator.</param>
-        /// <returns>A <see cref="TxPluginResource{T}"/> with <paramref name="locator"/> as the active member.</returns>
-        /// <seealso cref="OfLocator{T}(TxPluginResourceLocator)"/>
-        /// <seealso cref="OfRendererLocator(TxPluginResourceLocator)"/>
-        public static TxPluginResource<ITxTextBitmapGenerator> OfGeneratorLocator(TxPluginResourceLocator locator) =>
-            new TxPluginResource<ITxTextBitmapGenerator>(locator);
+        ///
+        /// <param name="locator">The redirect locator. See <see cref="ResourceRedirect.Locator"/>.</param>
+        /// <param name="argumentsTransformer">
+        ///     The argument transformation to pass to the locator. See <see cref="ResourceRedirect.ArgumentsTransformer"/>.
+        /// </param>
+        /// <returns>A <see cref="TxPluginResource{T}"/> with a <see cref="ResourceRedirect"/> as the active member.</returns>
+        /// <seealso cref="OfFactory{T}"/>
+        /// <seealso cref="Redirect{T}"/>
+        /// <seealso cref="RedirectRenderer"/>
+        /// <see cref="ResourceRedirect"/>
+        public static TxPluginResource<ITxTextBitmapGenerator> RedirectGenerator(
+            TxPluginResourceLocator locator,
+            Func<TxArguments, TxArguments> argumentsTransformer = null) =>
+            new TxPluginResource<ITxTextBitmapGenerator>(new ResourceRedirect(locator, argumentsTransformer));
 
         /// <summary>
         /// Creates a <see cref="TxPluginResource{T}"/> with <see cref="TxPluginResource{T}.ActiveMemberKind"/> set to
-        /// <see cref="MemberKind.Locator"/> and <see cref="TxPluginResource{T}.Locator"/> set to
-        /// <paramref name="locator"/>.
+        /// <see cref="MemberKind.Redirect"/> and <see cref="TxPluginResource{T}.Redirect"/> set to a <see cref="ResourceRedirect"/>
+        /// with <paramref name="locator"/> and <paramref name="argumentsTransformer"/>.
         ///
-        /// The locator is an absolute URI identifying the location where a plugin believes the demanded resource can be
+        /// The <paramref name="locator"/> is an absolute URI identifying the location where a plugin believes the demanded resource can be
         /// found. This includes a <see cref="TxReferenceScheme"/>, <see cref="TxPluginResourceLocator.AssemblyPath"/>,
         /// and <see cref="TxPluginResourceLocator.ResourcePath"/>.
-        ///
         /// </summary>
-        /// <param name="locator">The active locator.</param>
-        /// <returns>A <see cref="TxPluginResource{T}"/> with <paramref name="locator"/> as the active member.</returns>
+        ///
+        /// <param name="locator">The redirect locator. See <see cref="ResourceRedirect.Locator"/>.</param>
+        /// <param name="argumentsTransformer">
+        ///     The argument transformation to pass to the locator. See <see cref="ResourceRedirect.ArgumentsTransformer"/>.
+        /// </param>
+        /// <returns>A <see cref="TxPluginResource{T}"/> with a <see cref="ResourceRedirect"/> as the active member.</returns>
         /// <seealso cref="OfFactory{T}"/>
-        /// <seealso cref="OfGeneratorLocator(TxPluginResourceLocator)"/>
-        public static TxPluginResource<ITxTextBitmapRenderer> OfRendererLocator(TxPluginResourceLocator locator) =>
-            new TxPluginResource<ITxTextBitmapRenderer>(locator);
+        /// <seealso cref="Redirect{T}"/>
+        /// <seealso cref="RedirectGenerator"/>
+        /// <see cref="ResourceRedirect"/>
+        public static TxPluginResource<ITxTextBitmapRenderer> RedirectRenderer(
+            TxPluginResourceLocator locator,
+            Func<TxArguments, TxArguments> argumentsTransformer = null) =>
+            new TxPluginResource<ITxTextBitmapRenderer>(new ResourceRedirect(locator, argumentsTransformer));
 
         /// <summary>
         /// Widens the type <typeparamref name="TU"/> to <typeparamref name="T"/>. <see cref="TxPluginResource{T}"/> can
@@ -122,7 +140,7 @@ namespace Texart.Api
             switch (resource.ActiveMemberKind)
             {
                 case MemberKind.Factory: return new TxPluginResource<T>(resource._factory);
-                case MemberKind.Locator: return new TxPluginResource<T>(resource._locator);
+                case MemberKind.Redirect: return new TxPluginResource<T>(resource._redirect);
                 default:
                     Debug.Fail("Unreachable code!");
                     throw new InvalidOperationException();
@@ -140,9 +158,82 @@ namespace Texart.Api
             /// </summary>
             Factory,
             /// <summary>
-            /// Kind indicating that <see cref="TxPluginResource{T}.Locator"/> is the <see cref="TxPluginResource{T}.ActiveMember"/>.
+            /// Kind indicating that <see cref="TxPluginResource{T}.Redirect"/> is the <see cref="TxPluginResource{T}.ActiveMember"/>.
             /// </summary>
-            Locator
+            Redirect
+        }
+
+        /// <summary>
+        /// A value that represents a plugin resource redirection and transformation that modifies the incoming
+        /// <see cref="TxArguments"/> that the redirect destination will receive.
+        /// </summary>
+        public sealed class ResourceRedirect : IEquatable<ResourceRedirect>
+        {
+            /// <summary>
+            /// The redirect destination.
+            /// </summary>
+            public TxPluginResourceLocator Locator { get; }
+            /// <summary>
+            /// The transformation applied to incoming arguments before being passed on to the redirect destination
+            /// pointed to by <see cref="Locator"/>. If this is <code>null</code>, then the identity transformation
+            /// should be applied.
+            /// </summary>
+            // TODO: Make this nullable when we have nullable references enabled.
+            public Func<TxArguments, TxArguments> ArgumentsTransformer { get; }
+
+            /// <summary>
+            /// Creates a redirect.
+            /// </summary>
+            /// <param name="locator"><see cref="Locator"/>.</param>
+            /// <param name="argumentsTransformer"><see cref="ArgumentsTransformer"/>.</param>
+            internal ResourceRedirect(TxPluginResourceLocator locator,
+                Func<TxArguments, TxArguments> argumentsTransformer)
+            {
+                Debug.Assert(locator != null);
+                Locator = locator;
+                ArgumentsTransformer = argumentsTransformer;
+            }
+
+            /// <inheritdoc cref="IEquatable{T}.Equals(T)"/>
+            public bool Equals(ResourceRedirect other)
+            {
+                if (other is null) return false;
+                if (ReferenceEquals(this, other)) return true;
+                return Equals(Locator, other.Locator) && Equals(ArgumentsTransformer, other.ArgumentsTransformer);
+            }
+
+            /// <inheritdoc cref="object.Equals(object)"/>
+            public override bool Equals(object obj)
+            {
+                return ReferenceEquals(this, obj) || obj is ResourceRedirect other && Equals(other);
+            }
+
+            /// <inheritdoc cref="object.GetHashCode"/>
+            public override int GetHashCode() => HashCode.Combine(Locator, ArgumentsTransformer);
+
+            /// <summary>
+            /// Compares two <see cref="ResourceRedirect"/> for equality. Two <see cref="ResourceRedirect"/> instances
+            /// are equal iff they have the same <see cref="Locator"/> and <see cref="ArgumentsTransformer"/>.
+            /// </summary>
+            /// <param name="lhs">The left-hand side of the equality.</param>
+            /// <param name="rhs">The right-hand side of the equality.</param>
+            /// <returns>
+            ///     <c>true</c> if the field members of <paramref name="lhs"/> and <paramref name="rhs"/>
+            ///     are equal, <c>false</c> otherwise.
+            /// </returns>
+            public static bool operator ==(ResourceRedirect lhs, ResourceRedirect rhs) => Equals(lhs, rhs);
+
+            /// <summary>
+            /// Compares two <see cref="ResourceRedirect"/> for equality. See <see cref="op_Equality"/> for details on
+            /// what constitutes equality.
+            /// </summary>
+            /// <param name="lhs">The left-hand side of the inequality.</param>
+            /// <param name="rhs">The right-hand side of the inequality.</param>
+            /// <returns>
+            ///     <c>true</c> if the field members of <paramref name="lhs"/> and <paramref name="rhs"/>
+            ///     are different, <c>false</c> otherwise.
+            /// </returns>
+            public static bool operator !=(ResourceRedirect lhs, ResourceRedirect rhs) => !(lhs == rhs);
         }
 
         /// <summary>
@@ -182,10 +273,12 @@ namespace Texart.Api
     /// <summary>
     /// A union type which is used as the return type of <see cref="ITxPlugin"/> lookup methods. This is required
     /// because C# (as of 8.0) does not support union types. This type allows the return value to be flexible. See
-    /// <see cref="TxPluginResource"/> for more details on the semantics of each kind of member.
+    /// <see cref="TxPluginResource"/> members for more details on the semantics of each kind of member.
     /// <see cref="TxPluginResource{T}"/> is immutable.
     /// </summary>
     /// <typeparam name="T">The type of resource that this creates.</typeparam>
+    /// <seealso cref="ITxPlugin.LookupGenerator"/>
+    /// <seealso cref="ITxPlugin.LookupRenderer"/>
     public sealed class TxPluginResource<T> : IEquatable<TxPluginResource<T>>
     {
         /// <summary>
@@ -214,26 +307,26 @@ namespace Texart.Api
         }
 
         /// <summary>
-        /// The locator member of the union if the <see cref="ActiveMemberKind"/> is
-        /// <see cref="TxPluginResource.MemberKind.Locator"/>. Throws an exception otherwise.
+        /// The redirect member of the union if the <see cref="ActiveMemberKind"/> is
+        /// <see cref="TxPluginResource.MemberKind.Redirect"/>. Throws an exception otherwise.
         /// </summary>
         /// <exception cref="TxPluginResource.InactiveUnionMemberAccessException">
-        ///     If the <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.Locator"/>.
+        ///     If the <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.Redirect"/>.
         /// </exception>
-        public TxPluginResourceLocator Locator {
+        public TxPluginResource.ResourceRedirect Redirect {
             get
             {
-                if (ActiveMemberKind != TxPluginResource.MemberKind.Locator)
+                if (ActiveMemberKind != TxPluginResource.MemberKind.Redirect)
                 {
                     throw new TxPluginResource.InactiveUnionMemberAccessException(
-                        TxPluginResource.MemberKind.Locator, ActiveMemberKind);
+                        TxPluginResource.MemberKind.Redirect, ActiveMemberKind);
                 }
-                return _locator;
+                return _redirect;
             }
         }
 
         /// <summary>
-        /// The currently active member of the union. This will be one of <see cref="Factory"/> or <see cref="Locator"/>
+        /// The currently active member of the union. This will be one of <see cref="Factory"/> or <see cref="Redirect"/>
         /// depending on <see cref="ActiveMemberKind"/>.
         /// </summary>
         public object ActiveMember
@@ -243,7 +336,7 @@ namespace Texart.Api
                 switch (ActiveMemberKind)
                 {
                     case TxPluginResource.MemberKind.Factory: return _factory;
-                    case TxPluginResource.MemberKind.Locator: return _locator;
+                    case TxPluginResource.MemberKind.Redirect: return _redirect;
                     default:
                         Debug.Fail("Unreachable code!");
                         throw new InvalidOperationException();
@@ -258,19 +351,21 @@ namespace Texart.Api
         /// <seealso cref="TxPluginResource.OfFactory{T}"/>
         internal TxPluginResource(TxFactory<T, TxArguments> factory)
         {
+            Debug.Assert(factory != null);
             _factory = factory;
             ActiveMemberKind = TxPluginResource.MemberKind.Factory;
         }
 
         /// <summary>
-        /// Creates a <see cref="TxPluginResource{T}"/> with <see cref="ActiveMemberKind"/> of <see cref="TxPluginResource.MemberKind.Locator"/>.
+        /// Creates a <see cref="TxPluginResource{T}"/> with <see cref="ActiveMemberKind"/> of <see cref="TxPluginResource.MemberKind.Redirect"/>.
         /// </summary>
-        /// <param name="locator">The active locator instance.</param>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator)"/>
-        internal TxPluginResource(TxPluginResourceLocator locator)
+        /// <param name="redirect">The redirect destination.</param>
+        /// <seealso cref="TxPluginResource.Redirect{T}"/>
+        internal TxPluginResource(TxPluginResource.ResourceRedirect redirect)
         {
-            _locator = locator;
-            ActiveMemberKind = TxPluginResource.MemberKind.Locator;
+            Debug.Assert(redirect != null);
+            _redirect = redirect;
+            ActiveMemberKind = TxPluginResource.MemberKind.Redirect;
         }
 
         /// <summary>
@@ -279,10 +374,10 @@ namespace Texart.Api
         // ReSharper disable once InconsistentNaming
         internal readonly TxFactory<T, TxArguments> _factory;
         /// <summary>
-        /// The locator union member, or <c>null</c> if <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.Locator"/>.
+        /// The redirect union member, or <c>null</c> if <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.Redirect"/>.
         /// </summary>
         // ReSharper disable once InconsistentNaming
-        internal readonly TxPluginResourceLocator _locator;
+        internal readonly TxPluginResource.ResourceRedirect _redirect;
 
         /// <inheritdoc cref="object.ToString"/>
         public override string ToString() => $"{typeof(TxPluginResource<T>).Name}({ActiveMemberKind}){{{ActiveMember}}}";
@@ -296,7 +391,7 @@ namespace Texart.Api
             switch (ActiveMemberKind)
             {
                 case TxPluginResource.MemberKind.Factory: return Equals(_factory, other._factory);
-                case TxPluginResource.MemberKind.Locator: return Equals(_locator, other._locator);
+                case TxPluginResource.MemberKind.Redirect: return Equals(_redirect, other._redirect);
                 default:
                     Debug.Fail("Unreachable code!");
                     return false;
@@ -317,8 +412,8 @@ namespace Texart.Api
                 case TxPluginResource.MemberKind.Factory:
                     hashCode.Add(_factory);
                     break;
-                case TxPluginResource.MemberKind.Locator:
-                    hashCode.Add(_locator);
+                case TxPluginResource.MemberKind.Redirect:
+                    hashCode.Add(_redirect);
                     break;
                 default:
                     Debug.Fail("Unreachable code!");

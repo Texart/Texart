@@ -27,12 +27,12 @@ namespace Texart.Api
     ///
     /// The anatomy of a <see cref="TxPluginResourceLocator"/> looks like:
     /// <code>
-    /// //  Scheme        AssemblyPath       ResourcePath
-    /// //    |       ________|________   _______|______
-    /// //   /\      /                 \ /              \
+    /// //  Scheme        AssemblyPath      ResourcePath
+    /// //    |        ________|_______   _______|_____
+    /// //   / \      /                \ /             \
     /// //   foo:///path/to/assembly.dll:path/to/resource
-    /// //       \/                    |
-    /// //       |                     |
+    /// //       \_/                    |
+    /// //        |                     |
     /// // (empty Authority)  AssemblyResourceSeparator (:)
     /// </code>
     ///
@@ -57,6 +57,7 @@ namespace Texart.Api
     /// </code>
     /// </example>
     /// <seealso cref="RelativeLocator"/>
+    /// <seealso cref="TxPluginResource{T}"/>
     public sealed class TxPluginResourceLocator : IEquatable<TxPluginResourceLocator>
     {
         /// <summary>

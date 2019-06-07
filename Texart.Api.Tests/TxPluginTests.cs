@@ -10,15 +10,15 @@ namespace Texart.Api.Tests
         private class AllowsRelativeRedirectPlugin : PluginBase
         {
             public override TxPluginResource<ITxTextBitmapGenerator> LookupGenerator(TxPluginResourceLocator locator) =>
-                TxPluginResource.OfGeneratorLocator(locator
+                TxPluginResource.RedirectGenerator(locator
                     .WithScheme("other-scheme")
                     .WithAssemblyPath("/other/plugin.dll")
-                    .WithRelativeResource("/other/resource"));
+                    .WithRelativeResource("/other/resource"), args => args);
             public override TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(TxPluginResourceLocator locator) =>
-                TxPluginResource.OfRendererLocator(locator
+                TxPluginResource.RedirectRenderer(locator
                     .WithScheme("other-scheme")
                     .WithAssemblyPath("/other/plugin.dll")
-                    .WithRelativeResource("/other/resource"));
+                    .WithRelativeResource("/other/resource"), args => args);
         }
 
         [Test]
@@ -26,9 +26,17 @@ namespace Texart.Api.Tests
         {
             ITxPlugin plugin = new AllowsRelativeRedirectPlugin();
             var sourceLocator = TxPluginResourceLocator.Of("tx:///plugin.dll:resource");
-            var expectedRedirect = TxPluginResourceLocator.Of("other-scheme:////other/plugin.dll:/other/resource");
-            Assert.AreEqual(expectedRedirect, plugin.LookupGenerator(sourceLocator).Locator);
-            Assert.AreEqual(expectedRedirect, plugin.LookupRenderer(sourceLocator).Locator);
+            var expectedRedirectLocation = TxPluginResourceLocator.Of("other-scheme:////other/plugin.dll:/other/resource");
+            var expectedArgs = new TxArguments(new Dictionary<string, string> { { "hello", "world" } });
+
+            var generatorRedirect = plugin.LookupGenerator(sourceLocator).Redirect;
+            var rendererRedirect = plugin.LookupRenderer(sourceLocator).Redirect;
+
+            Assert.AreEqual(expectedRedirectLocation, generatorRedirect.Locator);
+            Assert.AreEqual(expectedArgs, generatorRedirect.ArgumentsTransformer(expectedArgs));
+
+            Assert.AreEqual(expectedRedirectLocation, rendererRedirect.Locator);
+            Assert.AreEqual(expectedArgs, rendererRedirect.ArgumentsTransformer(expectedArgs));
         }
 
         /// <summary>

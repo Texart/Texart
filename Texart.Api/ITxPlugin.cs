@@ -31,8 +31,8 @@ namespace Texart.Api
         /// </param>
         /// <returns>A resource specification for <see cref="ITxTextBitmapGenerator"/></returns>
         /// <seealso cref="TxPluginResource.OfFactory{T}"/>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator)"/>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.RelativeLocator)"/>
+        /// <seealso cref="TxPluginResource.Redirect{T}"/>
+        /// <seealso cref="TxPluginResource.Redirect{T}"/>
         TxPluginResource<ITxTextBitmapGenerator> LookupGenerator(TxPluginResourceLocator locator);
 
         /// <summary>
@@ -53,8 +53,8 @@ namespace Texart.Api
         /// </param>
         /// <returns>A resource specification for <see cref="ITxTextBitmapRenderer"/></returns>
         /// <seealso cref="TxPluginResource.OfFactory{T}"/>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator)"/>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.RelativeLocator)"/>
+        /// <seealso cref="TxPluginResource.Redirect{T}"/>
+        /// <seealso cref="TxPluginResource.Redirect{T}"/>
         TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(TxPluginResourceLocator locator);
     }
 }
