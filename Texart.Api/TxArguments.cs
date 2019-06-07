@@ -17,6 +17,49 @@ namespace Texart.Api
     public sealed class TxArguments : IEquatable<TxArguments>
     {
         /// <summary>
+        /// An <see cref="IExtractable"/> is an object that is able to extract values out of a <see cref="TxArguments"/>
+        /// instance.
+        ///
+        /// This API requires the implementing class to be mutable in order to (meaningfully) extract values from
+        /// arguments. Caution should be exercised if the extracted object needs to be stored beyond the scope of its declaration.
+        /// If the extracted values need to be persisted, it is recommended to place them into a different (but very similar) type
+        /// to <c>this</c> which IS immutable.
+        /// </summary>
+        public interface IExtractable
+        {
+            /// <summary>
+            /// Extracts arguments from <paramref name="args"/> and modifies <c>this</c> accordingly.
+            /// </summary>
+            /// <param name="args">Arguments to extract values from.</param>
+            void Extract(TxArguments args);
+        }
+
+        /// <summary>
+        /// Extracts arguments from <c>this</c> via the <see cref="IExtractable.Extract(TxArguments)"/> of
+        /// <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type that defines how to extract values.</typeparam>
+        /// <returns>Extracted arguments</returns>
+        /// <seealso cref="IExtractable"/>
+        /// <seealso cref="Extract{T}(ref T)"/>
+        public T Extract<T>() where T : struct, IExtractable
+        {
+            var value = new T();
+            Extract(ref value);
+            return value;
+        }
+
+        /// <summary>
+        /// Extracts arguments from <c>this</c> via the <see cref="IExtractable.Extract(TxArguments)"/> method of
+        /// <paramref name="value"/>. This will place the values into an existing value, referenced by <paramref name="value"/>.
+        /// </summary>
+        /// <param name="value">The destination into which extracted argument values will be placed.</param>
+        /// <typeparam name="T">The type that defines how to extract values.</typeparam>
+        /// <seealso cref="IExtractable"/>
+        /// <seealso cref="Extract{T}()"/>
+        public void Extract<T>(ref T value) where T : struct, IExtractable => value.Extract(this);
+
+        /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="sbyte"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="sbyte"/>, an exception is thrown.
         /// </summary>
