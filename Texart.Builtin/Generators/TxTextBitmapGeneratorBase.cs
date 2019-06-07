@@ -13,7 +13,7 @@ namespace Texart.Builtin.Generators
         /// The constructor that should be called from derived types.
         /// </summary>
         /// <param name="characters">The character set to use.</param>
-        /// <param name="pixelSamplingRatio"><see cref="ITxTextBitmapGenerator.PixelSamplingRatio"/></param>
+        /// <param name="pixelSamplingRatio">Ratio of pixel count (squared) to generated character count</param>
         protected TxTextBitmapGeneratorBase(IList<char> characters, int pixelSamplingRatio)
         {
             Characters = characters ?? throw new ArgumentNullException(nameof(characters));
