@@ -992,6 +992,9 @@ namespace Texart.Api
             /// <inheritdoc cref="object.GetHashCode"/>
             public override int GetHashCode() => (int) Type;
 
+            /// <inheritdoc cref="object.ToString"/>
+            public override string ToString() => $"LookupResult{{{Type.ToString()}}}";
+
             /// <summary>
             /// Compares two <see cref="LookupResult"/>s for equality.
             /// </summary>

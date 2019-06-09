@@ -297,8 +297,45 @@ namespace Texart.Api.Tests
             Assert.Throws<ArgumentException>(() => args.GetBool(key, true));
         }
 
+        private delegate TxArguments.LookupResult TryGetFunc<T>(string key, out T value);
+
         [Test]
         public void AllowsTryGet()
+        {
+            const string key = "foo";
+            const int value = 42;
+            var args = new TxArguments(new Dictionary<string, string>
+            {
+                { key, value.ToString() },
+                { "c", "c" },
+                { "b", "true" },
+                { "extra-key", "extra-value" }
+            });
+            AssertTryGetSuccess<byte>(args.TryGetValue, key, value);
+            AssertTryGetSuccess<sbyte>(args.TryGetValue, key, value);
+            AssertTryGetSuccess<short>(args.TryGetValue, key, value);
+            AssertTryGetSuccess<ushort>(args.TryGetValue, key, value);
+            AssertTryGetSuccess<int>(args.TryGetValue, key, value);
+            AssertTryGetSuccess<uint>(args.TryGetValue, key, value);
+            AssertTryGetSuccess<long>(args.TryGetValue, key, value);
+            AssertTryGetSuccess<ulong>(args.TryGetValue, key, value);
+            AssertTryGetSuccess<decimal>(args.TryGetValue, key, value);
+            AssertTryGetSuccess<float>(args.TryGetValue, key, value);
+            AssertTryGetSuccess<double>(args.TryGetValue, key, value);
+            AssertTryGetSuccess<char>(args.TryGetValue, "c", 'c');
+            AssertTryGetSuccess<string>(args.TryGetValue, "extra-key", "extra-value");
+            AssertTryGetSuccess<bool>(args.TryGetValue, "b", true);
+
+            static void AssertTryGetSuccess<T>(TryGetFunc<T> tryGetFunc, string lookupKey, T expectedValue)
+            {
+                var lookupResult = tryGetFunc(lookupKey, out var v);
+                Assert.AreEqual(TxArguments.LookupResult.Success, lookupResult);
+                Assert.AreEqual(expectedValue, v);
+            }
+        }
+
+        [Test]
+        public void RejectsMissingTryGet()
         {
 
         }
