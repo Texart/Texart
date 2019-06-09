@@ -311,6 +311,7 @@ namespace Texart.Api.Tests
                 { "b", "true" },
                 { "extra-key", "extra-value" }
             });
+
             AssertTryGetSuccess<byte>(args.TryGetValue, key, value);
             AssertTryGetSuccess<sbyte>(args.TryGetValue, key, value);
             AssertTryGetSuccess<short>(args.TryGetValue, key, value);
@@ -335,15 +336,73 @@ namespace Texart.Api.Tests
         }
 
         [Test]
-        public void RejectsMissingTryGet()
+        public void RejectsMissingKeyTryGet()
         {
+            const string key = "foo";
+            const int value = 42;
+            var args = new TxArguments(new Dictionary<string, string>
+            {
+                { key, value.ToString() },
+                { "c", "c" },
+                { "b", "true" },
+                { "extra-key", "extra-value" }
+            });
+            const string missingKey = "missing-key";
 
+            AssertTryGetMissing<byte>(args.TryGetValue, missingKey);
+            AssertTryGetMissing<sbyte>(args.TryGetValue, missingKey);
+            AssertTryGetMissing<short>(args.TryGetValue, missingKey);
+            AssertTryGetMissing<ushort>(args.TryGetValue, missingKey);
+            AssertTryGetMissing<int>(args.TryGetValue, missingKey);
+            AssertTryGetMissing<uint>(args.TryGetValue, missingKey);
+            AssertTryGetMissing<long>(args.TryGetValue, missingKey);
+            AssertTryGetMissing<ulong>(args.TryGetValue, missingKey);
+            AssertTryGetMissing<decimal>(args.TryGetValue, missingKey);
+            AssertTryGetMissing<float>(args.TryGetValue, missingKey);
+            AssertTryGetMissing<double>(args.TryGetValue, missingKey);
+            AssertTryGetMissing<char>(args.TryGetValue, missingKey);
+            AssertTryGetMissing<string>(args.TryGetValue, missingKey);
+            AssertTryGetMissing<bool>(args.TryGetValue, missingKey);
+
+            static void AssertTryGetMissing<T>(TryGetFunc<T> tryGetFunc, string lookupKey)
+            {
+                var lookupResult = tryGetFunc(lookupKey, out _);
+                Assert.AreEqual(TxArguments.LookupResult.MissingKey, lookupResult);
+            }
         }
 
         [Test]
-        public void RejectsBadTryGet()
+        public void RejectsParsingErrorTryGet()
         {
+            const string key = "foo";
+            const string value = "bad-numeric-value";
+            var args = new TxArguments(new Dictionary<string, string>
+            {
+                { key, value },
+                { "c", "too-many-chars" },
+                { "b", "not-a-bool" },
+                { "extra-key", "extra-value" }
+            });
 
+            AssertTryGetParsingError<byte>(args.TryGetValue, key);
+            AssertTryGetParsingError<sbyte>(args.TryGetValue, key);
+            AssertTryGetParsingError<short>(args.TryGetValue, key);
+            AssertTryGetParsingError<ushort>(args.TryGetValue, key);
+            AssertTryGetParsingError<int>(args.TryGetValue, key);
+            AssertTryGetParsingError<uint>(args.TryGetValue, key);
+            AssertTryGetParsingError<long>(args.TryGetValue, key);
+            AssertTryGetParsingError<ulong>(args.TryGetValue, key);
+            AssertTryGetParsingError<decimal>(args.TryGetValue, key);
+            AssertTryGetParsingError<float>(args.TryGetValue, key);
+            AssertTryGetParsingError<double>(args.TryGetValue, key);
+            AssertTryGetParsingError<char>(args.TryGetValue, "c");
+            AssertTryGetParsingError<bool>(args.TryGetValue, "b");
+
+            static void AssertTryGetParsingError<T>(TryGetFunc<T> tryGetFunc, string lookupKey)
+            {
+                var lookupResult = tryGetFunc(lookupKey, out _);
+                Assert.AreEqual(TxArguments.LookupResult.ParsingError, lookupResult);
+            }
         }
 
         [Test]
