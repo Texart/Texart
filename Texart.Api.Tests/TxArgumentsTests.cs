@@ -298,6 +298,7 @@ namespace Texart.Api.Tests
         }
 
         private delegate TxArguments.LookupResult TryGetFunc<T>(string key, out T value);
+        private delegate TxArguments.LookupResult TryGetWithParseFunc<T>(string key, out T value, TxArguments.TryParseFunc<T> tryParse);
 
         [Test]
         public void AllowsTryGet()
@@ -406,15 +407,154 @@ namespace Texart.Api.Tests
         }
 
         [Test]
-        public void AllowsCustomParseFunc()
+        public void HandlesMissingKeys()
         {
+            const string missingKey = "foo";
+            var args = new TxArguments(new Dictionary<string, string>
+            {
+                { "extra-key", "extra-value" }
+            });
 
+            AssertTryGetMissingKey<byte>(args.TryGetValue, missingKey);
+            AssertTryGetMissingKey<sbyte>(args.TryGetValue, missingKey);
+            AssertTryGetMissingKey<short>(args.TryGetValue, missingKey);
+            AssertTryGetMissingKey<ushort>(args.TryGetValue, missingKey);
+            AssertTryGetMissingKey<int>(args.TryGetValue, missingKey);
+            AssertTryGetMissingKey<uint>(args.TryGetValue, missingKey);
+            AssertTryGetMissingKey<long>(args.TryGetValue, missingKey);
+            AssertTryGetMissingKey<ulong>(args.TryGetValue, missingKey);
+            AssertTryGetMissingKey<decimal>(args.TryGetValue, missingKey);
+            AssertTryGetMissingKey<float>(args.TryGetValue, missingKey);
+            AssertTryGetMissingKey<double>(args.TryGetValue, missingKey);
+            AssertTryGetMissingKey<char>(args.TryGetValue, missingKey);
+            AssertTryGetMissingKey<bool>(args.TryGetValue, missingKey);
+
+            static void AssertTryGetMissingKey<T>(TryGetFunc<T> tryGetFunc, string lookupKey)
+            {
+                var lookupResult = tryGetFunc(lookupKey, out _);
+                Assert.AreEqual(TxArguments.LookupResult.MissingKey, lookupResult);
+            }
         }
 
         [Test]
-        public void HandlesMissingKeys()
+        public void AllowsCustomParseFunc()
         {
+            const string key = "extra-key";
+            var args = new TxArguments(new Dictionary<string, string>
+            {
+                { key, "extra-value" }
+            });
 
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<byte>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<sbyte>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<short>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<ushort>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<int>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<uint>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<long>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<ulong>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<decimal>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<float>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<double>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<char>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<bool>(), default);
+
+            // random types
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<object>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<string>(), default);
+            AssertTryGetSuccess(args.TryGetValue, key, TryParseFuncWithDefaultValue<TxArgumentsTests>(), default);
+
+            static TxArguments.TryParseFunc<T> TryParseFuncWithDefaultValue<T>() => (string str, out T value) =>
+            {
+                value = default;
+                return true;
+            };
+            static void AssertTryGetSuccess<T>(TryGetWithParseFunc<T> tryGet, string lookupKey,
+                TxArguments.TryParseFunc<T> tryParse, T expectedValue)
+            {
+                var lookupResult = tryGet(lookupKey, out var value, tryParse);
+                Assert.AreEqual(TxArguments.LookupResult.Success, lookupResult);
+                Assert.AreEqual(expectedValue, value);
+            }
+        }
+
+        [Test]
+        public void AllowsCustomParseFuncWithParsingError()
+        {
+            const string key = "extra-key";
+            var args = new TxArguments(new Dictionary<string, string>
+            {
+                { key, "extra-value" }
+            });
+
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<byte>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<sbyte>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<short>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<ushort>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<int>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<uint>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<long>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<ulong>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<decimal>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<float>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<double>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<char>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<bool>());
+
+            // random types
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<object>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<string>());
+            AssertTryGetParsingError(args.TryGetValue, key, TryParseFuncWithParsingError<TxArgumentsTests>());
+
+            static TxArguments.TryParseFunc<T> TryParseFuncWithParsingError<T>() => (string str, out T value) =>
+            {
+                value = default;
+                return false;
+            };
+            static void AssertTryGetParsingError<T>(TryGetWithParseFunc<T> tryGet, string lookupKey,
+                TxArguments.TryParseFunc<T> tryParse)
+            {
+                var lookupResult = tryGet(lookupKey, out _, tryParse);
+                Assert.AreEqual(TxArguments.LookupResult.ParsingError, lookupResult);
+            }
+        }
+
+        [Test]
+        public void AllowsCustomParseFuncWithMissingKey()
+        {
+            const string missingKey = "missing-key";
+            var args = new TxArguments(new Dictionary<string, string>
+            {
+                { "extra-key", "extra-value" }
+            });
+
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<byte>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<sbyte>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<short>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<ushort>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<int>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<uint>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<long>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<ulong>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<decimal>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<float>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<double>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<char>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<bool>());
+
+            // random types
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<object>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<string>());
+            AssertTryGetParsingError(args.TryGetValue, missingKey, TryParseFuncThatThrows<TxArgumentsTests>());
+
+            static TxArguments.TryParseFunc<T> TryParseFuncThatThrows<T>() =>
+                (string str, out T value) => throw new Exception("Should not be called");
+            static void AssertTryGetParsingError<T>(TryGetWithParseFunc<T> tryGet, string lookupKey,
+                TxArguments.TryParseFunc<T> tryParse)
+            {
+                var lookupResult = tryGet(lookupKey, out _, tryParse);
+                Assert.AreEqual(TxArguments.LookupResult.MissingKey, lookupResult);
+            }
         }
 
         [Test]
