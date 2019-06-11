@@ -6,6 +6,8 @@ using NUnit.Framework;
 
 namespace Texart.Api.Tests
 {
+    using BadLookupException = TxArguments.BadLookupException;
+
     [TestFixture]
     internal class TxArgumentsTests
     {
@@ -60,10 +62,10 @@ namespace Texart.Api.Tests
             Assert.AreEqual(value, args.GetSingle(key));
             Assert.AreEqual(value, args.GetDouble(key));
 
-            Assert.Throws<ArgumentException>(() => args.GetByte(key));
-            Assert.Throws<ArgumentException>(() => args.GetUShort(key));
-            Assert.Throws<ArgumentException>(() => args.GetUInt(key));
-            Assert.Throws<ArgumentException>(() => args.GetULong(key));
+            Assert.Throws<BadLookupException>(() => args.GetByte(key));
+            Assert.Throws<BadLookupException>(() => args.GetUShort(key));
+            Assert.Throws<BadLookupException>(() => args.GetUInt(key));
+            Assert.Throws<BadLookupException>(() => args.GetULong(key));
         }
 
         [Test]
@@ -89,17 +91,17 @@ namespace Texart.Api.Tests
                 { key, value },
                 { "extra-key", "extra-value" }
             });
-            Assert.Throws<ArgumentException>(() => args.GetByte(key));
-            Assert.Throws<ArgumentException>(() => args.GetSByte(key));
-            Assert.Throws<ArgumentException>(() => args.GetShort(key));
-            Assert.Throws<ArgumentException>(() => args.GetUShort(key));
-            Assert.Throws<ArgumentException>(() => args.GetInt(key));
-            Assert.Throws<ArgumentException>(() => args.GetUInt(key));
-            Assert.Throws<ArgumentException>(() => args.GetLong(key));
-            Assert.Throws<ArgumentException>(() => args.GetULong(key));
-            Assert.Throws<ArgumentException>(() => args.GetDecimal(key));
-            Assert.Throws<ArgumentException>(() => args.GetSingle(key));
-            Assert.Throws<ArgumentException>(() => args.GetDouble(key));
+            Assert.Throws<BadLookupException>(() => args.GetByte(key));
+            Assert.Throws<BadLookupException>(() => args.GetSByte(key));
+            Assert.Throws<BadLookupException>(() => args.GetShort(key));
+            Assert.Throws<BadLookupException>(() => args.GetUShort(key));
+            Assert.Throws<BadLookupException>(() => args.GetInt(key));
+            Assert.Throws<BadLookupException>(() => args.GetUInt(key));
+            Assert.Throws<BadLookupException>(() => args.GetLong(key));
+            Assert.Throws<BadLookupException>(() => args.GetULong(key));
+            Assert.Throws<BadLookupException>(() => args.GetDecimal(key));
+            Assert.Throws<BadLookupException>(() => args.GetSingle(key));
+            Assert.Throws<BadLookupException>(() => args.GetDouble(key));
         }
 
         [Test]
@@ -112,15 +114,15 @@ namespace Texart.Api.Tests
                 { key, value },
                 { "extra-key", "extra-value" }
             });
-            Assert.Throws<ArgumentException>(() => args.GetByte(key));
-            Assert.Throws<ArgumentException>(() => args.GetSByte(key));
-            Assert.Throws<ArgumentException>(() => args.GetShort(key));
-            Assert.Throws<ArgumentException>(() => args.GetUShort(key));
-            Assert.Throws<ArgumentException>(() => args.GetInt(key));
-            Assert.Throws<ArgumentException>(() => args.GetUInt(key));
-            Assert.Throws<ArgumentException>(() => args.GetLong(key));
-            Assert.Throws<ArgumentException>(() => args.GetULong(key));
-            Assert.Throws<ArgumentException>(() => args.GetDecimal(key));
+            Assert.Throws<BadLookupException>(() => args.GetByte(key));
+            Assert.Throws<BadLookupException>(() => args.GetSByte(key));
+            Assert.Throws<BadLookupException>(() => args.GetShort(key));
+            Assert.Throws<BadLookupException>(() => args.GetUShort(key));
+            Assert.Throws<BadLookupException>(() => args.GetInt(key));
+            Assert.Throws<BadLookupException>(() => args.GetUInt(key));
+            Assert.Throws<BadLookupException>(() => args.GetLong(key));
+            Assert.Throws<BadLookupException>(() => args.GetULong(key));
+            Assert.Throws<BadLookupException>(() => args.GetDecimal(key));
         }
 
         [Test]
@@ -194,11 +196,11 @@ namespace Texart.Api.Tests
             Assert.IsTrue(args.GetBool("b2"));
             Assert.IsFalse(args.GetBool("b3"));
             Assert.IsFalse(args.GetBool("b4"));
-            Assert.Throws<ArgumentException>(() => args.GetBool("b5"));
-            Assert.Throws<ArgumentException>(() => args.GetBool("b6"));
+            Assert.Throws<BadLookupException>(() => args.GetBool("b5"));
+            Assert.Throws<BadLookupException>(() => args.GetBool("b6"));
 
-            Assert.Throws<ArgumentException>(() => args.GetBool("foo"));
-            Assert.Throws<ArgumentException>(() => args.GetBool("extra-key"));
+            Assert.Throws<BadLookupException>(() => args.GetBool("foo"));
+            Assert.Throws<BadLookupException>(() => args.GetBool("extra-key"));
         }
 
         [Test]
@@ -215,11 +217,11 @@ namespace Texart.Api.Tests
             });
             Assert.AreEqual('t', args.GetChar("c1"));
             Assert.AreEqual('1', args.GetChar("c2"));
-            Assert.Throws<ArgumentException>(() => args.GetChar("c3"));
-            Assert.Throws<ArgumentException>(() => args.GetChar("c4"));
+            Assert.Throws<BadLookupException>(() => args.GetChar("c3"));
+            Assert.Throws<BadLookupException>(() => args.GetChar("c4"));
 
-            Assert.Throws<ArgumentException>(() => args.GetChar("foo"));
-            Assert.Throws<ArgumentException>(() => args.GetChar("extra-key"));
+            Assert.Throws<BadLookupException>(() => args.GetChar("foo"));
+            Assert.Throws<BadLookupException>(() => args.GetChar("extra-key"));
         }
 
         [Test]
@@ -282,20 +284,20 @@ namespace Texart.Api.Tests
                 { key, badValue },
                 { "extra-key", "extra-value" }
             });
-            Assert.Throws<ArgumentException>(() => args.GetByte(key, defaultValue));
-            Assert.Throws<ArgumentException>(() => args.GetSByte(key, defaultValue));
-            Assert.Throws<ArgumentException>(() => args.GetShort(key, defaultValue));
-            Assert.Throws<ArgumentException>(() => args.GetUShort(key, defaultValue));
-            Assert.Throws<ArgumentException>(() => args.GetInt(key, defaultValue));
-            Assert.Throws<ArgumentException>(() => args.GetUInt(key, defaultValue));
-            Assert.Throws<ArgumentException>(() => args.GetLong(key, defaultValue));
-            Assert.Throws<ArgumentException>(() => args.GetULong(key, defaultValue));
-            Assert.Throws<ArgumentException>(() => args.GetDecimal(key, defaultValue));
-            Assert.Throws<ArgumentException>(() => args.GetSingle(key, defaultValue));
-            Assert.Throws<ArgumentException>(() => args.GetDouble(key, defaultValue));
-            Assert.Throws<ArgumentException>(() => args.GetChar(key, 'a'));
+            Assert.Throws<BadLookupException>(() => args.GetByte(key, defaultValue));
+            Assert.Throws<BadLookupException>(() => args.GetSByte(key, defaultValue));
+            Assert.Throws<BadLookupException>(() => args.GetShort(key, defaultValue));
+            Assert.Throws<BadLookupException>(() => args.GetUShort(key, defaultValue));
+            Assert.Throws<BadLookupException>(() => args.GetInt(key, defaultValue));
+            Assert.Throws<BadLookupException>(() => args.GetUInt(key, defaultValue));
+            Assert.Throws<BadLookupException>(() => args.GetLong(key, defaultValue));
+            Assert.Throws<BadLookupException>(() => args.GetULong(key, defaultValue));
+            Assert.Throws<BadLookupException>(() => args.GetDecimal(key, defaultValue));
+            Assert.Throws<BadLookupException>(() => args.GetSingle(key, defaultValue));
+            Assert.Throws<BadLookupException>(() => args.GetDouble(key, defaultValue));
+            Assert.Throws<BadLookupException>(() => args.GetChar(key, 'a'));
             Assert.AreEqual(badValue, args.GetString(key, "a"));
-            Assert.Throws<ArgumentException>(() => args.GetBool(key, true));
+            Assert.Throws<BadLookupException>(() => args.GetBool(key, true));
         }
 
         private delegate TxArguments.LookupResult TryGetFunc<T>(string key, out T value);
