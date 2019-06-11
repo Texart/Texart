@@ -1113,7 +1113,7 @@ namespace Texart.Api
         /// <summary>
         /// An exception that is thrown when a lookup within <see cref="TxArguments"/> fails. For example,
         /// when <see cref="TxArguments.GetValue{T}(string,TryParseFunc{T})"/> is called with a non-existent
-        /// key, or the parsing of the associated value fails.
+        /// key, or parsing the associated value fails.
         /// </summary>
         public sealed class BadLookupException : System.Exception
         {
