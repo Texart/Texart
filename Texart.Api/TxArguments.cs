@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Texart.Api
 {
@@ -1052,7 +1053,18 @@ namespace Texart.Api
         public bool Equals(TxArguments other)
         {
             if (other is null) return false;
-            return ReferenceEquals(this, other) || AsImmutableDictionary.Equals(other.AsImmutableDictionary);
+            return ReferenceEquals(this, other) || DictEquals(AsImmutableDictionary, other.AsImmutableDictionary);
+
+            static bool DictEquals<TK, TV>(ImmutableDictionary<TK, TV> lhs, ImmutableDictionary<TK, TV> rhs)
+            {
+                if (lhs.Count != rhs.Count)
+                {
+                    return false;
+                }
+                var lhsValues = lhs.OrderBy(kv => kv.Key);
+                var rhsValues = rhs.OrderBy(kv => kv.Key);
+                return lhsValues.SequenceEqual(rhsValues);
+            }
         }
 
         /// <inheritdoc cref="object.Equals(object)"/>
@@ -1060,11 +1072,20 @@ namespace Texart.Api
             ReferenceEquals(this, obj) || obj is TxArguments other && Equals(other);
 
         /// <inheritdoc cref="object.GetHashCode"/>
-        public override int GetHashCode() => AsImmutableDictionary.GetHashCode();
+        public override int GetHashCode()
+        {
+            var orderedKeyValues = AsImmutableDictionary.OrderBy(kv => kv.Key);
+            var hashCode = new HashCode();
+            foreach (var keyValue in orderedKeyValues)
+            {
+                hashCode.Add(keyValue);
+            }
+            return hashCode.ToHashCode();
+        }
 
         /// <summary>
         /// Compares two <see cref="TxArguments"/>s for equality. Two <see cref="TxArguments"/>s are
-        /// only considered equal iff <see cref="AsImmutableDictionary"/> are equal.
+        /// only considered equal iff <see cref="AsImmutableDictionary"/> contains the same key-value pairs.
         /// </summary>
         /// <param name="left">The left-hand side of the equality.</param>
         /// <param name="right">The right-hand side of the equality.</param>
@@ -1076,7 +1097,7 @@ namespace Texart.Api
 
         /// <summary>
         /// Compares two <see cref="TxArguments"/>s for inequality. Two <see cref="TxArguments"/>s are
-        /// only considered unequal iff <see cref="AsImmutableDictionary"/> are unequal.
+        /// only considered unequal iff <see cref="AsImmutableDictionary"/> contains different key-value pairs.
         /// </summary>
         /// <param name="left">The left-hand side of the inequality.</param>
         /// <param name="right">The right-hand side of the inequality.</param>

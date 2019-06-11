@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Globalization;
 using NUnit.Framework;
 
@@ -560,19 +561,61 @@ namespace Texart.Api.Tests
         [Test]
         public void HasCorrectEquality()
         {
+            var args1 = new TxArguments(new Dictionary<string, string>
+            {
+                { "key", "value" }
+            });
+            var args2 = new TxArguments(new Dictionary<string, string>
+            {
+                {"key", "value"}
+            }.ToImmutableDictionary());
 
+            Assert.IsTrue(args1 == args2);
+            Assert.IsTrue(args2 == args1);
+            Assert.IsFalse(args1 != args2);
+            Assert.IsFalse(args2 != args1);
         }
 
         [Test]
         public void HasCorrectInequality()
         {
+            var args1 = new TxArguments(new Dictionary<string, string>
+            {
+                { "key", "value" }
+            });
+            var args2 = new TxArguments(new Dictionary<string, string>
+            {
+                {"different-key", "value"}
+            }.ToImmutableDictionary());
 
+            Assert.IsFalse(args1 == args2);
+            Assert.IsFalse(args2 == args1);
+            Assert.IsTrue(args1 != args2);
+            Assert.IsTrue(args2 != args1);
         }
 
         [Test]
         public void HasCorrectHashCode()
         {
+            var args1 = new TxArguments(new Dictionary<string, string>
+            {
+                { "key", "value" }
+            });
+            var args2 = new TxArguments(new Dictionary<string, string>
+            {
+                {"key", "value"}
+            }.ToImmutableDictionary());
+            var args3 = new TxArguments(new Dictionary<string, string>
+            {
+                {"different-key", "value"}
+            });
+            var args4 = new TxArguments(new Dictionary<string, string>
+            {
+                {"different-key", "value"}
+            }.ToImmutableDictionary());
 
+            Assert.AreEqual(args1.GetHashCode(), args2.GetHashCode());
+            Assert.AreEqual(args3.GetHashCode(), args4.GetHashCode());
         }
 
         [Test]
