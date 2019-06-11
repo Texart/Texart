@@ -197,7 +197,7 @@ namespace Texart.Plugins.Scripting
         /// <returns>Script instance</returns>
         public static PluginScript<T> From<T>(SourceFile sourceFile)
         {
-            if (sourceFile == null) throw new ArgumentNullException(nameof(sourceFile));
+            if (sourceFile is null) throw new ArgumentNullException(nameof(sourceFile));
             var scriptOptions = BaseScriptOptions
                 .WithFilePath(sourceFile.FilePath)
                 .WithSourceResolver(BuildSourceReferenceResolver(sourceFile))
@@ -232,7 +232,7 @@ namespace Texart.Plugins.Scripting
         /// The language version to use to compile Texart scripts. Ideally, this should be the same as the version
         /// used to compile Texart.
         /// </summary>
-        internal static LanguageVersion DefaultLanguageVersion => LanguageVersion.CSharp7_3;
+        internal static LanguageVersion DefaultLanguageVersion => LanguageVersion.CSharp8;
         /// <summary>
         /// The default optimization level to compile Texart scripts.
         /// </summary>

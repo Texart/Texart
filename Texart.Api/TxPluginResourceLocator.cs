@@ -25,6 +25,17 @@ namespace Texart.Api
     /// See <see href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#/media/File:URI_syntax_diagram.png"/> for
     /// a simple diagram.
     ///
+    /// The anatomy of a <see cref="TxPluginResourceLocator"/> looks like:
+    /// <code>
+    /// //  Scheme        AssemblyPath      ResourcePath
+    /// //    |        ________|_______   _______|_____
+    /// //   / \      /                \ /             \
+    /// //   foo:///path/to/assembly.dll:path/to/resource
+    /// //       \_/                    |
+    /// //        |                     |
+    /// // (empty Authority)  AssemblyResourceSeparator (:)
+    /// </code>
+    ///
     /// From the above, only the following properties are allowed:
     ///   * scheme: <see cref="TxPluginResourceLocator.Scheme"/>.
     ///   * authority: This is required for a URI but in our case, this <b>MUST</b> be empty.
@@ -46,6 +57,7 @@ namespace Texart.Api
     /// </code>
     /// </example>
     /// <seealso cref="RelativeLocator"/>
+    /// <seealso cref="TxPluginResource{T}"/>
     public sealed class TxPluginResourceLocator : IEquatable<TxPluginResourceLocator>
     {
         /// <summary>
@@ -80,7 +92,7 @@ namespace Texart.Api
         /// <see cref="ResourceSegments"/> as a URI path string. The format is "path/to/resource".
         /// </summary>
         public string ResourcePath =>
-            _resourcePathBackingField = _resourcePathBackingField ?? string.Join(UriPathSeparator, ResourceSegments);
+            _resourcePathBackingField ??= string.Join(UriPathSeparator, ResourceSegments);
 
         /// <summary>
         /// The URI representation of <c>this</c>.
@@ -99,7 +111,7 @@ namespace Texart.Api
         /// in this case).
         /// </summary>
         /// <seealso cref="Uri.EscapeUriString"/>
-        public const char AssemblyResourceSeparator = ':';
+        private const char AssemblyResourceSeparator = ':';
 
         /// <summary>
         /// Constructs a <see cref="TxPluginResourceLocator"/> from an absolute URI.
@@ -134,7 +146,7 @@ namespace Texart.Api
         public static bool IsWellFormedResourceLocatorUri(Uri uri)
         {
             var (exception, _) = CheckIsValidPluginResourceUri(uri);
-            return exception == null;
+            return exception is null;
         }
 
         /// <summary>
@@ -166,7 +178,7 @@ namespace Texart.Api
         public static bool IsWellFormedRelativeResourceString(string relativeResource)
         {
             var (checkFailedException, _) = RelativeLocator.CheckIsValidRelativeResourcePath(relativeResource);
-            return checkFailedException == null;
+            return checkFailedException is null;
         }
 
         /// <summary>
@@ -204,7 +216,7 @@ namespace Texart.Api
         /// <exception cref="ArgumentNullException">If <paramref name="scheme"/> is <c>null</c></exception>
         public TxPluginResourceLocator WithScheme(TxReferenceScheme scheme)
         {
-            if (scheme == null)
+            if (scheme is null)
             {
                 throw new ArgumentNullException(nameof(scheme));
             }
@@ -262,7 +274,7 @@ namespace Texart.Api
         /// <exception cref="ArgumentNullException">If <paramref name="relativeLocator"/> is <c>null</c></exception>
         public TxPluginResourceLocator WithRelativeResource(RelativeLocator relativeLocator)
         {
-            if (relativeLocator == null)
+            if (relativeLocator is null)
             {
                 throw new ArgumentNullException(nameof(relativeLocator));
             }
@@ -306,7 +318,7 @@ namespace Texart.Api
             /// <seealso cref="TxPluginResourceLocator.CheckIsValidPluginResourceUri"/>
             internal static (Exception, RelativeLocator) CheckIsValidRelativeResourcePath(string relativePath)
             {
-                if (relativePath == null)
+                if (relativePath is null)
                 {
                     return (new ArgumentNullException(nameof(relativePath)), default);
                 }
@@ -454,7 +466,7 @@ namespace Texart.Api
             //     / \ /                        \
             //     urn:example:animal:ferret:nose
             //
-            if (uri == null) { return (new ArgumentNullException(nameof(uri)), default); }
+            if (uri is null) { return (new ArgumentNullException(nameof(uri)), default); }
             if (!uri.IsAbsoluteUri)
             {
                 return (new FormatException($"URI must be absolute: {uri}"), default);
@@ -510,7 +522,7 @@ namespace Texart.Api
             ReadOnlySpan<string> segments = path.Split(UriPathSeparator);
             if (!segments.IsEmpty && segments[0] == string.Empty)
             {
-                // Remove trailing /
+                // Remove leading /
                 segments = segments.Slice(1);
             }
 
@@ -701,7 +713,7 @@ namespace Texart.Api
             //     / \ /                        \
             //     urn:example:animal:ferret:nose
             //
-            if (assemblyPath == null)
+            if (assemblyPath is null)
             {
                 return (new ArgumentNullException(nameof(assemblyPath)), default);
             }

@@ -57,7 +57,7 @@ namespace Texart.Api
                 }
             }
 
-            int Gcd(int a, int b)
+            static int Gcd(int a, int b)
             {
                 // Generic Euclidean GCD algorithm
                 while (b != 0)

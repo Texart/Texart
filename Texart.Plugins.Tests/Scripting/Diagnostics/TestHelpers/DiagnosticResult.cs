@@ -41,7 +41,7 @@ namespace Texart.Plugins.Tests.Scripting.Diagnostics.TestHelpers
         {
             get
             {
-                if (this.locations == null)
+                if (this.locations is null)
                 {
                     this.locations = new DiagnosticResultLocation[] { };
                 }

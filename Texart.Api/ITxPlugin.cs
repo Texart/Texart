@@ -26,12 +26,13 @@ namespace Texart.Api
         /// </summary>
         /// <param name="locator">
         ///     The resource to look up. This name should appear in <see cref="AvailableGenerators"/> but not required.
-        ///     If a plugin exports a "default" type, then the type should be available as <c>null</c>.
+        ///     If a plugin exports a "default" type, then the type should be available as an empty
+        ///     <see cref="TxPluginResourceLocator.ResourcePath"/>.
         /// </param>
         /// <returns>A resource specification for <see cref="ITxTextBitmapGenerator"/></returns>
         /// <seealso cref="TxPluginResource.OfFactory{T}"/>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator)"/>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.RelativeLocator)"/>
+        /// <seealso cref="TxPluginResource.Redirect{T}"/>
+        /// <seealso cref="TxPluginResource.Redirect{T}"/>
         TxPluginResource<ITxTextBitmapGenerator> LookupGenerator(TxPluginResourceLocator locator);
 
         /// <summary>
@@ -47,12 +48,13 @@ namespace Texart.Api
         /// </summary>
         /// <param name="locator">
         ///     The resource to look up. This identity should appear in <see cref="AvailableRenderers"/> but not required.
-        ///     If a plugin exports a "default" type, then the type should be available as <c>null</c>.
+        ///     If a plugin exports a "default" type, then the type should be available as an empty
+        ///     <see cref="TxPluginResourceLocator.ResourcePath"/>.
         /// </param>
         /// <returns>A resource specification for <see cref="ITxTextBitmapRenderer"/></returns>
         /// <seealso cref="TxPluginResource.OfFactory{T}"/>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator)"/>
-        /// <seealso cref="TxPluginResource.OfLocator{T}(TxPluginResourceLocator.RelativeLocator)"/>
+        /// <seealso cref="TxPluginResource.Redirect{T}"/>
+        /// <seealso cref="TxPluginResource.Redirect{T}"/>
         TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(TxPluginResourceLocator locator);
     }
 }

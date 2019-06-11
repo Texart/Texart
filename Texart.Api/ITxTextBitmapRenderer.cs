@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Texart.Api
@@ -14,8 +15,8 @@ namespace Texart.Api
         /// <summary>
         /// Write some text data to an output stream.
         /// </summary>
-        /// <param name="txTextBitmap">The source text data</param>
-        /// <param name="outputStream">The stream to write to</param>
-        Task RenderAsync(ITxTextBitmap txTextBitmap, Stream outputStream);
+        /// <param name="textBitmaps">The source text data.</param>
+        /// <param name="outputStream">The stream to write to.</param>
+        Task RenderAsync(IAsyncEnumerable<ITxTextBitmap> textBitmaps, Stream outputStream);
     }
 }

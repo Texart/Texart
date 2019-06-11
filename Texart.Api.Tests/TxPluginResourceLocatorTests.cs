@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Texart.Api.Tests
 {
+    [TestFixture]
     internal class TxPluginResourceLocatorTests
     {
         [Test]
@@ -315,6 +316,7 @@ namespace Texart.Api.Tests
         /// <summary>
         /// Tests for <see cref="TxPluginResourceLocator.RelativeLocator"/>.
         /// </summary>
+        [TestFixture]
         internal class RelativeResourceTests
         {
             [Test]

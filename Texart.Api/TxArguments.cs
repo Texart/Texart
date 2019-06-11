@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Texart.Api
 {
@@ -17,20 +18,63 @@ namespace Texart.Api
     public sealed class TxArguments : IEquatable<TxArguments>
     {
         /// <summary>
+        /// An <see cref="IExtractable"/> is an object that is able to extract values out of a <see cref="TxArguments"/>
+        /// instance.
+        ///
+        /// This API requires the implementing class to be mutable in order to (meaningfully) extract values from
+        /// arguments. Caution should be exercised if the extracted object needs to be stored beyond the scope of its declaration.
+        /// If the extracted values need to be persisted, it is recommended to place them into a different (but very similar) type
+        /// to <c>this</c> which IS immutable.
+        /// </summary>
+        public interface IExtractable
+        {
+            /// <summary>
+            /// Extracts arguments from <paramref name="args"/> and modifies <c>this</c> accordingly.
+            /// </summary>
+            /// <param name="args">Arguments to extract values from.</param>
+            void Extract(TxArguments args);
+        }
+
+        /// <summary>
+        /// Extracts arguments from <c>this</c> via the <see cref="IExtractable.Extract(TxArguments)"/> of
+        /// <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type that defines how to extract values.</typeparam>
+        /// <returns>Extracted arguments</returns>
+        /// <seealso cref="IExtractable"/>
+        /// <seealso cref="Extract{T}(ref T)"/>
+        public T Extract<T>() where T : struct, IExtractable
+        {
+            var value = new T();
+            Extract(ref value);
+            return value;
+        }
+
+        /// <summary>
+        /// Extracts arguments from <c>this</c> via the <see cref="IExtractable.Extract(TxArguments)"/> method of
+        /// <paramref name="value"/>. This will place the values into an existing value, referenced by <paramref name="value"/>.
+        /// </summary>
+        /// <param name="value">The destination into which extracted argument values will be placed.</param>
+        /// <typeparam name="T">The type that defines how to extract values.</typeparam>
+        /// <seealso cref="IExtractable"/>
+        /// <seealso cref="Extract{T}()"/>
+        public void Extract<T>(ref T value) where T : struct, IExtractable => value.Extract(this);
+
+        /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="sbyte"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="sbyte"/>, an exception is thrown.
         /// </summary>
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="sbyte"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <see cref="sbyte"/>.
         /// </exception>
         /// <seealso cref="GetSByte(string,sbyte)"/>
         /// <seealso cref="TryGetValue(string,out sbyte)"/>
         public sbyte GetSByte(string key) => GetValue<sbyte>(key, sbyte.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="byte"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="byte"/>, an exception is thrown.
@@ -38,14 +82,14 @@ namespace Texart.Api
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="byte"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <see cref="byte"/>.
         /// </exception>
         /// <seealso cref="GetByte(string,byte)"/>
         /// <seealso cref="TryGetValue(string,out byte)"/>
         public byte GetByte(string key) => GetValue<byte>(key, byte.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="short"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="short"/>, an exception is thrown.
@@ -53,14 +97,14 @@ namespace Texart.Api
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="short"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <see cref="short"/>.
         /// </exception>
         /// <seealso cref="GetShort(string,short)"/>
         /// <seealso cref="TryGetValue(string,out short)"/>
         public short GetShort(string key) => GetValue<short>(key, short.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="ushort"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="ushort"/>, an exception is thrown.
@@ -68,14 +112,14 @@ namespace Texart.Api
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="ushort"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <see cref="ushort"/>.
         /// </exception>
         /// <seealso cref="GetUShort(string,ushort)"/>
         /// <seealso cref="TryGetValue(string,out ushort)"/>
         public ushort GetUShort(string key) => GetValue<ushort>(key, ushort.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="int"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="int"/>, an exception is thrown.
@@ -83,14 +127,14 @@ namespace Texart.Api
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="int"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <see cref="int"/>.
         /// </exception>
         /// <seealso cref="GetInt(string,int)"/>
         /// <seealso cref="TryGetValue(string,out int)"/>
         public int GetInt(string key) => GetValue<int>(key, int.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="uint"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="uint"/>, an exception is thrown.
@@ -98,14 +142,14 @@ namespace Texart.Api
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="uint"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <see cref="uint"/>.
         /// </exception>
         /// <seealso cref="GetUInt(string,uint)"/>
         /// <seealso cref="TryGetValue(string,out uint)"/>
         public uint GetUInt(string key) => GetValue<uint>(key, uint.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="long"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="long"/>, an exception is thrown.
@@ -113,14 +157,14 @@ namespace Texart.Api
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="long"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <see cref="long"/>.
         /// </exception>
         /// <seealso cref="GetLong(string,long)"/>
         /// <seealso cref="TryGetValue(string,out long)"/>
         public long GetLong(string key) => GetValue<long>(key, long.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="ulong"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="ulong"/>, an exception is thrown.
@@ -128,14 +172,14 @@ namespace Texart.Api
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="ulong"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <see cref="ulong"/>.
         /// </exception>
         /// <seealso cref="GetULong(string,ulong)"/>
         /// <seealso cref="TryGetValue(string,out ulong)"/>
         public ulong GetULong(string key) => GetValue<ulong>(key, ulong.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="char"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="char"/>, an exception is thrown.
@@ -143,14 +187,14 @@ namespace Texart.Api
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="char"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <see cref="char"/>.
         /// </exception>
         /// <seealso cref="GetChar(string,char)"/>
         /// <seealso cref="TryGetValue(string,out char)"/>
         public char GetChar(string key) => GetValue<char>(key, char.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="float"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="float"/>, an exception is thrown.
@@ -158,14 +202,14 @@ namespace Texart.Api
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="float"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <see cref="float"/>.
         /// </exception>
         /// <seealso cref="GetSingle(string,float)"/>
         /// <seealso cref="TryGetValue(string,out float)"/>
         public float GetSingle(string key) => GetValue<float>(key, float.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="double"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="double"/>, an exception is thrown.
@@ -173,14 +217,14 @@ namespace Texart.Api
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="double"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <see cref="double"/>.
         /// </exception>
         /// <seealso cref="GetDouble(string,double)"/>
         /// <seealso cref="TryGetValue(string,out double)"/>
         public double GetDouble(string key) => GetValue<double>(key, double.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="bool"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="bool"/>, an exception is thrown.
@@ -188,14 +232,14 @@ namespace Texart.Api
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="bool"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <see cref="bool"/>.
         /// </exception>
         /// <seealso cref="GetBool(string,bool)"/>
         /// <seealso cref="TryGetValue(string,out bool)"/>
         public bool GetBool(string key) => GetValue<bool>(key, bool.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="decimal"/>. If the key is not found, or the
         /// associated value cannot be converted to <see cref="decimal"/>, an exception is thrown.
@@ -203,30 +247,31 @@ namespace Texart.Api
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="decimal"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <see cref="decimal"/>.
         /// </exception>
         /// <seealso cref="GetDecimal(string,decimal)"/>
         /// <seealso cref="TryGetValue(string,out decimal)"/>
         public decimal GetDecimal(string key) => GetValue<decimal>(key, decimal.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="string"/>.
         /// </summary>
         /// <param name="key">The key to look up.</param>
         /// <returns>The value associated with <paramref name="key"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
+        /// <exception cref="BadLookupException">If <paramref name="key"/> does not exist.</exception>
         /// <seealso cref="GetString(string,string)"/>
         /// <seealso cref="TryGetValue(string,out string)"/>
         public string GetString(string key)
         {
-            if (key == null) { throw new ArgumentNullException(nameof(key)); }
+            if (key is null) { throw new ArgumentNullException(nameof(key)); }
             return AsImmutableDictionary.TryGetValue(key, out var value)
                 ? value
-                : throw new ArgumentException($"No key found: \"{key}\"");
+                : throw new BadLookupException(LookupResult.MissingKey, $"No key found: \"{key}\"");
         }
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <typeparamref name="T"/>. If the key is not found, or the
         /// associated value cannot be converted to <typeparamref name="T"/> (via <paramref name="tryParse"/>,
@@ -237,7 +282,7 @@ namespace Texart.Api
         /// <typeparam name="T">The desired return type.</typeparam>
         /// <returns>The value associated with <paramref name="key"/>, converted to <typeparamref name="T"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> does not exist,
         ///     or the associated value cannot not be converted to <typeparamref name="T"/>.
         /// </exception>
@@ -257,7 +302,7 @@ namespace Texart.Api
         /// <seealso cref="GetBool(string)"/>
         public T GetValue<T>(string key, TryParseFunc<T> tryParse)
         {
-            if (key == null) { throw new ArgumentNullException(nameof(key)); }
+            if (key is null) { throw new ArgumentNullException(nameof(key)); }
             Debug.Assert(tryParse != null);
             var lookupResult = TryGetValue(key, out var value, tryParse);
             switch (lookupResult.Type)
@@ -265,14 +310,15 @@ namespace Texart.Api
                 case LookupResultType.Success:
                     return value;
                 case LookupResultType.MissingKey:
-                    throw new ArgumentException($"No key found: \"{key}\"");
+                    throw new BadLookupException(LookupResult.MissingKey,$"No key found: \"{key}\"");
                 case LookupResultType.ParsingError:
-                    throw new ArgumentException(
+                    throw new BadLookupException(
+                        LookupResult.ParsingError,
                         $"Value for key, \"{key}\", could not be parsed as {typeof(T).FullName}: {AsImmutableDictionary[key]}");
             }
             return value;
         }
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="sbyte"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -282,13 +328,13 @@ namespace Texart.Api
         /// <param name="defaultValue">The default value to return if <paramref name="key"/> is not found.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="sbyte"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <see cref="sbyte"/>.
         /// </exception>
         /// <seealso cref="GetSByte(string)"/>
         /// <seealso cref="TryGetValue(string,out sbyte)"/>
         public sbyte GetSByte(string key, sbyte defaultValue) => GetValue(key, sbyte.TryParse, defaultValue);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="byte"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -298,13 +344,13 @@ namespace Texart.Api
         /// <param name="defaultValue">The default value to return if <paramref name="key"/> is not found.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="byte"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <see cref="byte"/>.
         /// </exception>
         /// <seealso cref="GetByte(string)"/>
         /// <seealso cref="TryGetValue(string,out byte)"/>
         public byte GetByte(string key, byte defaultValue) => GetValue(key, byte.TryParse, defaultValue);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="short"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -314,13 +360,13 @@ namespace Texart.Api
         /// <param name="defaultValue">The default value to return if <paramref name="key"/> is not found.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="short"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <see cref="short"/>.
         /// </exception>
         /// <seealso cref="GetShort(string)"/>
         /// <seealso cref="TryGetValue(string,out short)"/>
         public short GetShort(string key, short defaultValue) => GetValue(key, short.TryParse, defaultValue);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="ushort"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -330,13 +376,13 @@ namespace Texart.Api
         /// <param name="defaultValue">The default value to return if <paramref name="key"/> is not found.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="ushort"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <see cref="ushort"/>.
         /// </exception>
         /// <seealso cref="GetUShort(string)"/>
         /// <seealso cref="TryGetValue(string,out ushort)"/>
         public ushort GetUShort(string key, ushort defaultValue) => GetValue(key, ushort.TryParse, defaultValue);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="int"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -346,13 +392,13 @@ namespace Texart.Api
         /// <param name="defaultValue">The default value to return if <paramref name="key"/> is not found.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="int"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <see cref="int"/>.
         /// </exception>
         /// <seealso cref="GetInt(string)"/>
         /// <seealso cref="TryGetValue(string,out int)"/>
         public int GetInt(string key, int defaultValue) => GetValue(key, int.TryParse, defaultValue);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="uint"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -362,13 +408,13 @@ namespace Texart.Api
         /// <param name="defaultValue">The default value to return if <paramref name="key"/> is not found.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="uint"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <see cref="uint"/>.
         /// </exception>
         /// <seealso cref="GetUInt(string)"/>
         /// <seealso cref="TryGetValue(string,out uint)"/>
         public uint GetUInt(string key, uint defaultValue) => GetValue(key, uint.TryParse, defaultValue);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="long"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -378,13 +424,13 @@ namespace Texart.Api
         /// <param name="defaultValue">The default value to return if <paramref name="key"/> is not found.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="long"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <see cref="long"/>.
         /// </exception>
         /// <seealso cref="GetLong(string)"/>
         /// <seealso cref="TryGetValue(string,out long)"/>
         public long GetLong(string key, long defaultValue) => GetValue(key, long.TryParse, defaultValue);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="ulong"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -394,13 +440,13 @@ namespace Texart.Api
         /// <param name="defaultValue">The default value to return if <paramref name="key"/> is not found.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="ulong"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <see cref="ulong"/>.
         /// </exception>
         /// <seealso cref="GetULong(string)"/>
         /// <seealso cref="TryGetValue(string,out ulong)"/>
         public ulong GetULong(string key, ulong defaultValue) => GetValue(key, ulong.TryParse, defaultValue);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="char"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -410,13 +456,13 @@ namespace Texart.Api
         /// <param name="defaultValue">The default value to return if <paramref name="key"/> is not found.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="char"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <see cref="char"/>.
         /// </exception>
         /// <seealso cref="GetChar(string)"/>
         /// <seealso cref="TryGetValue(string,out char)"/>
         public char GetChar(string key, char defaultValue) => GetValue(key, char.TryParse, defaultValue);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="float"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -426,13 +472,13 @@ namespace Texart.Api
         /// <param name="defaultValue">The default value to return if <paramref name="key"/> is not found.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="float"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <see cref="float"/>.
         /// </exception>
         /// <seealso cref="GetSingle(string)"/>
         /// <seealso cref="TryGetValue(string,out float)"/>
         public float GetSingle(string key, float defaultValue) => GetValue(key, float.TryParse, defaultValue);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="double"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -442,13 +488,13 @@ namespace Texart.Api
         /// <param name="defaultValue">The default value to return if <paramref name="key"/> is not found.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="double"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <see cref="double"/>.
         /// </exception>
         /// <seealso cref="GetDouble(string)"/>
         /// <seealso cref="TryGetValue(string,out double)"/>
         public double GetDouble(string key, double defaultValue) => GetValue(key, double.TryParse, defaultValue);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="bool"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -458,13 +504,13 @@ namespace Texart.Api
         /// <param name="defaultValue">The default value to return if <paramref name="key"/> is not found.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="bool"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <see cref="bool"/>.
         /// </exception>
         /// <seealso cref="GetBool(string)"/>
         /// <seealso cref="TryGetValue(string,out bool)"/>
         public bool GetBool(string key, bool defaultValue) => GetValue(key, bool.TryParse, defaultValue);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="decimal"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -474,13 +520,13 @@ namespace Texart.Api
         /// <param name="defaultValue">The default value to return if <paramref name="key"/> is not found.</param>
         /// <returns>The value associated with <paramref name="key"/>, converted to <see cref="decimal"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <see cref="decimal"/>.
         /// </exception>
         /// <seealso cref="GetDecimal(string)"/>
         /// <seealso cref="TryGetValue(string,out decimal)"/>
         public decimal GetDecimal(string key, decimal defaultValue) => GetValue(key, decimal.TryParse, defaultValue);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="string"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned.
@@ -493,12 +539,12 @@ namespace Texart.Api
         /// <seealso cref="TryGetValue(string,out string)"/>
         public string GetString(string key, string defaultValue)
         {
-            if (key == null) { throw new ArgumentNullException(nameof(key)); }
+            if (key is null) { throw new ArgumentNullException(nameof(key)); }
             return AsImmutableDictionary.TryGetValue(key, out var value)
                 ? value
                 : defaultValue;
         }
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <typeparamref name="T"/>. If the key is not found, then
         /// <paramref name="defaultValue"/> is returned. If the key exists, but the associated value cannot be converted
@@ -510,7 +556,7 @@ namespace Texart.Api
         /// <typeparam name="T">The desired return type.</typeparam>
         /// <returns>The value associated with <paramref name="key"/>, converted to <typeparamref name="T"/></returns>
         /// <exception cref="ArgumentNullException">If <paramref name="key"/> is <c>null</c>.</exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="BadLookupException">
         ///     If <paramref name="key"/> exists but the associated value cannot not be converted to <typeparamref name="T"/>.
         /// </exception>
         /// <seealso cref="GetValue{T}(string,TryParseFunc{T})"/>
@@ -529,7 +575,7 @@ namespace Texart.Api
         /// <seealso cref="GetBool(string,bool)"/>
         public T GetValue<T>(string key, TryParseFunc<T> tryParse, T defaultValue)
         {
-            if (key == null) { throw new ArgumentNullException(nameof(key)); }
+            if (key is null) { throw new ArgumentNullException(nameof(key)); }
             Debug.Assert(tryParse != null);
             var lookupResult = TryGetValue(key, out var value, tryParse);
             switch (lookupResult.Type)
@@ -539,7 +585,8 @@ namespace Texart.Api
                 case LookupResultType.MissingKey:
                     return defaultValue;
                 case LookupResultType.ParsingError:
-                    throw new ArgumentException(
+                    throw new BadLookupException(
+                        LookupResult.ParsingError,
                         $"Value for key, \"{key}\", could not be parsed as {typeof(T).FullName}: {AsImmutableDictionary[key]}");
             }
             return value;
@@ -564,7 +611,7 @@ namespace Texart.Api
         /// <seealso cref="GetSByte(string)"/>
         public LookupResult TryGetValue(string key, out sbyte value) =>
             TryGetValue(key, out value, sbyte.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="byte"/>.
         /// If the key is not found, then <paramref name="value"/> is set to <c>default</c> and
@@ -584,7 +631,7 @@ namespace Texart.Api
         /// <seealso cref="GetByte(string)"/>
         public LookupResult TryGetValue(string key, out byte value) =>
             TryGetValue(key, out value, byte.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="short"/>.
         /// If the key is not found, then <paramref name="value"/> is set to <c>default</c> and
@@ -604,7 +651,7 @@ namespace Texart.Api
         /// <seealso cref="GetShort(string)"/>
         public LookupResult TryGetValue(string key, out short value) =>
             TryGetValue(key, out value, short.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="ushort"/>.
         /// If the key is not found, then <paramref name="value"/> is set to <c>default</c> and
@@ -624,7 +671,7 @@ namespace Texart.Api
         /// <seealso cref="GetUShort(string)"/>
         public LookupResult TryGetValue(string key, out ushort value) =>
             TryGetValue(key, out value, ushort.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="int"/>.
         /// If the key is not found, then <paramref name="value"/> is set to <c>default</c> and
@@ -644,7 +691,7 @@ namespace Texart.Api
         /// <seealso cref="GetInt(string)"/>
         public LookupResult TryGetValue(string key, out int value) =>
             TryGetValue(key, out value, int.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="uint"/>.
         /// If the key is not found, then <paramref name="value"/> is set to <c>default</c> and
@@ -664,7 +711,7 @@ namespace Texart.Api
         /// <seealso cref="GetUInt(string)"/>
         public LookupResult TryGetValue(string key, out uint value) =>
             TryGetValue(key, out value, uint.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="long"/>.
         /// If the key is not found, then <paramref name="value"/> is set to <c>default</c> and
@@ -684,7 +731,7 @@ namespace Texart.Api
         /// <seealso cref="GetLong(string)"/>
         public LookupResult TryGetValue(string key, out long value) =>
             TryGetValue(key, out value, long.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="ulong"/>.
         /// If the key is not found, then <paramref name="value"/> is set to <c>default</c> and
@@ -704,7 +751,7 @@ namespace Texart.Api
         /// <seealso cref="GetULong(string)"/>
         public LookupResult TryGetValue(string key, out ulong value) =>
             TryGetValue(key, out value, ulong.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="char"/>.
         /// If the key is not found, then <paramref name="value"/> is set to <c>default</c> and
@@ -724,7 +771,7 @@ namespace Texart.Api
         /// <seealso cref="GetChar(string)"/>
         public LookupResult TryGetValue(string key, out char value) =>
             TryGetValue(key, out value, char.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="float"/>.
         /// If the key is not found, then <paramref name="value"/> is set to <c>default</c> and
@@ -744,7 +791,7 @@ namespace Texart.Api
         /// <seealso cref="GetSingle(string)"/>
         public LookupResult TryGetValue(string key, out float value) =>
             TryGetValue(key, out value, float.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="double"/>.
         /// If the key is not found, then <paramref name="value"/> is set to <c>default</c> and
@@ -764,7 +811,7 @@ namespace Texart.Api
         /// <seealso cref="GetDouble(string)"/>
         public LookupResult TryGetValue(string key, out double value) =>
             TryGetValue(key, out value, double.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="bool"/>.
         /// If the key is not found, then <paramref name="value"/> is set to <c>default</c> and
@@ -784,7 +831,7 @@ namespace Texart.Api
         /// <seealso cref="GetBool(string)"/>
         public LookupResult TryGetValue(string key, out bool value) =>
             TryGetValue(key, out value, bool.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="decimal"/>.
         /// If the key is not found, then <paramref name="value"/> is set to <c>default</c> and
@@ -804,7 +851,7 @@ namespace Texart.Api
         /// <seealso cref="GetDecimal(string)"/>
         public LookupResult TryGetValue(string key, out decimal value) =>
             TryGetValue(key, out value, decimal.TryParse);
-        
+
         /// <summary>
         /// Retrieves the value at <paramref name="key"/> as <see cref="string"/>.
         /// If the key is not found, then <paramref name="value"/> is set to <c>default</c> and
@@ -821,7 +868,7 @@ namespace Texart.Api
         /// <seealso cref="GetString(string)"/>
         public LookupResult TryGetValue(string key, out string value)
         {
-            if (key == null) { throw new ArgumentNullException(nameof(key)); }
+            if (key is null) { throw new ArgumentNullException(nameof(key)); }
             return AsImmutableDictionary.TryGetValue(key, out value)
                 ? LookupResult.Success
                 : LookupResult.MissingKey;
@@ -856,7 +903,7 @@ namespace Texart.Api
         /// <seealso cref="GetValue{T}(string,TryParseFunc{T})"/>
         public LookupResult TryGetValue<T>(string key, out T value, TryParseFunc<T> tryParse)
         {
-            if (key == null) { throw new ArgumentNullException(nameof(key)); }
+            if (key is null) { throw new ArgumentNullException(nameof(key)); }
             Debug.Assert(tryParse != null);
             if (AsImmutableDictionary.TryGetValue(key, out var stringValue))
             {
@@ -898,7 +945,7 @@ namespace Texart.Api
             /// The lookup result type.
             /// </summary>
             public LookupResultType Type { get; }
-            
+
             /// <summary>
             /// See <see cref="LookupResultType.Success"/>.
             /// </summary>
@@ -930,7 +977,7 @@ namespace Texart.Api
             ///     <c>true</c> otherwise.
             /// </returns>
             public static bool operator false(LookupResult result) => result.Type != LookupResultType.Success;
-            
+
             /// <summary>
             /// Constructs a <see cref="LookupResult"/> with a backing <see cref="LookupResultType"/>.
             /// </summary>
@@ -948,6 +995,9 @@ namespace Texart.Api
 
             /// <inheritdoc cref="object.GetHashCode"/>
             public override int GetHashCode() => (int) Type;
+
+            /// <inheritdoc cref="object.ToString"/>
+            public override string ToString() => $"LookupResult{{{Type.ToString()}}}";
 
             /// <summary>
             /// Compares two <see cref="LookupResult"/>s for equality.
@@ -976,7 +1026,7 @@ namespace Texart.Api
         /// The backing arguments dictionary.
         /// </summary>
         public ImmutableDictionary<string, string> AsImmutableDictionary { get; }
-        
+
         /// <summary>
         /// Creates a <see cref="TxArguments"/> with the provided arguments dictionary.
         /// </summary>
@@ -985,7 +1035,7 @@ namespace Texart.Api
         {
             AsImmutableDictionary = arguments ?? throw new ArgumentNullException(nameof(arguments));
         }
-        
+
         /// <summary>
         /// Creates a <see cref="TxArguments"/> with the provided arguments dictionary.
         /// </summary>
@@ -994,9 +1044,9 @@ namespace Texart.Api
         {
             AsImmutableDictionary = arguments?.ToImmutableDictionary() ?? throw new ArgumentNullException(nameof(arguments));
         }
-        
+
         /// <summary>
-        /// An empty <see cref="TxArguments"/> instance.
+        /// An empty <see cref="TxArguments"/> instance without any arguments.
         /// </summary>
         /// <seealso cref="ImmutableDictionary{TKey,TValue}.Empty"/>
         public static readonly TxArguments Empty = new TxArguments(
@@ -1006,7 +1056,18 @@ namespace Texart.Api
         public bool Equals(TxArguments other)
         {
             if (other is null) return false;
-            return ReferenceEquals(this, other) || AsImmutableDictionary.Equals(other.AsImmutableDictionary);
+            return ReferenceEquals(this, other) || DictEquals(AsImmutableDictionary, other.AsImmutableDictionary);
+
+            static bool DictEquals<TK, TV>(ImmutableDictionary<TK, TV> lhs, ImmutableDictionary<TK, TV> rhs)
+            {
+                if (lhs.Count != rhs.Count)
+                {
+                    return false;
+                }
+                var lhsValues = lhs.OrderBy(kv => kv.Key);
+                var rhsValues = rhs.OrderBy(kv => kv.Key);
+                return lhsValues.SequenceEqual(rhsValues);
+            }
         }
 
         /// <inheritdoc cref="object.Equals(object)"/>
@@ -1014,11 +1075,20 @@ namespace Texart.Api
             ReferenceEquals(this, obj) || obj is TxArguments other && Equals(other);
 
         /// <inheritdoc cref="object.GetHashCode"/>
-        public override int GetHashCode() => AsImmutableDictionary.GetHashCode();
+        public override int GetHashCode()
+        {
+            var orderedKeyValues = AsImmutableDictionary.OrderBy(kv => kv.Key);
+            var hashCode = new HashCode();
+            foreach (var keyValue in orderedKeyValues)
+            {
+                hashCode.Add(keyValue);
+            }
+            return hashCode.ToHashCode();
+        }
 
         /// <summary>
         /// Compares two <see cref="TxArguments"/>s for equality. Two <see cref="TxArguments"/>s are
-        /// only considered equal iff <see cref="AsImmutableDictionary"/> are equal.
+        /// only considered equal iff <see cref="AsImmutableDictionary"/> contains the same key-value pairs.
         /// </summary>
         /// <param name="left">The left-hand side of the equality.</param>
         /// <param name="right">The right-hand side of the equality.</param>
@@ -1030,7 +1100,7 @@ namespace Texart.Api
 
         /// <summary>
         /// Compares two <see cref="TxArguments"/>s for inequality. Two <see cref="TxArguments"/>s are
-        /// only considered unequal iff <see cref="AsImmutableDictionary"/> are unequal.
+        /// only considered unequal iff <see cref="AsImmutableDictionary"/> contains different key-value pairs.
         /// </summary>
         /// <param name="left">The left-hand side of the inequality.</param>
         /// <param name="right">The right-hand side of the inequality.</param>
@@ -1039,5 +1109,42 @@ namespace Texart.Api
         ///     <c>true</c> otherwise.
         /// </returns>
         public static bool operator !=(TxArguments left, TxArguments right) => !(left == right);
+
+        /// <summary>
+        /// An exception that is thrown when a lookup within <see cref="TxArguments"/> fails. For example,
+        /// when <see cref="TxArguments.GetValue{T}(string,TryParseFunc{T})"/> is called with a non-existent
+        /// key, or the parsing of the associated value fails.
+        /// </summary>
+        public sealed class BadLookupException : System.Exception
+        {
+            /// <summary>
+            /// The lookup that caused this exception.
+            /// </summary>
+            public LookupResult LookupResult { get; }
+
+            /// <summary>
+            /// Creates a <see cref="BadLookupException"/> from a lookup result and a message.
+            /// </summary>
+            /// <param name="lookupResult">See <see cref="LookupResult"/>.</param>
+            /// <param name="message">See <see cref="Exception.Message"/>.</param>
+            public BadLookupException(LookupResult lookupResult, string message) : base(message)
+            {
+                Debug.Assert(lookupResult != LookupResult.Success);
+                LookupResult = lookupResult;
+            }
+
+            /// <summary>
+            /// Creates a <see cref="BadLookupException"/> from a lookup result, a message, and an inner exception.
+            /// </summary>
+            /// <param name="lookupResult">See <see cref="LookupResult"/>.</param>
+            /// <param name="message">See <see cref="Exception.Message"/>.</param>
+            /// <param name="innerException">See <see cref="Exception.InnerException"/>.</param>
+            public BadLookupException(LookupResult lookupResult, string message, Exception innerException)
+                : base(message, innerException)
+            {
+                Debug.Assert(lookupResult != LookupResult.Success);
+                LookupResult = lookupResult;
+            }
+        }
     }
 }
