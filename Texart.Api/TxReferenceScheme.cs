@@ -68,7 +68,7 @@ namespace Texart.Api
         /// <returns>If this scheme is valid.</returns>
         public static bool IsValidScheme(string scheme)
         {
-            if (scheme == null) { throw new ArgumentNullException(nameof(scheme)); }
+            if (scheme is null) { throw new ArgumentNullException(nameof(scheme)); }
             return Uri.CheckSchemeName(scheme) && SchemeRegex.IsMatch(scheme);
         }
 

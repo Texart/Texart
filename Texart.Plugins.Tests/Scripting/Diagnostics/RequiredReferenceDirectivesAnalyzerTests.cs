@@ -13,7 +13,7 @@ namespace Texart.Plugins.Tests.Scripting.Diagnostics
     {
         private static ImmutableArray<string> RequiredReferences => ImmutableArray.Create(
             "B.dll", "A.dll", "C.dll");
-        protected override DiagnosticAnalyzer CSharpDiagnosticAnalyzer =>
+        protected override DiagnosticAnalyzer? CSharpDiagnosticAnalyzer =>
             new RequiredReferenceDirectivesAnalyzer(RequiredReferences, string.Empty);
         protected override LanguageVersion CSharpLanguageVersion => PluginScript.DefaultLanguageVersion;
         protected override SourceCodeKind CSharpSourceCodeKind => SourceCodeKind.Script;
@@ -358,7 +358,7 @@ using System;
     internal class RequireReferenceDirectivesAnalyzerSkipFilesTests : DiagnosticVerifier
     {
         // A crazy extension for scripts to make sure that any input file gets ignored by the analyzer
-        protected override DiagnosticAnalyzer CSharpDiagnosticAnalyzer =>
+        protected override DiagnosticAnalyzer? CSharpDiagnosticAnalyzer =>
             new RequiredReferenceDirectivesAnalyzer(
                 RequiredReferenceDirectivesAnalyzer.RequiredReferences, ".crazy-extension");
         protected override LanguageVersion CSharpLanguageVersion => PluginScript.DefaultLanguageVersion;

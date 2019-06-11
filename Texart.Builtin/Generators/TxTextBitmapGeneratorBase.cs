@@ -13,7 +13,7 @@ namespace Texart.Builtin.Generators
         /// The constructor that should be called from derived types.
         /// </summary>
         /// <param name="characters">The character set to use.</param>
-        /// <param name="pixelSamplingRatio"><see cref="ITxTextBitmapGenerator.PixelSamplingRatio"/></param>
+        /// <param name="pixelSamplingRatio">Ratio of pixel count (squared) to generated character count</param>
         protected TxTextBitmapGeneratorBase(IList<char> characters, int pixelSamplingRatio)
         {
             Characters = characters ?? throw new ArgumentNullException(nameof(characters));
@@ -32,18 +32,21 @@ namespace Texart.Builtin.Generators
         /// <inheritdocs/>
         protected IList<char> Characters { get; set; }
 
-        /// <inheritdocs/>
-        public int PixelSamplingRatio { get; protected set; }
+        protected int PixelSamplingRatio { get; set; }
 
         /// <inheritdocs/>
-        public async Task<ITxTextBitmap> GenerateAsync(SKBitmap bitmap)
+        public async IAsyncEnumerable<ITxTextBitmap> GenerateAsync(IAsyncEnumerable<SKBitmap> bitmaps)
         {
-            if (bitmap == null) { throw new ArgumentNullException(nameof(bitmap)); }
-            if (bitmap.Width % this.PixelSamplingRatio != 0 || bitmap.Height % this.PixelSamplingRatio != 0)
+            if (bitmaps is null) { throw new ArgumentNullException(nameof(bitmaps)); }
+
+            await foreach (var bitmap in bitmaps)
             {
-                throw new ArgumentException($"{nameof(this.PixelSamplingRatio)} must evenly divide both Bitmap width and height.");
+                if (bitmap.Width % PixelSamplingRatio != 0 || bitmap.Height % PixelSamplingRatio != 0)
+                {
+                    throw new ArgumentException($"{nameof(PixelSamplingRatio)} must evenly divide both Bitmap width and height.");
+                }
+                yield return await DoGenerateTextAsync(bitmap);
             }
-            return await this.DoGenerateTextAsync(bitmap);
         }
 
         /// <summary>
@@ -53,7 +56,7 @@ namespace Texart.Builtin.Generators
         /// <param name="bitmap">The image to generate text data from.</param>
         /// <returns>The generated text data.</returns>
         /// <see cref="ITxTextBitmapGenerator.GenerateAsync"/>
-        public abstract Task<ITxTextBitmap> DoGenerateTextAsync(SKBitmap bitmap);
+        protected abstract Task<ITxTextBitmap> DoGenerateTextAsync(SKBitmap bitmap);
 
         /// <summary>
         /// Gets the width for the given bitmap adjusted for the sampling ratio.

@@ -14,13 +14,13 @@ namespace Texart.Builtin.Generators
     internal sealed class BrightnessBasedBitmapGenerator : TxTextBitmapGeneratorBase, ITxTextBitmapGenerator
     {
         /// <inheritdocs/>
-        public override Task<ITxTextBitmap> DoGenerateTextAsync(SKBitmap bitmap)
+        protected override Task<ITxTextBitmap> DoGenerateTextAsync(SKBitmap bitmap)
         {
-            var characters = this.Characters;
+            var characters = Characters;
             var charactersCount = characters.Count;
             var targetWidth = WidthFor(bitmap);
             var targetHeight = HeightFor(bitmap);
-            var brightnessValues = this.GenerateBrightnessArray(bitmap);
+            var brightnessValues = GenerateBrightnessArray(bitmap);
 
             Debug.Assert(charactersCount > 0);
             Debug.Assert(brightnessValues.Length == targetWidth * targetHeight);
@@ -108,11 +108,11 @@ namespace Texart.Builtin.Generators
         }
 
         /// <summary>
-        /// Constructs a generator with the given character set and <see cref="ITxTextBitmapGenerator.PixelSamplingRatio"/>.
+        /// Constructs a generator with the given character set.
         /// </summary>
         /// <param name="characters">The set of characters to use in the generation.</param>
-        /// <param name="pixelSamplingRatio">See <see cref="ITxTextBitmapGenerator.PixelSamplingRatio"/>.</param>
-        public BrightnessBasedBitmapGenerator(IEnumerable<char> characters, int pixelSamplingRatio = 1)
+        /// <param name="pixelSamplingRatio"></param>
+        private BrightnessBasedBitmapGenerator(IEnumerable<char> characters, int pixelSamplingRatio = 1)
             : base(new List<char>(characters), pixelSamplingRatio)
         {
         }

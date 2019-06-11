@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -17,30 +18,30 @@ namespace Texart.Builtin.Renderers
         /// <summary>
         /// The encoding to output as.
         /// </summary>
-        public Encoding Encoding { get; }
+        private Encoding Encoding { get; }
 
         /// <inheritdocs/>
-        public Task RenderAsync(ITxTextBitmap txTextBitmap, Stream outputStream)
+        public async Task RenderAsync(IAsyncEnumerable<ITxTextBitmap> textBitmaps, Stream outputStream)
         {
-            Debug.Assert(txTextBitmap != null);
+            Debug.Assert(textBitmaps != null);
             Debug.Assert(outputStream != null);
 
-            outputStream = (outputStream is BufferedStream) ?
-                outputStream : new BufferedStream(outputStream);
+            outputStream = outputStream is BufferedStream
+                ? outputStream
+                : new BufferedStream(outputStream);
 
-            using (TextWriter writer = new StreamWriter(outputStream, Encoding))
+            await foreach (var textBitmap in textBitmaps)
             {
-                for (var y = 0; y < txTextBitmap.Height; ++y)
+                await using TextWriter writer = new StreamWriter(outputStream, Encoding);
+                for (var y = 0; y < textBitmap.Height; ++y)
                 {
-                    for (var x = 0; x < txTextBitmap.Width; ++x)
+                    for (var x = 0; x < textBitmap.Width; ++x)
                     {
-                        writer.Write((char)txTextBitmap.CharAt(x, y));
+                        writer.Write(textBitmap.CharAt(x, y));
                     }
                     writer.Write(writer.NewLine);
                 }
             }
-
-            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -49,7 +50,7 @@ namespace Texart.Builtin.Renderers
         /// <seealso cref="PlatformHelpers.DefaultEncoding"/>
         /// <seealso cref="StringBitmapRenderer(System.Text.Encoding)"/>
         /// <seealso cref="System.Text.Encoding"/>
-        public StringBitmapRenderer()
+        private StringBitmapRenderer()
             : this(PlatformHelpers.DefaultEncoding)
         {
         }
@@ -61,7 +62,7 @@ namespace Texart.Builtin.Renderers
         /// <exception cref="ArgumentNullException">
         ///     Thrown if <paramref name="encoding"/> is <c>null</c>.
         /// </exception>
-        public StringBitmapRenderer(Encoding encoding)
+        private StringBitmapRenderer(Encoding encoding)
         {
             Encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
         }

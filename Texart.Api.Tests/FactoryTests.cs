@@ -3,6 +3,7 @@ using NUnit.Framework;
 
 namespace Texart.Api.Tests
 {
+    [TestFixture]
     internal class FactoryTests
     {
         [Test]

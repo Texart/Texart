@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 namespace Texart.Plugins.Tests.Scripting
 {
+    [TestFixture]
     internal class PluginScriptTests
     {
         [Test]
@@ -53,8 +54,8 @@ namespace Texart.Plugins.Tests.Scripting
             var result = await script.EvaluateAsync();
             Assert.AreEqual(0, result.AvailableGenerators.Count());
             Assert.AreEqual(0, result.AvailableRenderers.Count());
-            Assert.Throws<NotImplementedException>(() => result.LookupGenerator(null));
-            Assert.Throws<NotImplementedException>(() => result.LookupRenderer(null));
+            Assert.Throws<NotImplementedException>(() => result.LookupGenerator(null!));
+            Assert.Throws<NotImplementedException>(() => result.LookupRenderer(null!));
             Assert.AreEqual("DummyPlugin", result.GetType().Name);
         }
 

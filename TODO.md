@@ -4,20 +4,22 @@
 
 - [ ] Improve `BrightnessBasedGenerator` implementation.
   - [ ] Switch from ASCII to UTF-8 encoding on all platforms.
-- [ ] Multi-image / video support.
+- [X] ~~Multi-image~~ / video support.
   - [ ] Genetic algorithm to create GIF from different iterations.
+  - [ ] Multi-image tiling
 - [ ] Investigate coloring.
 
 ## High-level
 
-- [ ] Investigate .NET Core 3.0.
-  - [ ] Investigate C# 8.0 (and nullable reference types).
+- [X] Investigate .NET Core 3.0.
+  - [X] Investigate C# 8.0.
+    - [ ] Investigate nullable reference types
 - [ ] Come up with a documentation plan (e.g. publishing to GitHub Pages).
 - [ ] How to handle errors in plugins?
 - [ ] Implement argument parsing.
   - [ ] Group arguments by prefixes to figure out which ones are passed to plugins. (e.g `--generator-*` and `--renderer-*`).
-  - [ ] Allow shortcut for generators and renderers with the same name in the same plugin.
-  - Add interfaces in `Texart.Api` to support common CLI arguments deserialization.
+  - [ ] Allow shortcut for generators and renderers with the same name in the same plugin ( `--package`).
+  - [ ] Add interfaces in `Texart.Api` to support common CLI arguments deserialization.
 
 ## Chore
 

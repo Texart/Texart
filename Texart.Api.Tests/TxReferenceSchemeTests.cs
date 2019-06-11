@@ -1,8 +1,8 @@
-using System;
 using NUnit.Framework;
 
 namespace Texart.Api.Tests
 {
+    [TestFixture]
     internal class TxReferenceSchemeTests
     {
         [Test]

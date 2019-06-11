@@ -32,7 +32,7 @@ namespace Texart.Plugins.Tests.Scripting.Diagnostics.TestHelpers
         /// <summary>
         /// Get the CSharp source kind - to be implemented in non-abstract class
         /// </summary>
-        protected virtual IEnumerable<string> CSharpPreprocessorSymbols => null;
+        protected virtual IEnumerable<string>? CSharpPreprocessorSymbols => null;
         #endregion
 
         #region Verifier wrappers
@@ -45,7 +45,7 @@ namespace Texart.Plugins.Tests.Scripting.Diagnostics.TestHelpers
         /// <param name="expected"> DiagnosticResults that should appear after the analyzer is run on the source</param>
         protected void VerifyCSharpDiagnostic(string source, params DiagnosticResult[] expected)
         {
-            VerifyDiagnostics(new[] { source }, CSharpDiagnosticAnalyzer, expected);
+            VerifyDiagnostics(new[] { source }, CSharpDiagnosticAnalyzer!, expected);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Texart.Plugins.Tests.Scripting.Diagnostics.TestHelpers
         /// <param name="expected">DiagnosticResults that should appear after the analyzer is run on the sources</param>
         protected void VerifyCSharpDiagnostic(string[] sources, params DiagnosticResult[] expected)
         {
-            VerifyDiagnostics(sources, CSharpDiagnosticAnalyzer, expected);
+            VerifyDiagnostics(sources, CSharpDiagnosticAnalyzer!, expected);
         }
 
         /// <summary>

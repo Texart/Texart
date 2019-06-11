@@ -197,7 +197,7 @@ namespace Texart.Plugins.Scripting
         /// <returns>Script instance</returns>
         public static PluginScript<T> From<T>(SourceFile sourceFile)
         {
-            if (sourceFile == null) throw new ArgumentNullException(nameof(sourceFile));
+            if (sourceFile is null) throw new ArgumentNullException(nameof(sourceFile));
             var scriptOptions = BaseScriptOptions
                 .WithFilePath(sourceFile.FilePath)
                 .WithSourceResolver(BuildSourceReferenceResolver(sourceFile))

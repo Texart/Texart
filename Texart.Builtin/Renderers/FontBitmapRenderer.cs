@@ -1,5 +1,6 @@
 ﻿using SkiaSharp;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -13,50 +14,70 @@ namespace Texart.Builtin.Renderers
     internal sealed class FontBitmapRenderer : ITxTextBitmapRenderer
     {
         /// <summary>
-        /// The font to paint with, including metadata such as size, color, and spacing.
+        /// The typeface to paint with.
         /// </summary>
-        public TxFont Font { get; }
+        /// <seealso cref="SKPaint.Typeface"/>
+        private SKTypeface Typeface { get; }
 
         /// <summary>
         /// Determines if the output image should be antialiased.
         /// </summary>
-        /// <see cref="SKPaint.IsAntialias"/>
-        public bool ShouldAntialias { get; set; }
+        /// <seealso cref="SKPaint.IsAntialias"/>
+        private bool ShouldAntialias => true;
 
         /// <summary>
         /// Determines if the output image should be dithered.
         /// </summary>
-        /// <see cref="SKPaint.IsDither"/>
-        public bool ShouldDither { get; set; }
+        /// <seealso cref="SKPaint.IsDither"/>
+        private bool ShouldDither => true;
 
         /// <summary>
         /// Determines if font hinting is enabled.
         /// </summary>
-        /// <see cref="SKPaint.IsAutohinted"/>
-        public bool ShouldHint { get; set; }
+        /// <seealso cref="SKPaint.IsAutohinted"/>
+        private bool ShouldHint => true;
 
         /// <summary>
-        /// The image background color. This is in contrast to <see cref="TxFont.Color"/>.
+        /// The text font color.
         /// </summary>
-        public SKColor BackgroundColor { get; set; } = DefaultBackgroundColor;
+        /// <seealso cref="SKPaint.Color"/>
+        private SKColor ForegroundColor => SKColors.Black;
+
         /// <summary>
-        /// The default image background color.
+        /// The image background color. This is in contrast to <see cref="ForegroundColor"/>.
         /// </summary>
-        public static SKColor DefaultBackgroundColor => SKColors.White;
+        private SKColor BackgroundColor => SKColors.White;
+
+        /// <summary>
+        /// The point size of the font.
+        /// </summary>
+        /// <seealso cref="SKPaint.TextSize"/>
+        public float TextSize => 12f;
+
+        /// <summary>
+        /// The amount of spacing reserved for one character in the text data.
+        /// Each character is assigned a square grid of length <c>CharacterSpacing</c> points.
+        /// </summary>
+        private int CharacterSpacing => 8;
 
         /// <inheritdocs />
-        public Task RenderAsync(ITxTextBitmap txTextBitmap, Stream outputStream)
+        public async Task RenderAsync(IAsyncEnumerable<ITxTextBitmap> textBitmaps, Stream outputStream)
         {
-            Debug.Assert(txTextBitmap != null);
+            Debug.Assert(textBitmaps != null);
             Debug.Assert(outputStream != null);
-
-            using (SKBitmap bitmap = GenerateBitmap(txTextBitmap))
-            using (SKImage image = SKImage.FromBitmap(bitmap))
+            var didOutput = false;
+            await foreach (var textBitmap in textBitmaps)
             {
+                // TODO: Implement tiling when multiple images (and helper types in Texart.Api)
+                if (didOutput)
+                {
+                    throw new InvalidOperationException("Only one output can be created");
+                }
+                using SKBitmap bitmap = GenerateBitmap(textBitmap);
+                using SKImage image = SKImage.FromBitmap(bitmap);
                 image.Encode().SaveTo(outputStream);
+                didOutput = true;
             }
-
-            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -72,12 +93,12 @@ namespace Texart.Builtin.Renderers
                 IsAntialias = ShouldAntialias,
                 IsDither = ShouldDither,
                 IsAutohinted = ShouldHint,
-                Typeface = Font.Typeface,
-                TextSize = Font.TextSize,
+                Typeface = Typeface,
+                TextSize = TextSize,
                 TextEncoding = SKTextEncoding.Utf8,
                 SubpixelText = true,
                 DeviceKerningEnabled = false,
-                Color = Font.Color
+                Color = ForegroundColor
             };
 
             var backgroundColor = BackgroundColor;
@@ -87,7 +108,7 @@ namespace Texart.Builtin.Renderers
 
             // spacing reserved for a single character
             SKFontMetrics fontMetrics = paint.FontMetrics;
-            int characterSpacing = Font.CharacterSpacing;
+            int characterSpacing = CharacterSpacing;
 
             Debug.Assert(characterSpacing > 0);
 
@@ -141,12 +162,10 @@ namespace Texart.Builtin.Renderers
         /// <summary>
         /// Constructs a renderer with the given font.
         /// </summary>
-        /// <param name="txFont">The font to use.</param>
-        public FontBitmapRenderer(TxFont txFont)
+        /// <param name="typeface">The typeface to use.</param>
+        private FontBitmapRenderer(SKTypeface typeface)
         {
-            if (txFont == null) { throw new ArgumentNullException(nameof(txFont)); }
-            if (txFont.Typeface == null) { throw new ArgumentNullException(nameof(txFont.Typeface)); }
-            Font = txFont;
+            Typeface = typeface ?? throw new ArgumentNullException(nameof(typeface));
         }
 
         /// <summary>
@@ -158,7 +177,7 @@ namespace Texart.Builtin.Renderers
         {
             // TODO: use args
             var typeface = TxContract.NonNull(SKTypeface.FromFamilyName("Consolas"));
-            return new FontBitmapRenderer(TxFont.FromTypeface(typeface));
+            return new FontBitmapRenderer(typeface);
         }
     }
 }
