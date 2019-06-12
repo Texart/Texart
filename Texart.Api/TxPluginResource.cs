@@ -15,8 +15,8 @@ namespace Texart.Api
         ///
         /// The factory function accepts a <see cref="TxArguments"/> which can be used configure the created instance.
         /// The format of the arguments is implementation-defined.
-        ///
         /// </summary>
+        ///
         /// <param name="factory">The active factory instance.</param>
         /// <typeparam name="T">The type of resource.</typeparam>
         /// <returns>A <see cref="TxPluginResource{T}"/> with <paramref name="factory"/> as the active member.</returns>
