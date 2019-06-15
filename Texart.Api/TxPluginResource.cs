@@ -175,7 +175,7 @@ namespace Texart.Api
             public TxPluginResourceLocator Locator { get; }
             /// <summary>
             /// The transformation applied to incoming arguments before being passed on to the redirect destination
-            /// pointed to by <see cref="Locator"/>. If this is <code>null</code>, then the identity transformation
+            /// pointed to by <see cref="Locator"/>. If this is <c>null</c>, then the identity transformation
             /// should be applied.
             /// </summary>
             // TODO: Make this nullable when we have nullable references enabled.
