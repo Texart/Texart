@@ -88,9 +88,9 @@ instead.</p>
 <p>See <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#/media/File:URI_syntax_diagram.png">https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#/media/File:URI_syntax_diagram.png</a> for
 a simple diagram.</p>
 <p>The anatomy of a <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> looks like:</p>
-<pre><code>//  Scheme        AssemblyPath      ResourcePath
-//    |        ________|_______   _______|_____
-//   / \      /                \ /             \
+<pre><code>//  Scheme       AssemblyPath       ResourcePath
+//    |      _________|________   _______|_____
+//   / \    /                  \ /             \
 //   foo:///path/to/assembly.dll:path/to/resource
 //       \_/                    |
 //        |                     |
@@ -141,7 +141,7 @@ Note that the current restrictions imply that http or https schemes cannot be us
   <h5 id="Texart_Api_TxPluginResourceLocator_examples"><strong>Examples</strong></h5>
   <pre><code>    var locator = PluginResourceLocator.FromUri(&quot;file:///plugins/Texart.SomePlugin.dll:SomePath/SomeResource&quot;);
     locator.Scheme;           // new ReferenceScheme(&quot;file&quot;)
-    locator.AssemblyPath      // &quot;plugins/Texart.SomePlugin.dll
+    locator.AssemblyPath      // &quot;plugins/Texart.SomePlugin.dll&quot;
     locator.AssemblySegments  // new [] { &quot;plugins, &quot;Texart.SomePlugin.dll&quot; }
     locator.ResourcePath      // &quot;SomePath/SomeResource&quot;
     locator.ResourceSegments  // new [] { &quot;SomePath&quot;, &quot;SomeResource&quot; }</code></pre>
