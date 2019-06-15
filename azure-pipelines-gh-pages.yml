@@ -37,6 +37,10 @@ steps:
   displayName: Install docfx
 
 - script: |
+    dotnet restore
+  displayName: dotnet restore
+
+- script: |
     docfx docfx/docfx.json
   displayName: Build documentation
 
