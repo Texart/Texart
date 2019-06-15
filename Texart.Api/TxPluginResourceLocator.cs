@@ -27,9 +27,9 @@ namespace Texart.Api
     ///
     /// The anatomy of a <see cref="TxPluginResourceLocator"/> looks like:
     /// <code>
-    /// //  Scheme        AssemblyPath      ResourcePath
-    /// //    |        ________|_______   _______|_____
-    /// //   / \      /                \ /             \
+    /// //  Scheme       AssemblyPath       ResourcePath
+    /// //    |      _________|________   _______|_____
+    /// //   / \    /                  \ /             \
     /// //   foo:///path/to/assembly.dll:path/to/resource
     /// //       \_/                    |
     /// //        |                     |
@@ -50,7 +50,7 @@ namespace Texart.Api
     /// <code>
     ///     var locator = PluginResourceLocator.FromUri("file:///plugins/Texart.SomePlugin.dll:SomePath/SomeResource");
     ///     locator.Scheme;           // new ReferenceScheme("file")
-    ///     locator.AssemblyPath      // "plugins/Texart.SomePlugin.dll
+    ///     locator.AssemblyPath      // "plugins/Texart.SomePlugin.dll"
     ///     locator.AssemblySegments  // new [] { "plugins, "Texart.SomePlugin.dll" }
     ///     locator.ResourcePath      // "SomePath/SomeResource"
     ///     locator.ResourceSegments  // new [] { "SomePath", "SomeResource" }
