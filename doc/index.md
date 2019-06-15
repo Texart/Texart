@@ -1,5 +1,22 @@
 # Documentation
 
+Welcome to the Texart API documentation. If you're looking for a high-level overview of Texart's architecture and/or plugin development (including examples), you're in the right place!
+
+Auto-generated Texart API _reference_ documentation is available [here](https://texart.github.io/Texart/).
+
+## How To Read The Docs
+
+Texart documentation is completely browseable within GitHub! The [table of contents](#table-of-contents) is a good place to start browsing. Most of the documentation is grouped by topics.
+
+Before you proceed, you should perform the pre-requisite steps:
+
+* Install [GitHub + Mermaid](https://github.com/BackMarket/github-mermaid-extension) browser extension.
+  * Diagrams in the docs are written with [mermaid](https://mermaidjs.github.io/). GitHub-flavored markdown does not support mermaid diagrams. GitLab *does* support mermaid natively. You may browse the [GitLab mirror](https://gitlab.com/Texart/Texart) (note that browsing the documentation on GitLab mirror is not officially supported, but it *should* mostly work anyways).
+
+## Table of Contents
+
+TODO
+
 ## Assemblies
 
 * `Texart`
@@ -20,7 +37,3 @@
 * [`ITxTextBitmap`](i-tx-text-types.md#itxtextbitmap)
 * [`ITxTextBitmapGenerator`](i-tx-text-types.md#itxtextbitmapgenerator)
 * [`ITxTextBitmapRenderer`](i-tx-text-types.md#itxtextbitmaprenderer)
-
-## Diagrams
-
-Diagrams in the documentation are written with [mermaid](https://mermaidjs.github.io/). Currently, GitHub-flavored markdown does not support mermaid diagrams (GitLab does). You may use the [GitHub + Mermaid](https://github.com/BackMarket/github-mermaid-extension) extension until GitHub allows diagrams natively.

@@ -1,6 +1,6 @@
 # Texart API Reference
 
-This site contains the auto-generated (by [docfx](https://dotnet.github.io/docfx/)) Texart API reference documentation. The Texart API allows developers to implement [Texart plugins](TODO) with custom functionality. This reference is intended for plugin developers.
+This site contains the auto-generated (by [docfx](https://dotnet.github.io/docfx/)) Texart API *reference* documentation. The Texart API allows developers to implement [Texart plugins](TODO) with custom functionality. This reference is intended for plugin developers.
 
 **Users**: Refer to the [website](https://texart.github.io) to learn about Texart and how to use it.
 
