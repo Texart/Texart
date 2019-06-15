@@ -142,7 +142,7 @@ Note that the current restrictions imply that http or https schemes cannot be us
   <pre><code>    var locator = PluginResourceLocator.FromUri(&quot;file:///plugins/Texart.SomePlugin.dll:SomePath/SomeResource&quot;);
     locator.Scheme;           // new ReferenceScheme(&quot;file&quot;)
     locator.AssemblyPath      // &quot;plugins/Texart.SomePlugin.dll&quot;
-    locator.AssemblySegments  // new [] { &quot;plugins, &quot;Texart.SomePlugin.dll&quot; }
+    locator.AssemblySegments  // new [] { &quot;plugins&quot;, &quot;Texart.SomePlugin.dll&quot; }
     locator.ResourcePath      // &quot;SomePath/SomeResource&quot;
     locator.ResourceSegments  // new [] { &quot;SomePath&quot;, &quot;SomeResource&quot; }</code></pre>
 

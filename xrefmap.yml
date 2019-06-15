@@ -1975,6 +1975,19 @@ references:
   commentId: T:Texart.Api.TxReferenceScheme.FormatException
   fullName: Texart.Api.TxReferenceScheme.FormatException
   nameWithType: TxReferenceScheme.FormatException
+- uid: Texart.Api.TxReferenceScheme.FormatException.#ctor(System.String)
+  name: FormatException(String)
+  href: api/Texart.Api.TxReferenceScheme.FormatException.html#Texart_Api_TxReferenceScheme_FormatException__ctor_System_String_
+  commentId: M:Texart.Api.TxReferenceScheme.FormatException.#ctor(System.String)
+  fullName: Texart.Api.TxReferenceScheme.FormatException.FormatException(System.String)
+  nameWithType: TxReferenceScheme.FormatException.FormatException(String)
+- uid: Texart.Api.TxReferenceScheme.FormatException.#ctor*
+  name: FormatException
+  href: api/Texart.Api.TxReferenceScheme.FormatException.html#Texart_Api_TxReferenceScheme_FormatException__ctor_
+  commentId: Overload:Texart.Api.TxReferenceScheme.FormatException.#ctor
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.FormatException.FormatException
+  nameWithType: TxReferenceScheme.FormatException.FormatException
 - uid: Texart.Api.TxReferenceScheme.GetHashCode
   name: GetHashCode()
   href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_GetHashCode
