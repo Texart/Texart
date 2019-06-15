@@ -116,13 +116,13 @@ references:
   commentId: T:Texart.Api.ITxTextBitmapGenerator
   fullName: Texart.Api.ITxTextBitmapGenerator
   nameWithType: ITxTextBitmapGenerator
-- uid: Texart.Api.ITxTextBitmapGenerator.GenerateAsync(IAsyncEnumerable{SKBitmap})
+- uid: Texart.Api.ITxTextBitmapGenerator.GenerateAsync(System.Collections.Generic.IAsyncEnumerable{SkiaSharp.SKBitmap})
   name: GenerateAsync(IAsyncEnumerable<SKBitmap>)
-  href: api/Texart.Api.ITxTextBitmapGenerator.html#Texart_Api_ITxTextBitmapGenerator_GenerateAsync_IAsyncEnumerable_SKBitmap__
-  commentId: M:Texart.Api.ITxTextBitmapGenerator.GenerateAsync(IAsyncEnumerable{SKBitmap})
+  href: api/Texart.Api.ITxTextBitmapGenerator.html#Texart_Api_ITxTextBitmapGenerator_GenerateAsync_System_Collections_Generic_IAsyncEnumerable_SkiaSharp_SKBitmap__
+  commentId: M:Texart.Api.ITxTextBitmapGenerator.GenerateAsync(System.Collections.Generic.IAsyncEnumerable{SkiaSharp.SKBitmap})
   name.vb: GenerateAsync(IAsyncEnumerable(Of SKBitmap))
-  fullName: Texart.Api.ITxTextBitmapGenerator.GenerateAsync(IAsyncEnumerable<SKBitmap>)
-  fullName.vb: Texart.Api.ITxTextBitmapGenerator.GenerateAsync(IAsyncEnumerable(Of SKBitmap))
+  fullName: Texart.Api.ITxTextBitmapGenerator.GenerateAsync(System.Collections.Generic.IAsyncEnumerable<SkiaSharp.SKBitmap>)
+  fullName.vb: Texart.Api.ITxTextBitmapGenerator.GenerateAsync(System.Collections.Generic.IAsyncEnumerable(Of SkiaSharp.SKBitmap))
   nameWithType: ITxTextBitmapGenerator.GenerateAsync(IAsyncEnumerable<SKBitmap>)
   nameWithType.vb: ITxTextBitmapGenerator.GenerateAsync(IAsyncEnumerable(Of SKBitmap))
 - uid: Texart.Api.ITxTextBitmapGenerator.GenerateAsync*
@@ -138,13 +138,13 @@ references:
   commentId: T:Texart.Api.ITxTextBitmapRenderer
   fullName: Texart.Api.ITxTextBitmapRenderer
   nameWithType: ITxTextBitmapRenderer
-- uid: Texart.Api.ITxTextBitmapRenderer.RenderAsync(IAsyncEnumerable{Texart.Api.ITxTextBitmap},Stream)
+- uid: Texart.Api.ITxTextBitmapRenderer.RenderAsync(System.Collections.Generic.IAsyncEnumerable{Texart.Api.ITxTextBitmap},System.IO.Stream)
   name: RenderAsync(IAsyncEnumerable<ITxTextBitmap>, Stream)
-  href: api/Texart.Api.ITxTextBitmapRenderer.html#Texart_Api_ITxTextBitmapRenderer_RenderAsync_IAsyncEnumerable_Texart_Api_ITxTextBitmap__Stream_
-  commentId: M:Texart.Api.ITxTextBitmapRenderer.RenderAsync(IAsyncEnumerable{Texart.Api.ITxTextBitmap},Stream)
+  href: api/Texart.Api.ITxTextBitmapRenderer.html#Texart_Api_ITxTextBitmapRenderer_RenderAsync_System_Collections_Generic_IAsyncEnumerable_Texart_Api_ITxTextBitmap__System_IO_Stream_
+  commentId: M:Texart.Api.ITxTextBitmapRenderer.RenderAsync(System.Collections.Generic.IAsyncEnumerable{Texart.Api.ITxTextBitmap},System.IO.Stream)
   name.vb: RenderAsync(IAsyncEnumerable(Of ITxTextBitmap), Stream)
-  fullName: Texart.Api.ITxTextBitmapRenderer.RenderAsync(IAsyncEnumerable<Texart.Api.ITxTextBitmap>, Stream)
-  fullName.vb: Texart.Api.ITxTextBitmapRenderer.RenderAsync(IAsyncEnumerable(Of Texart.Api.ITxTextBitmap), Stream)
+  fullName: Texart.Api.ITxTextBitmapRenderer.RenderAsync(System.Collections.Generic.IAsyncEnumerable<Texart.Api.ITxTextBitmap>, System.IO.Stream)
+  fullName.vb: Texart.Api.ITxTextBitmapRenderer.RenderAsync(System.Collections.Generic.IAsyncEnumerable(Of Texart.Api.ITxTextBitmap), System.IO.Stream)
   nameWithType: ITxTextBitmapRenderer.RenderAsync(IAsyncEnumerable<ITxTextBitmap>, Stream)
   nameWithType.vb: ITxTextBitmapRenderer.RenderAsync(IAsyncEnumerable(Of ITxTextBitmap), Stream)
 - uid: Texart.Api.ITxTextBitmapRenderer.RenderAsync*
@@ -160,22 +160,22 @@ references:
   commentId: T:Texart.Api.TxArguments
   fullName: Texart.Api.TxArguments
   nameWithType: TxArguments
-- uid: Texart.Api.TxArguments.#ctor(Dictionary{System.String,System.String})
+- uid: Texart.Api.TxArguments.#ctor(System.Collections.Generic.Dictionary{System.String,System.String})
   name: TxArguments(Dictionary<String, String>)
-  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments__ctor_Dictionary_System_String_System_String__
-  commentId: M:Texart.Api.TxArguments.#ctor(Dictionary{System.String,System.String})
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments__ctor_System_Collections_Generic_Dictionary_System_String_System_String__
+  commentId: M:Texart.Api.TxArguments.#ctor(System.Collections.Generic.Dictionary{System.String,System.String})
   name.vb: TxArguments(Dictionary(Of String, String))
-  fullName: Texart.Api.TxArguments.TxArguments(Dictionary<System.String, System.String>)
-  fullName.vb: Texart.Api.TxArguments.TxArguments(Dictionary(Of System.String, System.String))
+  fullName: Texart.Api.TxArguments.TxArguments(System.Collections.Generic.Dictionary<System.String, System.String>)
+  fullName.vb: Texart.Api.TxArguments.TxArguments(System.Collections.Generic.Dictionary(Of System.String, System.String))
   nameWithType: TxArguments.TxArguments(Dictionary<String, String>)
   nameWithType.vb: TxArguments.TxArguments(Dictionary(Of String, String))
-- uid: Texart.Api.TxArguments.#ctor(ImmutableDictionary{System.String,System.String})
+- uid: Texart.Api.TxArguments.#ctor(System.Collections.Immutable.ImmutableDictionary{System.String,System.String})
   name: TxArguments(ImmutableDictionary<String, String>)
-  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments__ctor_ImmutableDictionary_System_String_System_String__
-  commentId: M:Texart.Api.TxArguments.#ctor(ImmutableDictionary{System.String,System.String})
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments__ctor_System_Collections_Immutable_ImmutableDictionary_System_String_System_String__
+  commentId: M:Texart.Api.TxArguments.#ctor(System.Collections.Immutable.ImmutableDictionary{System.String,System.String})
   name.vb: TxArguments(ImmutableDictionary(Of String, String))
-  fullName: Texart.Api.TxArguments.TxArguments(ImmutableDictionary<System.String, System.String>)
-  fullName.vb: Texart.Api.TxArguments.TxArguments(ImmutableDictionary(Of System.String, System.String))
+  fullName: Texart.Api.TxArguments.TxArguments(System.Collections.Immutable.ImmutableDictionary<System.String, System.String>)
+  fullName.vb: Texart.Api.TxArguments.TxArguments(System.Collections.Immutable.ImmutableDictionary(Of System.String, System.String))
   nameWithType: TxArguments.TxArguments(ImmutableDictionary<String, String>)
   nameWithType.vb: TxArguments.TxArguments(ImmutableDictionary(Of String, String))
 - uid: Texart.Api.TxArguments.#ctor*
@@ -210,11 +210,11 @@ references:
   commentId: M:Texart.Api.TxArguments.BadLookupException.#ctor(Texart.Api.TxArguments.LookupResult,System.String)
   fullName: Texart.Api.TxArguments.BadLookupException.BadLookupException(Texart.Api.TxArguments.LookupResult, System.String)
   nameWithType: TxArguments.BadLookupException.BadLookupException(TxArguments.LookupResult, String)
-- uid: Texart.Api.TxArguments.BadLookupException.#ctor(Texart.Api.TxArguments.LookupResult,System.String,Exception)
+- uid: Texart.Api.TxArguments.BadLookupException.#ctor(Texart.Api.TxArguments.LookupResult,System.String,System.Exception)
   name: BadLookupException(TxArguments.LookupResult, String, Exception)
-  href: api/Texart.Api.TxArguments.BadLookupException.html#Texart_Api_TxArguments_BadLookupException__ctor_Texart_Api_TxArguments_LookupResult_System_String_Exception_
-  commentId: M:Texart.Api.TxArguments.BadLookupException.#ctor(Texart.Api.TxArguments.LookupResult,System.String,Exception)
-  fullName: Texart.Api.TxArguments.BadLookupException.BadLookupException(Texart.Api.TxArguments.LookupResult, System.String, Exception)
+  href: api/Texart.Api.TxArguments.BadLookupException.html#Texart_Api_TxArguments_BadLookupException__ctor_Texart_Api_TxArguments_LookupResult_System_String_System_Exception_
+  commentId: M:Texart.Api.TxArguments.BadLookupException.#ctor(Texart.Api.TxArguments.LookupResult,System.String,System.Exception)
+  fullName: Texart.Api.TxArguments.BadLookupException.BadLookupException(Texart.Api.TxArguments.LookupResult, System.String, System.Exception)
   nameWithType: TxArguments.BadLookupException.BadLookupException(TxArguments.LookupResult, String, Exception)
 - uid: Texart.Api.TxArguments.BadLookupException.#ctor*
   name: BadLookupException
@@ -1032,11 +1032,11 @@ references:
   commentId: T:Texart.Api.TxBitmap
   fullName: Texart.Api.TxBitmap
   nameWithType: TxBitmap
-- uid: Texart.Api.TxBitmap.GetPerfectPixelRatios(SKBitmap)
+- uid: Texart.Api.TxBitmap.GetPerfectPixelRatios(SkiaSharp.SKBitmap)
   name: GetPerfectPixelRatios(SKBitmap)
-  href: api/Texart.Api.TxBitmap.html#Texart_Api_TxBitmap_GetPerfectPixelRatios_SKBitmap_
-  commentId: M:Texart.Api.TxBitmap.GetPerfectPixelRatios(SKBitmap)
-  fullName: Texart.Api.TxBitmap.GetPerfectPixelRatios(SKBitmap)
+  href: api/Texart.Api.TxBitmap.html#Texart_Api_TxBitmap_GetPerfectPixelRatios_SkiaSharp_SKBitmap_
+  commentId: M:Texart.Api.TxBitmap.GetPerfectPixelRatios(SkiaSharp.SKBitmap)
+  fullName: Texart.Api.TxBitmap.GetPerfectPixelRatios(SkiaSharp.SKBitmap)
   nameWithType: TxBitmap.GetPerfectPixelRatios(SKBitmap)
 - uid: Texart.Api.TxBitmap.GetPerfectPixelRatios(System.Int32,System.Int32)
   name: GetPerfectPixelRatios(Int32, Int32)
@@ -1180,22 +1180,22 @@ references:
   isSpec: "True"
   fullName: Texart.Api.TxPluginResource.Redirect
   nameWithType: TxPluginResource.Redirect
-- uid: Texart.Api.TxPluginResource.Redirect``1(Texart.Api.TxPluginResourceLocator,Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
+- uid: Texart.Api.TxPluginResource.Redirect``1(Texart.Api.TxPluginResourceLocator,System.Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
   name: Redirect<T>(TxPluginResourceLocator, Func<TxArguments, TxArguments>)
-  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect__1_Texart_Api_TxPluginResourceLocator_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__
-  commentId: M:Texart.Api.TxPluginResource.Redirect``1(Texart.Api.TxPluginResourceLocator,Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect__1_Texart_Api_TxPluginResourceLocator_System_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__
+  commentId: M:Texart.Api.TxPluginResource.Redirect``1(Texart.Api.TxPluginResourceLocator,System.Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
   name.vb: Redirect(Of T)(TxPluginResourceLocator, Func(Of TxArguments, TxArguments))
-  fullName: Texart.Api.TxPluginResource.Redirect<T>(Texart.Api.TxPluginResourceLocator, Func<Texart.Api.TxArguments, Texart.Api.TxArguments>)
-  fullName.vb: Texart.Api.TxPluginResource.Redirect(Of T)(Texart.Api.TxPluginResourceLocator, Func(Of Texart.Api.TxArguments, Texart.Api.TxArguments))
+  fullName: Texart.Api.TxPluginResource.Redirect<T>(Texart.Api.TxPluginResourceLocator, System.Func<Texart.Api.TxArguments, Texart.Api.TxArguments>)
+  fullName.vb: Texart.Api.TxPluginResource.Redirect(Of T)(Texart.Api.TxPluginResourceLocator, System.Func(Of Texart.Api.TxArguments, Texart.Api.TxArguments))
   nameWithType: TxPluginResource.Redirect<T>(TxPluginResourceLocator, Func<TxArguments, TxArguments>)
   nameWithType.vb: TxPluginResource.Redirect(Of T)(TxPluginResourceLocator, Func(Of TxArguments, TxArguments))
-- uid: Texart.Api.TxPluginResource.RedirectGenerator(Texart.Api.TxPluginResourceLocator,Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
+- uid: Texart.Api.TxPluginResource.RedirectGenerator(Texart.Api.TxPluginResourceLocator,System.Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
   name: RedirectGenerator(TxPluginResourceLocator, Func<TxArguments, TxArguments>)
-  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_RedirectGenerator_Texart_Api_TxPluginResourceLocator_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__
-  commentId: M:Texart.Api.TxPluginResource.RedirectGenerator(Texart.Api.TxPluginResourceLocator,Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_RedirectGenerator_Texart_Api_TxPluginResourceLocator_System_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__
+  commentId: M:Texart.Api.TxPluginResource.RedirectGenerator(Texart.Api.TxPluginResourceLocator,System.Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
   name.vb: RedirectGenerator(TxPluginResourceLocator, Func(Of TxArguments, TxArguments))
-  fullName: Texart.Api.TxPluginResource.RedirectGenerator(Texart.Api.TxPluginResourceLocator, Func<Texart.Api.TxArguments, Texart.Api.TxArguments>)
-  fullName.vb: Texart.Api.TxPluginResource.RedirectGenerator(Texart.Api.TxPluginResourceLocator, Func(Of Texart.Api.TxArguments, Texart.Api.TxArguments))
+  fullName: Texart.Api.TxPluginResource.RedirectGenerator(Texart.Api.TxPluginResourceLocator, System.Func<Texart.Api.TxArguments, Texart.Api.TxArguments>)
+  fullName.vb: Texart.Api.TxPluginResource.RedirectGenerator(Texart.Api.TxPluginResourceLocator, System.Func(Of Texart.Api.TxArguments, Texart.Api.TxArguments))
   nameWithType: TxPluginResource.RedirectGenerator(TxPluginResourceLocator, Func<TxArguments, TxArguments>)
   nameWithType.vb: TxPluginResource.RedirectGenerator(TxPluginResourceLocator, Func(Of TxArguments, TxArguments))
 - uid: Texart.Api.TxPluginResource.RedirectGenerator*
@@ -1205,13 +1205,13 @@ references:
   isSpec: "True"
   fullName: Texart.Api.TxPluginResource.RedirectGenerator
   nameWithType: TxPluginResource.RedirectGenerator
-- uid: Texart.Api.TxPluginResource.RedirectRenderer(Texart.Api.TxPluginResourceLocator,Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
+- uid: Texart.Api.TxPluginResource.RedirectRenderer(Texart.Api.TxPluginResourceLocator,System.Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
   name: RedirectRenderer(TxPluginResourceLocator, Func<TxArguments, TxArguments>)
-  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_RedirectRenderer_Texart_Api_TxPluginResourceLocator_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__
-  commentId: M:Texart.Api.TxPluginResource.RedirectRenderer(Texart.Api.TxPluginResourceLocator,Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_RedirectRenderer_Texart_Api_TxPluginResourceLocator_System_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__
+  commentId: M:Texart.Api.TxPluginResource.RedirectRenderer(Texart.Api.TxPluginResourceLocator,System.Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
   name.vb: RedirectRenderer(TxPluginResourceLocator, Func(Of TxArguments, TxArguments))
-  fullName: Texart.Api.TxPluginResource.RedirectRenderer(Texart.Api.TxPluginResourceLocator, Func<Texart.Api.TxArguments, Texart.Api.TxArguments>)
-  fullName.vb: Texart.Api.TxPluginResource.RedirectRenderer(Texart.Api.TxPluginResourceLocator, Func(Of Texart.Api.TxArguments, Texart.Api.TxArguments))
+  fullName: Texart.Api.TxPluginResource.RedirectRenderer(Texart.Api.TxPluginResourceLocator, System.Func<Texart.Api.TxArguments, Texart.Api.TxArguments>)
+  fullName.vb: Texart.Api.TxPluginResource.RedirectRenderer(Texart.Api.TxPluginResourceLocator, System.Func(Of Texart.Api.TxArguments, Texart.Api.TxArguments))
   nameWithType: TxPluginResource.RedirectRenderer(TxPluginResourceLocator, Func<TxArguments, TxArguments>)
   nameWithType.vb: TxPluginResource.RedirectRenderer(TxPluginResourceLocator, Func(Of TxArguments, TxArguments))
 - uid: Texart.Api.TxPluginResource.RedirectRenderer*
@@ -1602,11 +1602,11 @@ references:
   isSpec: "True"
   fullName: Texart.Api.TxPluginResourceLocator.IsWellFormedRelativeResourceString
   nameWithType: TxPluginResourceLocator.IsWellFormedRelativeResourceString
-- uid: Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri(Uri)
+- uid: Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri(System.Uri)
   name: IsWellFormedResourceLocatorUri(Uri)
-  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_IsWellFormedResourceLocatorUri_Uri_
-  commentId: M:Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri(Uri)
-  fullName: Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri(Uri)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_IsWellFormedResourceLocatorUri_System_Uri_
+  commentId: M:Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri(System.Uri)
+  fullName: Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri(System.Uri)
   nameWithType: TxPluginResourceLocator.IsWellFormedResourceLocatorUri(Uri)
 - uid: Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri*
   name: IsWellFormedResourceLocatorUri
@@ -1621,11 +1621,11 @@ references:
   commentId: M:Texart.Api.TxPluginResourceLocator.Of(System.String)
   fullName: Texart.Api.TxPluginResourceLocator.Of(System.String)
   nameWithType: TxPluginResourceLocator.Of(String)
-- uid: Texart.Api.TxPluginResourceLocator.Of(Uri)
+- uid: Texart.Api.TxPluginResourceLocator.Of(System.Uri)
   name: Of(Uri)
-  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Of_Uri_
-  commentId: M:Texart.Api.TxPluginResourceLocator.Of(Uri)
-  fullName: Texart.Api.TxPluginResourceLocator.Of(Uri)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Of_System_Uri_
+  commentId: M:Texart.Api.TxPluginResourceLocator.Of(System.Uri)
+  fullName: Texart.Api.TxPluginResourceLocator.Of(System.Uri)
   nameWithType: TxPluginResourceLocator.Of(Uri)
 - uid: Texart.Api.TxPluginResourceLocator.Of*
   name: Of
@@ -2150,13 +2150,13 @@ references:
   commentId: T:Texart.Api.TxSize
   fullName: Texart.Api.TxSize
   nameWithType: TxSize
-- uid: Texart.Api.TxSize.TryParse(ReadOnlySpan{System.Char},SKSize@)
+- uid: Texart.Api.TxSize.TryParse(System.ReadOnlySpan{System.Char},SkiaSharp.SKSize@)
   name: TryParse(ReadOnlySpan<Char>, out SKSize)
-  href: api/Texart.Api.TxSize.html#Texart_Api_TxSize_TryParse_ReadOnlySpan_System_Char__SKSize__
-  commentId: M:Texart.Api.TxSize.TryParse(ReadOnlySpan{System.Char},SKSize@)
+  href: api/Texart.Api.TxSize.html#Texart_Api_TxSize_TryParse_System_ReadOnlySpan_System_Char__SkiaSharp_SKSize__
+  commentId: M:Texart.Api.TxSize.TryParse(System.ReadOnlySpan{System.Char},SkiaSharp.SKSize@)
   name.vb: TryParse(ReadOnlySpan(Of Char), ByRef SKSize)
-  fullName: Texart.Api.TxSize.TryParse(ReadOnlySpan<System.Char>, out SKSize)
-  fullName.vb: Texart.Api.TxSize.TryParse(ReadOnlySpan(Of System.Char), ByRef SKSize)
+  fullName: Texart.Api.TxSize.TryParse(System.ReadOnlySpan<System.Char>, out SkiaSharp.SKSize)
+  fullName.vb: Texart.Api.TxSize.TryParse(System.ReadOnlySpan(Of System.Char), ByRef SkiaSharp.SKSize)
   nameWithType: TxSize.TryParse(ReadOnlySpan<Char>, out SKSize)
   nameWithType.vb: TxSize.TryParse(ReadOnlySpan(Of Char), ByRef SKSize)
 - uid: Texart.Api.TxSize.TryParse*
@@ -2166,13 +2166,13 @@ references:
   isSpec: "True"
   fullName: Texart.Api.TxSize.TryParse
   nameWithType: TxSize.TryParse
-- uid: Texart.Api.TxSize.TryParseI(ReadOnlySpan{System.Char},SKSizeI@)
+- uid: Texart.Api.TxSize.TryParseI(System.ReadOnlySpan{System.Char},SkiaSharp.SKSizeI@)
   name: TryParseI(ReadOnlySpan<Char>, out SKSizeI)
-  href: api/Texart.Api.TxSize.html#Texart_Api_TxSize_TryParseI_ReadOnlySpan_System_Char__SKSizeI__
-  commentId: M:Texart.Api.TxSize.TryParseI(ReadOnlySpan{System.Char},SKSizeI@)
+  href: api/Texart.Api.TxSize.html#Texart_Api_TxSize_TryParseI_System_ReadOnlySpan_System_Char__SkiaSharp_SKSizeI__
+  commentId: M:Texart.Api.TxSize.TryParseI(System.ReadOnlySpan{System.Char},SkiaSharp.SKSizeI@)
   name.vb: TryParseI(ReadOnlySpan(Of Char), ByRef SKSizeI)
-  fullName: Texart.Api.TxSize.TryParseI(ReadOnlySpan<System.Char>, out SKSizeI)
-  fullName.vb: Texart.Api.TxSize.TryParseI(ReadOnlySpan(Of System.Char), ByRef SKSizeI)
+  fullName: Texart.Api.TxSize.TryParseI(System.ReadOnlySpan<System.Char>, out SkiaSharp.SKSizeI)
+  fullName.vb: Texart.Api.TxSize.TryParseI(System.ReadOnlySpan(Of System.Char), ByRef SkiaSharp.SKSizeI)
   nameWithType: TxSize.TryParseI(ReadOnlySpan<Char>, out SKSizeI)
   nameWithType.vb: TxSize.TryParseI(ReadOnlySpan(Of Char), ByRef SKSizeI)
 - uid: Texart.Api.TxSize.TryParseI*

@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.ITxPlugin.html",
-          "hash": "XQsj/ddj9Of6eXjU/IMlCA=="
+          "hash": "DYYbR8c1M1pW1kce69jHQg=="
         }
       },
       "is_incremental": false,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.ITxTextBitmapGenerator.html",
-          "hash": "PQLFbrudwP7KGQLnmDkq3Q=="
+          "hash": "2BbHM8AoPmS1F5PcVRomVA=="
         }
       },
       "is_incremental": false,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.ITxTextBitmapRenderer.html",
-          "hash": "1IJsFJ2U4sBfQydI66ZO/A=="
+          "hash": "SYWyGHbX7j0Ni45TAbbjtw=="
         }
       },
       "is_incremental": false,
@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxArguments.BadLookupException.html",
-          "hash": "zjDN+4ZHPVpF7ofYrAztmw=="
+          "hash": "1BCF1Zlrl9UDDSMmaubgWw=="
         }
       },
       "is_incremental": false,
@@ -81,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxArguments.LookupResult.html",
-          "hash": "Flxb86fWzhIlURfY12BP4w=="
+          "hash": "IeaIp1d/qI87xUhPjnS+1g=="
         }
       },
       "is_incremental": false,
@@ -93,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxArguments.LookupResultType.html",
-          "hash": "qMo+bd18HnnmbsdOxCBrpw=="
+          "hash": "DxgOH82r1vGVqG24dk6X0g=="
         }
       },
       "is_incremental": false,
@@ -105,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxArguments.TryParseFunc-1.html",
-          "hash": "dsn37HdSEYiEcuMM79szWQ=="
+          "hash": "aG1eID2bm1ykgUl8aSSMkQ=="
         }
       },
       "is_incremental": false,
@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxArguments.html",
-          "hash": "hAsR3zCyhncTkRa/LP3yaw=="
+          "hash": "rbvETCt70RUIEGK6KWaAxQ=="
         }
       },
       "is_incremental": false,
@@ -129,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxArrayTextBitmap.html",
-          "hash": "eL2okLB4GUXIYPiAuu1Wqw=="
+          "hash": "0GrBEKtdg7WAgeIEYXc5eA=="
         }
       },
       "is_incremental": false,
@@ -141,7 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxBitmap.html",
-          "hash": "8Q0t/YinC8glyDBbOrsHSg=="
+          "hash": "UYcWaKH04/6S1tswrRX69Q=="
         }
       },
       "is_incremental": false,
@@ -153,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxContract.html",
-          "hash": "UFdDkjXLatvfvzieoALjQg=="
+          "hash": "uN+7gNRpeVjjIGZ2fA6V9g=="
         }
       },
       "is_incremental": false,
@@ -177,7 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxPluginResource-1.html",
-          "hash": "dOlNuLsDFojtFq0eKPsGbQ=="
+          "hash": "YGkHpOrba3ahM+rICkrmIw=="
         }
       },
       "is_incremental": false,
@@ -189,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxPluginResource.InactiveUnionMemberAccessException.html",
-          "hash": "rqzi6+tJs31OJ84mXqNIIA=="
+          "hash": "eRcjA8XtXqa4E/+t9aQJOw=="
         }
       },
       "is_incremental": false,
@@ -201,7 +201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxPluginResource.MemberKind.html",
-          "hash": "kSxVRrxhg3yBLTHVUt0tcA=="
+          "hash": "o/xYZpwYhRJHBNmJLtaMnQ=="
         }
       },
       "is_incremental": false,
@@ -213,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxPluginResource.ResourceRedirect.html",
-          "hash": "hmwZDwDbaEIdrj6xS22ivg=="
+          "hash": "bDN9vOlmDxRcBejiwKA0xA=="
         }
       },
       "is_incremental": false,
@@ -225,7 +225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxPluginResource.html",
-          "hash": "vt5hKVT18S35VJ0mIICBdQ=="
+          "hash": "a3LiIxIl0TYAUTwE+QlbRQ=="
         }
       },
       "is_incremental": false,
@@ -237,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxPluginResourceLocator.FormatException.html",
-          "hash": "HrOzf9QPoLGr2rt3o502yA=="
+          "hash": "ZEcEof6ZPJUGlsoirCCMew=="
         }
       },
       "is_incremental": false,
@@ -249,7 +249,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html",
-          "hash": "efJncpmQOcmLrVbPnTe20A=="
+          "hash": "B0dmf6DCLsqiKDKP1IyvmQ=="
         }
       },
       "is_incremental": false,
@@ -261,7 +261,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxPluginResourceLocator.html",
-          "hash": "y1Y6J9eXzxzyP5a+mhGTjQ=="
+          "hash": "N5CTZDLR6P4JoH75V+H9ng=="
         }
       },
       "is_incremental": false,
@@ -273,7 +273,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxReferenceScheme.FormatException.html",
-          "hash": "g+TOf+fWjCPbwWKcO6ubuw=="
+          "hash": "9waKG7s45cclHl931ky0Cw=="
         }
       },
       "is_incremental": false,
@@ -285,7 +285,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxReferenceScheme.html",
-          "hash": "6FxoxPbPvYLPDg/syGR17g=="
+          "hash": "W2bYaHaAkgnXP20+NCF9hA=="
         }
       },
       "is_incremental": false,
@@ -297,7 +297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxSize.html",
-          "hash": "GZzKwfSKXiKNj0LpiJPC1w=="
+          "hash": "CJUAD/bYVn9ajOwTqbq/qA=="
         }
       },
       "is_incremental": false,
@@ -309,7 +309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.html",
-          "hash": "FB+5+FKdHTBmduVZGO8Dxg=="
+          "hash": "8cdzuaUTmUuNJBgvFnL2xw=="
         }
       },
       "is_incremental": false,
