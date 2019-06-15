@@ -158,7 +158,7 @@ namespace Texart.Api
             /// Creates an exception with <see cref="Exception.Message"/> set to <paramref name="message"/>.
             /// </summary>
             /// <param name="message">The exception message.</param>
-            internal FormatException(string message) : base(message) { }
+            public FormatException(string message) : base(message) { }
         }
     }
 
