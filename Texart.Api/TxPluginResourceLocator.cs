@@ -111,11 +111,10 @@ namespace Texart.Api
         /// in this case).
         /// </summary>
         /// <seealso cref="Uri.EscapeUriString"/>
-        private const char AssemblyResourceSeparator = ':';
+        public const char AssemblyResourceSeparator = ':';
 
         /// <summary>
         /// Constructs a <see cref="TxPluginResourceLocator"/> from an absolute URI.
-        /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
         /// </summary>
         /// <param name="uri">The URI to build from.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="uri"/> is <c>null</c>.</exception>
@@ -125,7 +124,6 @@ namespace Texart.Api
         /// <summary>
         /// Constructs a <see cref="TxPluginResourceLocator"/> from an absolute URI. The escaping semantics
         /// are defined by the <see cref="Uri"/> class.
-        /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
         /// </summary>
         /// <param name="uri">The URI to build from.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="uri"/> is <c>null</c>.</exception>
@@ -315,7 +313,6 @@ namespace Texart.Api
             /// </summary>
             /// <param name="relativePath">The relative URI path to check.</param>
             /// <returns>An exception if the URI is invalid, or <see cref="RelativeLocator"/> if valid.</returns>
-            /// <seealso cref="TxPluginResourceLocator.CheckIsValidPluginResourceUri"/>
             internal static (Exception, RelativeLocator) CheckIsValidRelativeResourcePath(string relativePath)
             {
                 if (relativePath is null)
@@ -601,7 +598,6 @@ namespace Texart.Api
 
         /// <summary>
         /// Constructs a <see cref="TxPluginResourceLocator"/> from a URI.
-        /// The provided URI must be valid: <see cref="CheckIsValidPluginResourceUri"/>.
         /// </summary>
         /// <param name="uri">The URI to parse.</param>
         private TxPluginResourceLocator(Uri uri)
@@ -699,7 +695,6 @@ namespace Texart.Api
         /// </summary>
         /// <param name="assemblyPath">The assembly URI path to check.</param>
         /// <returns>An exception if the URI is invalid, or <see cref="ImmutableArray{T}"/> if valid.</returns>
-        /// <seealso cref="TxPluginResourceLocator.CheckIsValidPluginResourceUri"/>
         private static (Exception, ImmutableArray<string>) CheckIsValidAssemblyPath(string assemblyPath)
         {
             //

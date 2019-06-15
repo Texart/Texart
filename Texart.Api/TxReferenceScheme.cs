@@ -73,7 +73,7 @@ namespace Texart.Api
         }
 
         /// <summary>
-        /// Constructs a scheme from the given string. It must match <see cref="SchemeRegex"/>.
+        /// Constructs a scheme from the given string.
         /// </summary>
         /// <param name="scheme"></param>
         public TxReferenceScheme(string scheme)
