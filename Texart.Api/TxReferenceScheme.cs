@@ -28,19 +28,19 @@ namespace Texart.Api
         /// <summary>
         /// Scheme for the <c>file</c> protocol.
         /// </summary>
-        public static readonly TxReferenceScheme File = new TxReferenceScheme("file");
+        public static TxReferenceScheme File => new TxReferenceScheme("file");
         /// <summary>
         /// Scheme for the <c>http</c> protocol.
         /// </summary>
-        public static readonly TxReferenceScheme Http = new TxReferenceScheme("http");
+        public static TxReferenceScheme Http => new TxReferenceScheme("http");
         /// <summary>
         /// Scheme for the <c>https</c> protocol.
         /// </summary>
-        public static readonly TxReferenceScheme Https = new TxReferenceScheme("https");
+        public static TxReferenceScheme Https => new TxReferenceScheme("https");
         /// <summary>
         /// Scheme for the <c>tx</c> protocol.
         /// </summary>
-        public static readonly TxReferenceScheme Tx = new TxReferenceScheme("tx");
+        public static TxReferenceScheme Tx => new TxReferenceScheme("tx");
 
         /// <summary>
         /// All valid schemes must match this regex.
