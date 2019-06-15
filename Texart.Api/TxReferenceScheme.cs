@@ -5,11 +5,11 @@ using System.Text.RegularExpressions;
 namespace Texart.Api
 {
     /// <summary>
-    /// A <see cref="TxReferenceScheme"/> is akin to URI schemes (such as <c>file:</c> and <c>https:</c>).
+    /// A <see cref="TxReferenceScheme"/> represents a URI scheme (such as <c>file:</c> and <c>https:</c>).
     /// As such, it is also case-insensitive.
     ///
     /// Note that not every valid URI scheme is a valid <see cref="TxReferenceScheme"/>. Specifically, the characters,
-    /// <c>+</c>, and <c>.</c>, are not allowed. However, <c>-</c> is allowed. This may relaxed
+    /// <c>+</c>, and <c>.</c>, are not allowed. However, <c>-</c> is allowed. This restriction <i>may</i> be relaxed
     /// in the future.
     ///
     /// Refer to <see href="https://tools.ietf.org/html/rfc3986#section-3.1"/> for information on URI schemes
@@ -19,28 +19,28 @@ namespace Texart.Api
     /// </code>
     ///
     /// Use cases:
-    ///   * As a way to allow custom resolution strategies for <c>#load</c> and <c>#r</c> directives.
-    ///   * As part of identify (or locating) objects in a plugin assembly. See <see cref="TxPluginResourceLocator"/>.
+    ///   * As a way to allow custom resolution strategies for <c>#load</c> and <c>#r</c> directives in Texart scripts.
+    ///   * As a part of locating resources in a <see cref="ITxPlugin"/> assembly. See <see cref="TxPluginResourceLocator"/>.
     /// </summary>
     /// <seealso cref="Uri.Scheme"/>
     public sealed class TxReferenceScheme : IComparable<TxReferenceScheme>, IEquatable<TxReferenceScheme>
     {
         /// <summary>
-        /// Scheme for <c>file</c> protocol.
+        /// Scheme for the <c>file</c> protocol.
         /// </summary>
-        public static TxReferenceScheme File => new TxReferenceScheme("file");
+        public static readonly TxReferenceScheme File = new TxReferenceScheme("file");
         /// <summary>
-        /// Scheme for <c>http</c> protocol.
+        /// Scheme for the <c>http</c> protocol.
         /// </summary>
-        public static TxReferenceScheme Http => new TxReferenceScheme("http");
+        public static readonly TxReferenceScheme Http = new TxReferenceScheme("http");
         /// <summary>
-        /// Scheme for <c>https</c> protocol.
+        /// Scheme for the <c>https</c> protocol.
         /// </summary>
-        public static TxReferenceScheme Https => new TxReferenceScheme("https");
+        public static readonly TxReferenceScheme Https = new TxReferenceScheme("https");
         /// <summary>
-        /// Scheme for <c>tx</c> protocol.
+        /// Scheme for the <c>tx</c> protocol.
         /// </summary>
-        public static TxReferenceScheme Tx => new TxReferenceScheme("tx");
+        public static readonly TxReferenceScheme Tx = new TxReferenceScheme("tx");
 
         /// <summary>
         /// All valid schemes must match this regex.
@@ -65,7 +65,7 @@ namespace Texart.Api
         /// then trying to construct with this string will throw an exception.
         /// </summary>
         /// <param name="scheme">The scheme to check.</param>
-        /// <returns>If this scheme is valid.</returns>
+        /// <returns><c>true</c> if <c>this</c> scheme is valid, <c>false</c> otherwise.</returns>
         public static bool IsValidScheme(string scheme)
         {
             if (scheme is null) { throw new ArgumentNullException(nameof(scheme)); }
@@ -75,40 +75,39 @@ namespace Texart.Api
         /// <summary>
         /// Constructs a scheme from the given string.
         /// </summary>
-        /// <param name="scheme"></param>
+        /// <param name="scheme">The case-insensitive scheme. See <see cref="Scheme"/>.</param>
         public TxReferenceScheme(string scheme)
         {
             if (!IsValidScheme(scheme))
             {
                 throw new FormatException($"{nameof(scheme)} is not valid: {scheme}");
             }
-
             Scheme = scheme.ToLower();
         }
 
         /// <summary>
-        /// Determines whether or not the provided path matches this scheme.
+        /// Determines whether or not the provided path matches <c>this</c> scheme.
         /// </summary>
-        /// <param name="path">the path to check against</param>
-        /// <returns>true if match, false otherwise</returns>
+        /// <param name="path">The path to check against.</param>
+        /// <returns><c>true</c> if match, <c>false</c> otherwise.</returns>
         public bool Matches(string path) => path.StartsWith(SchemePrefix);
 
         /// <summary>
-        /// Returns the provided path with this scheme removed.
+        /// Returns the provided path with <c>this</c> scheme removed.
         /// <see cref="Matches"/> must return <c>true</c> with the provided path.
         /// </summary>
-        /// <param name="path">the path to remove scheme from</param>
-        /// <returns>the path without this scheme</returns>
+        /// <param name="path">The path to remove scheme from.</param>
+        /// <returns><paramref name="path"/> without <c>this</c> scheme.</returns>
         public string NormalizePath(string path)
         {
             Debug.Assert(Matches(path));
             return path.Substring(SchemePrefix.Length);
         }
         /// <summary>
-        /// Returns the provided path with this scheme applied.
+        /// Returns the provided path with <c>this</c> scheme applied.
         /// </summary>
-        /// <param name="path">the path to add scheme to</param>
-        /// <returns>the path with this scheme</returns>
+        /// <param name="path">the path to add scheme to.</param>
+        /// <returns><paramref name="path"/> with <c>this</c> scheme added.</returns>
         public string Prefix(string path) => $"{SchemePrefix}{path}";
 
         /// <inheritdoc/>
