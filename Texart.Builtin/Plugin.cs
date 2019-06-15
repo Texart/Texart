@@ -55,10 +55,10 @@ namespace Texart.Builtin
         private readonly TxPluginResource<ITxTextBitmapRenderer> _defaultRenderer =
             TxPluginResource.OfRendererFactory(FontBitmapRenderer.Create);
 
-        /// <inheritdoc cref="ITxPlugin.AvailableGenerators"/>
+        /// <inheritdoc/>
         IEnumerable<RelativeLocator> ITxPlugin.AvailableGenerators => _generators.Keys;
 
-        /// <inheritdoc cref="ITxPlugin.LookupGenerator" />
+        /// <inheritdoc/>
         TxPluginResource<ITxTextBitmapGenerator> ITxPlugin.LookupGenerator(Locator locator)
         {
             if (locator is null)
@@ -76,10 +76,10 @@ namespace Texart.Builtin
             throw new ArgumentException($"No {nameof(ITxTextBitmapGenerator)} named '{locator.RelativeResource}' exists.");
         }
 
-        /// <inheritdoc cref="ITxPlugin.AvailableRenderers"/>
+        /// <inheritdoc/>
         IEnumerable<RelativeLocator> ITxPlugin.AvailableRenderers => _renderers.Keys;
 
-        /// <inheritdoc cref="ITxPlugin.LookupRenderer"/>
+        /// <inheritdoc/>
         TxPluginResource<ITxTextBitmapRenderer> ITxPlugin.LookupRenderer(Locator locator)
         {
             if (locator is null)

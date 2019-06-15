@@ -41,7 +41,7 @@ namespace Texart.Api
             Characters = characters;
         }
 
-        /// <inheritdocs/>
+        /// <inheritdoc/>
         public char CharAt(int x, int y)
         {
             CheckCoordinate(x, y);

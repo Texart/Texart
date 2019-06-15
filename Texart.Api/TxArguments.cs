@@ -987,16 +987,16 @@ namespace Texart.Api
                 Type = type;
             }
 
-            /// <inheritdoc cref="IEquatable{T}.Equals(T)"/>
+            /// <inheritdoc/>
             public bool Equals(LookupResult other) => Type == other.Type;
 
-            /// <inheritdoc cref="object.Equals(object)"/>
+            /// <inheritdoc/>
             public override bool Equals(object obj) => obj is LookupResult other && Equals(other);
 
-            /// <inheritdoc cref="object.GetHashCode"/>
+            /// <inheritdoc/>
             public override int GetHashCode() => (int) Type;
 
-            /// <inheritdoc cref="object.ToString"/>
+            /// <inheritdoc/>
             public override string ToString() => $"LookupResult{{{Type.ToString()}}}";
 
             /// <summary>
@@ -1052,7 +1052,7 @@ namespace Texart.Api
         public static readonly TxArguments Empty = new TxArguments(
             ImmutableDictionary<string, string>.Empty);
 
-        /// <inheritdoc cref="IEquatable{T}.Equals(T)"/>
+        /// <inheritdoc/>
         public bool Equals(TxArguments other)
         {
             if (other is null) return false;
@@ -1070,11 +1070,11 @@ namespace Texart.Api
             }
         }
 
-        /// <inheritdoc cref="object.Equals(object)"/>
+        /// <inheritdoc/>
         public override bool Equals(object obj) =>
             ReferenceEquals(this, obj) || obj is TxArguments other && Equals(other);
 
-        /// <inheritdoc cref="object.GetHashCode"/>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             var orderedKeyValues = AsImmutableDictionary.OrderBy(kv => kv.Key);

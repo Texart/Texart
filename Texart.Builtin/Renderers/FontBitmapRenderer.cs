@@ -60,7 +60,7 @@ namespace Texart.Builtin.Renderers
         /// </summary>
         private int CharacterSpacing => 8;
 
-        /// <inheritdocs />
+        /// <inheritdoc/>
         public async Task RenderAsync(IAsyncEnumerable<ITxTextBitmap> textBitmaps, Stream outputStream)
         {
             Debug.Assert(textBitmaps != null);

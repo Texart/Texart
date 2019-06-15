@@ -26,7 +26,7 @@ namespace Texart.Plugins.Scripting
             _resolversByScheme = resolversByScheme ?? throw new ArgumentNullException(nameof(resolversByScheme));
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override ImmutableArray<PortableExecutableReference> ResolveReference(string reference, string baseFilePath, MetadataReferenceProperties properties)
         {
             var (scheme, resolver) = GetResolverByPath(reference);
@@ -36,10 +36,10 @@ namespace Texart.Plugins.Scripting
                 properties);
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override bool ResolveMissingAssemblies => _defaultResolver.ResolveMissingAssemblies;
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override PortableExecutableReference ResolveMissingAssembly(MetadataReference definition, AssemblyIdentity referenceIdentity) =>
             _defaultResolver.ResolveMissingAssembly(definition, referenceIdentity);
 
@@ -59,7 +59,7 @@ namespace Texart.Plugins.Scripting
         public bool Equals(MetadataReferenceResolverDemux other) =>
             _defaultResolver.Equals(other._defaultResolver) && _resolversByScheme.Equals(other._resolversByScheme);
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override bool Equals(object other)
         {
             if (ReferenceEquals(this, other))
@@ -75,7 +75,7 @@ namespace Texart.Plugins.Scripting
             }
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override int GetHashCode() => HashCode.Combine(_defaultResolver, _resolversByScheme);
     }
 }

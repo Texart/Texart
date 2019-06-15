@@ -20,7 +20,7 @@ namespace Texart.Builtin.Renderers
         /// </summary>
         private Encoding Encoding { get; }
 
-        /// <inheritdocs/>
+        /// <inheritdoc/>
         public async Task RenderAsync(IAsyncEnumerable<ITxTextBitmap> textBitmaps, Stream outputStream)
         {
             Debug.Assert(textBitmaps != null);

@@ -111,25 +111,25 @@ namespace Texart.Api
         /// <returns>the path with this scheme</returns>
         public string Prefix(string path) => $"{SchemePrefix}{path}";
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override string ToString() => Scheme;
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public int CompareTo(TxReferenceScheme other) =>
             string.Compare(Scheme, other.Scheme, StringComparison.Ordinal);
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public bool Equals(TxReferenceScheme other)
         {
             if (other is null) return false;
             return ReferenceEquals(this, other) || string.Equals(Scheme, other.Scheme);
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override bool Equals(object obj) =>
             ReferenceEquals(this, obj) || obj is TxReferenceScheme other && Equals(other);
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override int GetHashCode() => Scheme != null ? Scheme.GetHashCode() : 0;
 
         /// <summary>

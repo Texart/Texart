@@ -48,10 +48,10 @@ namespace Texart.Plugins.Scripting
             return new SourceFile(absolutePath, reader.ReadToEnd());
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override int GetHashCode() => HashCode.Combine(FilePath, Text);
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public bool Equals(SourceFile other)
         {
             if (other is null) return false;
@@ -59,7 +59,7 @@ namespace Texart.Plugins.Scripting
             return string.Equals(FilePath, other.FilePath) && string.Equals(Text, other.Text);
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override bool Equals(object obj) =>
             ReferenceEquals(this, obj) || obj is SourceFile other && Equals(other);
     }

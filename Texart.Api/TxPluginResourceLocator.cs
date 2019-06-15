@@ -377,21 +377,21 @@ namespace Texart.Api
                     path.Split(UriPathSeparator).ToImmutableArray());
             }
 
-            /// <inheritdoc cref="object.ToString"/>
+            /// <inheritdoc/>
             public override string ToString() => ResourcePath;
 
-            /// <inheritdoc cref="IEquatable{T}.Equals(T)"/>
+            /// <inheritdoc/>
             public bool Equals(RelativeLocator other)
             {
                 if (ReferenceEquals(null, other)) return false;
                 return ReferenceEquals(this, other) || ResourceSegments.SequenceEqual(other.ResourceSegments);
             }
 
-            /// <inheritdoc cref="object.Equals(object)"/>
+            /// <inheritdoc/>
             public override bool Equals(object obj) =>
                 ReferenceEquals(this, obj) || obj is RelativeLocator other && Equals(other);
 
-            /// <inheritdoc cref="object.GetHashCode"/>
+            /// <inheritdoc/>
             public override int GetHashCode()
             {
                 var hashCode = new HashCode();
@@ -641,11 +641,11 @@ namespace Texart.Api
         /// </summary>
         private static char UriPathSeparator => '/';
 
-        /// <inheritdoc cref="object.ToString"/>
+        /// <inheritdoc/>
         public override string ToString() =>
             $"{Scheme}{Uri.SchemeDelimiter}{UriPathSeparator}{AssemblyPath}{AssemblyResourceSeparator}{ResourcePath}";
 
-        /// <inheritdoc cref="IEquatable{T}.Equals(T)"/>
+        /// <inheritdoc/>
         public bool Equals(TxPluginResourceLocator other)
         {
             if (other is null) return false;
@@ -658,11 +658,11 @@ namespace Texart.Api
                    RelativeResource == other.RelativeResource;
         }
 
-        /// <inheritdoc cref="object.Equals(object)"/>
+        /// <inheritdoc/>
         public override bool Equals(object obj) =>
             ReferenceEquals(this, obj) || obj is TxPluginResourceLocator other && Equals(other);
 
-        /// <inheritdoc cref="object.GetHashCode"/>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             var hashCode = new HashCode();

@@ -52,7 +52,7 @@ namespace Texart.Plugins.Scripting
             _underlyingResolver = underlyingResolver;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override ImmutableArray<PortableExecutableReference> ResolveReference(
             string reference,
             string baseFilePath,
@@ -69,7 +69,7 @@ namespace Texart.Plugins.Scripting
         /// <inheritdoc/>
         public override bool ResolveMissingAssemblies => _underlyingResolver.ResolveMissingAssemblies;
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override PortableExecutableReference ResolveMissingAssembly(
             MetadataReference definition, AssemblyIdentity referenceIdentity)
         {
@@ -83,18 +83,18 @@ namespace Texart.Plugins.Scripting
             return _underlyingResolver.ResolveMissingAssembly(definition, referenceIdentity);
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public bool Equals(PredefinedOrForwardingMetadataResolver other)
         {
             if (other is null) return false;
             return ReferenceEquals(this, other) || Equals(_underlyingResolver, other._underlyingResolver);
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override bool Equals(object obj) =>
             ReferenceEquals(this, obj) || obj is PredefinedOrForwardingMetadataResolver other && Equals(other);
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override int GetHashCode() =>
             _underlyingResolver != null ? _underlyingResolver.GetHashCode() : 0;
     }

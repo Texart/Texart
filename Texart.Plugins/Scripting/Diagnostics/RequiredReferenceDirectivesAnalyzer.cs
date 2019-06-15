@@ -74,10 +74,10 @@ namespace Texart.Plugins.Scripting.Diagnostics
             isEnabledByDefault: true,
             description: Description);
 
-        /// <inheritdoc cref="DiagnosticAnalyzer.SupportedDiagnostics"/>
+        /// <inheritdoc/>
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
 
-        /// <inheritdoc cref="DiagnosticAnalyzer.Initialize"/>
+        /// <inheritdoc/>
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(AnalyzeRequiredReferences, SyntaxKind.CompilationUnit);

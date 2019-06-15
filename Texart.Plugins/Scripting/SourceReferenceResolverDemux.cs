@@ -27,7 +27,7 @@ namespace Texart.Plugins.Scripting
             _resolversByScheme = resolversByScheme ?? throw new ArgumentNullException(nameof(resolversByScheme));
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override string NormalizePath(string path, string baseFilePath)
         {
             var (scheme, resolver) = GetResolverByPath(path);
@@ -37,7 +37,7 @@ namespace Texart.Plugins.Scripting
             return scheme != null ? scheme.Prefix(normalizedPath) : normalizedPath;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override string ResolveReference(string path, string baseFilePath)
         {
             var (scheme, resolver) = GetResolverByPath(path);
@@ -47,7 +47,7 @@ namespace Texart.Plugins.Scripting
             return scheme != null ? scheme.Prefix(resolvedReferencePath) : resolvedReferencePath;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override Stream OpenRead(string resolvedPath)
         {
             var (scheme, resolver) = GetResolverByPath(resolvedPath);
@@ -66,11 +66,11 @@ namespace Texart.Plugins.Scripting
                 .DefaultIfEmpty((null, _defaultResolver))
                 .First();
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public bool Equals(SourceReferenceResolverDemux other) =>
             _defaultResolver.Equals(other._defaultResolver) && _resolversByScheme.Equals(other._resolversByScheme);
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override bool Equals(object other)
         {
             if (ReferenceEquals(this, other))
@@ -86,7 +86,7 @@ namespace Texart.Plugins.Scripting
             }
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc/>
         public override int GetHashCode() => HashCode.Combine(_defaultResolver, _resolversByScheme);
     }
 }

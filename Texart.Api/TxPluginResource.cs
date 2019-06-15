@@ -194,7 +194,7 @@ namespace Texart.Api
                 ArgumentsTransformer = argumentsTransformer;
             }
 
-            /// <inheritdoc cref="IEquatable{T}.Equals(T)"/>
+            /// <inheritdoc/>
             public bool Equals(ResourceRedirect other)
             {
                 if (other is null) return false;
@@ -202,13 +202,13 @@ namespace Texart.Api
                 return Equals(Locator, other.Locator) && Equals(ArgumentsTransformer, other.ArgumentsTransformer);
             }
 
-            /// <inheritdoc cref="object.Equals(object)"/>
+            /// <inheritdoc/>
             public override bool Equals(object obj)
             {
                 return ReferenceEquals(this, obj) || obj is ResourceRedirect other && Equals(other);
             }
 
-            /// <inheritdoc cref="object.GetHashCode"/>
+            /// <inheritdoc/>
             public override int GetHashCode() => HashCode.Combine(Locator, ArgumentsTransformer);
 
             /// <summary>
@@ -251,12 +251,12 @@ namespace Texart.Api
             /// </summary>
             private readonly MemberKind _activeKind;
 
-            /// <inheritdoc cref="Exception.Message"/>
+            /// <inheritdoc/>
             public override string Message =>
                 $"Attempted to access {_attemptedKind} but the active member is {_activeKind}";
 
             /// <summary>
-            /// Creates an <inheritdoc cref="InactiveUnionMemberAccessException"/> with the mismatched (attempted versus
+            /// Creates an <see cref="InactiveUnionMemberAccessException"/> with the mismatched (attempted versus
             /// actual) kinds.
             /// </summary>
             /// <param name="attemptedKind">The attempted access kind.</param>
@@ -379,10 +379,10 @@ namespace Texart.Api
         // ReSharper disable once InconsistentNaming
         internal readonly TxPluginResource.ResourceRedirect _redirect;
 
-        /// <inheritdoc cref="object.ToString"/>
+        /// <inheritdoc/>
         public override string ToString() => $"{typeof(TxPluginResource<T>).Name}({ActiveMemberKind}){{{ActiveMember}}}";
 
-        /// <inheritdoc cref="IEquatable{T}.Equals(T)"/>
+        /// <inheritdoc/>
         public bool Equals(TxPluginResource<T> other)
         {
             if (other is null) return false;
@@ -398,11 +398,11 @@ namespace Texart.Api
             }
         }
 
-        /// <inheritdoc cref="object.Equals(object)"/>
+        /// <inheritdoc/>
         public override bool Equals(object obj) =>
             ReferenceEquals(this, obj) || obj is TxPluginResource<T> other && Equals(other);
 
-        /// <inheritdoc cref="object.GetHashCode"/>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             var hashCode = new HashCode();

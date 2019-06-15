@@ -13,7 +13,7 @@ namespace Texart.Builtin.Generators
     /// </summary>
     internal sealed class BrightnessBasedBitmapGenerator : TxTextBitmapGeneratorBase, ITxTextBitmapGenerator
     {
-        /// <inheritdocs/>
+        /// <inheritdoc/>
         protected override Task<ITxTextBitmap> DoGenerateTextAsync(SKBitmap bitmap)
         {
             var characters = Characters;

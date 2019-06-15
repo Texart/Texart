@@ -12,23 +12,22 @@ namespace Texart.Api
     public static class TxBitmap
     {
         /// <summary>
-        /// Returns every possible values for <see cref="ITxTextBitmapGenerator.PixelSamplingRatio"/>
-        /// for the given image bitmap. This value depends only on the bitmap size, not it's pixel
-        /// data.
-        /// <see cref="GetPerfectPixelRatios(int, int)"/>
+        /// Returns every possible value that divides <paramref name="bitmap"/>'s width and height evenly.
+        /// This value depends only on the bitmap size; pixel data does not matter.
         /// </summary>
         /// <param name="bitmap">The bitmap whose dimensions to check.</param>
         /// <returns>Every possible factor.</returns>
+        /// <seealso cref="GetPerfectPixelRatios(int, int)"/>
         public static IEnumerable<int> GetPerfectPixelRatios(SKBitmap bitmap) =>
             GetPerfectPixelRatios(bitmap.Width, bitmap.Height);
 
         /// <summary>
-        /// Returns every possible values for <see cref="ITxTextBitmapGenerator.PixelSamplingRatio"/>
-        /// for the given dimensions.
+        /// Returns every possible value that divides the width and height evenly.
         /// </summary>
         /// <param name="width">The width of bitmap to check.</param>
         /// <param name="height">The height of bitmap to check.</param>
         /// <returns>Every possible factor.</returns>
+        /// <seealso cref="GetPerfectPixelRatios(SKBitmap)"/>
         public static IEnumerable<int> GetPerfectPixelRatios(int width, int height)
         {
             // The idea is to get every common factor between the width and the height

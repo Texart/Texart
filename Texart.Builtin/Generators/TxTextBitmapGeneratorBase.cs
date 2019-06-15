@@ -29,12 +29,14 @@ namespace Texart.Builtin.Generators
             PixelSamplingRatio = pixelSamplingRatio;
         }
 
-        /// <inheritdocs/>
+        /// <summary>
+        /// The characters to use in the output <see cref="ITxTextBitmap"/>.
+        /// </summary>
         protected IList<char> Characters { get; set; }
 
         protected int PixelSamplingRatio { get; set; }
 
-        /// <inheritdocs/>
+        /// <inheritdoc/>
         public async IAsyncEnumerable<ITxTextBitmap> GenerateAsync(IAsyncEnumerable<SKBitmap> bitmaps)
         {
             if (bitmaps is null) { throw new ArgumentNullException(nameof(bitmaps)); }

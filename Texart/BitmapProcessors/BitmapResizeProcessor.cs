@@ -41,7 +41,7 @@ namespace Texart.BitmapProcessors
             FilterQuality = filterQuality;
         }
 
-        /// <inheritdoc cref="IBitmapProcessor{T}.Process"/>
+        /// <inheritdoc/>
         public async IAsyncEnumerable<SKBitmap> Process(IAsyncEnumerable<SKBitmap> bitmaps)
         {
             await foreach (var bitmap in bitmaps)
