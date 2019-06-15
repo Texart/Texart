@@ -8,11 +8,32 @@ using Texart.Api;
 
 namespace Texart.Plugins
 {
+    /// <summary>
+    /// Helpers for dealing with pre-built plugin assemblies.
+    /// </summary>
     public static class PrebuiltPlugin
     {
+        /// <summary>
+        /// Searches <paramref name="pluginAssembly"/> for <see cref="ITxPlugin"/> type, with
+        /// <see cref="TxPluginAttribute"/> applied to it. The found type is then instantiated by
+        /// calling its no-arg constructor (with <see cref="Activator.CreateInstance(Type)"/>.
+        /// Only <c>public</c> types are considered.
+        /// </summary>
+        /// <param name="pluginAssembly">The assembly whose <c>public</c> types to search.</param>
+        /// <returns>The constructed <see cref="ITxPlugin"/> instance.</returns>
+        /// <exception cref="BadPluginAssemblyException">
+        ///     If a valid <see cref="ITxPlugin"/> type could not be found in <paramref name="pluginAssembly"/>,
+        ///     or there was an error constructing the found type.
+        /// </exception>
+        /// <seealso cref="TxPluginAttribute"/>
         public static ITxPlugin GetPluginFromAssembly(Assembly pluginAssembly) =>
             GetPluginFromTypes(pluginAssembly.GetExportedTypes());
 
+        /// <summary>
+        /// Helper for <see cref="GetPluginFromAssembly"/> that makes it easier to test.
+        /// </summary>
+        /// <param name="assemblyTypes">See <see cref="GetPluginFromAssembly"/>.</param>
+        /// <returns>See <see cref="GetPluginFromAssembly"/>.</returns>
         internal static ITxPlugin GetPluginFromTypes(IEnumerable<Type> assemblyTypes)
         {
             Debug.Assert(assemblyTypes != null);
