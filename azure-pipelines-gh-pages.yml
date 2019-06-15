@@ -9,6 +9,7 @@ pool:
   vmImage: 'windows-2019'
 
 variables:
+  dotnetVersion: '3.0.100-preview5-011568'
   siteBranch: 'gh-pages'
   currentSiteDirectory: 'gh-pages'
   newSiteDirectory: 'docfx/_site'
@@ -30,7 +31,7 @@ steps:
 - task: DotNetCoreInstaller@0
   displayName: Install dotnet
   inputs:
-    version: '3.0.100-preview5-011568'
+    version: $(dotnetVersion)
 
 - script: |
     choco install docfx -y

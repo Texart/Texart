@@ -1,0 +1,31 @@
+# Make sure docs can be built for GitHub pages (but don't publish!)
+
+trigger:
+- master
+
+pr: none
+
+pool:
+  vmImage: 'windows-2019'
+
+variables:
+  dotnetVersion: '3.0.100-preview5-011568'
+
+steps:
+
+- task: DotNetCoreInstaller@0
+  displayName: Install dotnet
+  inputs:
+    version: $(dotnetVersion)
+
+- script: |
+    choco install docfx -y
+  displayName: Install docfx
+
+- script: |
+    dotnet restore
+  displayName: dotnet restore
+
+- script: |
+    docfx docfx/docfx.json
+  displayName: Build documentation

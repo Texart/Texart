@@ -20,13 +20,14 @@ pool:
   vmImage: $(imageName)
 
 variables:
+  dotnetVersion: '3.0.100-preview5-011568'
   buildConfiguration: 'Release'
 
 steps:
 - task: DotNetCoreInstaller@0
   displayName: Install dotnet
   inputs:
-    version: '3.0.100-preview5-011568'
+    version: $(dotnetVersion)
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'Build $(buildConfiguration)'
