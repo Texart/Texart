@@ -3,6 +3,7 @@
 trigger:
 - master
 
+# Only deploy from master
 pr: none
 
 pool:
