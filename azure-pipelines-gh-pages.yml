@@ -52,7 +52,7 @@ steps:
     git config --local user.email "azuredevops@microsoft.com"
     git config --local core.autocrlf false
     git add .
-    git commit -m "Publishing GitHub Pages [skip ci]"
+    git commit --allow-empty -m "Publishing GitHub Pages [skip ci]"
   displayName: Commit built documentation
   workingDirectory: $(newSiteDirectory)
 
