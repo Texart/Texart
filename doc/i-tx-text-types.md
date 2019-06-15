@@ -20,8 +20,12 @@ In the future, `ITxTextBitmap` may expose more information about each "pixel" (s
 
 ## Diagram
 
-<!-- markdownlint-disable MD033 -->
-<p align="center">
-  <img src='./i-tx-text-types.1.svg' width='400' />
-</p>
-<!-- markdownlint-enable MD033 -->
+```mermaid
+graph TD;
+  C1(Configuration) -- passed to --> G[ITxTextBitmapGenerator]
+  B(Image Bitmap) -- passed to --> G
+  G -- generates --> D(ITxTextBitmap);
+  D -- passed to --> R[ITxTextBitmapRenderer]
+  C2(Configuration) -- passed to --> R
+  R -- renders to --> O(Output Stream)
+```

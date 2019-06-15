@@ -1,7 +1,0 @@
-graph TD;
-  C1(Configuration) -- passed to --> G[ITxTextBitmapGenerator]
-  B(Image Bitmap) -- passed to --> G
-  G -- generates --> D(ITxTextBitmap);
-  D -- passed to --> R[ITxTextBitmapRenderer]
-  C2(Configuration) -- passed to --> R
-  R -- renders to --> O(Output Stream)

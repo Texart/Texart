@@ -20,3 +20,7 @@
 * [`ITxTextBitmap`](i-tx-text-types.md#itxtextbitmap)
 * [`ITxTextBitmapGenerator`](i-tx-text-types.md#itxtextbitmapgenerator)
 * [`ITxTextBitmapRenderer`](i-tx-text-types.md#itxtextbitmaprenderer)
+
+## Diagrams
+
+Diagrams in the documentation are written with [mermaid](https://mermaidjs.github.io/). Currently, GitHub-flavored markdown does not support mermaid diagrams (GitLab does). You may use the [GitHub + Mermaid](https://github.com/BackMarket/github-mermaid-extension) extension until GitHub allows diagrams natively.
