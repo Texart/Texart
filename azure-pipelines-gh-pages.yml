@@ -26,6 +26,7 @@ steps:
     chmod 600 ~/.ssh/id_rsa
     ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
   displayName: Set up Git SSH authentication
+  failOnStderr: true
 
 - task: DotNetCoreInstaller@0
   displayName: Install dotnet
@@ -46,6 +47,7 @@ steps:
     git clone https://github.com/Texart/Texart.git -b $(siteBranch) $(currentSiteDirectory) -q
     cp -R $(currentSiteDirectory)/.git $(newSiteDirectory)
   displayName: 'Fetch GitHub Pages branch'
+  failOnStderr: true
 
 - bash: |
     git config --local user.name "Azure Pipelines"
@@ -55,12 +57,14 @@ steps:
     git commit -m "Publishing GitHub Pages [skip ci]"
   displayName: Commit built documentation
   workingDirectory: $(newSiteDirectory)
+  failOnStderr: true
 
 - bash: |
     git remote set-url --push origin git@github.com:Texart/Texart.git
     git push origin HEAD:$(siteBranch)
   displayName: Publish to GitHub Pages
   workingDirectory: $(newSiteDirectory)
+  failOnStderr: true
   condition: |
     and(not(eq(variables['Build.Reason'], 'PullRequest')),
         eq(variables['Build.SourceBranch'], 'refs/heads/master'))
