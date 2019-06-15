@@ -14,13 +14,31 @@ variables:
   newSiteDirectory: 'docfx/_site'
 
 steps:
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: deploy_key
+  displayName: Get deploy key
+
+- script: |
+    mkdir -p ~/.ssh
+    mv $DOWNLOADSECUREFILE_SECUREFILEPATH ~/.ssh/id_rsa
+    chmod 700 ~/.ssh
+    chmod 600 ~/.ssh/id_rsa
+    ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+  displayName: Set up Git SSH authentication
+
+- task: DotNetCoreInstaller@0
+  displayName: Install dotnet
+  inputs:
+    version: '3.0.100-preview5-011568'
+
 - script: |
     choco install docfx -y
-  displayName: 'Install docfx'
+  displayName: Install docfx
 
 - script: |
     docfx docfx/docfx.json
-  displayName: 'Build documentation'
+  displayName: Build documentation
 
 # The following logic is similar to the docfx-seed example: https://github.com/docascode/docfx-seed/blob/eea1fd7dc62e043cc59a28ab0ed11937161d38ab/appveyor.yml
 
@@ -32,23 +50,16 @@ steps:
 - script: |
     git config --local user.name "Azure Pipelines"
     git config --local user.email "azuredevops@microsoft.com"
+    git config --local core.autocrlf false
     git add .
     git commit -m "Publishing GitHub Pages [skip ci]"
-  displayName: 'Commit built documentation'
+  displayName: Commit built documentation
   workingDirectory: $(newSiteDirectory)
 
-- task: DownloadSecureFile@1
-  inputs:
-    secureFile: deploy_key
-  displayName: 'Get deploy key'
-
 - script: |
-    mkdir -p ~/.ssh && mv $DOWNLOADSECUREFILE_SECUREFILEPATH ~/.ssh/id_rsa
-    chmod 700 ~/.ssh && chmod 600 ~/.ssh/id_rsa
-    ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
     git remote set-url --push origin git@github.com:Texart/Texart.git
     git push origin HEAD:$(siteBranch)
-  displayName: 'Publish GitHub Pages'
+  displayName: Publish to GitHub Pages
   workingDirectory: $(newSiteDirectory)
   condition: |
     and(not(eq(variables['Build.Reason'], 'PullRequest')),

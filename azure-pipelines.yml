@@ -23,8 +23,10 @@ steps:
   displayName: Install dotnet
   inputs:
     version: '3.0.100-preview5-011568'
+
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'Build $(buildConfiguration)'
+
 - task: DotNetCoreCLI@2
   displayName: Run Unit Tests ($(buildConfiguration))
   inputs:
