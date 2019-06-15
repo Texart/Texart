@@ -19,9 +19,9 @@ steps:
     secureFile: deploy_key
   displayName: Get deploy key
 
-- script: |
+- bash: |
     mkdir -p ~/.ssh
-    mv $DOWNLOADSECUREFILE_SECUREFILEPATH ~/.ssh/id_rsa
+    mv $(DOWNLOADSECUREFILE_SECUREFILEPATH) ~/.ssh/id_rsa
     chmod 700 ~/.ssh
     chmod 600 ~/.ssh/id_rsa
     ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
@@ -42,12 +42,12 @@ steps:
 
 # The following logic is similar to the docfx-seed example: https://github.com/docascode/docfx-seed/blob/eea1fd7dc62e043cc59a28ab0ed11937161d38ab/appveyor.yml
 
-- script: |
+- bash: |
     git clone https://github.com/Texart/Texart.git -b $(siteBranch) $(currentSiteDirectory) -q
     cp -R $(currentSiteDirectory)/.git $(newSiteDirectory)
   displayName: 'Fetch GitHub Pages branch'
 
-- script: |
+- bash: |
     git config --local user.name "Azure Pipelines"
     git config --local user.email "azuredevops@microsoft.com"
     git config --local core.autocrlf false
@@ -56,7 +56,7 @@ steps:
   displayName: Commit built documentation
   workingDirectory: $(newSiteDirectory)
 
-- script: |
+- bash: |
     git remote set-url --push origin git@github.com:Texart/Texart.git
     git push origin HEAD:$(siteBranch)
   displayName: Publish to GitHub Pages
