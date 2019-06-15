@@ -51,7 +51,7 @@ namespace Texart.Api
     ///     var locator = PluginResourceLocator.FromUri("file:///plugins/Texart.SomePlugin.dll:SomePath/SomeResource");
     ///     locator.Scheme;           // new ReferenceScheme("file")
     ///     locator.AssemblyPath      // "plugins/Texart.SomePlugin.dll"
-    ///     locator.AssemblySegments  // new [] { "plugins, "Texart.SomePlugin.dll" }
+    ///     locator.AssemblySegments  // new [] { "plugins", "Texart.SomePlugin.dll" }
     ///     locator.ResourcePath      // "SomePath/SomeResource"
     ///     locator.ResourceSegments  // new [] { "SomePath", "SomeResource" }
     /// </code>
