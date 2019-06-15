@@ -1,11 +1,7 @@
 # Make sure docs can be built for GitHub pages (but don't publish!)
 
-trigger:
-  branches:
-    include:
-    - master
-    exclude:
-    - gh-pages
+# Only on PRs
+trigger: none
 
 pool:
   vmImage: 'windows-2019'
