@@ -1,0 +1,7 @@
+- name: API Reference
+  href: api/
+  homepage: api/Texart.Api.yml
+- name: GitHub
+  href: https://github.com/Texart/Texart
+- name: Website
+  href: https://texart.github.io/
