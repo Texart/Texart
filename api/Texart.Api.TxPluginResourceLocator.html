@@ -1,0 +1,1344 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class TxPluginResourceLocator
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class TxPluginResourceLocator
+   ">
+    <meta name="generator" content="docfx 2.43.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Texart.Api.TxPluginResourceLocator">
+  
+  
+  <h1 id="Texart_Api_TxPluginResourceLocator" data-uid="Texart.Api.TxPluginResourceLocator" class="text-break">Class TxPluginResourceLocator
+  </h1>
+  <div class="markdown level0 summary"><p>A domain-specific URI-like string that is used to identity a plugin assembly and objects inside it.
+The properties and formatting is a strict subset of a URI and thus all <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a>s
+are valid (absolute) URIs. Relative resource URIs can be represented by <a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a>
+instead.</p>
+<p><a href="https://tools.ietf.org/html/rfc3986#section-3">https://tools.ietf.org/html/rfc3986#section-3</a> defines the syntax of URIs:</p>
+<pre><code>//    foo://example.com:8042/over/there?name=ferret#nose
+//    \_/   \______________/\_________/ \_________/ \__/
+//     |           |            |            |        |
+//  scheme     authority       path        query   fragment
+//     |   _____________________|__
+//    / \ /                        \
+//    urn:example:animal:ferret:nose</code></pre>
+<p>See <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#/media/File:URI_syntax_diagram.png">https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#/media/File:URI_syntax_diagram.png</a> for
+a simple diagram.</p>
+<p>The anatomy of a <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> looks like:</p>
+<pre><code>//  Scheme        AssemblyPath      ResourcePath
+//    |        ________|_______   _______|_____
+//   / \      /                \ /             \
+//   foo:///path/to/assembly.dll:path/to/resource
+//       \_/                    |
+//        |                     |
+// (empty Authority)  AssemblyResourceSeparator (:)</code></pre>
+<p>From the above, only the following properties are allowed:</p>
+<ul>
+<li>scheme: <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Scheme">Scheme</a>.</li>
+<li>authority: This is required for a URI but in our case, this <strong>MUST</strong> be empty.</li>
+<li>path: The path <strong>MUST</strong> contain at least one segment containing <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyResourceSeparator">AssemblyResourceSeparator</a>,
+the <em>last</em> of which is used to partition the path into <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyPath">AssemblyPath</a>
+and <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a>.
+<a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a> is allowed to be empty.
+These restrictions may be relaxed in the future, but will always be compliant with the latest URI RFC.
+Note that the current restrictions imply that http or https schemes cannot be used, since they require a hostname.</li>
+</ul>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">TxPluginResourceLocator</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Texart.Api.html">Texart.Api</a></h6>
+  <h6><strong>Assembly</strong>: Texart.Api.dll</h6>
+  <h5 id="Texart_Api_TxPluginResourceLocator_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class TxPluginResourceLocator : IEquatable&lt;TxPluginResourceLocator&gt;</code></pre>
+  </div>
+  <h5 id="Texart_Api_TxPluginResourceLocator_examples"><strong>Examples</strong></h5>
+  <pre><code>    var locator = PluginResourceLocator.FromUri(&quot;file:///plugins/Texart.SomePlugin.dll:SomePath/SomeResource&quot;);
+    locator.Scheme;           // new ReferenceScheme(&quot;file&quot;)
+    locator.AssemblyPath      // &quot;plugins/Texart.SomePlugin.dll
+    locator.AssemblySegments  // new [] { &quot;plugins, &quot;Texart.SomePlugin.dll&quot; }
+    locator.ResourcePath      // &quot;SomePath/SomeResource&quot;
+    locator.ResourceSegments  // new [] { &quot;SomePath&quot;, &quot;SomeResource&quot; }</code></pre>
+
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_AssemblyResourceSeparator.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.AssemblyResourceSeparator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L114">View Source</a>
+  </span>
+  <h4 id="Texart_Api_TxPluginResourceLocator_AssemblyResourceSeparator" data-uid="Texart.Api.TxPluginResourceLocator.AssemblyResourceSeparator">AssemblyResourceSeparator</h4>
+  <div class="markdown level1 summary"><p>Character that is used to partition the URI path into <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyPath">AssemblyPath</a> and <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a>.
+The choice of <code>:</code> is justified by its absence in file names (reasonably). Note that many user agents allow
+<code>:</code> in URI paths (e.g. web browsers). Paths containing <code>:</code> <em>may</em> need to be URI-encoded (<code>%3A</code>
+in this case).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const char AssemblyResourceSeparator = null</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.char">Char</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_AssemblyPath.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.AssemblyPath%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L76">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_AssemblyPath_" data-uid="Texart.Api.TxPluginResourceLocator.AssemblyPath*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_AssemblyPath" data-uid="Texart.Api.TxPluginResourceLocator.AssemblyPath">AssemblyPath</h4>
+  <div class="markdown level1 summary"><p><a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblySegments">AssemblySegments</a> as a URI path string. The format is &quot;path/to/plugin.dll&quot;.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string AssemblyPath { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_AssemblySegments.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.AssemblySegments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L72">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_AssemblySegments_" data-uid="Texart.Api.TxPluginResourceLocator.AssemblySegments*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_AssemblySegments" data-uid="Texart.Api.TxPluginResourceLocator.AssemblySegments">AssemblySegments</h4>
+  <div class="markdown level1 summary"><p>The segments in the URI path that locate the plugin <see cref="!:System.Reflection.Assembly"></see> or script.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ImmutableArray&lt;string&gt; AssemblySegments { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ImmutableArray</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_AsUri.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.AsUri%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L100">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_AsUri_" data-uid="Texart.Api.TxPluginResourceLocator.AsUri*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_AsUri" data-uid="Texart.Api.TxPluginResourceLocator.AsUri">AsUri</h4>
+  <div class="markdown level1 summary"><p>The URI representation of <code>this</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Uri AsUri { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Uri</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_RelativeResource.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.RelativeResource%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L81">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_RelativeResource_" data-uid="Texart.Api.TxPluginResourceLocator.RelativeResource*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_RelativeResource" data-uid="Texart.Api.TxPluginResourceLocator.RelativeResource">RelativeResource</h4>
+  <div class="markdown level1 summary"><p>The resource path as a locator.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TxPluginResourceLocator.RelativeLocator RelativeResource { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_ResourcePath.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.ResourcePath%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L94">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_ResourcePath_" data-uid="Texart.Api.TxPluginResourceLocator.ResourcePath*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_ResourcePath" data-uid="Texart.Api.TxPluginResourceLocator.ResourcePath">ResourcePath</h4>
+  <div class="markdown level1 summary"><p><a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourceSegments">ResourceSegments</a> as a URI path string. The format is &quot;path/to/resource&quot;.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ResourcePath { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_ResourceSegments.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.ResourceSegments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L86">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_ResourceSegments_" data-uid="Texart.Api.TxPluginResourceLocator.ResourceSegments*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_ResourceSegments" data-uid="Texart.Api.TxPluginResourceLocator.ResourceSegments">ResourceSegments</h4>
+  <div class="markdown level1 summary"><p>The segments in the URI path that locate specific resource inside a plugin.
+For example: as a path to <a class="xref" href="Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_LookupGenerator_Texart_Api_TxPluginResourceLocator_">LookupGenerator(TxPluginResourceLocator)</a> or <a class="xref" href="Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_LookupRenderer_Texart_Api_TxPluginResourceLocator_">LookupRenderer(TxPluginResourceLocator)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ImmutableArray&lt;string&gt; ResourceSegments { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ImmutableArray</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_Scheme.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.Scheme%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L67">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_Scheme_" data-uid="Texart.Api.TxPluginResourceLocator.Scheme*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_Scheme" data-uid="Texart.Api.TxPluginResourceLocator.Scheme">Scheme</h4>
+  <div class="markdown level1 summary"><p>The URI scheme.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TxReferenceScheme Scheme { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_WithoutRelativeResource.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.WithoutRelativeResource%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L105">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_WithoutRelativeResource_" data-uid="Texart.Api.TxPluginResourceLocator.WithoutRelativeResource*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_WithoutRelativeResource" data-uid="Texart.Api.TxPluginResourceLocator.WithoutRelativeResource">WithoutRelativeResource</h4>
+  <div class="markdown level1 summary"><p><code>this</code> without <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_RelativeResource">RelativeResource</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TxPluginResourceLocator WithoutRelativeResource { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L658">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_Equals_" data-uid="Texart.Api.TxPluginResourceLocator.Equals*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_Equals_System_Object_" data-uid="Texart.Api.TxPluginResourceLocator.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">obj</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_Equals_Texart_Api_TxPluginResourceLocator_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.Equals(Texart.Api.TxPluginResourceLocator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L645">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_Equals_" data-uid="Texart.Api.TxPluginResourceLocator.Equals*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_Equals_Texart_Api_TxPluginResourceLocator_" data-uid="Texart.Api.TxPluginResourceLocator.Equals(Texart.Api.TxPluginResourceLocator)">Equals(TxPluginResourceLocator)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(TxPluginResourceLocator other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_GetHashCode.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L662">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_GetHashCode_" data-uid="Texart.Api.TxPluginResourceLocator.GetHashCode*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_GetHashCode" data-uid="Texart.Api.TxPluginResourceLocator.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_IsWellFormedRelativeResourceString_System_String_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.IsWellFormedRelativeResourceString(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L176">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_IsWellFormedRelativeResourceString_" data-uid="Texart.Api.TxPluginResourceLocator.IsWellFormedRelativeResourceString*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_IsWellFormedRelativeResourceString_System_String_" data-uid="Texart.Api.TxPluginResourceLocator.IsWellFormedRelativeResourceString(System.String)">IsWellFormedRelativeResourceString(String)</h4>
+  <div class="markdown level1 summary"><p>Determines if the given resource path is valid for <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsWellFormedRelativeResourceString(string relativeResource)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">relativeResource</span></td>
+        <td><p>The relative URI path to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if valid for <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a>,
+<code>false</code> otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_IsWellFormedResourceLocatorUri_Uri_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L144">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_IsWellFormedResourceLocatorUri_" data-uid="Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_IsWellFormedResourceLocatorUri_Uri_" data-uid="Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri(Uri)">IsWellFormedResourceLocatorUri(Uri)</h4>
+  <div class="markdown level1 summary"><p>Determines if the provided URI is within the subset of allowed URIs.
+Not all URIs are valid <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a>s.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsWellFormedResourceLocatorUri(Uri uri)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Uri</span></td>
+        <td><span class="parametername">uri</span></td>
+        <td><p>The URI to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if valid <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> URI,
+<code>false</code> otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_Of_System_String_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.Of(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L133">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_Of_" data-uid="Texart.Api.TxPluginResourceLocator.Of*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_Of_System_String_" data-uid="Texart.Api.TxPluginResourceLocator.Of(System.String)">Of(String)</h4>
+  <div class="markdown level1 summary"><p>Constructs a <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> from an absolute URI. The escaping semantics
+are defined by the <see cref="!:Uri"></see> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TxPluginResourceLocator Of(string uri)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">uri</span></td>
+        <td><p>The URI to build from.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.FormatException.html">TxPluginResourceLocator.FormatException</a></td>
+        <td><p>If the URI is not valid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Texart_Api_TxPluginResourceLocator_Of_System_String__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Of_Uri_">Of(Uri)</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_Of_Uri_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.Of(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L122">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_Of_" data-uid="Texart.Api.TxPluginResourceLocator.Of*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_Of_Uri_" data-uid="Texart.Api.TxPluginResourceLocator.Of(Uri)">Of(Uri)</h4>
+  <div class="markdown level1 summary"><p>Constructs a <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> from an absolute URI.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TxPluginResourceLocator Of(Uri uri)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Uri</span></td>
+        <td><span class="parametername">uri</span></td>
+        <td><p>The URI to build from.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.FormatException.html">TxPluginResourceLocator.FormatException</a></td>
+        <td><p>If the URI is not valid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_OfRelativeResource_System_String_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.OfRelativeResource(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L158">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_OfRelativeResource_" data-uid="Texart.Api.TxPluginResourceLocator.OfRelativeResource*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_OfRelativeResource_System_String_" data-uid="Texart.Api.TxPluginResourceLocator.OfRelativeResource(System.String)">OfRelativeResource(String)</h4>
+  <div class="markdown level1 summary"><p>Constructs a <a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a> from the provided relative URI path. <code data-dev-comment-type="paramref" class="paramref">relativeResource</code>
+cannot contain <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyResourceSeparator">AssemblyResourceSeparator</a>. The escaping semantics are defined by the <see cref="!:Uri"></see> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TxPluginResourceLocator.RelativeLocator OfRelativeResource(string relativeResource)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">relativeResource</span></td>
+        <td><p>The relative resource path. See <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a></td>
+        <td><p>A <a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a> from parsing <code data-dev-comment-type="paramref" class="paramref">relativeResource</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.FormatException.html">TxPluginResourceLocator.FormatException</a></td>
+        <td><p>If the relative resource path is not valid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_ToString.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L641">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_ToString_" data-uid="Texart.Api.TxPluginResourceLocator.ToString*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_ToString" data-uid="Texart.Api.TxPluginResourceLocator.ToString">ToString()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_WithAssemblyPath_System_String_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.WithAssemblyPath(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L237">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_WithAssemblyPath_" data-uid="Texart.Api.TxPluginResourceLocator.WithAssemblyPath*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_WithAssemblyPath_System_String_" data-uid="Texart.Api.TxPluginResourceLocator.WithAssemblyPath(System.String)">WithAssemblyPath(String)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> with <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyPath">AssemblyPath</a> replaced with
+<code data-dev-comment-type="paramref" class="paramref">assemblyPath</code>. The escaping semantics are defined by the <see cref="!:Uri"></see> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TxPluginResourceLocator WithAssemblyPath(string assemblyPath)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">assemblyPath</span></td>
+        <td><p>The new <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyPath">AssemblyPath</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td><p>A new <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> with <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyPath">AssemblyPath</a> replaced with
+<code data-dev-comment-type="paramref" class="paramref">assemblyPath</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.FormatException.html">TxPluginResourceLocator.FormatException</a></td>
+        <td><p>If the assembly path is not valid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_WithRelativeResource_System_String_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.WithRelativeResource(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L260">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_WithRelativeResource_" data-uid="Texart.Api.TxPluginResourceLocator.WithRelativeResource*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_WithRelativeResource_System_String_" data-uid="Texart.Api.TxPluginResourceLocator.WithRelativeResource(System.String)">WithRelativeResource(String)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> with <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_RelativeResource">RelativeResource</a> replaced with
+<code data-dev-comment-type="paramref" class="paramref">relativeResourceLocator</code>. The escaping semantics are defined by the <see cref="!:Uri"></see> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TxPluginResourceLocator WithRelativeResource(string relativeResourceLocator)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">relativeResourceLocator</span></td>
+        <td><p>The new <a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td><p>A new <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> with <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a> replaced with
+<code data-dev-comment-type="paramref" class="paramref">relativeResourceLocator</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.FormatException.html">TxPluginResourceLocator.FormatException</a></td>
+        <td><p>If the resource path is not valid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_WithRelativeResource_Texart_Api_TxPluginResourceLocator_RelativeLocator_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.WithRelativeResource(Texart.Api.TxPluginResourceLocator.RelativeLocator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L273">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_WithRelativeResource_" data-uid="Texart.Api.TxPluginResourceLocator.WithRelativeResource*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_WithRelativeResource_Texart_Api_TxPluginResourceLocator_RelativeLocator_" data-uid="Texart.Api.TxPluginResourceLocator.WithRelativeResource(Texart.Api.TxPluginResourceLocator.RelativeLocator)">WithRelativeResource(TxPluginResourceLocator.RelativeLocator)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> with <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_RelativeResource">RelativeResource</a> replaced with
+<code data-dev-comment-type="paramref" class="paramref">relativeLocator</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TxPluginResourceLocator WithRelativeResource(TxPluginResourceLocator.RelativeLocator relativeLocator)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a></td>
+        <td><span class="parametername">relativeLocator</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td><p>A new <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> with <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a> replaced with
+<code data-dev-comment-type="paramref" class="paramref">relativeLocator</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_WithScheme_System_String_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.WithScheme(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L193">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_WithScheme_" data-uid="Texart.Api.TxPluginResourceLocator.WithScheme*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_WithScheme_System_String_" data-uid="Texart.Api.TxPluginResourceLocator.WithScheme(System.String)">WithScheme(String)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> with <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Scheme">Scheme</a> replaced with
+<code data-dev-comment-type="paramref" class="paramref">scheme</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TxPluginResourceLocator WithScheme(string scheme)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">scheme</span></td>
+        <td><p>The new <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td><p>A new <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> with <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Scheme">Scheme</a> replaced with
+<code data-dev-comment-type="paramref" class="paramref">scheme</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.FormatException.html">TxPluginResourceLocator.FormatException</a></td>
+        <td><p>If the scheme is not valid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_WithScheme_Texart_Api_TxReferenceScheme_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.WithScheme(Texart.Api.TxReferenceScheme)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L215">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_WithScheme_" data-uid="Texart.Api.TxPluginResourceLocator.WithScheme*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_WithScheme_Texart_Api_TxReferenceScheme_" data-uid="Texart.Api.TxPluginResourceLocator.WithScheme(Texart.Api.TxReferenceScheme)">WithScheme(TxReferenceScheme)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> with <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Scheme">Scheme</a> replaced with
+<code data-dev-comment-type="paramref" class="paramref">scheme</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TxPluginResourceLocator WithScheme(TxReferenceScheme scheme)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></td>
+        <td><span class="parametername">scheme</span></td>
+        <td><p>The new <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td><p>A new <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> with <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Scheme">Scheme</a> replaced with
+<code data-dev-comment-type="paramref" class="paramref">scheme</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_op_Equality_Texart_Api_TxPluginResourceLocator_Texart_Api_TxPluginResourceLocator_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.op_Equality(Texart.Api.TxPluginResourceLocator%2CTexart.Api.TxPluginResourceLocator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L683">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_op_Equality_" data-uid="Texart.Api.TxPluginResourceLocator.op_Equality*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_op_Equality_Texart_Api_TxPluginResourceLocator_Texart_Api_TxPluginResourceLocator_" data-uid="Texart.Api.TxPluginResourceLocator.op_Equality(Texart.Api.TxPluginResourceLocator,Texart.Api.TxPluginResourceLocator)">Equality(TxPluginResourceLocator, TxPluginResourceLocator)</h4>
+  <div class="markdown level1 summary"><p>Compares two <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> for equality.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(TxPluginResourceLocator lhs, TxPluginResourceLocator rhs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td><span class="parametername">lhs</span></td>
+        <td><p>The left hand side of the equality.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td><span class="parametername">rhs</span></td>
+        <td><p>The right hand side of the equality.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>Whether the two instances refer to the same URIs or not.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator_op_Inequality_Texart_Api_TxPluginResourceLocator_Texart_Api_TxPluginResourceLocator_.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator.op_Inequality(Texart.Api.TxPluginResourceLocator%2CTexart.Api.TxPluginResourceLocator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L691">View Source</a>
+  </span>
+  <a id="Texart_Api_TxPluginResourceLocator_op_Inequality_" data-uid="Texart.Api.TxPluginResourceLocator.op_Inequality*"></a>
+  <h4 id="Texart_Api_TxPluginResourceLocator_op_Inequality_Texart_Api_TxPluginResourceLocator_Texart_Api_TxPluginResourceLocator_" data-uid="Texart.Api.TxPluginResourceLocator.op_Inequality(Texart.Api.TxPluginResourceLocator,Texart.Api.TxPluginResourceLocator)">Inequality(TxPluginResourceLocator, TxPluginResourceLocator)</h4>
+  <div class="markdown level1 summary"><p>Compares two <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> for inequality.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(TxPluginResourceLocator lhs, TxPluginResourceLocator rhs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td><span class="parametername">lhs</span></td>
+        <td><p>The left hand side of the inequality.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td><span class="parametername">rhs</span></td>
+        <td><p>The right hand side of the inequality.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>Whether the two instances refer to different URIs or not.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a></div>
+      <div><a class="xref" href="Texart.Api.TxPluginResource-1.html">TxPluginResource</a>&lt;T&gt;</div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxPluginResourceLocator.md&amp;value=---%0Auid%3A%20Texart.Api.TxPluginResourceLocator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxPluginResourceLocator.cs/#L61" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

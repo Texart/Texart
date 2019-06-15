@@ -1,0 +1,893 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class TxReferenceScheme
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class TxReferenceScheme
+   ">
+    <meta name="generator" content="docfx 2.43.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Texart.Api.TxReferenceScheme">
+  
+  
+  <h1 id="Texart_Api_TxReferenceScheme" data-uid="Texart.Api.TxReferenceScheme" class="text-break">Class TxReferenceScheme
+  </h1>
+  <div class="markdown level0 summary"><p>A <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a> is akin to URI schemes (such as <code>file:</code> and <code>https:</code>).
+As such, it is also case-insensitive.</p>
+<p>Note that not every valid URI scheme is a valid <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a>. Specifically, the characters,
+<code>+</code>, and <code>.</code>, are not allowed. However, <code>-</code> is allowed. This may relaxed
+in the future.</p>
+<p>Refer to <a href="https://tools.ietf.org/html/rfc3986#section-3.1">https://tools.ietf.org/html/rfc3986#section-3.1</a> for information on URI schemes
+(which are valid <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a>s, except for the restrictions listed above).</p>
+<pre><code>//    scheme      = ALPHA *( ALPHA / DIGIT / &quot;+&quot; / &quot;-&quot; / &quot;.&quot; )</code></pre>
+<p>Use cases:</p>
+<ul>
+<li>As a way to allow custom resolution strategies for <code>#load</code> and <code>#r</code> directives.</li>
+<li>As part of identify (or locating) objects in a plugin assembly. See <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a>.</li>
+</ul>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">TxReferenceScheme</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">IEquatable</span>&lt;<a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a>&gt;</div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Texart.Api.html">Texart.Api</a></h6>
+  <h6><strong>Assembly</strong>: Texart.Api.dll</h6>
+  <h5 id="Texart_Api_TxReferenceScheme_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class TxReferenceScheme : IComparable&lt;TxReferenceScheme&gt;, IEquatable&lt;TxReferenceScheme&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme__ctor_System_String_.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.%23ctor(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L79">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme__ctor_" data-uid="Texart.Api.TxReferenceScheme.#ctor*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme__ctor_System_String_" data-uid="Texart.Api.TxReferenceScheme.#ctor(System.String)">TxReferenceScheme(String)</h4>
+  <div class="markdown level1 summary"><p>Constructs a scheme from the given string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TxReferenceScheme(string scheme)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">scheme</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_File.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.File%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L31">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_File_" data-uid="Texart.Api.TxReferenceScheme.File*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_File" data-uid="Texart.Api.TxReferenceScheme.File">File</h4>
+  <div class="markdown level1 summary"><p>Scheme for <code>file</code> protocol.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TxReferenceScheme File { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_Http.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.Http%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L35">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_Http_" data-uid="Texart.Api.TxReferenceScheme.Http*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_Http" data-uid="Texart.Api.TxReferenceScheme.Http">Http</h4>
+  <div class="markdown level1 summary"><p>Scheme for <code>http</code> protocol.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TxReferenceScheme Http { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_Https.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.Https%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L39">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_Https_" data-uid="Texart.Api.TxReferenceScheme.Https*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_Https" data-uid="Texart.Api.TxReferenceScheme.Https">Https</h4>
+  <div class="markdown level1 summary"><p>Scheme for <code>https</code> protocol.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TxReferenceScheme Https { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_Scheme.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.Scheme%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L56">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_Scheme_" data-uid="Texart.Api.TxReferenceScheme.Scheme*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_Scheme" data-uid="Texart.Api.TxReferenceScheme.Scheme">Scheme</h4>
+  <div class="markdown level1 summary"><p>The underlying scheme string. This will always be lower-cased.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Scheme { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_SchemePrefix.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.SchemePrefix%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L61">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_SchemePrefix_" data-uid="Texart.Api.TxReferenceScheme.SchemePrefix*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_SchemePrefix" data-uid="Texart.Api.TxReferenceScheme.SchemePrefix">SchemePrefix</h4>
+  <div class="markdown level1 summary"><p>The actual prefix of a path that represents this scheme.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string SchemePrefix { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_Tx.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.Tx%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L43">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_Tx_" data-uid="Texart.Api.TxReferenceScheme.Tx*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_Tx" data-uid="Texart.Api.TxReferenceScheme.Tx">Tx</h4>
+  <div class="markdown level1 summary"><p>Scheme for <code>tx</code> protocol.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static TxReferenceScheme Tx { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_CompareTo_Texart_Api_TxReferenceScheme_.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.CompareTo(Texart.Api.TxReferenceScheme)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L118">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_CompareTo_" data-uid="Texart.Api.TxReferenceScheme.CompareTo*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_CompareTo_Texart_Api_TxReferenceScheme_" data-uid="Texart.Api.TxReferenceScheme.CompareTo(Texart.Api.TxReferenceScheme)">CompareTo(TxReferenceScheme)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(TxReferenceScheme other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L129">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_Equals_" data-uid="Texart.Api.TxReferenceScheme.Equals*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_Equals_System_Object_" data-uid="Texart.Api.TxReferenceScheme.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">obj</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_Equals_Texart_Api_TxReferenceScheme_.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.Equals(Texart.Api.TxReferenceScheme)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L122">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_Equals_" data-uid="Texart.Api.TxReferenceScheme.Equals*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_Equals_Texart_Api_TxReferenceScheme_" data-uid="Texart.Api.TxReferenceScheme.Equals(Texart.Api.TxReferenceScheme)">Equals(TxReferenceScheme)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(TxReferenceScheme other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_GetHashCode.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L133">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_GetHashCode_" data-uid="Texart.Api.TxReferenceScheme.GetHashCode*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_GetHashCode" data-uid="Texart.Api.TxReferenceScheme.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_IsValidScheme_System_String_.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.IsValidScheme(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L69">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_IsValidScheme_" data-uid="Texart.Api.TxReferenceScheme.IsValidScheme*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_IsValidScheme_System_String_" data-uid="Texart.Api.TxReferenceScheme.IsValidScheme(System.String)">IsValidScheme(String)</h4>
+  <div class="markdown level1 summary"><p>Checks if the provided string can be a valid scheme. If this returns <code>false</code>,
+then trying to construct with this string will throw an exception.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsValidScheme(string scheme)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">scheme</span></td>
+        <td><p>The scheme to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>If this scheme is valid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_Matches_System_String_.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.Matches(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L94">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_Matches_" data-uid="Texart.Api.TxReferenceScheme.Matches*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_Matches_System_String_" data-uid="Texart.Api.TxReferenceScheme.Matches(System.String)">Matches(String)</h4>
+  <div class="markdown level1 summary"><p>Determines whether or not the provided path matches this scheme.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Matches(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the path to check against</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>true if match, false otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_NormalizePath_System_String_.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.NormalizePath(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L102">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_NormalizePath_" data-uid="Texart.Api.TxReferenceScheme.NormalizePath*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_NormalizePath_System_String_" data-uid="Texart.Api.TxReferenceScheme.NormalizePath(System.String)">NormalizePath(String)</h4>
+  <div class="markdown level1 summary"><p>Returns the provided path with this scheme removed.
+<a class="xref" href="Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Matches_System_String_">Matches(String)</a> must return <code>true</code> with the provided path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string NormalizePath(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the path to remove scheme from</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><p>the path without this scheme</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_Prefix_System_String_.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.Prefix(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L112">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_Prefix_" data-uid="Texart.Api.TxReferenceScheme.Prefix*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_Prefix_System_String_" data-uid="Texart.Api.TxReferenceScheme.Prefix(System.String)">Prefix(String)</h4>
+  <div class="markdown level1 summary"><p>Returns the provided path with this scheme applied.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Prefix(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>the path to add scheme to</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><p>the path with this scheme</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_ToString.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L115">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_ToString_" data-uid="Texart.Api.TxReferenceScheme.ToString*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_ToString" data-uid="Texart.Api.TxReferenceScheme.ToString">ToString()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_op_Equality_Texart_Api_TxReferenceScheme_Texart_Api_TxReferenceScheme_.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.op_Equality(Texart.Api.TxReferenceScheme%2CTexart.Api.TxReferenceScheme)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L141">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_op_Equality_" data-uid="Texart.Api.TxReferenceScheme.op_Equality*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_op_Equality_Texart_Api_TxReferenceScheme_Texart_Api_TxReferenceScheme_" data-uid="Texart.Api.TxReferenceScheme.op_Equality(Texart.Api.TxReferenceScheme,Texart.Api.TxReferenceScheme)">Equality(TxReferenceScheme, TxReferenceScheme)</h4>
+  <div class="markdown level1 summary"><p>Compares two <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a> for equality.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(TxReferenceScheme lhs, TxReferenceScheme rhs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></td>
+        <td><span class="parametername">lhs</span></td>
+        <td><p>The left hand side of the equality.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></td>
+        <td><span class="parametername">rhs</span></td>
+        <td><p>The right hand side of the equality.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>Whether the two instances refer to the same scheme or not.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme_op_Inequality_Texart_Api_TxReferenceScheme_Texart_Api_TxReferenceScheme_.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme.op_Inequality(Texart.Api.TxReferenceScheme%2CTexart.Api.TxReferenceScheme)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L149">View Source</a>
+  </span>
+  <a id="Texart_Api_TxReferenceScheme_op_Inequality_" data-uid="Texart.Api.TxReferenceScheme.op_Inequality*"></a>
+  <h4 id="Texart_Api_TxReferenceScheme_op_Inequality_Texart_Api_TxReferenceScheme_Texart_Api_TxReferenceScheme_" data-uid="Texart.Api.TxReferenceScheme.op_Inequality(Texart.Api.TxReferenceScheme,Texart.Api.TxReferenceScheme)">Inequality(TxReferenceScheme, TxReferenceScheme)</h4>
+  <div class="markdown level1 summary"><p>Compares two <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a> for inequality.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(TxReferenceScheme lhs, TxReferenceScheme rhs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></td>
+        <td><span class="parametername">lhs</span></td>
+        <td><p>The left hand side of the inequality.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></td>
+        <td><span class="parametername">rhs</span></td>
+        <td><p>The right hand side of the inequality.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>Whether the two instances refer to different schemes or not.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">IEquatable&lt;&gt;</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_TxReferenceScheme.md&amp;value=---%0Auid%3A%20Texart.Api.TxReferenceScheme%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/TxReferenceScheme.cs/#L26" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

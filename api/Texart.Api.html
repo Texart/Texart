@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Namespace Texart.Api
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Namespace Texart.Api
+   ">
+    <meta name="generator" content="docfx 2.43.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Texart.Api">
+  
+  <h1 id="Texart_Api" data-uid="Texart.Api" class="text-break">Namespace Texart.Api
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="Texart.Api.TxArguments.html">TxArguments</a></h4>
+      <section><p>A <a class="xref" href="Texart.Api.TxArguments.html">TxArguments</a> is used to pass arguments to <a class="xref" href="Texart.Api.ITxPlugin.html">ITxPlugin</a>. The keys and values are
+both stored as <see cref="!:System.String"></see>.
+Accessor methods, such as <a class="xref" href="Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetValue__1_System_String_Texart_Api_TxArguments_TryParseFunc___0____0_">GetValue&lt;T&gt;(String, TxArguments.TryParseFunc&lt;T&gt;, T)</a> and
+<a class="xref" href="Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue__1_System_String___0__Texart_Api_TxArguments_TryParseFunc___0__">TryGetValue&lt;T&gt;(String, out T, TxArguments.TryParseFunc&lt;T&gt;)</a> are provided to extract and parse values to any type.
+Helper methods are provided for accessing primitive types (<see cref="!:Type.IsPrimitive"></see>) and
+<see cref="!:System.String"></see>.
+A <a class="xref" href="Texart.Api.TxArguments.html">TxArguments</a> is immutable.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxArguments.BadLookupException.html">TxArguments.BadLookupException</a></h4>
+      <section><p>An exception that is thrown when a lookup within <a class="xref" href="Texart.Api.TxArguments.html">TxArguments</a> fails. For example,
+when <a class="xref" href="Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetValue__1_System_String_Texart_Api_TxArguments_TryParseFunc___0__">GetValue&lt;T&gt;(String, TxArguments.TryParseFunc&lt;T&gt;)</a> is called with a non-existent
+key, or parsing the associated value fails.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxArrayTextBitmap.html">TxArrayTextBitmap</a></h4>
+      <section><p>An implementation of <a class="xref" href="Texart.Api.ITxTextBitmap.html">ITxTextBitmap</a> based on an underlying
+one dimensional array.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxBitmap.html">TxBitmap</a></h4>
+      <section><p>Helpers for image bitmaps.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxContract.html">TxContract</a></h4>
+      <section><p>Helpers methods around code validation.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxPluginResource.html">TxPluginResource</a></h4>
+      <section><p>Factory functions for creating <a class="xref" href="Texart.Api.TxPluginResource-1.html">TxPluginResource&lt;T&gt;</a> instances.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxPluginResource.InactiveUnionMemberAccessException.html">TxPluginResource.InactiveUnionMemberAccessException</a></h4>
+      <section><p>An exception that is thrown if an attempt is made to access an inactive member of the union.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxPluginResource.ResourceRedirect.html">TxPluginResource.ResourceRedirect</a></h4>
+      <section><p>A value that represents a plugin resource redirection and transformation that modifies the incoming
+<a class="xref" href="Texart.Api.TxArguments.html">TxArguments</a> that the redirect destination will receive.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxPluginResource-1.html">TxPluginResource&lt;T&gt;</a></h4>
+      <section><p>A union type which is used as the return type of <a class="xref" href="Texart.Api.ITxPlugin.html">ITxPlugin</a> lookup methods. This is required
+because C# (as of 8.0) does not support union types. This type allows the return value to be flexible. See
+<a class="xref" href="Texart.Api.TxPluginResource.html">TxPluginResource</a> members for more details on the semantics of each kind of member.
+<a class="xref" href="Texart.Api.TxPluginResource-1.html">TxPluginResource&lt;T&gt;</a> is immutable.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></h4>
+      <section><p>A domain-specific URI-like string that is used to identity a plugin assembly and objects inside it.
+The properties and formatting is a strict subset of a URI and thus all <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a>s
+are valid (absolute) URIs. Relative resource URIs can be represented by <a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a>
+instead.</p>
+<p><a href="https://tools.ietf.org/html/rfc3986#section-3">https://tools.ietf.org/html/rfc3986#section-3</a> defines the syntax of URIs:</p>
+<pre><code>//    foo://example.com:8042/over/there?name=ferret#nose
+//    \_/   \______________/\_________/ \_________/ \__/
+//     |           |            |            |        |
+//  scheme     authority       path        query   fragment
+//     |   _____________________|__
+//    / \ /                        \
+//    urn:example:animal:ferret:nose</code></pre>
+<p>See <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#/media/File:URI_syntax_diagram.png">https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#/media/File:URI_syntax_diagram.png</a> for
+a simple diagram.</p>
+<p>The anatomy of a <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> looks like:</p>
+<pre><code>//  Scheme        AssemblyPath      ResourcePath
+//    |        ________|_______   _______|_____
+//   / \      /                \ /             \
+//   foo:///path/to/assembly.dll:path/to/resource
+//       \_/                    |
+//        |                     |
+// (empty Authority)  AssemblyResourceSeparator (:)</code></pre>
+<p>From the above, only the following properties are allowed:</p>
+<ul>
+<li>scheme: <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Scheme">Scheme</a>.</li>
+<li>authority: This is required for a URI but in our case, this <strong>MUST</strong> be empty.</li>
+<li>path: The path <strong>MUST</strong> contain at least one segment containing <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyResourceSeparator">AssemblyResourceSeparator</a>,
+the <em>last</em> of which is used to partition the path into <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyPath">AssemblyPath</a>
+and <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a>.
+<a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a> is allowed to be empty.
+These restrictions may be relaxed in the future, but will always be compliant with the latest URI RFC.
+Note that the current restrictions imply that http or https schemes cannot be used, since they require a hostname.</li>
+</ul>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxPluginResourceLocator.FormatException.html">TxPluginResourceLocator.FormatException</a></h4>
+      <section><p>A <a class="xref" href="Texart.Api.TxPluginResourceLocator.FormatException.html">TxPluginResourceLocator.FormatException</a> is thrown when an attempt is made to create <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a>
+or <a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a> with an invalid string.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a></h4>
+      <section><p>A <a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a> represents the <a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_ResourcePath">ResourcePath</a> part of <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a>.
+It represents a resource relative to <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyPath">AssemblyPath</a>.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></h4>
+      <section><p>A <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a> is akin to URI schemes (such as <code>file:</code> and <code>https:</code>).
+As such, it is also case-insensitive.</p>
+<p>Note that not every valid URI scheme is a valid <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a>. Specifically, the characters,
+<code>+</code>, and <code>.</code>, are not allowed. However, <code>-</code> is allowed. This may relaxed
+in the future.</p>
+<p>Refer to <a href="https://tools.ietf.org/html/rfc3986#section-3.1">https://tools.ietf.org/html/rfc3986#section-3.1</a> for information on URI schemes
+(which are valid <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a>s, except for the restrictions listed above).</p>
+<pre><code>//    scheme      = ALPHA *( ALPHA / DIGIT / &quot;+&quot; / &quot;-&quot; / &quot;.&quot; )</code></pre>
+<p>Use cases:</p>
+<ul>
+<li>As a way to allow custom resolution strategies for <code>#load</code> and <code>#r</code> directives.</li>
+<li>As part of identify (or locating) objects in a plugin assembly. See <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a>.</li>
+</ul>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxReferenceScheme.FormatException.html">TxReferenceScheme.FormatException</a></h4>
+      <section><p>A <a class="xref" href="Texart.Api.TxReferenceScheme.FormatException.html">TxReferenceScheme.FormatException</a> is thrown when an attempt is made to create <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a>
+with an invalid string.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxSize.html">TxSize</a></h4>
+      <section><p>Helpers for size representation.</p>
+</section>
+    <h3 id="structs">Structs
+  </h3>
+      <h4><a class="xref" href="Texart.Api.TxArguments.LookupResult.html">TxArguments.LookupResult</a></h4>
+      <section><p>The result of a lookup operation on <a class="xref" href="Texart.Api.TxArguments.html">TxArguments</a>. This type is implicitly convertible
+to <code>bool</code>.</p>
+</section>
+    <h3 id="interfaces">Interfaces
+  </h3>
+      <h4><a class="xref" href="Texart.Api.ITxPlugin.html">ITxPlugin</a></h4>
+      <section><p>A plugin represents a collection of named <a class="xref" href="Texart.Api.ITxTextBitmapGenerator.html">ITxTextBitmapGenerator</a> and <a class="xref" href="Texart.Api.ITxTextBitmapRenderer.html">ITxTextBitmapRenderer</a>.
+The plugin abstraction allows sharing these types across assembly boundaries.</p>
+<p>Using types defined in the following contexts are unified by this interface:</p>
+<ul>
+<li>Within Texart code</li>
+<li>Within a separately compiled assembly</li>
+<li>Within a .tx.csx file that will be interpreted at runtime</li>
+</ul>
+</section>
+      <h4><a class="xref" href="Texart.Api.ITxTextBitmap.html">ITxTextBitmap</a></h4>
+      <section><p>An <a class="xref" href="Texart.Api.ITxTextBitmap.html">ITxTextBitmap</a> is a bitmap of character data – like <code>char[,]</code>.</p>
+<p>The API exposes an indexer-like method, <code>char ChatAt(int x, int y)</code> for 2D-array-like access.
+The internal representation is implementation-defined. The underlying computation can be performed
+on the fly, or wrap around a pre-populated <code>char[,]</code>. etc.</p>
+<p>Implementations are strongly encouraged to be immutable.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.ITxTextBitmapGenerator.html">ITxTextBitmapGenerator</a></h4>
+      <section><p>An <a class="xref" href="Texart.Api.ITxTextBitmapGenerator.html">ITxTextBitmapGenerator</a> is used to generate <a class="xref" href="Texart.Api.ITxTextBitmap.html">ITxTextBitmap</a>s given
+some configuration options.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.ITxTextBitmapRenderer.html">ITxTextBitmapRenderer</a></h4>
+      <section><p>An <a class="xref" href="Texart.Api.ITxTextBitmapRenderer.html">ITxTextBitmapRenderer</a> writes some text data into an output stream
+in an implementation-defined format.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxArguments.IExtractable.html">TxArguments.IExtractable</a></h4>
+      <section><p>An <a class="xref" href="Texart.Api.TxArguments.IExtractable.html">TxArguments.IExtractable</a> is an object that is able to extract values out of a <a class="xref" href="Texart.Api.TxArguments.html">TxArguments</a>
+instance.</p>
+<p>This API requires the implementing class to be mutable in order to (meaningfully) extract values from
+arguments. Caution should be exercised if the extracted object needs to be stored beyond the scope of its declaration.
+If the extracted values need to be persisted, it is recommended to place them into a different (but very similar) type
+to <code>this</code> which IS immutable.</p>
+</section>
+    <h3 id="enums">Enums
+  </h3>
+      <h4><a class="xref" href="Texart.Api.TxArguments.LookupResultType.html">TxArguments.LookupResultType</a></h4>
+      <section><p>The result type of a lookup operation on <a class="xref" href="Texart.Api.TxArguments.html">TxArguments</a>.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxPluginResource.MemberKind.html">TxPluginResource.MemberKind</a></h4>
+      <section><p>A tag used to determine the active member of the union.</p>
+</section>
+    <h3 id="delegates">Delegates
+  </h3>
+      <h4><a class="xref" href="Texart.Api.TxArguments.TryParseFunc-1.html">TxArguments.TryParseFunc&lt;T&gt;</a></h4>
+      <section><p>A function that models parsers like <see cref="!:int.TryParse(ReadOnlySpan&lt;char>,out int)"></see> for any
+<code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxFactory-2.html">TxFactory&lt;TResult, TInput&gt;</a></h4>
+      <section><p>A factory function taking exactly one input argument.</p>
+</section>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

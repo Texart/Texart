@@ -1,0 +1,2184 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: Texart.Api
+  name: Texart.Api
+  href: api/Texart.Api.html
+  commentId: N:Texart.Api
+  fullName: Texart.Api
+  nameWithType: Texart.Api
+- uid: Texart.Api.ITxPlugin
+  name: ITxPlugin
+  href: api/Texart.Api.ITxPlugin.html
+  commentId: T:Texart.Api.ITxPlugin
+  fullName: Texart.Api.ITxPlugin
+  nameWithType: ITxPlugin
+- uid: Texart.Api.ITxPlugin.AvailableGenerators
+  name: AvailableGenerators
+  href: api/Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_AvailableGenerators
+  commentId: P:Texart.Api.ITxPlugin.AvailableGenerators
+  fullName: Texart.Api.ITxPlugin.AvailableGenerators
+  nameWithType: ITxPlugin.AvailableGenerators
+- uid: Texart.Api.ITxPlugin.AvailableGenerators*
+  name: AvailableGenerators
+  href: api/Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_AvailableGenerators_
+  commentId: Overload:Texart.Api.ITxPlugin.AvailableGenerators
+  isSpec: "True"
+  fullName: Texart.Api.ITxPlugin.AvailableGenerators
+  nameWithType: ITxPlugin.AvailableGenerators
+- uid: Texart.Api.ITxPlugin.AvailableRenderers
+  name: AvailableRenderers
+  href: api/Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_AvailableRenderers
+  commentId: P:Texart.Api.ITxPlugin.AvailableRenderers
+  fullName: Texart.Api.ITxPlugin.AvailableRenderers
+  nameWithType: ITxPlugin.AvailableRenderers
+- uid: Texart.Api.ITxPlugin.AvailableRenderers*
+  name: AvailableRenderers
+  href: api/Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_AvailableRenderers_
+  commentId: Overload:Texart.Api.ITxPlugin.AvailableRenderers
+  isSpec: "True"
+  fullName: Texart.Api.ITxPlugin.AvailableRenderers
+  nameWithType: ITxPlugin.AvailableRenderers
+- uid: Texart.Api.ITxPlugin.LookupGenerator(Texart.Api.TxPluginResourceLocator)
+  name: LookupGenerator(TxPluginResourceLocator)
+  href: api/Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_LookupGenerator_Texart_Api_TxPluginResourceLocator_
+  commentId: M:Texart.Api.ITxPlugin.LookupGenerator(Texart.Api.TxPluginResourceLocator)
+  fullName: Texart.Api.ITxPlugin.LookupGenerator(Texart.Api.TxPluginResourceLocator)
+  nameWithType: ITxPlugin.LookupGenerator(TxPluginResourceLocator)
+- uid: Texart.Api.ITxPlugin.LookupGenerator*
+  name: LookupGenerator
+  href: api/Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_LookupGenerator_
+  commentId: Overload:Texart.Api.ITxPlugin.LookupGenerator
+  isSpec: "True"
+  fullName: Texart.Api.ITxPlugin.LookupGenerator
+  nameWithType: ITxPlugin.LookupGenerator
+- uid: Texart.Api.ITxPlugin.LookupRenderer(Texart.Api.TxPluginResourceLocator)
+  name: LookupRenderer(TxPluginResourceLocator)
+  href: api/Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_LookupRenderer_Texart_Api_TxPluginResourceLocator_
+  commentId: M:Texart.Api.ITxPlugin.LookupRenderer(Texart.Api.TxPluginResourceLocator)
+  fullName: Texart.Api.ITxPlugin.LookupRenderer(Texart.Api.TxPluginResourceLocator)
+  nameWithType: ITxPlugin.LookupRenderer(TxPluginResourceLocator)
+- uid: Texart.Api.ITxPlugin.LookupRenderer*
+  name: LookupRenderer
+  href: api/Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_LookupRenderer_
+  commentId: Overload:Texart.Api.ITxPlugin.LookupRenderer
+  isSpec: "True"
+  fullName: Texart.Api.ITxPlugin.LookupRenderer
+  nameWithType: ITxPlugin.LookupRenderer
+- uid: Texart.Api.ITxTextBitmap
+  name: ITxTextBitmap
+  href: api/Texart.Api.ITxTextBitmap.html
+  commentId: T:Texart.Api.ITxTextBitmap
+  fullName: Texart.Api.ITxTextBitmap
+  nameWithType: ITxTextBitmap
+- uid: Texart.Api.ITxTextBitmap.CharAt(System.Int32,System.Int32)
+  name: CharAt(Int32, Int32)
+  href: api/Texart.Api.ITxTextBitmap.html#Texart_Api_ITxTextBitmap_CharAt_System_Int32_System_Int32_
+  commentId: M:Texart.Api.ITxTextBitmap.CharAt(System.Int32,System.Int32)
+  fullName: Texart.Api.ITxTextBitmap.CharAt(System.Int32, System.Int32)
+  nameWithType: ITxTextBitmap.CharAt(Int32, Int32)
+- uid: Texart.Api.ITxTextBitmap.CharAt*
+  name: CharAt
+  href: api/Texart.Api.ITxTextBitmap.html#Texart_Api_ITxTextBitmap_CharAt_
+  commentId: Overload:Texart.Api.ITxTextBitmap.CharAt
+  isSpec: "True"
+  fullName: Texart.Api.ITxTextBitmap.CharAt
+  nameWithType: ITxTextBitmap.CharAt
+- uid: Texart.Api.ITxTextBitmap.Height
+  name: Height
+  href: api/Texart.Api.ITxTextBitmap.html#Texart_Api_ITxTextBitmap_Height
+  commentId: P:Texart.Api.ITxTextBitmap.Height
+  fullName: Texart.Api.ITxTextBitmap.Height
+  nameWithType: ITxTextBitmap.Height
+- uid: Texart.Api.ITxTextBitmap.Height*
+  name: Height
+  href: api/Texart.Api.ITxTextBitmap.html#Texart_Api_ITxTextBitmap_Height_
+  commentId: Overload:Texart.Api.ITxTextBitmap.Height
+  isSpec: "True"
+  fullName: Texart.Api.ITxTextBitmap.Height
+  nameWithType: ITxTextBitmap.Height
+- uid: Texart.Api.ITxTextBitmap.Width
+  name: Width
+  href: api/Texart.Api.ITxTextBitmap.html#Texart_Api_ITxTextBitmap_Width
+  commentId: P:Texart.Api.ITxTextBitmap.Width
+  fullName: Texart.Api.ITxTextBitmap.Width
+  nameWithType: ITxTextBitmap.Width
+- uid: Texart.Api.ITxTextBitmap.Width*
+  name: Width
+  href: api/Texart.Api.ITxTextBitmap.html#Texart_Api_ITxTextBitmap_Width_
+  commentId: Overload:Texart.Api.ITxTextBitmap.Width
+  isSpec: "True"
+  fullName: Texart.Api.ITxTextBitmap.Width
+  nameWithType: ITxTextBitmap.Width
+- uid: Texart.Api.ITxTextBitmapGenerator
+  name: ITxTextBitmapGenerator
+  href: api/Texart.Api.ITxTextBitmapGenerator.html
+  commentId: T:Texart.Api.ITxTextBitmapGenerator
+  fullName: Texart.Api.ITxTextBitmapGenerator
+  nameWithType: ITxTextBitmapGenerator
+- uid: Texart.Api.ITxTextBitmapGenerator.GenerateAsync(IAsyncEnumerable{SKBitmap})
+  name: GenerateAsync(IAsyncEnumerable<SKBitmap>)
+  href: api/Texart.Api.ITxTextBitmapGenerator.html#Texart_Api_ITxTextBitmapGenerator_GenerateAsync_IAsyncEnumerable_SKBitmap__
+  commentId: M:Texart.Api.ITxTextBitmapGenerator.GenerateAsync(IAsyncEnumerable{SKBitmap})
+  name.vb: GenerateAsync(IAsyncEnumerable(Of SKBitmap))
+  fullName: Texart.Api.ITxTextBitmapGenerator.GenerateAsync(IAsyncEnumerable<SKBitmap>)
+  fullName.vb: Texart.Api.ITxTextBitmapGenerator.GenerateAsync(IAsyncEnumerable(Of SKBitmap))
+  nameWithType: ITxTextBitmapGenerator.GenerateAsync(IAsyncEnumerable<SKBitmap>)
+  nameWithType.vb: ITxTextBitmapGenerator.GenerateAsync(IAsyncEnumerable(Of SKBitmap))
+- uid: Texart.Api.ITxTextBitmapGenerator.GenerateAsync*
+  name: GenerateAsync
+  href: api/Texart.Api.ITxTextBitmapGenerator.html#Texart_Api_ITxTextBitmapGenerator_GenerateAsync_
+  commentId: Overload:Texart.Api.ITxTextBitmapGenerator.GenerateAsync
+  isSpec: "True"
+  fullName: Texart.Api.ITxTextBitmapGenerator.GenerateAsync
+  nameWithType: ITxTextBitmapGenerator.GenerateAsync
+- uid: Texart.Api.ITxTextBitmapRenderer
+  name: ITxTextBitmapRenderer
+  href: api/Texart.Api.ITxTextBitmapRenderer.html
+  commentId: T:Texart.Api.ITxTextBitmapRenderer
+  fullName: Texart.Api.ITxTextBitmapRenderer
+  nameWithType: ITxTextBitmapRenderer
+- uid: Texart.Api.ITxTextBitmapRenderer.RenderAsync(IAsyncEnumerable{Texart.Api.ITxTextBitmap},Stream)
+  name: RenderAsync(IAsyncEnumerable<ITxTextBitmap>, Stream)
+  href: api/Texart.Api.ITxTextBitmapRenderer.html#Texart_Api_ITxTextBitmapRenderer_RenderAsync_IAsyncEnumerable_Texart_Api_ITxTextBitmap__Stream_
+  commentId: M:Texart.Api.ITxTextBitmapRenderer.RenderAsync(IAsyncEnumerable{Texart.Api.ITxTextBitmap},Stream)
+  name.vb: RenderAsync(IAsyncEnumerable(Of ITxTextBitmap), Stream)
+  fullName: Texart.Api.ITxTextBitmapRenderer.RenderAsync(IAsyncEnumerable<Texart.Api.ITxTextBitmap>, Stream)
+  fullName.vb: Texart.Api.ITxTextBitmapRenderer.RenderAsync(IAsyncEnumerable(Of Texart.Api.ITxTextBitmap), Stream)
+  nameWithType: ITxTextBitmapRenderer.RenderAsync(IAsyncEnumerable<ITxTextBitmap>, Stream)
+  nameWithType.vb: ITxTextBitmapRenderer.RenderAsync(IAsyncEnumerable(Of ITxTextBitmap), Stream)
+- uid: Texart.Api.ITxTextBitmapRenderer.RenderAsync*
+  name: RenderAsync
+  href: api/Texart.Api.ITxTextBitmapRenderer.html#Texart_Api_ITxTextBitmapRenderer_RenderAsync_
+  commentId: Overload:Texart.Api.ITxTextBitmapRenderer.RenderAsync
+  isSpec: "True"
+  fullName: Texart.Api.ITxTextBitmapRenderer.RenderAsync
+  nameWithType: ITxTextBitmapRenderer.RenderAsync
+- uid: Texart.Api.TxArguments
+  name: TxArguments
+  href: api/Texart.Api.TxArguments.html
+  commentId: T:Texart.Api.TxArguments
+  fullName: Texart.Api.TxArguments
+  nameWithType: TxArguments
+- uid: Texart.Api.TxArguments.#ctor(Dictionary{System.String,System.String})
+  name: TxArguments(Dictionary<String, String>)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments__ctor_Dictionary_System_String_System_String__
+  commentId: M:Texart.Api.TxArguments.#ctor(Dictionary{System.String,System.String})
+  name.vb: TxArguments(Dictionary(Of String, String))
+  fullName: Texart.Api.TxArguments.TxArguments(Dictionary<System.String, System.String>)
+  fullName.vb: Texart.Api.TxArguments.TxArguments(Dictionary(Of System.String, System.String))
+  nameWithType: TxArguments.TxArguments(Dictionary<String, String>)
+  nameWithType.vb: TxArguments.TxArguments(Dictionary(Of String, String))
+- uid: Texart.Api.TxArguments.#ctor(ImmutableDictionary{System.String,System.String})
+  name: TxArguments(ImmutableDictionary<String, String>)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments__ctor_ImmutableDictionary_System_String_System_String__
+  commentId: M:Texart.Api.TxArguments.#ctor(ImmutableDictionary{System.String,System.String})
+  name.vb: TxArguments(ImmutableDictionary(Of String, String))
+  fullName: Texart.Api.TxArguments.TxArguments(ImmutableDictionary<System.String, System.String>)
+  fullName.vb: Texart.Api.TxArguments.TxArguments(ImmutableDictionary(Of System.String, System.String))
+  nameWithType: TxArguments.TxArguments(ImmutableDictionary<String, String>)
+  nameWithType.vb: TxArguments.TxArguments(ImmutableDictionary(Of String, String))
+- uid: Texart.Api.TxArguments.#ctor*
+  name: TxArguments
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments__ctor_
+  commentId: Overload:Texart.Api.TxArguments.#ctor
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.TxArguments
+  nameWithType: TxArguments.TxArguments
+- uid: Texart.Api.TxArguments.AsImmutableDictionary
+  name: AsImmutableDictionary
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_AsImmutableDictionary
+  commentId: P:Texart.Api.TxArguments.AsImmutableDictionary
+  fullName: Texart.Api.TxArguments.AsImmutableDictionary
+  nameWithType: TxArguments.AsImmutableDictionary
+- uid: Texart.Api.TxArguments.AsImmutableDictionary*
+  name: AsImmutableDictionary
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_AsImmutableDictionary_
+  commentId: Overload:Texart.Api.TxArguments.AsImmutableDictionary
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.AsImmutableDictionary
+  nameWithType: TxArguments.AsImmutableDictionary
+- uid: Texart.Api.TxArguments.BadLookupException
+  name: TxArguments.BadLookupException
+  href: api/Texart.Api.TxArguments.BadLookupException.html
+  commentId: T:Texart.Api.TxArguments.BadLookupException
+  fullName: Texart.Api.TxArguments.BadLookupException
+  nameWithType: TxArguments.BadLookupException
+- uid: Texart.Api.TxArguments.BadLookupException.#ctor(Texart.Api.TxArguments.LookupResult,System.String)
+  name: BadLookupException(TxArguments.LookupResult, String)
+  href: api/Texart.Api.TxArguments.BadLookupException.html#Texart_Api_TxArguments_BadLookupException__ctor_Texart_Api_TxArguments_LookupResult_System_String_
+  commentId: M:Texart.Api.TxArguments.BadLookupException.#ctor(Texart.Api.TxArguments.LookupResult,System.String)
+  fullName: Texart.Api.TxArguments.BadLookupException.BadLookupException(Texart.Api.TxArguments.LookupResult, System.String)
+  nameWithType: TxArguments.BadLookupException.BadLookupException(TxArguments.LookupResult, String)
+- uid: Texart.Api.TxArguments.BadLookupException.#ctor(Texart.Api.TxArguments.LookupResult,System.String,Exception)
+  name: BadLookupException(TxArguments.LookupResult, String, Exception)
+  href: api/Texart.Api.TxArguments.BadLookupException.html#Texart_Api_TxArguments_BadLookupException__ctor_Texart_Api_TxArguments_LookupResult_System_String_Exception_
+  commentId: M:Texart.Api.TxArguments.BadLookupException.#ctor(Texart.Api.TxArguments.LookupResult,System.String,Exception)
+  fullName: Texart.Api.TxArguments.BadLookupException.BadLookupException(Texart.Api.TxArguments.LookupResult, System.String, Exception)
+  nameWithType: TxArguments.BadLookupException.BadLookupException(TxArguments.LookupResult, String, Exception)
+- uid: Texart.Api.TxArguments.BadLookupException.#ctor*
+  name: BadLookupException
+  href: api/Texart.Api.TxArguments.BadLookupException.html#Texart_Api_TxArguments_BadLookupException__ctor_
+  commentId: Overload:Texart.Api.TxArguments.BadLookupException.#ctor
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.BadLookupException.BadLookupException
+  nameWithType: TxArguments.BadLookupException.BadLookupException
+- uid: Texart.Api.TxArguments.BadLookupException.LookupResult
+  name: LookupResult
+  href: api/Texart.Api.TxArguments.BadLookupException.html#Texart_Api_TxArguments_BadLookupException_LookupResult
+  commentId: P:Texart.Api.TxArguments.BadLookupException.LookupResult
+  fullName: Texart.Api.TxArguments.BadLookupException.LookupResult
+  nameWithType: TxArguments.BadLookupException.LookupResult
+- uid: Texart.Api.TxArguments.BadLookupException.LookupResult*
+  name: LookupResult
+  href: api/Texart.Api.TxArguments.BadLookupException.html#Texart_Api_TxArguments_BadLookupException_LookupResult_
+  commentId: Overload:Texart.Api.TxArguments.BadLookupException.LookupResult
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.BadLookupException.LookupResult
+  nameWithType: TxArguments.BadLookupException.LookupResult
+- uid: Texart.Api.TxArguments.Empty
+  name: Empty
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_Empty
+  commentId: F:Texart.Api.TxArguments.Empty
+  fullName: Texart.Api.TxArguments.Empty
+  nameWithType: TxArguments.Empty
+- uid: Texart.Api.TxArguments.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_Equals_System_Object_
+  commentId: M:Texart.Api.TxArguments.Equals(System.Object)
+  fullName: Texart.Api.TxArguments.Equals(System.Object)
+  nameWithType: TxArguments.Equals(Object)
+- uid: Texart.Api.TxArguments.Equals(Texart.Api.TxArguments)
+  name: Equals(TxArguments)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_Equals_Texart_Api_TxArguments_
+  commentId: M:Texart.Api.TxArguments.Equals(Texart.Api.TxArguments)
+  fullName: Texart.Api.TxArguments.Equals(Texart.Api.TxArguments)
+  nameWithType: TxArguments.Equals(TxArguments)
+- uid: Texart.Api.TxArguments.Equals*
+  name: Equals
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_Equals_
+  commentId: Overload:Texart.Api.TxArguments.Equals
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.Equals
+  nameWithType: TxArguments.Equals
+- uid: Texart.Api.TxArguments.Extract*
+  name: Extract
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_Extract_
+  commentId: Overload:Texart.Api.TxArguments.Extract
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.Extract
+  nameWithType: TxArguments.Extract
+- uid: Texart.Api.TxArguments.Extract``1
+  name: Extract<T>()
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_Extract__1
+  commentId: M:Texart.Api.TxArguments.Extract``1
+  name.vb: Extract(Of T)()
+  fullName: Texart.Api.TxArguments.Extract<T>()
+  fullName.vb: Texart.Api.TxArguments.Extract(Of T)()
+  nameWithType: TxArguments.Extract<T>()
+  nameWithType.vb: TxArguments.Extract(Of T)()
+- uid: Texart.Api.TxArguments.Extract``1(``0@)
+  name: Extract<T>(ref T)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_Extract__1___0__
+  commentId: M:Texart.Api.TxArguments.Extract``1(``0@)
+  name.vb: Extract(Of T)(ByRef T)
+  fullName: Texart.Api.TxArguments.Extract<T>(ref T)
+  fullName.vb: Texart.Api.TxArguments.Extract(Of T)(ByRef T)
+  nameWithType: TxArguments.Extract<T>(ref T)
+  nameWithType.vb: TxArguments.Extract(Of T)(ByRef T)
+- uid: Texart.Api.TxArguments.GetBool(System.String)
+  name: GetBool(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetBool_System_String_
+  commentId: M:Texart.Api.TxArguments.GetBool(System.String)
+  fullName: Texart.Api.TxArguments.GetBool(System.String)
+  nameWithType: TxArguments.GetBool(String)
+- uid: Texart.Api.TxArguments.GetBool(System.String,System.Boolean)
+  name: GetBool(String, Boolean)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetBool_System_String_System_Boolean_
+  commentId: M:Texart.Api.TxArguments.GetBool(System.String,System.Boolean)
+  fullName: Texart.Api.TxArguments.GetBool(System.String, System.Boolean)
+  nameWithType: TxArguments.GetBool(String, Boolean)
+- uid: Texart.Api.TxArguments.GetBool*
+  name: GetBool
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetBool_
+  commentId: Overload:Texart.Api.TxArguments.GetBool
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetBool
+  nameWithType: TxArguments.GetBool
+- uid: Texart.Api.TxArguments.GetByte(System.String)
+  name: GetByte(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetByte_System_String_
+  commentId: M:Texart.Api.TxArguments.GetByte(System.String)
+  fullName: Texart.Api.TxArguments.GetByte(System.String)
+  nameWithType: TxArguments.GetByte(String)
+- uid: Texart.Api.TxArguments.GetByte(System.String,System.Byte)
+  name: GetByte(String, Byte)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetByte_System_String_System_Byte_
+  commentId: M:Texart.Api.TxArguments.GetByte(System.String,System.Byte)
+  fullName: Texart.Api.TxArguments.GetByte(System.String, System.Byte)
+  nameWithType: TxArguments.GetByte(String, Byte)
+- uid: Texart.Api.TxArguments.GetByte*
+  name: GetByte
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetByte_
+  commentId: Overload:Texart.Api.TxArguments.GetByte
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetByte
+  nameWithType: TxArguments.GetByte
+- uid: Texart.Api.TxArguments.GetChar(System.String)
+  name: GetChar(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetChar_System_String_
+  commentId: M:Texart.Api.TxArguments.GetChar(System.String)
+  fullName: Texart.Api.TxArguments.GetChar(System.String)
+  nameWithType: TxArguments.GetChar(String)
+- uid: Texart.Api.TxArguments.GetChar(System.String,System.Char)
+  name: GetChar(String, Char)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetChar_System_String_System_Char_
+  commentId: M:Texart.Api.TxArguments.GetChar(System.String,System.Char)
+  fullName: Texart.Api.TxArguments.GetChar(System.String, System.Char)
+  nameWithType: TxArguments.GetChar(String, Char)
+- uid: Texart.Api.TxArguments.GetChar*
+  name: GetChar
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetChar_
+  commentId: Overload:Texart.Api.TxArguments.GetChar
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetChar
+  nameWithType: TxArguments.GetChar
+- uid: Texart.Api.TxArguments.GetDecimal(System.String)
+  name: GetDecimal(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetDecimal_System_String_
+  commentId: M:Texart.Api.TxArguments.GetDecimal(System.String)
+  fullName: Texart.Api.TxArguments.GetDecimal(System.String)
+  nameWithType: TxArguments.GetDecimal(String)
+- uid: Texart.Api.TxArguments.GetDecimal(System.String,System.Decimal)
+  name: GetDecimal(String, Decimal)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetDecimal_System_String_System_Decimal_
+  commentId: M:Texart.Api.TxArguments.GetDecimal(System.String,System.Decimal)
+  fullName: Texart.Api.TxArguments.GetDecimal(System.String, System.Decimal)
+  nameWithType: TxArguments.GetDecimal(String, Decimal)
+- uid: Texart.Api.TxArguments.GetDecimal*
+  name: GetDecimal
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetDecimal_
+  commentId: Overload:Texart.Api.TxArguments.GetDecimal
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetDecimal
+  nameWithType: TxArguments.GetDecimal
+- uid: Texart.Api.TxArguments.GetDouble(System.String)
+  name: GetDouble(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetDouble_System_String_
+  commentId: M:Texart.Api.TxArguments.GetDouble(System.String)
+  fullName: Texart.Api.TxArguments.GetDouble(System.String)
+  nameWithType: TxArguments.GetDouble(String)
+- uid: Texart.Api.TxArguments.GetDouble(System.String,System.Double)
+  name: GetDouble(String, Double)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetDouble_System_String_System_Double_
+  commentId: M:Texart.Api.TxArguments.GetDouble(System.String,System.Double)
+  fullName: Texart.Api.TxArguments.GetDouble(System.String, System.Double)
+  nameWithType: TxArguments.GetDouble(String, Double)
+- uid: Texart.Api.TxArguments.GetDouble*
+  name: GetDouble
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetDouble_
+  commentId: Overload:Texart.Api.TxArguments.GetDouble
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetDouble
+  nameWithType: TxArguments.GetDouble
+- uid: Texart.Api.TxArguments.GetHashCode
+  name: GetHashCode()
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetHashCode
+  commentId: M:Texart.Api.TxArguments.GetHashCode
+  fullName: Texart.Api.TxArguments.GetHashCode()
+  nameWithType: TxArguments.GetHashCode()
+- uid: Texart.Api.TxArguments.GetHashCode*
+  name: GetHashCode
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetHashCode_
+  commentId: Overload:Texart.Api.TxArguments.GetHashCode
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetHashCode
+  nameWithType: TxArguments.GetHashCode
+- uid: Texart.Api.TxArguments.GetInt(System.String)
+  name: GetInt(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetInt_System_String_
+  commentId: M:Texart.Api.TxArguments.GetInt(System.String)
+  fullName: Texart.Api.TxArguments.GetInt(System.String)
+  nameWithType: TxArguments.GetInt(String)
+- uid: Texart.Api.TxArguments.GetInt(System.String,System.Int32)
+  name: GetInt(String, Int32)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetInt_System_String_System_Int32_
+  commentId: M:Texart.Api.TxArguments.GetInt(System.String,System.Int32)
+  fullName: Texart.Api.TxArguments.GetInt(System.String, System.Int32)
+  nameWithType: TxArguments.GetInt(String, Int32)
+- uid: Texart.Api.TxArguments.GetInt*
+  name: GetInt
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetInt_
+  commentId: Overload:Texart.Api.TxArguments.GetInt
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetInt
+  nameWithType: TxArguments.GetInt
+- uid: Texart.Api.TxArguments.GetLong(System.String)
+  name: GetLong(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetLong_System_String_
+  commentId: M:Texart.Api.TxArguments.GetLong(System.String)
+  fullName: Texart.Api.TxArguments.GetLong(System.String)
+  nameWithType: TxArguments.GetLong(String)
+- uid: Texart.Api.TxArguments.GetLong(System.String,System.Int64)
+  name: GetLong(String, Int64)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetLong_System_String_System_Int64_
+  commentId: M:Texart.Api.TxArguments.GetLong(System.String,System.Int64)
+  fullName: Texart.Api.TxArguments.GetLong(System.String, System.Int64)
+  nameWithType: TxArguments.GetLong(String, Int64)
+- uid: Texart.Api.TxArguments.GetLong*
+  name: GetLong
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetLong_
+  commentId: Overload:Texart.Api.TxArguments.GetLong
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetLong
+  nameWithType: TxArguments.GetLong
+- uid: Texart.Api.TxArguments.GetSByte(System.String)
+  name: GetSByte(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetSByte_System_String_
+  commentId: M:Texart.Api.TxArguments.GetSByte(System.String)
+  fullName: Texart.Api.TxArguments.GetSByte(System.String)
+  nameWithType: TxArguments.GetSByte(String)
+- uid: Texart.Api.TxArguments.GetSByte(System.String,System.SByte)
+  name: GetSByte(String, SByte)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetSByte_System_String_System_SByte_
+  commentId: M:Texart.Api.TxArguments.GetSByte(System.String,System.SByte)
+  fullName: Texart.Api.TxArguments.GetSByte(System.String, System.SByte)
+  nameWithType: TxArguments.GetSByte(String, SByte)
+- uid: Texart.Api.TxArguments.GetSByte*
+  name: GetSByte
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetSByte_
+  commentId: Overload:Texart.Api.TxArguments.GetSByte
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetSByte
+  nameWithType: TxArguments.GetSByte
+- uid: Texart.Api.TxArguments.GetShort(System.String)
+  name: GetShort(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetShort_System_String_
+  commentId: M:Texart.Api.TxArguments.GetShort(System.String)
+  fullName: Texart.Api.TxArguments.GetShort(System.String)
+  nameWithType: TxArguments.GetShort(String)
+- uid: Texart.Api.TxArguments.GetShort(System.String,System.Int16)
+  name: GetShort(String, Int16)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetShort_System_String_System_Int16_
+  commentId: M:Texart.Api.TxArguments.GetShort(System.String,System.Int16)
+  fullName: Texart.Api.TxArguments.GetShort(System.String, System.Int16)
+  nameWithType: TxArguments.GetShort(String, Int16)
+- uid: Texart.Api.TxArguments.GetShort*
+  name: GetShort
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetShort_
+  commentId: Overload:Texart.Api.TxArguments.GetShort
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetShort
+  nameWithType: TxArguments.GetShort
+- uid: Texart.Api.TxArguments.GetSingle(System.String)
+  name: GetSingle(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetSingle_System_String_
+  commentId: M:Texart.Api.TxArguments.GetSingle(System.String)
+  fullName: Texart.Api.TxArguments.GetSingle(System.String)
+  nameWithType: TxArguments.GetSingle(String)
+- uid: Texart.Api.TxArguments.GetSingle(System.String,System.Single)
+  name: GetSingle(String, Single)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetSingle_System_String_System_Single_
+  commentId: M:Texart.Api.TxArguments.GetSingle(System.String,System.Single)
+  fullName: Texart.Api.TxArguments.GetSingle(System.String, System.Single)
+  nameWithType: TxArguments.GetSingle(String, Single)
+- uid: Texart.Api.TxArguments.GetSingle*
+  name: GetSingle
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetSingle_
+  commentId: Overload:Texart.Api.TxArguments.GetSingle
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetSingle
+  nameWithType: TxArguments.GetSingle
+- uid: Texart.Api.TxArguments.GetString(System.String)
+  name: GetString(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetString_System_String_
+  commentId: M:Texart.Api.TxArguments.GetString(System.String)
+  fullName: Texart.Api.TxArguments.GetString(System.String)
+  nameWithType: TxArguments.GetString(String)
+- uid: Texart.Api.TxArguments.GetString(System.String,System.String)
+  name: GetString(String, String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetString_System_String_System_String_
+  commentId: M:Texart.Api.TxArguments.GetString(System.String,System.String)
+  fullName: Texart.Api.TxArguments.GetString(System.String, System.String)
+  nameWithType: TxArguments.GetString(String, String)
+- uid: Texart.Api.TxArguments.GetString*
+  name: GetString
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetString_
+  commentId: Overload:Texart.Api.TxArguments.GetString
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetString
+  nameWithType: TxArguments.GetString
+- uid: Texart.Api.TxArguments.GetUInt(System.String)
+  name: GetUInt(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetUInt_System_String_
+  commentId: M:Texart.Api.TxArguments.GetUInt(System.String)
+  fullName: Texart.Api.TxArguments.GetUInt(System.String)
+  nameWithType: TxArguments.GetUInt(String)
+- uid: Texart.Api.TxArguments.GetUInt(System.String,System.UInt32)
+  name: GetUInt(String, UInt32)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetUInt_System_String_System_UInt32_
+  commentId: M:Texart.Api.TxArguments.GetUInt(System.String,System.UInt32)
+  fullName: Texart.Api.TxArguments.GetUInt(System.String, System.UInt32)
+  nameWithType: TxArguments.GetUInt(String, UInt32)
+- uid: Texart.Api.TxArguments.GetUInt*
+  name: GetUInt
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetUInt_
+  commentId: Overload:Texart.Api.TxArguments.GetUInt
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetUInt
+  nameWithType: TxArguments.GetUInt
+- uid: Texart.Api.TxArguments.GetULong(System.String)
+  name: GetULong(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetULong_System_String_
+  commentId: M:Texart.Api.TxArguments.GetULong(System.String)
+  fullName: Texart.Api.TxArguments.GetULong(System.String)
+  nameWithType: TxArguments.GetULong(String)
+- uid: Texart.Api.TxArguments.GetULong(System.String,System.UInt64)
+  name: GetULong(String, UInt64)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetULong_System_String_System_UInt64_
+  commentId: M:Texart.Api.TxArguments.GetULong(System.String,System.UInt64)
+  fullName: Texart.Api.TxArguments.GetULong(System.String, System.UInt64)
+  nameWithType: TxArguments.GetULong(String, UInt64)
+- uid: Texart.Api.TxArguments.GetULong*
+  name: GetULong
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetULong_
+  commentId: Overload:Texart.Api.TxArguments.GetULong
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetULong
+  nameWithType: TxArguments.GetULong
+- uid: Texart.Api.TxArguments.GetUShort(System.String)
+  name: GetUShort(String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetUShort_System_String_
+  commentId: M:Texart.Api.TxArguments.GetUShort(System.String)
+  fullName: Texart.Api.TxArguments.GetUShort(System.String)
+  nameWithType: TxArguments.GetUShort(String)
+- uid: Texart.Api.TxArguments.GetUShort(System.String,System.UInt16)
+  name: GetUShort(String, UInt16)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetUShort_System_String_System_UInt16_
+  commentId: M:Texart.Api.TxArguments.GetUShort(System.String,System.UInt16)
+  fullName: Texart.Api.TxArguments.GetUShort(System.String, System.UInt16)
+  nameWithType: TxArguments.GetUShort(String, UInt16)
+- uid: Texart.Api.TxArguments.GetUShort*
+  name: GetUShort
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetUShort_
+  commentId: Overload:Texart.Api.TxArguments.GetUShort
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetUShort
+  nameWithType: TxArguments.GetUShort
+- uid: Texart.Api.TxArguments.GetValue*
+  name: GetValue
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetValue_
+  commentId: Overload:Texart.Api.TxArguments.GetValue
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.GetValue
+  nameWithType: TxArguments.GetValue
+- uid: Texart.Api.TxArguments.GetValue``1(System.String,Texart.Api.TxArguments.TryParseFunc{``0})
+  name: GetValue<T>(String, TxArguments.TryParseFunc<T>)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetValue__1_System_String_Texart_Api_TxArguments_TryParseFunc___0__
+  commentId: M:Texart.Api.TxArguments.GetValue``1(System.String,Texart.Api.TxArguments.TryParseFunc{``0})
+  name.vb: GetValue(Of T)(String, TxArguments.TryParseFunc(Of T))
+  fullName: Texart.Api.TxArguments.GetValue<T>(System.String, Texart.Api.TxArguments.TryParseFunc<T>)
+  fullName.vb: Texart.Api.TxArguments.GetValue(Of T)(System.String, Texart.Api.TxArguments.TryParseFunc(Of T))
+  nameWithType: TxArguments.GetValue<T>(String, TxArguments.TryParseFunc<T>)
+  nameWithType.vb: TxArguments.GetValue(Of T)(String, TxArguments.TryParseFunc(Of T))
+- uid: Texart.Api.TxArguments.GetValue``1(System.String,Texart.Api.TxArguments.TryParseFunc{``0},``0)
+  name: GetValue<T>(String, TxArguments.TryParseFunc<T>, T)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_GetValue__1_System_String_Texart_Api_TxArguments_TryParseFunc___0____0_
+  commentId: M:Texart.Api.TxArguments.GetValue``1(System.String,Texart.Api.TxArguments.TryParseFunc{``0},``0)
+  name.vb: GetValue(Of T)(String, TxArguments.TryParseFunc(Of T), T)
+  fullName: Texart.Api.TxArguments.GetValue<T>(System.String, Texart.Api.TxArguments.TryParseFunc<T>, T)
+  fullName.vb: Texart.Api.TxArguments.GetValue(Of T)(System.String, Texart.Api.TxArguments.TryParseFunc(Of T), T)
+  nameWithType: TxArguments.GetValue<T>(String, TxArguments.TryParseFunc<T>, T)
+  nameWithType.vb: TxArguments.GetValue(Of T)(String, TxArguments.TryParseFunc(Of T), T)
+- uid: Texart.Api.TxArguments.IExtractable
+  name: TxArguments.IExtractable
+  href: api/Texart.Api.TxArguments.IExtractable.html
+  commentId: T:Texart.Api.TxArguments.IExtractable
+  fullName: Texart.Api.TxArguments.IExtractable
+  nameWithType: TxArguments.IExtractable
+- uid: Texart.Api.TxArguments.IExtractable.Extract(Texart.Api.TxArguments)
+  name: Extract(TxArguments)
+  href: api/Texart.Api.TxArguments.IExtractable.html#Texart_Api_TxArguments_IExtractable_Extract_Texart_Api_TxArguments_
+  commentId: M:Texart.Api.TxArguments.IExtractable.Extract(Texart.Api.TxArguments)
+  fullName: Texart.Api.TxArguments.IExtractable.Extract(Texart.Api.TxArguments)
+  nameWithType: TxArguments.IExtractable.Extract(TxArguments)
+- uid: Texart.Api.TxArguments.IExtractable.Extract*
+  name: Extract
+  href: api/Texart.Api.TxArguments.IExtractable.html#Texart_Api_TxArguments_IExtractable_Extract_
+  commentId: Overload:Texart.Api.TxArguments.IExtractable.Extract
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.IExtractable.Extract
+  nameWithType: TxArguments.IExtractable.Extract
+- uid: Texart.Api.TxArguments.LookupResult
+  name: TxArguments.LookupResult
+  href: api/Texart.Api.TxArguments.LookupResult.html
+  commentId: T:Texart.Api.TxArguments.LookupResult
+  fullName: Texart.Api.TxArguments.LookupResult
+  nameWithType: TxArguments.LookupResult
+- uid: Texart.Api.TxArguments.LookupResult.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_Equals_System_Object_
+  commentId: M:Texart.Api.TxArguments.LookupResult.Equals(System.Object)
+  fullName: Texart.Api.TxArguments.LookupResult.Equals(System.Object)
+  nameWithType: TxArguments.LookupResult.Equals(Object)
+- uid: Texart.Api.TxArguments.LookupResult.Equals(Texart.Api.TxArguments.LookupResult)
+  name: Equals(TxArguments.LookupResult)
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_Equals_Texart_Api_TxArguments_LookupResult_
+  commentId: M:Texart.Api.TxArguments.LookupResult.Equals(Texart.Api.TxArguments.LookupResult)
+  fullName: Texart.Api.TxArguments.LookupResult.Equals(Texart.Api.TxArguments.LookupResult)
+  nameWithType: TxArguments.LookupResult.Equals(TxArguments.LookupResult)
+- uid: Texart.Api.TxArguments.LookupResult.Equals*
+  name: Equals
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_Equals_
+  commentId: Overload:Texart.Api.TxArguments.LookupResult.Equals
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.LookupResult.Equals
+  nameWithType: TxArguments.LookupResult.Equals
+- uid: Texart.Api.TxArguments.LookupResult.GetHashCode
+  name: GetHashCode()
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_GetHashCode
+  commentId: M:Texart.Api.TxArguments.LookupResult.GetHashCode
+  fullName: Texart.Api.TxArguments.LookupResult.GetHashCode()
+  nameWithType: TxArguments.LookupResult.GetHashCode()
+- uid: Texart.Api.TxArguments.LookupResult.GetHashCode*
+  name: GetHashCode
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_GetHashCode_
+  commentId: Overload:Texart.Api.TxArguments.LookupResult.GetHashCode
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.LookupResult.GetHashCode
+  nameWithType: TxArguments.LookupResult.GetHashCode
+- uid: Texart.Api.TxArguments.LookupResult.MissingKey
+  name: MissingKey
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_MissingKey
+  commentId: P:Texart.Api.TxArguments.LookupResult.MissingKey
+  fullName: Texart.Api.TxArguments.LookupResult.MissingKey
+  nameWithType: TxArguments.LookupResult.MissingKey
+- uid: Texart.Api.TxArguments.LookupResult.MissingKey*
+  name: MissingKey
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_MissingKey_
+  commentId: Overload:Texart.Api.TxArguments.LookupResult.MissingKey
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.LookupResult.MissingKey
+  nameWithType: TxArguments.LookupResult.MissingKey
+- uid: Texart.Api.TxArguments.LookupResult.op_Equality(Texart.Api.TxArguments.LookupResult,Texart.Api.TxArguments.LookupResult)
+  name: Equality(TxArguments.LookupResult, TxArguments.LookupResult)
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_op_Equality_Texart_Api_TxArguments_LookupResult_Texart_Api_TxArguments_LookupResult_
+  commentId: M:Texart.Api.TxArguments.LookupResult.op_Equality(Texart.Api.TxArguments.LookupResult,Texart.Api.TxArguments.LookupResult)
+  fullName: Texart.Api.TxArguments.LookupResult.Equality(Texart.Api.TxArguments.LookupResult, Texart.Api.TxArguments.LookupResult)
+  nameWithType: TxArguments.LookupResult.Equality(TxArguments.LookupResult, TxArguments.LookupResult)
+- uid: Texart.Api.TxArguments.LookupResult.op_Equality*
+  name: Equality
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_op_Equality_
+  commentId: Overload:Texart.Api.TxArguments.LookupResult.op_Equality
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.LookupResult.Equality
+  nameWithType: TxArguments.LookupResult.Equality
+- uid: Texart.Api.TxArguments.LookupResult.op_False(Texart.Api.TxArguments.LookupResult)
+  name: False(TxArguments.LookupResult)
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_op_False_Texart_Api_TxArguments_LookupResult_
+  commentId: M:Texart.Api.TxArguments.LookupResult.op_False(Texart.Api.TxArguments.LookupResult)
+  fullName: Texart.Api.TxArguments.LookupResult.False(Texart.Api.TxArguments.LookupResult)
+  nameWithType: TxArguments.LookupResult.False(TxArguments.LookupResult)
+- uid: Texart.Api.TxArguments.LookupResult.op_False*
+  name: "False"
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_op_False_
+  commentId: Overload:Texart.Api.TxArguments.LookupResult.op_False
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.LookupResult.False
+  nameWithType: TxArguments.LookupResult.False
+- uid: Texart.Api.TxArguments.LookupResult.op_Inequality(Texart.Api.TxArguments.LookupResult,Texart.Api.TxArguments.LookupResult)
+  name: Inequality(TxArguments.LookupResult, TxArguments.LookupResult)
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_op_Inequality_Texart_Api_TxArguments_LookupResult_Texart_Api_TxArguments_LookupResult_
+  commentId: M:Texart.Api.TxArguments.LookupResult.op_Inequality(Texart.Api.TxArguments.LookupResult,Texart.Api.TxArguments.LookupResult)
+  fullName: Texart.Api.TxArguments.LookupResult.Inequality(Texart.Api.TxArguments.LookupResult, Texart.Api.TxArguments.LookupResult)
+  nameWithType: TxArguments.LookupResult.Inequality(TxArguments.LookupResult, TxArguments.LookupResult)
+- uid: Texart.Api.TxArguments.LookupResult.op_Inequality*
+  name: Inequality
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_op_Inequality_
+  commentId: Overload:Texart.Api.TxArguments.LookupResult.op_Inequality
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.LookupResult.Inequality
+  nameWithType: TxArguments.LookupResult.Inequality
+- uid: Texart.Api.TxArguments.LookupResult.op_True(Texart.Api.TxArguments.LookupResult)
+  name: True(TxArguments.LookupResult)
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_op_True_Texart_Api_TxArguments_LookupResult_
+  commentId: M:Texart.Api.TxArguments.LookupResult.op_True(Texart.Api.TxArguments.LookupResult)
+  fullName: Texart.Api.TxArguments.LookupResult.True(Texart.Api.TxArguments.LookupResult)
+  nameWithType: TxArguments.LookupResult.True(TxArguments.LookupResult)
+- uid: Texart.Api.TxArguments.LookupResult.op_True*
+  name: "True"
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_op_True_
+  commentId: Overload:Texart.Api.TxArguments.LookupResult.op_True
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.LookupResult.True
+  nameWithType: TxArguments.LookupResult.True
+- uid: Texart.Api.TxArguments.LookupResult.ParsingError
+  name: ParsingError
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_ParsingError
+  commentId: P:Texart.Api.TxArguments.LookupResult.ParsingError
+  fullName: Texart.Api.TxArguments.LookupResult.ParsingError
+  nameWithType: TxArguments.LookupResult.ParsingError
+- uid: Texart.Api.TxArguments.LookupResult.ParsingError*
+  name: ParsingError
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_ParsingError_
+  commentId: Overload:Texart.Api.TxArguments.LookupResult.ParsingError
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.LookupResult.ParsingError
+  nameWithType: TxArguments.LookupResult.ParsingError
+- uid: Texart.Api.TxArguments.LookupResult.Success
+  name: Success
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_Success
+  commentId: P:Texart.Api.TxArguments.LookupResult.Success
+  fullName: Texart.Api.TxArguments.LookupResult.Success
+  nameWithType: TxArguments.LookupResult.Success
+- uid: Texart.Api.TxArguments.LookupResult.Success*
+  name: Success
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_Success_
+  commentId: Overload:Texart.Api.TxArguments.LookupResult.Success
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.LookupResult.Success
+  nameWithType: TxArguments.LookupResult.Success
+- uid: Texart.Api.TxArguments.LookupResult.ToString
+  name: ToString()
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_ToString
+  commentId: M:Texart.Api.TxArguments.LookupResult.ToString
+  fullName: Texart.Api.TxArguments.LookupResult.ToString()
+  nameWithType: TxArguments.LookupResult.ToString()
+- uid: Texart.Api.TxArguments.LookupResult.ToString*
+  name: ToString
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_ToString_
+  commentId: Overload:Texart.Api.TxArguments.LookupResult.ToString
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.LookupResult.ToString
+  nameWithType: TxArguments.LookupResult.ToString
+- uid: Texart.Api.TxArguments.LookupResult.Type
+  name: Type
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_Type
+  commentId: P:Texart.Api.TxArguments.LookupResult.Type
+  fullName: Texart.Api.TxArguments.LookupResult.Type
+  nameWithType: TxArguments.LookupResult.Type
+- uid: Texart.Api.TxArguments.LookupResult.Type*
+  name: Type
+  href: api/Texart.Api.TxArguments.LookupResult.html#Texart_Api_TxArguments_LookupResult_Type_
+  commentId: Overload:Texart.Api.TxArguments.LookupResult.Type
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.LookupResult.Type
+  nameWithType: TxArguments.LookupResult.Type
+- uid: Texart.Api.TxArguments.LookupResultType
+  name: TxArguments.LookupResultType
+  href: api/Texart.Api.TxArguments.LookupResultType.html
+  commentId: T:Texart.Api.TxArguments.LookupResultType
+  fullName: Texart.Api.TxArguments.LookupResultType
+  nameWithType: TxArguments.LookupResultType
+- uid: Texart.Api.TxArguments.LookupResultType.MissingKey
+  name: MissingKey
+  href: api/Texart.Api.TxArguments.LookupResultType.html#Texart_Api_TxArguments_LookupResultType_MissingKey
+  commentId: F:Texart.Api.TxArguments.LookupResultType.MissingKey
+  fullName: Texart.Api.TxArguments.LookupResultType.MissingKey
+  nameWithType: TxArguments.LookupResultType.MissingKey
+- uid: Texart.Api.TxArguments.LookupResultType.ParsingError
+  name: ParsingError
+  href: api/Texart.Api.TxArguments.LookupResultType.html#Texart_Api_TxArguments_LookupResultType_ParsingError
+  commentId: F:Texart.Api.TxArguments.LookupResultType.ParsingError
+  fullName: Texart.Api.TxArguments.LookupResultType.ParsingError
+  nameWithType: TxArguments.LookupResultType.ParsingError
+- uid: Texart.Api.TxArguments.LookupResultType.Success
+  name: Success
+  href: api/Texart.Api.TxArguments.LookupResultType.html#Texart_Api_TxArguments_LookupResultType_Success
+  commentId: F:Texart.Api.TxArguments.LookupResultType.Success
+  fullName: Texart.Api.TxArguments.LookupResultType.Success
+  nameWithType: TxArguments.LookupResultType.Success
+- uid: Texart.Api.TxArguments.op_Equality(Texart.Api.TxArguments,Texart.Api.TxArguments)
+  name: Equality(TxArguments, TxArguments)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_op_Equality_Texart_Api_TxArguments_Texart_Api_TxArguments_
+  commentId: M:Texart.Api.TxArguments.op_Equality(Texart.Api.TxArguments,Texart.Api.TxArguments)
+  fullName: Texart.Api.TxArguments.Equality(Texart.Api.TxArguments, Texart.Api.TxArguments)
+  nameWithType: TxArguments.Equality(TxArguments, TxArguments)
+- uid: Texart.Api.TxArguments.op_Equality*
+  name: Equality
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_op_Equality_
+  commentId: Overload:Texart.Api.TxArguments.op_Equality
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.Equality
+  nameWithType: TxArguments.Equality
+- uid: Texart.Api.TxArguments.op_Inequality(Texart.Api.TxArguments,Texart.Api.TxArguments)
+  name: Inequality(TxArguments, TxArguments)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_op_Inequality_Texart_Api_TxArguments_Texart_Api_TxArguments_
+  commentId: M:Texart.Api.TxArguments.op_Inequality(Texart.Api.TxArguments,Texart.Api.TxArguments)
+  fullName: Texart.Api.TxArguments.Inequality(Texart.Api.TxArguments, Texart.Api.TxArguments)
+  nameWithType: TxArguments.Inequality(TxArguments, TxArguments)
+- uid: Texart.Api.TxArguments.op_Inequality*
+  name: Inequality
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_op_Inequality_
+  commentId: Overload:Texart.Api.TxArguments.op_Inequality
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.Inequality
+  nameWithType: TxArguments.Inequality
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.Boolean@)
+  name: TryGetValue(String, out Boolean)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_Boolean__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.Boolean@)
+  name.vb: TryGetValue(String, ByRef Boolean)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.Boolean)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.Boolean)
+  nameWithType: TxArguments.TryGetValue(String, out Boolean)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef Boolean)
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.Byte@)
+  name: TryGetValue(String, out Byte)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_Byte__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.Byte@)
+  name.vb: TryGetValue(String, ByRef Byte)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.Byte)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.Byte)
+  nameWithType: TxArguments.TryGetValue(String, out Byte)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef Byte)
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.Char@)
+  name: TryGetValue(String, out Char)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_Char__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.Char@)
+  name.vb: TryGetValue(String, ByRef Char)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.Char)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.Char)
+  nameWithType: TxArguments.TryGetValue(String, out Char)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef Char)
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.Decimal@)
+  name: TryGetValue(String, out Decimal)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_Decimal__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.Decimal@)
+  name.vb: TryGetValue(String, ByRef Decimal)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.Decimal)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.Decimal)
+  nameWithType: TxArguments.TryGetValue(String, out Decimal)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef Decimal)
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.Double@)
+  name: TryGetValue(String, out Double)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_Double__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.Double@)
+  name.vb: TryGetValue(String, ByRef Double)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.Double)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.Double)
+  nameWithType: TxArguments.TryGetValue(String, out Double)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef Double)
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.Int16@)
+  name: TryGetValue(String, out Int16)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_Int16__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.Int16@)
+  name.vb: TryGetValue(String, ByRef Int16)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.Int16)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.Int16)
+  nameWithType: TxArguments.TryGetValue(String, out Int16)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef Int16)
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.Int32@)
+  name: TryGetValue(String, out Int32)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_Int32__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.Int32@)
+  name.vb: TryGetValue(String, ByRef Int32)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.Int32)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.Int32)
+  nameWithType: TxArguments.TryGetValue(String, out Int32)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef Int32)
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.Int64@)
+  name: TryGetValue(String, out Int64)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_Int64__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.Int64@)
+  name.vb: TryGetValue(String, ByRef Int64)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.Int64)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.Int64)
+  nameWithType: TxArguments.TryGetValue(String, out Int64)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef Int64)
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.SByte@)
+  name: TryGetValue(String, out SByte)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_SByte__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.SByte@)
+  name.vb: TryGetValue(String, ByRef SByte)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.SByte)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.SByte)
+  nameWithType: TxArguments.TryGetValue(String, out SByte)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef SByte)
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.Single@)
+  name: TryGetValue(String, out Single)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_Single__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.Single@)
+  name.vb: TryGetValue(String, ByRef Single)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.Single)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.Single)
+  nameWithType: TxArguments.TryGetValue(String, out Single)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef Single)
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.String@)
+  name: TryGetValue(String, out String)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_String__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.String@)
+  name.vb: TryGetValue(String, ByRef String)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.String)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.String)
+  nameWithType: TxArguments.TryGetValue(String, out String)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef String)
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.UInt16@)
+  name: TryGetValue(String, out UInt16)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_UInt16__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.UInt16@)
+  name.vb: TryGetValue(String, ByRef UInt16)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.UInt16)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.UInt16)
+  nameWithType: TxArguments.TryGetValue(String, out UInt16)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef UInt16)
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.UInt32@)
+  name: TryGetValue(String, out UInt32)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_UInt32__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.UInt32@)
+  name.vb: TryGetValue(String, ByRef UInt32)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.UInt32)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.UInt32)
+  nameWithType: TxArguments.TryGetValue(String, out UInt32)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef UInt32)
+- uid: Texart.Api.TxArguments.TryGetValue(System.String,System.UInt64@)
+  name: TryGetValue(String, out UInt64)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_System_String_System_UInt64__
+  commentId: M:Texart.Api.TxArguments.TryGetValue(System.String,System.UInt64@)
+  name.vb: TryGetValue(String, ByRef UInt64)
+  fullName: Texart.Api.TxArguments.TryGetValue(System.String, out System.UInt64)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(System.String, ByRef System.UInt64)
+  nameWithType: TxArguments.TryGetValue(String, out UInt64)
+  nameWithType.vb: TxArguments.TryGetValue(String, ByRef UInt64)
+- uid: Texart.Api.TxArguments.TryGetValue*
+  name: TryGetValue
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue_
+  commentId: Overload:Texart.Api.TxArguments.TryGetValue
+  isSpec: "True"
+  fullName: Texart.Api.TxArguments.TryGetValue
+  nameWithType: TxArguments.TryGetValue
+- uid: Texart.Api.TxArguments.TryGetValue``1(System.String,``0@,Texart.Api.TxArguments.TryParseFunc{``0})
+  name: TryGetValue<T>(String, out T, TxArguments.TryParseFunc<T>)
+  href: api/Texart.Api.TxArguments.html#Texart_Api_TxArguments_TryGetValue__1_System_String___0__Texart_Api_TxArguments_TryParseFunc___0__
+  commentId: M:Texart.Api.TxArguments.TryGetValue``1(System.String,``0@,Texart.Api.TxArguments.TryParseFunc{``0})
+  name.vb: TryGetValue(Of T)(String, ByRef T, TxArguments.TryParseFunc(Of T))
+  fullName: Texart.Api.TxArguments.TryGetValue<T>(System.String, out T, Texart.Api.TxArguments.TryParseFunc<T>)
+  fullName.vb: Texart.Api.TxArguments.TryGetValue(Of T)(System.String, ByRef T, Texart.Api.TxArguments.TryParseFunc(Of T))
+  nameWithType: TxArguments.TryGetValue<T>(String, out T, TxArguments.TryParseFunc<T>)
+  nameWithType.vb: TxArguments.TryGetValue(Of T)(String, ByRef T, TxArguments.TryParseFunc(Of T))
+- uid: Texart.Api.TxArguments.TryParseFunc`1
+  name: TxArguments.TryParseFunc<T>
+  href: api/Texart.Api.TxArguments.TryParseFunc-1.html
+  commentId: T:Texart.Api.TxArguments.TryParseFunc`1
+  name.vb: TxArguments.TryParseFunc(Of T)
+  fullName: Texart.Api.TxArguments.TryParseFunc<T>
+  fullName.vb: Texart.Api.TxArguments.TryParseFunc(Of T)
+  nameWithType: TxArguments.TryParseFunc<T>
+  nameWithType.vb: TxArguments.TryParseFunc(Of T)
+- uid: Texart.Api.TxArrayTextBitmap
+  name: TxArrayTextBitmap
+  href: api/Texart.Api.TxArrayTextBitmap.html
+  commentId: T:Texart.Api.TxArrayTextBitmap
+  fullName: Texart.Api.TxArrayTextBitmap
+  nameWithType: TxArrayTextBitmap
+- uid: Texart.Api.TxArrayTextBitmap.#ctor(System.Char[],System.Int32,System.Int32)
+  name: TxArrayTextBitmap(Char[], Int32, Int32)
+  href: api/Texart.Api.TxArrayTextBitmap.html#Texart_Api_TxArrayTextBitmap__ctor_System_Char___System_Int32_System_Int32_
+  commentId: M:Texart.Api.TxArrayTextBitmap.#ctor(System.Char[],System.Int32,System.Int32)
+  name.vb: TxArrayTextBitmap(Char(), Int32, Int32)
+  fullName: Texart.Api.TxArrayTextBitmap.TxArrayTextBitmap(System.Char[], System.Int32, System.Int32)
+  fullName.vb: Texart.Api.TxArrayTextBitmap.TxArrayTextBitmap(System.Char(), System.Int32, System.Int32)
+  nameWithType: TxArrayTextBitmap.TxArrayTextBitmap(Char[], Int32, Int32)
+  nameWithType.vb: TxArrayTextBitmap.TxArrayTextBitmap(Char(), Int32, Int32)
+- uid: Texart.Api.TxArrayTextBitmap.#ctor*
+  name: TxArrayTextBitmap
+  href: api/Texart.Api.TxArrayTextBitmap.html#Texart_Api_TxArrayTextBitmap__ctor_
+  commentId: Overload:Texart.Api.TxArrayTextBitmap.#ctor
+  isSpec: "True"
+  fullName: Texart.Api.TxArrayTextBitmap.TxArrayTextBitmap
+  nameWithType: TxArrayTextBitmap.TxArrayTextBitmap
+- uid: Texart.Api.TxArrayTextBitmap.CharAt(System.Int32,System.Int32)
+  name: CharAt(Int32, Int32)
+  href: api/Texart.Api.TxArrayTextBitmap.html#Texart_Api_TxArrayTextBitmap_CharAt_System_Int32_System_Int32_
+  commentId: M:Texart.Api.TxArrayTextBitmap.CharAt(System.Int32,System.Int32)
+  fullName: Texart.Api.TxArrayTextBitmap.CharAt(System.Int32, System.Int32)
+  nameWithType: TxArrayTextBitmap.CharAt(Int32, Int32)
+- uid: Texart.Api.TxArrayTextBitmap.CharAt*
+  name: CharAt
+  href: api/Texart.Api.TxArrayTextBitmap.html#Texart_Api_TxArrayTextBitmap_CharAt_
+  commentId: Overload:Texart.Api.TxArrayTextBitmap.CharAt
+  isSpec: "True"
+  fullName: Texart.Api.TxArrayTextBitmap.CharAt
+  nameWithType: TxArrayTextBitmap.CharAt
+- uid: Texart.Api.TxArrayTextBitmap.Height
+  name: Height
+  href: api/Texart.Api.TxArrayTextBitmap.html#Texart_Api_TxArrayTextBitmap_Height
+  commentId: P:Texart.Api.TxArrayTextBitmap.Height
+  fullName: Texart.Api.TxArrayTextBitmap.Height
+  nameWithType: TxArrayTextBitmap.Height
+- uid: Texart.Api.TxArrayTextBitmap.Height*
+  name: Height
+  href: api/Texart.Api.TxArrayTextBitmap.html#Texart_Api_TxArrayTextBitmap_Height_
+  commentId: Overload:Texart.Api.TxArrayTextBitmap.Height
+  isSpec: "True"
+  fullName: Texart.Api.TxArrayTextBitmap.Height
+  nameWithType: TxArrayTextBitmap.Height
+- uid: Texart.Api.TxArrayTextBitmap.Width
+  name: Width
+  href: api/Texart.Api.TxArrayTextBitmap.html#Texart_Api_TxArrayTextBitmap_Width
+  commentId: P:Texart.Api.TxArrayTextBitmap.Width
+  fullName: Texart.Api.TxArrayTextBitmap.Width
+  nameWithType: TxArrayTextBitmap.Width
+- uid: Texart.Api.TxArrayTextBitmap.Width*
+  name: Width
+  href: api/Texart.Api.TxArrayTextBitmap.html#Texart_Api_TxArrayTextBitmap_Width_
+  commentId: Overload:Texart.Api.TxArrayTextBitmap.Width
+  isSpec: "True"
+  fullName: Texart.Api.TxArrayTextBitmap.Width
+  nameWithType: TxArrayTextBitmap.Width
+- uid: Texart.Api.TxBitmap
+  name: TxBitmap
+  href: api/Texart.Api.TxBitmap.html
+  commentId: T:Texart.Api.TxBitmap
+  fullName: Texart.Api.TxBitmap
+  nameWithType: TxBitmap
+- uid: Texart.Api.TxBitmap.GetPerfectPixelRatios(SKBitmap)
+  name: GetPerfectPixelRatios(SKBitmap)
+  href: api/Texart.Api.TxBitmap.html#Texart_Api_TxBitmap_GetPerfectPixelRatios_SKBitmap_
+  commentId: M:Texart.Api.TxBitmap.GetPerfectPixelRatios(SKBitmap)
+  fullName: Texart.Api.TxBitmap.GetPerfectPixelRatios(SKBitmap)
+  nameWithType: TxBitmap.GetPerfectPixelRatios(SKBitmap)
+- uid: Texart.Api.TxBitmap.GetPerfectPixelRatios(System.Int32,System.Int32)
+  name: GetPerfectPixelRatios(Int32, Int32)
+  href: api/Texart.Api.TxBitmap.html#Texart_Api_TxBitmap_GetPerfectPixelRatios_System_Int32_System_Int32_
+  commentId: M:Texart.Api.TxBitmap.GetPerfectPixelRatios(System.Int32,System.Int32)
+  fullName: Texart.Api.TxBitmap.GetPerfectPixelRatios(System.Int32, System.Int32)
+  nameWithType: TxBitmap.GetPerfectPixelRatios(Int32, Int32)
+- uid: Texart.Api.TxBitmap.GetPerfectPixelRatios*
+  name: GetPerfectPixelRatios
+  href: api/Texart.Api.TxBitmap.html#Texart_Api_TxBitmap_GetPerfectPixelRatios_
+  commentId: Overload:Texart.Api.TxBitmap.GetPerfectPixelRatios
+  isSpec: "True"
+  fullName: Texart.Api.TxBitmap.GetPerfectPixelRatios
+  nameWithType: TxBitmap.GetPerfectPixelRatios
+- uid: Texart.Api.TxContract
+  name: TxContract
+  href: api/Texart.Api.TxContract.html
+  commentId: T:Texart.Api.TxContract
+  fullName: Texart.Api.TxContract
+  nameWithType: TxContract
+- uid: Texart.Api.TxContract.NonNull*
+  name: NonNull
+  href: api/Texart.Api.TxContract.html#Texart_Api_TxContract_NonNull_
+  commentId: Overload:Texart.Api.TxContract.NonNull
+  isSpec: "True"
+  fullName: Texart.Api.TxContract.NonNull
+  nameWithType: TxContract.NonNull
+- uid: Texart.Api.TxContract.NonNull``1(``0,System.String)
+  name: NonNull<T>(T, String)
+  href: api/Texart.Api.TxContract.html#Texart_Api_TxContract_NonNull__1___0_System_String_
+  commentId: M:Texart.Api.TxContract.NonNull``1(``0,System.String)
+  name.vb: NonNull(Of T)(T, String)
+  fullName: Texart.Api.TxContract.NonNull<T>(T, System.String)
+  fullName.vb: Texart.Api.TxContract.NonNull(Of T)(T, System.String)
+  nameWithType: TxContract.NonNull<T>(T, String)
+  nameWithType.vb: TxContract.NonNull(Of T)(T, String)
+- uid: Texart.Api.TxFactory`2
+  name: TxFactory<TResult, TInput>
+  href: api/Texart.Api.TxFactory-2.html
+  commentId: T:Texart.Api.TxFactory`2
+  name.vb: TxFactory(Of TResult, TInput)
+  fullName: Texart.Api.TxFactory<TResult, TInput>
+  fullName.vb: Texart.Api.TxFactory(Of TResult, TInput)
+  nameWithType: TxFactory<TResult, TInput>
+  nameWithType.vb: TxFactory(Of TResult, TInput)
+- uid: Texart.Api.TxPluginResource
+  name: TxPluginResource
+  href: api/Texart.Api.TxPluginResource.html
+  commentId: T:Texart.Api.TxPluginResource
+  fullName: Texart.Api.TxPluginResource
+  nameWithType: TxPluginResource
+- uid: Texart.Api.TxPluginResource.InactiveUnionMemberAccessException
+  name: TxPluginResource.InactiveUnionMemberAccessException
+  href: api/Texart.Api.TxPluginResource.InactiveUnionMemberAccessException.html
+  commentId: T:Texart.Api.TxPluginResource.InactiveUnionMemberAccessException
+  fullName: Texart.Api.TxPluginResource.InactiveUnionMemberAccessException
+  nameWithType: TxPluginResource.InactiveUnionMemberAccessException
+- uid: Texart.Api.TxPluginResource.InactiveUnionMemberAccessException.Message
+  name: Message
+  href: api/Texart.Api.TxPluginResource.InactiveUnionMemberAccessException.html#Texart_Api_TxPluginResource_InactiveUnionMemberAccessException_Message
+  commentId: P:Texart.Api.TxPluginResource.InactiveUnionMemberAccessException.Message
+  fullName: Texart.Api.TxPluginResource.InactiveUnionMemberAccessException.Message
+  nameWithType: TxPluginResource.InactiveUnionMemberAccessException.Message
+- uid: Texart.Api.TxPluginResource.InactiveUnionMemberAccessException.Message*
+  name: Message
+  href: api/Texart.Api.TxPluginResource.InactiveUnionMemberAccessException.html#Texart_Api_TxPluginResource_InactiveUnionMemberAccessException_Message_
+  commentId: Overload:Texart.Api.TxPluginResource.InactiveUnionMemberAccessException.Message
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.InactiveUnionMemberAccessException.Message
+  nameWithType: TxPluginResource.InactiveUnionMemberAccessException.Message
+- uid: Texart.Api.TxPluginResource.MemberKind
+  name: TxPluginResource.MemberKind
+  href: api/Texart.Api.TxPluginResource.MemberKind.html
+  commentId: T:Texart.Api.TxPluginResource.MemberKind
+  fullName: Texart.Api.TxPluginResource.MemberKind
+  nameWithType: TxPluginResource.MemberKind
+- uid: Texart.Api.TxPluginResource.MemberKind.Factory
+  name: Factory
+  href: api/Texart.Api.TxPluginResource.MemberKind.html#Texart_Api_TxPluginResource_MemberKind_Factory
+  commentId: F:Texart.Api.TxPluginResource.MemberKind.Factory
+  fullName: Texart.Api.TxPluginResource.MemberKind.Factory
+  nameWithType: TxPluginResource.MemberKind.Factory
+- uid: Texart.Api.TxPluginResource.MemberKind.Redirect
+  name: Redirect
+  href: api/Texart.Api.TxPluginResource.MemberKind.html#Texart_Api_TxPluginResource_MemberKind_Redirect
+  commentId: F:Texart.Api.TxPluginResource.MemberKind.Redirect
+  fullName: Texart.Api.TxPluginResource.MemberKind.Redirect
+  nameWithType: TxPluginResource.MemberKind.Redirect
+- uid: Texart.Api.TxPluginResource.OfFactory*
+  name: OfFactory
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_OfFactory_
+  commentId: Overload:Texart.Api.TxPluginResource.OfFactory
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.OfFactory
+  nameWithType: TxPluginResource.OfFactory
+- uid: Texart.Api.TxPluginResource.OfFactory``1(Texart.Api.TxFactory{``0,Texart.Api.TxArguments})
+  name: OfFactory<T>(TxFactory<T, TxArguments>)
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_OfFactory__1_Texart_Api_TxFactory___0_Texart_Api_TxArguments__
+  commentId: M:Texart.Api.TxPluginResource.OfFactory``1(Texart.Api.TxFactory{``0,Texart.Api.TxArguments})
+  name.vb: OfFactory(Of T)(TxFactory(Of T, TxArguments))
+  fullName: Texart.Api.TxPluginResource.OfFactory<T>(Texart.Api.TxFactory<T, Texart.Api.TxArguments>)
+  fullName.vb: Texart.Api.TxPluginResource.OfFactory(Of T)(Texart.Api.TxFactory(Of T, Texart.Api.TxArguments))
+  nameWithType: TxPluginResource.OfFactory<T>(TxFactory<T, TxArguments>)
+  nameWithType.vb: TxPluginResource.OfFactory(Of T)(TxFactory(Of T, TxArguments))
+- uid: Texart.Api.TxPluginResource.OfGeneratorFactory*
+  name: OfGeneratorFactory
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_OfGeneratorFactory_
+  commentId: Overload:Texart.Api.TxPluginResource.OfGeneratorFactory
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.OfGeneratorFactory
+  nameWithType: TxPluginResource.OfGeneratorFactory
+- uid: Texart.Api.TxPluginResource.OfGeneratorFactory``1(Texart.Api.TxFactory{``0,Texart.Api.TxArguments})
+  name: OfGeneratorFactory<T>(TxFactory<T, TxArguments>)
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_OfGeneratorFactory__1_Texart_Api_TxFactory___0_Texart_Api_TxArguments__
+  commentId: M:Texart.Api.TxPluginResource.OfGeneratorFactory``1(Texart.Api.TxFactory{``0,Texart.Api.TxArguments})
+  name.vb: OfGeneratorFactory(Of T)(TxFactory(Of T, TxArguments))
+  fullName: Texart.Api.TxPluginResource.OfGeneratorFactory<T>(Texart.Api.TxFactory<T, Texart.Api.TxArguments>)
+  fullName.vb: Texart.Api.TxPluginResource.OfGeneratorFactory(Of T)(Texart.Api.TxFactory(Of T, Texart.Api.TxArguments))
+  nameWithType: TxPluginResource.OfGeneratorFactory<T>(TxFactory<T, TxArguments>)
+  nameWithType.vb: TxPluginResource.OfGeneratorFactory(Of T)(TxFactory(Of T, TxArguments))
+- uid: Texart.Api.TxPluginResource.OfRendererFactory*
+  name: OfRendererFactory
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_OfRendererFactory_
+  commentId: Overload:Texart.Api.TxPluginResource.OfRendererFactory
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.OfRendererFactory
+  nameWithType: TxPluginResource.OfRendererFactory
+- uid: Texart.Api.TxPluginResource.OfRendererFactory``1(Texart.Api.TxFactory{``0,Texart.Api.TxArguments})
+  name: OfRendererFactory<T>(TxFactory<T, TxArguments>)
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_OfRendererFactory__1_Texart_Api_TxFactory___0_Texart_Api_TxArguments__
+  commentId: M:Texart.Api.TxPluginResource.OfRendererFactory``1(Texart.Api.TxFactory{``0,Texart.Api.TxArguments})
+  name.vb: OfRendererFactory(Of T)(TxFactory(Of T, TxArguments))
+  fullName: Texart.Api.TxPluginResource.OfRendererFactory<T>(Texart.Api.TxFactory<T, Texart.Api.TxArguments>)
+  fullName.vb: Texart.Api.TxPluginResource.OfRendererFactory(Of T)(Texart.Api.TxFactory(Of T, Texart.Api.TxArguments))
+  nameWithType: TxPluginResource.OfRendererFactory<T>(TxFactory<T, TxArguments>)
+  nameWithType.vb: TxPluginResource.OfRendererFactory(Of T)(TxFactory(Of T, TxArguments))
+- uid: Texart.Api.TxPluginResource.Redirect*
+  name: Redirect
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect_
+  commentId: Overload:Texart.Api.TxPluginResource.Redirect
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.Redirect
+  nameWithType: TxPluginResource.Redirect
+- uid: Texart.Api.TxPluginResource.Redirect``1(Texart.Api.TxPluginResourceLocator,Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
+  name: Redirect<T>(TxPluginResourceLocator, Func<TxArguments, TxArguments>)
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect__1_Texart_Api_TxPluginResourceLocator_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__
+  commentId: M:Texart.Api.TxPluginResource.Redirect``1(Texart.Api.TxPluginResourceLocator,Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
+  name.vb: Redirect(Of T)(TxPluginResourceLocator, Func(Of TxArguments, TxArguments))
+  fullName: Texart.Api.TxPluginResource.Redirect<T>(Texart.Api.TxPluginResourceLocator, Func<Texart.Api.TxArguments, Texart.Api.TxArguments>)
+  fullName.vb: Texart.Api.TxPluginResource.Redirect(Of T)(Texart.Api.TxPluginResourceLocator, Func(Of Texart.Api.TxArguments, Texart.Api.TxArguments))
+  nameWithType: TxPluginResource.Redirect<T>(TxPluginResourceLocator, Func<TxArguments, TxArguments>)
+  nameWithType.vb: TxPluginResource.Redirect(Of T)(TxPluginResourceLocator, Func(Of TxArguments, TxArguments))
+- uid: Texart.Api.TxPluginResource.RedirectGenerator(Texart.Api.TxPluginResourceLocator,Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
+  name: RedirectGenerator(TxPluginResourceLocator, Func<TxArguments, TxArguments>)
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_RedirectGenerator_Texart_Api_TxPluginResourceLocator_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__
+  commentId: M:Texart.Api.TxPluginResource.RedirectGenerator(Texart.Api.TxPluginResourceLocator,Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
+  name.vb: RedirectGenerator(TxPluginResourceLocator, Func(Of TxArguments, TxArguments))
+  fullName: Texart.Api.TxPluginResource.RedirectGenerator(Texart.Api.TxPluginResourceLocator, Func<Texart.Api.TxArguments, Texart.Api.TxArguments>)
+  fullName.vb: Texart.Api.TxPluginResource.RedirectGenerator(Texart.Api.TxPluginResourceLocator, Func(Of Texart.Api.TxArguments, Texart.Api.TxArguments))
+  nameWithType: TxPluginResource.RedirectGenerator(TxPluginResourceLocator, Func<TxArguments, TxArguments>)
+  nameWithType.vb: TxPluginResource.RedirectGenerator(TxPluginResourceLocator, Func(Of TxArguments, TxArguments))
+- uid: Texart.Api.TxPluginResource.RedirectGenerator*
+  name: RedirectGenerator
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_RedirectGenerator_
+  commentId: Overload:Texart.Api.TxPluginResource.RedirectGenerator
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.RedirectGenerator
+  nameWithType: TxPluginResource.RedirectGenerator
+- uid: Texart.Api.TxPluginResource.RedirectRenderer(Texart.Api.TxPluginResourceLocator,Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
+  name: RedirectRenderer(TxPluginResourceLocator, Func<TxArguments, TxArguments>)
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_RedirectRenderer_Texart_Api_TxPluginResourceLocator_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__
+  commentId: M:Texart.Api.TxPluginResource.RedirectRenderer(Texart.Api.TxPluginResourceLocator,Func{Texart.Api.TxArguments,Texart.Api.TxArguments})
+  name.vb: RedirectRenderer(TxPluginResourceLocator, Func(Of TxArguments, TxArguments))
+  fullName: Texart.Api.TxPluginResource.RedirectRenderer(Texart.Api.TxPluginResourceLocator, Func<Texart.Api.TxArguments, Texart.Api.TxArguments>)
+  fullName.vb: Texart.Api.TxPluginResource.RedirectRenderer(Texart.Api.TxPluginResourceLocator, Func(Of Texart.Api.TxArguments, Texart.Api.TxArguments))
+  nameWithType: TxPluginResource.RedirectRenderer(TxPluginResourceLocator, Func<TxArguments, TxArguments>)
+  nameWithType.vb: TxPluginResource.RedirectRenderer(TxPluginResourceLocator, Func(Of TxArguments, TxArguments))
+- uid: Texart.Api.TxPluginResource.RedirectRenderer*
+  name: RedirectRenderer
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_RedirectRenderer_
+  commentId: Overload:Texart.Api.TxPluginResource.RedirectRenderer
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.RedirectRenderer
+  nameWithType: TxPluginResource.RedirectRenderer
+- uid: Texart.Api.TxPluginResource.ResourceRedirect
+  name: TxPluginResource.ResourceRedirect
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html
+  commentId: T:Texart.Api.TxPluginResource.ResourceRedirect
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect
+  nameWithType: TxPluginResource.ResourceRedirect
+- uid: Texart.Api.TxPluginResource.ResourceRedirect.ArgumentsTransformer
+  name: ArgumentsTransformer
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html#Texart_Api_TxPluginResource_ResourceRedirect_ArgumentsTransformer
+  commentId: P:Texart.Api.TxPluginResource.ResourceRedirect.ArgumentsTransformer
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect.ArgumentsTransformer
+  nameWithType: TxPluginResource.ResourceRedirect.ArgumentsTransformer
+- uid: Texart.Api.TxPluginResource.ResourceRedirect.ArgumentsTransformer*
+  name: ArgumentsTransformer
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html#Texart_Api_TxPluginResource_ResourceRedirect_ArgumentsTransformer_
+  commentId: Overload:Texart.Api.TxPluginResource.ResourceRedirect.ArgumentsTransformer
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect.ArgumentsTransformer
+  nameWithType: TxPluginResource.ResourceRedirect.ArgumentsTransformer
+- uid: Texart.Api.TxPluginResource.ResourceRedirect.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html#Texart_Api_TxPluginResource_ResourceRedirect_Equals_System_Object_
+  commentId: M:Texart.Api.TxPluginResource.ResourceRedirect.Equals(System.Object)
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect.Equals(System.Object)
+  nameWithType: TxPluginResource.ResourceRedirect.Equals(Object)
+- uid: Texart.Api.TxPluginResource.ResourceRedirect.Equals(Texart.Api.TxPluginResource.ResourceRedirect)
+  name: Equals(TxPluginResource.ResourceRedirect)
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html#Texart_Api_TxPluginResource_ResourceRedirect_Equals_Texart_Api_TxPluginResource_ResourceRedirect_
+  commentId: M:Texart.Api.TxPluginResource.ResourceRedirect.Equals(Texart.Api.TxPluginResource.ResourceRedirect)
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect.Equals(Texart.Api.TxPluginResource.ResourceRedirect)
+  nameWithType: TxPluginResource.ResourceRedirect.Equals(TxPluginResource.ResourceRedirect)
+- uid: Texart.Api.TxPluginResource.ResourceRedirect.Equals*
+  name: Equals
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html#Texart_Api_TxPluginResource_ResourceRedirect_Equals_
+  commentId: Overload:Texart.Api.TxPluginResource.ResourceRedirect.Equals
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect.Equals
+  nameWithType: TxPluginResource.ResourceRedirect.Equals
+- uid: Texart.Api.TxPluginResource.ResourceRedirect.GetHashCode
+  name: GetHashCode()
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html#Texart_Api_TxPluginResource_ResourceRedirect_GetHashCode
+  commentId: M:Texart.Api.TxPluginResource.ResourceRedirect.GetHashCode
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect.GetHashCode()
+  nameWithType: TxPluginResource.ResourceRedirect.GetHashCode()
+- uid: Texart.Api.TxPluginResource.ResourceRedirect.GetHashCode*
+  name: GetHashCode
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html#Texart_Api_TxPluginResource_ResourceRedirect_GetHashCode_
+  commentId: Overload:Texart.Api.TxPluginResource.ResourceRedirect.GetHashCode
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect.GetHashCode
+  nameWithType: TxPluginResource.ResourceRedirect.GetHashCode
+- uid: Texart.Api.TxPluginResource.ResourceRedirect.Locator
+  name: Locator
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html#Texart_Api_TxPluginResource_ResourceRedirect_Locator
+  commentId: P:Texart.Api.TxPluginResource.ResourceRedirect.Locator
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect.Locator
+  nameWithType: TxPluginResource.ResourceRedirect.Locator
+- uid: Texart.Api.TxPluginResource.ResourceRedirect.Locator*
+  name: Locator
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html#Texart_Api_TxPluginResource_ResourceRedirect_Locator_
+  commentId: Overload:Texart.Api.TxPluginResource.ResourceRedirect.Locator
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect.Locator
+  nameWithType: TxPluginResource.ResourceRedirect.Locator
+- uid: Texart.Api.TxPluginResource.ResourceRedirect.op_Equality(Texart.Api.TxPluginResource.ResourceRedirect,Texart.Api.TxPluginResource.ResourceRedirect)
+  name: Equality(TxPluginResource.ResourceRedirect, TxPluginResource.ResourceRedirect)
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html#Texart_Api_TxPluginResource_ResourceRedirect_op_Equality_Texart_Api_TxPluginResource_ResourceRedirect_Texart_Api_TxPluginResource_ResourceRedirect_
+  commentId: M:Texart.Api.TxPluginResource.ResourceRedirect.op_Equality(Texart.Api.TxPluginResource.ResourceRedirect,Texart.Api.TxPluginResource.ResourceRedirect)
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect.Equality(Texart.Api.TxPluginResource.ResourceRedirect, Texart.Api.TxPluginResource.ResourceRedirect)
+  nameWithType: TxPluginResource.ResourceRedirect.Equality(TxPluginResource.ResourceRedirect, TxPluginResource.ResourceRedirect)
+- uid: Texart.Api.TxPluginResource.ResourceRedirect.op_Equality*
+  name: Equality
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html#Texart_Api_TxPluginResource_ResourceRedirect_op_Equality_
+  commentId: Overload:Texart.Api.TxPluginResource.ResourceRedirect.op_Equality
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect.Equality
+  nameWithType: TxPluginResource.ResourceRedirect.Equality
+- uid: Texart.Api.TxPluginResource.ResourceRedirect.op_Inequality(Texart.Api.TxPluginResource.ResourceRedirect,Texart.Api.TxPluginResource.ResourceRedirect)
+  name: Inequality(TxPluginResource.ResourceRedirect, TxPluginResource.ResourceRedirect)
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html#Texart_Api_TxPluginResource_ResourceRedirect_op_Inequality_Texart_Api_TxPluginResource_ResourceRedirect_Texart_Api_TxPluginResource_ResourceRedirect_
+  commentId: M:Texart.Api.TxPluginResource.ResourceRedirect.op_Inequality(Texart.Api.TxPluginResource.ResourceRedirect,Texart.Api.TxPluginResource.ResourceRedirect)
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect.Inequality(Texart.Api.TxPluginResource.ResourceRedirect, Texart.Api.TxPluginResource.ResourceRedirect)
+  nameWithType: TxPluginResource.ResourceRedirect.Inequality(TxPluginResource.ResourceRedirect, TxPluginResource.ResourceRedirect)
+- uid: Texart.Api.TxPluginResource.ResourceRedirect.op_Inequality*
+  name: Inequality
+  href: api/Texart.Api.TxPluginResource.ResourceRedirect.html#Texart_Api_TxPluginResource_ResourceRedirect_op_Inequality_
+  commentId: Overload:Texart.Api.TxPluginResource.ResourceRedirect.op_Inequality
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.ResourceRedirect.Inequality
+  nameWithType: TxPluginResource.ResourceRedirect.Inequality
+- uid: Texart.Api.TxPluginResource.Widen*
+  name: Widen
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Widen_
+  commentId: Overload:Texart.Api.TxPluginResource.Widen
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource.Widen
+  nameWithType: TxPluginResource.Widen
+- uid: Texart.Api.TxPluginResource.Widen``2(Texart.Api.TxPluginResource{``1})
+  name: Widen<T, TU>(TxPluginResource<TU>)
+  href: api/Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Widen__2_Texart_Api_TxPluginResource___1__
+  commentId: M:Texart.Api.TxPluginResource.Widen``2(Texart.Api.TxPluginResource{``1})
+  name.vb: Widen(Of T, TU)(TxPluginResource(Of TU))
+  fullName: Texart.Api.TxPluginResource.Widen<T, TU>(Texart.Api.TxPluginResource<TU>)
+  fullName.vb: Texart.Api.TxPluginResource.Widen(Of T, TU)(Texart.Api.TxPluginResource(Of TU))
+  nameWithType: TxPluginResource.Widen<T, TU>(TxPluginResource<TU>)
+  nameWithType.vb: TxPluginResource.Widen(Of T, TU)(TxPluginResource(Of TU))
+- uid: Texart.Api.TxPluginResource`1
+  name: TxPluginResource<T>
+  href: api/Texart.Api.TxPluginResource-1.html
+  commentId: T:Texart.Api.TxPluginResource`1
+  name.vb: TxPluginResource(Of T)
+  fullName: Texart.Api.TxPluginResource<T>
+  fullName.vb: Texart.Api.TxPluginResource(Of T)
+  nameWithType: TxPluginResource<T>
+  nameWithType.vb: TxPluginResource(Of T)
+- uid: Texart.Api.TxPluginResource`1.ActiveMember
+  name: ActiveMember
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_ActiveMember
+  commentId: P:Texart.Api.TxPluginResource`1.ActiveMember
+  fullName: Texart.Api.TxPluginResource<T>.ActiveMember
+  fullName.vb: Texart.Api.TxPluginResource(Of T).ActiveMember
+  nameWithType: TxPluginResource<T>.ActiveMember
+  nameWithType.vb: TxPluginResource(Of T).ActiveMember
+- uid: Texart.Api.TxPluginResource`1.ActiveMember*
+  name: ActiveMember
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_ActiveMember_
+  commentId: Overload:Texart.Api.TxPluginResource`1.ActiveMember
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource<T>.ActiveMember
+  fullName.vb: Texart.Api.TxPluginResource(Of T).ActiveMember
+  nameWithType: TxPluginResource<T>.ActiveMember
+  nameWithType.vb: TxPluginResource(Of T).ActiveMember
+- uid: Texart.Api.TxPluginResource`1.ActiveMemberKind
+  name: ActiveMemberKind
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_ActiveMemberKind
+  commentId: P:Texart.Api.TxPluginResource`1.ActiveMemberKind
+  fullName: Texart.Api.TxPluginResource<T>.ActiveMemberKind
+  fullName.vb: Texart.Api.TxPluginResource(Of T).ActiveMemberKind
+  nameWithType: TxPluginResource<T>.ActiveMemberKind
+  nameWithType.vb: TxPluginResource(Of T).ActiveMemberKind
+- uid: Texart.Api.TxPluginResource`1.ActiveMemberKind*
+  name: ActiveMemberKind
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_ActiveMemberKind_
+  commentId: Overload:Texart.Api.TxPluginResource`1.ActiveMemberKind
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource<T>.ActiveMemberKind
+  fullName.vb: Texart.Api.TxPluginResource(Of T).ActiveMemberKind
+  nameWithType: TxPluginResource<T>.ActiveMemberKind
+  nameWithType.vb: TxPluginResource(Of T).ActiveMemberKind
+- uid: Texart.Api.TxPluginResource`1.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_Equals_System_Object_
+  commentId: M:Texart.Api.TxPluginResource`1.Equals(System.Object)
+  fullName: Texart.Api.TxPluginResource<T>.Equals(System.Object)
+  fullName.vb: Texart.Api.TxPluginResource(Of T).Equals(System.Object)
+  nameWithType: TxPluginResource<T>.Equals(Object)
+  nameWithType.vb: TxPluginResource(Of T).Equals(Object)
+- uid: Texart.Api.TxPluginResource`1.Equals(Texart.Api.TxPluginResource{`0})
+  name: Equals(TxPluginResource<T>)
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_Equals_Texart_Api_TxPluginResource__0__
+  commentId: M:Texart.Api.TxPluginResource`1.Equals(Texart.Api.TxPluginResource{`0})
+  name.vb: Equals(TxPluginResource(Of T))
+  fullName: Texart.Api.TxPluginResource<T>.Equals(Texart.Api.TxPluginResource<T>)
+  fullName.vb: Texart.Api.TxPluginResource(Of T).Equals(Texart.Api.TxPluginResource(Of T))
+  nameWithType: TxPluginResource<T>.Equals(TxPluginResource<T>)
+  nameWithType.vb: TxPluginResource(Of T).Equals(TxPluginResource(Of T))
+- uid: Texart.Api.TxPluginResource`1.Equals*
+  name: Equals
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_Equals_
+  commentId: Overload:Texart.Api.TxPluginResource`1.Equals
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource<T>.Equals
+  fullName.vb: Texart.Api.TxPluginResource(Of T).Equals
+  nameWithType: TxPluginResource<T>.Equals
+  nameWithType.vb: TxPluginResource(Of T).Equals
+- uid: Texart.Api.TxPluginResource`1.Factory
+  name: Factory
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_Factory
+  commentId: P:Texart.Api.TxPluginResource`1.Factory
+  fullName: Texart.Api.TxPluginResource<T>.Factory
+  fullName.vb: Texart.Api.TxPluginResource(Of T).Factory
+  nameWithType: TxPluginResource<T>.Factory
+  nameWithType.vb: TxPluginResource(Of T).Factory
+- uid: Texart.Api.TxPluginResource`1.Factory*
+  name: Factory
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_Factory_
+  commentId: Overload:Texart.Api.TxPluginResource`1.Factory
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource<T>.Factory
+  fullName.vb: Texart.Api.TxPluginResource(Of T).Factory
+  nameWithType: TxPluginResource<T>.Factory
+  nameWithType.vb: TxPluginResource(Of T).Factory
+- uid: Texart.Api.TxPluginResource`1.GetHashCode
+  name: GetHashCode()
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_GetHashCode
+  commentId: M:Texart.Api.TxPluginResource`1.GetHashCode
+  fullName: Texart.Api.TxPluginResource<T>.GetHashCode()
+  fullName.vb: Texart.Api.TxPluginResource(Of T).GetHashCode()
+  nameWithType: TxPluginResource<T>.GetHashCode()
+  nameWithType.vb: TxPluginResource(Of T).GetHashCode()
+- uid: Texart.Api.TxPluginResource`1.GetHashCode*
+  name: GetHashCode
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_GetHashCode_
+  commentId: Overload:Texart.Api.TxPluginResource`1.GetHashCode
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource<T>.GetHashCode
+  fullName.vb: Texart.Api.TxPluginResource(Of T).GetHashCode
+  nameWithType: TxPluginResource<T>.GetHashCode
+  nameWithType.vb: TxPluginResource(Of T).GetHashCode
+- uid: Texart.Api.TxPluginResource`1.op_Equality(Texart.Api.TxPluginResource{`0},Texart.Api.TxPluginResource{`0})
+  name: Equality(TxPluginResource<T>, TxPluginResource<T>)
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_op_Equality_Texart_Api_TxPluginResource__0__Texart_Api_TxPluginResource__0__
+  commentId: M:Texart.Api.TxPluginResource`1.op_Equality(Texart.Api.TxPluginResource{`0},Texart.Api.TxPluginResource{`0})
+  name.vb: Equality(TxPluginResource(Of T), TxPluginResource(Of T))
+  fullName: Texart.Api.TxPluginResource<T>.Equality(Texart.Api.TxPluginResource<T>, Texart.Api.TxPluginResource<T>)
+  fullName.vb: Texart.Api.TxPluginResource(Of T).Equality(Texart.Api.TxPluginResource(Of T), Texart.Api.TxPluginResource(Of T))
+  nameWithType: TxPluginResource<T>.Equality(TxPluginResource<T>, TxPluginResource<T>)
+  nameWithType.vb: TxPluginResource(Of T).Equality(TxPluginResource(Of T), TxPluginResource(Of T))
+- uid: Texart.Api.TxPluginResource`1.op_Equality*
+  name: Equality
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_op_Equality_
+  commentId: Overload:Texart.Api.TxPluginResource`1.op_Equality
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource<T>.Equality
+  fullName.vb: Texart.Api.TxPluginResource(Of T).Equality
+  nameWithType: TxPluginResource<T>.Equality
+  nameWithType.vb: TxPluginResource(Of T).Equality
+- uid: Texart.Api.TxPluginResource`1.op_Inequality(Texart.Api.TxPluginResource{`0},Texart.Api.TxPluginResource{`0})
+  name: Inequality(TxPluginResource<T>, TxPluginResource<T>)
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_op_Inequality_Texart_Api_TxPluginResource__0__Texart_Api_TxPluginResource__0__
+  commentId: M:Texart.Api.TxPluginResource`1.op_Inequality(Texart.Api.TxPluginResource{`0},Texart.Api.TxPluginResource{`0})
+  name.vb: Inequality(TxPluginResource(Of T), TxPluginResource(Of T))
+  fullName: Texart.Api.TxPluginResource<T>.Inequality(Texart.Api.TxPluginResource<T>, Texart.Api.TxPluginResource<T>)
+  fullName.vb: Texart.Api.TxPluginResource(Of T).Inequality(Texart.Api.TxPluginResource(Of T), Texart.Api.TxPluginResource(Of T))
+  nameWithType: TxPluginResource<T>.Inequality(TxPluginResource<T>, TxPluginResource<T>)
+  nameWithType.vb: TxPluginResource(Of T).Inequality(TxPluginResource(Of T), TxPluginResource(Of T))
+- uid: Texart.Api.TxPluginResource`1.op_Inequality*
+  name: Inequality
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_op_Inequality_
+  commentId: Overload:Texart.Api.TxPluginResource`1.op_Inequality
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource<T>.Inequality
+  fullName.vb: Texart.Api.TxPluginResource(Of T).Inequality
+  nameWithType: TxPluginResource<T>.Inequality
+  nameWithType.vb: TxPluginResource(Of T).Inequality
+- uid: Texart.Api.TxPluginResource`1.Redirect
+  name: Redirect
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_Redirect
+  commentId: P:Texart.Api.TxPluginResource`1.Redirect
+  fullName: Texart.Api.TxPluginResource<T>.Redirect
+  fullName.vb: Texart.Api.TxPluginResource(Of T).Redirect
+  nameWithType: TxPluginResource<T>.Redirect
+  nameWithType.vb: TxPluginResource(Of T).Redirect
+- uid: Texart.Api.TxPluginResource`1.Redirect*
+  name: Redirect
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_Redirect_
+  commentId: Overload:Texart.Api.TxPluginResource`1.Redirect
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource<T>.Redirect
+  fullName.vb: Texart.Api.TxPluginResource(Of T).Redirect
+  nameWithType: TxPluginResource<T>.Redirect
+  nameWithType.vb: TxPluginResource(Of T).Redirect
+- uid: Texart.Api.TxPluginResource`1.ToString
+  name: ToString()
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_ToString
+  commentId: M:Texart.Api.TxPluginResource`1.ToString
+  fullName: Texart.Api.TxPluginResource<T>.ToString()
+  fullName.vb: Texart.Api.TxPluginResource(Of T).ToString()
+  nameWithType: TxPluginResource<T>.ToString()
+  nameWithType.vb: TxPluginResource(Of T).ToString()
+- uid: Texart.Api.TxPluginResource`1.ToString*
+  name: ToString
+  href: api/Texart.Api.TxPluginResource-1.html#Texart_Api_TxPluginResource_1_ToString_
+  commentId: Overload:Texart.Api.TxPluginResource`1.ToString
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResource<T>.ToString
+  fullName.vb: Texart.Api.TxPluginResource(Of T).ToString
+  nameWithType: TxPluginResource<T>.ToString
+  nameWithType.vb: TxPluginResource(Of T).ToString
+- uid: Texart.Api.TxPluginResourceLocator
+  name: TxPluginResourceLocator
+  href: api/Texart.Api.TxPluginResourceLocator.html
+  commentId: T:Texart.Api.TxPluginResourceLocator
+  fullName: Texart.Api.TxPluginResourceLocator
+  nameWithType: TxPluginResourceLocator
+- uid: Texart.Api.TxPluginResourceLocator.AssemblyPath
+  name: AssemblyPath
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyPath
+  commentId: P:Texart.Api.TxPluginResourceLocator.AssemblyPath
+  fullName: Texart.Api.TxPluginResourceLocator.AssemblyPath
+  nameWithType: TxPluginResourceLocator.AssemblyPath
+- uid: Texart.Api.TxPluginResourceLocator.AssemblyPath*
+  name: AssemblyPath
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyPath_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.AssemblyPath
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.AssemblyPath
+  nameWithType: TxPluginResourceLocator.AssemblyPath
+- uid: Texart.Api.TxPluginResourceLocator.AssemblyResourceSeparator
+  name: AssemblyResourceSeparator
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyResourceSeparator
+  commentId: F:Texart.Api.TxPluginResourceLocator.AssemblyResourceSeparator
+  fullName: Texart.Api.TxPluginResourceLocator.AssemblyResourceSeparator
+  nameWithType: TxPluginResourceLocator.AssemblyResourceSeparator
+- uid: Texart.Api.TxPluginResourceLocator.AssemblySegments
+  name: AssemblySegments
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblySegments
+  commentId: P:Texart.Api.TxPluginResourceLocator.AssemblySegments
+  fullName: Texart.Api.TxPluginResourceLocator.AssemblySegments
+  nameWithType: TxPluginResourceLocator.AssemblySegments
+- uid: Texart.Api.TxPluginResourceLocator.AssemblySegments*
+  name: AssemblySegments
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblySegments_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.AssemblySegments
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.AssemblySegments
+  nameWithType: TxPluginResourceLocator.AssemblySegments
+- uid: Texart.Api.TxPluginResourceLocator.AsUri
+  name: AsUri
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AsUri
+  commentId: P:Texart.Api.TxPluginResourceLocator.AsUri
+  fullName: Texart.Api.TxPluginResourceLocator.AsUri
+  nameWithType: TxPluginResourceLocator.AsUri
+- uid: Texart.Api.TxPluginResourceLocator.AsUri*
+  name: AsUri
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AsUri_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.AsUri
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.AsUri
+  nameWithType: TxPluginResourceLocator.AsUri
+- uid: Texart.Api.TxPluginResourceLocator.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Equals_System_Object_
+  commentId: M:Texart.Api.TxPluginResourceLocator.Equals(System.Object)
+  fullName: Texart.Api.TxPluginResourceLocator.Equals(System.Object)
+  nameWithType: TxPluginResourceLocator.Equals(Object)
+- uid: Texart.Api.TxPluginResourceLocator.Equals(Texart.Api.TxPluginResourceLocator)
+  name: Equals(TxPluginResourceLocator)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Equals_Texart_Api_TxPluginResourceLocator_
+  commentId: M:Texart.Api.TxPluginResourceLocator.Equals(Texart.Api.TxPluginResourceLocator)
+  fullName: Texart.Api.TxPluginResourceLocator.Equals(Texart.Api.TxPluginResourceLocator)
+  nameWithType: TxPluginResourceLocator.Equals(TxPluginResourceLocator)
+- uid: Texart.Api.TxPluginResourceLocator.Equals*
+  name: Equals
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Equals_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.Equals
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.Equals
+  nameWithType: TxPluginResourceLocator.Equals
+- uid: Texart.Api.TxPluginResourceLocator.FormatException
+  name: TxPluginResourceLocator.FormatException
+  href: api/Texart.Api.TxPluginResourceLocator.FormatException.html
+  commentId: T:Texart.Api.TxPluginResourceLocator.FormatException
+  fullName: Texart.Api.TxPluginResourceLocator.FormatException
+  nameWithType: TxPluginResourceLocator.FormatException
+- uid: Texart.Api.TxPluginResourceLocator.GetHashCode
+  name: GetHashCode()
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_GetHashCode
+  commentId: M:Texart.Api.TxPluginResourceLocator.GetHashCode
+  fullName: Texart.Api.TxPluginResourceLocator.GetHashCode()
+  nameWithType: TxPluginResourceLocator.GetHashCode()
+- uid: Texart.Api.TxPluginResourceLocator.GetHashCode*
+  name: GetHashCode
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_GetHashCode_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.GetHashCode
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.GetHashCode
+  nameWithType: TxPluginResourceLocator.GetHashCode
+- uid: Texart.Api.TxPluginResourceLocator.IsWellFormedRelativeResourceString(System.String)
+  name: IsWellFormedRelativeResourceString(String)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_IsWellFormedRelativeResourceString_System_String_
+  commentId: M:Texart.Api.TxPluginResourceLocator.IsWellFormedRelativeResourceString(System.String)
+  fullName: Texart.Api.TxPluginResourceLocator.IsWellFormedRelativeResourceString(System.String)
+  nameWithType: TxPluginResourceLocator.IsWellFormedRelativeResourceString(String)
+- uid: Texart.Api.TxPluginResourceLocator.IsWellFormedRelativeResourceString*
+  name: IsWellFormedRelativeResourceString
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_IsWellFormedRelativeResourceString_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.IsWellFormedRelativeResourceString
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.IsWellFormedRelativeResourceString
+  nameWithType: TxPluginResourceLocator.IsWellFormedRelativeResourceString
+- uid: Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri(Uri)
+  name: IsWellFormedResourceLocatorUri(Uri)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_IsWellFormedResourceLocatorUri_Uri_
+  commentId: M:Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri(Uri)
+  fullName: Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri(Uri)
+  nameWithType: TxPluginResourceLocator.IsWellFormedResourceLocatorUri(Uri)
+- uid: Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri*
+  name: IsWellFormedResourceLocatorUri
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_IsWellFormedResourceLocatorUri_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.IsWellFormedResourceLocatorUri
+  nameWithType: TxPluginResourceLocator.IsWellFormedResourceLocatorUri
+- uid: Texart.Api.TxPluginResourceLocator.Of(System.String)
+  name: Of(String)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Of_System_String_
+  commentId: M:Texart.Api.TxPluginResourceLocator.Of(System.String)
+  fullName: Texart.Api.TxPluginResourceLocator.Of(System.String)
+  nameWithType: TxPluginResourceLocator.Of(String)
+- uid: Texart.Api.TxPluginResourceLocator.Of(Uri)
+  name: Of(Uri)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Of_Uri_
+  commentId: M:Texart.Api.TxPluginResourceLocator.Of(Uri)
+  fullName: Texart.Api.TxPluginResourceLocator.Of(Uri)
+  nameWithType: TxPluginResourceLocator.Of(Uri)
+- uid: Texart.Api.TxPluginResourceLocator.Of*
+  name: Of
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Of_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.Of
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.Of
+  nameWithType: TxPluginResourceLocator.Of
+- uid: Texart.Api.TxPluginResourceLocator.OfRelativeResource(System.String)
+  name: OfRelativeResource(String)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_OfRelativeResource_System_String_
+  commentId: M:Texart.Api.TxPluginResourceLocator.OfRelativeResource(System.String)
+  fullName: Texart.Api.TxPluginResourceLocator.OfRelativeResource(System.String)
+  nameWithType: TxPluginResourceLocator.OfRelativeResource(String)
+- uid: Texart.Api.TxPluginResourceLocator.OfRelativeResource*
+  name: OfRelativeResource
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_OfRelativeResource_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.OfRelativeResource
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.OfRelativeResource
+  nameWithType: TxPluginResourceLocator.OfRelativeResource
+- uid: Texart.Api.TxPluginResourceLocator.op_Equality(Texart.Api.TxPluginResourceLocator,Texart.Api.TxPluginResourceLocator)
+  name: Equality(TxPluginResourceLocator, TxPluginResourceLocator)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_op_Equality_Texart_Api_TxPluginResourceLocator_Texart_Api_TxPluginResourceLocator_
+  commentId: M:Texart.Api.TxPluginResourceLocator.op_Equality(Texart.Api.TxPluginResourceLocator,Texart.Api.TxPluginResourceLocator)
+  fullName: Texart.Api.TxPluginResourceLocator.Equality(Texart.Api.TxPluginResourceLocator, Texart.Api.TxPluginResourceLocator)
+  nameWithType: TxPluginResourceLocator.Equality(TxPluginResourceLocator, TxPluginResourceLocator)
+- uid: Texart.Api.TxPluginResourceLocator.op_Equality*
+  name: Equality
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_op_Equality_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.op_Equality
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.Equality
+  nameWithType: TxPluginResourceLocator.Equality
+- uid: Texart.Api.TxPluginResourceLocator.op_Inequality(Texart.Api.TxPluginResourceLocator,Texart.Api.TxPluginResourceLocator)
+  name: Inequality(TxPluginResourceLocator, TxPluginResourceLocator)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_op_Inequality_Texart_Api_TxPluginResourceLocator_Texart_Api_TxPluginResourceLocator_
+  commentId: M:Texart.Api.TxPluginResourceLocator.op_Inequality(Texart.Api.TxPluginResourceLocator,Texart.Api.TxPluginResourceLocator)
+  fullName: Texart.Api.TxPluginResourceLocator.Inequality(Texart.Api.TxPluginResourceLocator, Texart.Api.TxPluginResourceLocator)
+  nameWithType: TxPluginResourceLocator.Inequality(TxPluginResourceLocator, TxPluginResourceLocator)
+- uid: Texart.Api.TxPluginResourceLocator.op_Inequality*
+  name: Inequality
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_op_Inequality_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.op_Inequality
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.Inequality
+  nameWithType: TxPluginResourceLocator.Inequality
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator
+  name: TxPluginResourceLocator.RelativeLocator
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html
+  commentId: T:Texart.Api.TxPluginResourceLocator.RelativeLocator
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator
+  nameWithType: TxPluginResourceLocator.RelativeLocator
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_Equals_System_Object_
+  commentId: M:Texart.Api.TxPluginResourceLocator.RelativeLocator.Equals(System.Object)
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.Equals(System.Object)
+  nameWithType: TxPluginResourceLocator.RelativeLocator.Equals(Object)
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.Equals(Texart.Api.TxPluginResourceLocator.RelativeLocator)
+  name: Equals(TxPluginResourceLocator.RelativeLocator)
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_Equals_Texart_Api_TxPluginResourceLocator_RelativeLocator_
+  commentId: M:Texart.Api.TxPluginResourceLocator.RelativeLocator.Equals(Texart.Api.TxPluginResourceLocator.RelativeLocator)
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.Equals(Texart.Api.TxPluginResourceLocator.RelativeLocator)
+  nameWithType: TxPluginResourceLocator.RelativeLocator.Equals(TxPluginResourceLocator.RelativeLocator)
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.Equals*
+  name: Equals
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_Equals_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.RelativeLocator.Equals
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.Equals
+  nameWithType: TxPluginResourceLocator.RelativeLocator.Equals
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.GetHashCode
+  name: GetHashCode()
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_GetHashCode
+  commentId: M:Texart.Api.TxPluginResourceLocator.RelativeLocator.GetHashCode
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.GetHashCode()
+  nameWithType: TxPluginResourceLocator.RelativeLocator.GetHashCode()
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.GetHashCode*
+  name: GetHashCode
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_GetHashCode_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.RelativeLocator.GetHashCode
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.GetHashCode
+  nameWithType: TxPluginResourceLocator.RelativeLocator.GetHashCode
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.op_Equality(Texart.Api.TxPluginResourceLocator.RelativeLocator,Texart.Api.TxPluginResourceLocator.RelativeLocator)
+  name: Equality(TxPluginResourceLocator.RelativeLocator, TxPluginResourceLocator.RelativeLocator)
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_op_Equality_Texart_Api_TxPluginResourceLocator_RelativeLocator_Texart_Api_TxPluginResourceLocator_RelativeLocator_
+  commentId: M:Texart.Api.TxPluginResourceLocator.RelativeLocator.op_Equality(Texart.Api.TxPluginResourceLocator.RelativeLocator,Texart.Api.TxPluginResourceLocator.RelativeLocator)
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.Equality(Texart.Api.TxPluginResourceLocator.RelativeLocator, Texart.Api.TxPluginResourceLocator.RelativeLocator)
+  nameWithType: TxPluginResourceLocator.RelativeLocator.Equality(TxPluginResourceLocator.RelativeLocator, TxPluginResourceLocator.RelativeLocator)
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.op_Equality*
+  name: Equality
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_op_Equality_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.RelativeLocator.op_Equality
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.Equality
+  nameWithType: TxPluginResourceLocator.RelativeLocator.Equality
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.op_Inequality(Texart.Api.TxPluginResourceLocator.RelativeLocator,Texart.Api.TxPluginResourceLocator.RelativeLocator)
+  name: Inequality(TxPluginResourceLocator.RelativeLocator, TxPluginResourceLocator.RelativeLocator)
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_op_Inequality_Texart_Api_TxPluginResourceLocator_RelativeLocator_Texart_Api_TxPluginResourceLocator_RelativeLocator_
+  commentId: M:Texart.Api.TxPluginResourceLocator.RelativeLocator.op_Inequality(Texart.Api.TxPluginResourceLocator.RelativeLocator,Texart.Api.TxPluginResourceLocator.RelativeLocator)
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.Inequality(Texart.Api.TxPluginResourceLocator.RelativeLocator, Texart.Api.TxPluginResourceLocator.RelativeLocator)
+  nameWithType: TxPluginResourceLocator.RelativeLocator.Inequality(TxPluginResourceLocator.RelativeLocator, TxPluginResourceLocator.RelativeLocator)
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.op_Inequality*
+  name: Inequality
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_op_Inequality_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.RelativeLocator.op_Inequality
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.Inequality
+  nameWithType: TxPluginResourceLocator.RelativeLocator.Inequality
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.ResourcePath
+  name: ResourcePath
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_ResourcePath
+  commentId: P:Texart.Api.TxPluginResourceLocator.RelativeLocator.ResourcePath
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.ResourcePath
+  nameWithType: TxPluginResourceLocator.RelativeLocator.ResourcePath
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.ResourcePath*
+  name: ResourcePath
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_ResourcePath_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.RelativeLocator.ResourcePath
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.ResourcePath
+  nameWithType: TxPluginResourceLocator.RelativeLocator.ResourcePath
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.ResourceSegments
+  name: ResourceSegments
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_ResourceSegments
+  commentId: P:Texart.Api.TxPluginResourceLocator.RelativeLocator.ResourceSegments
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.ResourceSegments
+  nameWithType: TxPluginResourceLocator.RelativeLocator.ResourceSegments
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.ResourceSegments*
+  name: ResourceSegments
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_ResourceSegments_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.RelativeLocator.ResourceSegments
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.ResourceSegments
+  nameWithType: TxPluginResourceLocator.RelativeLocator.ResourceSegments
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.ToString
+  name: ToString()
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_ToString
+  commentId: M:Texart.Api.TxPluginResourceLocator.RelativeLocator.ToString
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.ToString()
+  nameWithType: TxPluginResourceLocator.RelativeLocator.ToString()
+- uid: Texart.Api.TxPluginResourceLocator.RelativeLocator.ToString*
+  name: ToString
+  href: api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html#Texart_Api_TxPluginResourceLocator_RelativeLocator_ToString_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.RelativeLocator.ToString
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeLocator.ToString
+  nameWithType: TxPluginResourceLocator.RelativeLocator.ToString
+- uid: Texart.Api.TxPluginResourceLocator.RelativeResource
+  name: RelativeResource
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_RelativeResource
+  commentId: P:Texart.Api.TxPluginResourceLocator.RelativeResource
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeResource
+  nameWithType: TxPluginResourceLocator.RelativeResource
+- uid: Texart.Api.TxPluginResourceLocator.RelativeResource*
+  name: RelativeResource
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_RelativeResource_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.RelativeResource
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.RelativeResource
+  nameWithType: TxPluginResourceLocator.RelativeResource
+- uid: Texart.Api.TxPluginResourceLocator.ResourcePath
+  name: ResourcePath
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath
+  commentId: P:Texart.Api.TxPluginResourceLocator.ResourcePath
+  fullName: Texart.Api.TxPluginResourceLocator.ResourcePath
+  nameWithType: TxPluginResourceLocator.ResourcePath
+- uid: Texart.Api.TxPluginResourceLocator.ResourcePath*
+  name: ResourcePath
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.ResourcePath
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.ResourcePath
+  nameWithType: TxPluginResourceLocator.ResourcePath
+- uid: Texart.Api.TxPluginResourceLocator.ResourceSegments
+  name: ResourceSegments
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourceSegments
+  commentId: P:Texart.Api.TxPluginResourceLocator.ResourceSegments
+  fullName: Texart.Api.TxPluginResourceLocator.ResourceSegments
+  nameWithType: TxPluginResourceLocator.ResourceSegments
+- uid: Texart.Api.TxPluginResourceLocator.ResourceSegments*
+  name: ResourceSegments
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourceSegments_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.ResourceSegments
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.ResourceSegments
+  nameWithType: TxPluginResourceLocator.ResourceSegments
+- uid: Texart.Api.TxPluginResourceLocator.Scheme
+  name: Scheme
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Scheme
+  commentId: P:Texart.Api.TxPluginResourceLocator.Scheme
+  fullName: Texart.Api.TxPluginResourceLocator.Scheme
+  nameWithType: TxPluginResourceLocator.Scheme
+- uid: Texart.Api.TxPluginResourceLocator.Scheme*
+  name: Scheme
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_Scheme_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.Scheme
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.Scheme
+  nameWithType: TxPluginResourceLocator.Scheme
+- uid: Texart.Api.TxPluginResourceLocator.ToString
+  name: ToString()
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ToString
+  commentId: M:Texart.Api.TxPluginResourceLocator.ToString
+  fullName: Texart.Api.TxPluginResourceLocator.ToString()
+  nameWithType: TxPluginResourceLocator.ToString()
+- uid: Texart.Api.TxPluginResourceLocator.ToString*
+  name: ToString
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ToString_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.ToString
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.ToString
+  nameWithType: TxPluginResourceLocator.ToString
+- uid: Texart.Api.TxPluginResourceLocator.WithAssemblyPath(System.String)
+  name: WithAssemblyPath(String)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_WithAssemblyPath_System_String_
+  commentId: M:Texart.Api.TxPluginResourceLocator.WithAssemblyPath(System.String)
+  fullName: Texart.Api.TxPluginResourceLocator.WithAssemblyPath(System.String)
+  nameWithType: TxPluginResourceLocator.WithAssemblyPath(String)
+- uid: Texart.Api.TxPluginResourceLocator.WithAssemblyPath*
+  name: WithAssemblyPath
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_WithAssemblyPath_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.WithAssemblyPath
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.WithAssemblyPath
+  nameWithType: TxPluginResourceLocator.WithAssemblyPath
+- uid: Texart.Api.TxPluginResourceLocator.WithoutRelativeResource
+  name: WithoutRelativeResource
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_WithoutRelativeResource
+  commentId: P:Texart.Api.TxPluginResourceLocator.WithoutRelativeResource
+  fullName: Texart.Api.TxPluginResourceLocator.WithoutRelativeResource
+  nameWithType: TxPluginResourceLocator.WithoutRelativeResource
+- uid: Texart.Api.TxPluginResourceLocator.WithoutRelativeResource*
+  name: WithoutRelativeResource
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_WithoutRelativeResource_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.WithoutRelativeResource
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.WithoutRelativeResource
+  nameWithType: TxPluginResourceLocator.WithoutRelativeResource
+- uid: Texart.Api.TxPluginResourceLocator.WithRelativeResource(System.String)
+  name: WithRelativeResource(String)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_WithRelativeResource_System_String_
+  commentId: M:Texart.Api.TxPluginResourceLocator.WithRelativeResource(System.String)
+  fullName: Texart.Api.TxPluginResourceLocator.WithRelativeResource(System.String)
+  nameWithType: TxPluginResourceLocator.WithRelativeResource(String)
+- uid: Texart.Api.TxPluginResourceLocator.WithRelativeResource(Texart.Api.TxPluginResourceLocator.RelativeLocator)
+  name: WithRelativeResource(TxPluginResourceLocator.RelativeLocator)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_WithRelativeResource_Texart_Api_TxPluginResourceLocator_RelativeLocator_
+  commentId: M:Texart.Api.TxPluginResourceLocator.WithRelativeResource(Texart.Api.TxPluginResourceLocator.RelativeLocator)
+  fullName: Texart.Api.TxPluginResourceLocator.WithRelativeResource(Texart.Api.TxPluginResourceLocator.RelativeLocator)
+  nameWithType: TxPluginResourceLocator.WithRelativeResource(TxPluginResourceLocator.RelativeLocator)
+- uid: Texart.Api.TxPluginResourceLocator.WithRelativeResource*
+  name: WithRelativeResource
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_WithRelativeResource_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.WithRelativeResource
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.WithRelativeResource
+  nameWithType: TxPluginResourceLocator.WithRelativeResource
+- uid: Texart.Api.TxPluginResourceLocator.WithScheme(System.String)
+  name: WithScheme(String)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_WithScheme_System_String_
+  commentId: M:Texart.Api.TxPluginResourceLocator.WithScheme(System.String)
+  fullName: Texart.Api.TxPluginResourceLocator.WithScheme(System.String)
+  nameWithType: TxPluginResourceLocator.WithScheme(String)
+- uid: Texart.Api.TxPluginResourceLocator.WithScheme(Texart.Api.TxReferenceScheme)
+  name: WithScheme(TxReferenceScheme)
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_WithScheme_Texart_Api_TxReferenceScheme_
+  commentId: M:Texart.Api.TxPluginResourceLocator.WithScheme(Texart.Api.TxReferenceScheme)
+  fullName: Texart.Api.TxPluginResourceLocator.WithScheme(Texart.Api.TxReferenceScheme)
+  nameWithType: TxPluginResourceLocator.WithScheme(TxReferenceScheme)
+- uid: Texart.Api.TxPluginResourceLocator.WithScheme*
+  name: WithScheme
+  href: api/Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_WithScheme_
+  commentId: Overload:Texart.Api.TxPluginResourceLocator.WithScheme
+  isSpec: "True"
+  fullName: Texart.Api.TxPluginResourceLocator.WithScheme
+  nameWithType: TxPluginResourceLocator.WithScheme
+- uid: Texart.Api.TxReferenceScheme
+  name: TxReferenceScheme
+  href: api/Texart.Api.TxReferenceScheme.html
+  commentId: T:Texart.Api.TxReferenceScheme
+  fullName: Texart.Api.TxReferenceScheme
+  nameWithType: TxReferenceScheme
+- uid: Texart.Api.TxReferenceScheme.#ctor(System.String)
+  name: TxReferenceScheme(String)
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme__ctor_System_String_
+  commentId: M:Texart.Api.TxReferenceScheme.#ctor(System.String)
+  fullName: Texart.Api.TxReferenceScheme.TxReferenceScheme(System.String)
+  nameWithType: TxReferenceScheme.TxReferenceScheme(String)
+- uid: Texart.Api.TxReferenceScheme.#ctor*
+  name: TxReferenceScheme
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme__ctor_
+  commentId: Overload:Texart.Api.TxReferenceScheme.#ctor
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.TxReferenceScheme
+  nameWithType: TxReferenceScheme.TxReferenceScheme
+- uid: Texart.Api.TxReferenceScheme.CompareTo(Texart.Api.TxReferenceScheme)
+  name: CompareTo(TxReferenceScheme)
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_CompareTo_Texart_Api_TxReferenceScheme_
+  commentId: M:Texart.Api.TxReferenceScheme.CompareTo(Texart.Api.TxReferenceScheme)
+  fullName: Texart.Api.TxReferenceScheme.CompareTo(Texart.Api.TxReferenceScheme)
+  nameWithType: TxReferenceScheme.CompareTo(TxReferenceScheme)
+- uid: Texart.Api.TxReferenceScheme.CompareTo*
+  name: CompareTo
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_CompareTo_
+  commentId: Overload:Texart.Api.TxReferenceScheme.CompareTo
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.CompareTo
+  nameWithType: TxReferenceScheme.CompareTo
+- uid: Texart.Api.TxReferenceScheme.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Equals_System_Object_
+  commentId: M:Texart.Api.TxReferenceScheme.Equals(System.Object)
+  fullName: Texart.Api.TxReferenceScheme.Equals(System.Object)
+  nameWithType: TxReferenceScheme.Equals(Object)
+- uid: Texart.Api.TxReferenceScheme.Equals(Texart.Api.TxReferenceScheme)
+  name: Equals(TxReferenceScheme)
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Equals_Texart_Api_TxReferenceScheme_
+  commentId: M:Texart.Api.TxReferenceScheme.Equals(Texart.Api.TxReferenceScheme)
+  fullName: Texart.Api.TxReferenceScheme.Equals(Texart.Api.TxReferenceScheme)
+  nameWithType: TxReferenceScheme.Equals(TxReferenceScheme)
+- uid: Texart.Api.TxReferenceScheme.Equals*
+  name: Equals
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Equals_
+  commentId: Overload:Texart.Api.TxReferenceScheme.Equals
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.Equals
+  nameWithType: TxReferenceScheme.Equals
+- uid: Texart.Api.TxReferenceScheme.File
+  name: File
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_File
+  commentId: P:Texart.Api.TxReferenceScheme.File
+  fullName: Texart.Api.TxReferenceScheme.File
+  nameWithType: TxReferenceScheme.File
+- uid: Texart.Api.TxReferenceScheme.File*
+  name: File
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_File_
+  commentId: Overload:Texart.Api.TxReferenceScheme.File
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.File
+  nameWithType: TxReferenceScheme.File
+- uid: Texart.Api.TxReferenceScheme.FormatException
+  name: TxReferenceScheme.FormatException
+  href: api/Texart.Api.TxReferenceScheme.FormatException.html
+  commentId: T:Texart.Api.TxReferenceScheme.FormatException
+  fullName: Texart.Api.TxReferenceScheme.FormatException
+  nameWithType: TxReferenceScheme.FormatException
+- uid: Texart.Api.TxReferenceScheme.GetHashCode
+  name: GetHashCode()
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_GetHashCode
+  commentId: M:Texart.Api.TxReferenceScheme.GetHashCode
+  fullName: Texart.Api.TxReferenceScheme.GetHashCode()
+  nameWithType: TxReferenceScheme.GetHashCode()
+- uid: Texart.Api.TxReferenceScheme.GetHashCode*
+  name: GetHashCode
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_GetHashCode_
+  commentId: Overload:Texart.Api.TxReferenceScheme.GetHashCode
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.GetHashCode
+  nameWithType: TxReferenceScheme.GetHashCode
+- uid: Texart.Api.TxReferenceScheme.Http
+  name: Http
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Http
+  commentId: P:Texart.Api.TxReferenceScheme.Http
+  fullName: Texart.Api.TxReferenceScheme.Http
+  nameWithType: TxReferenceScheme.Http
+- uid: Texart.Api.TxReferenceScheme.Http*
+  name: Http
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Http_
+  commentId: Overload:Texart.Api.TxReferenceScheme.Http
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.Http
+  nameWithType: TxReferenceScheme.Http
+- uid: Texart.Api.TxReferenceScheme.Https
+  name: Https
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Https
+  commentId: P:Texart.Api.TxReferenceScheme.Https
+  fullName: Texart.Api.TxReferenceScheme.Https
+  nameWithType: TxReferenceScheme.Https
+- uid: Texart.Api.TxReferenceScheme.Https*
+  name: Https
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Https_
+  commentId: Overload:Texart.Api.TxReferenceScheme.Https
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.Https
+  nameWithType: TxReferenceScheme.Https
+- uid: Texart.Api.TxReferenceScheme.IsValidScheme(System.String)
+  name: IsValidScheme(String)
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_IsValidScheme_System_String_
+  commentId: M:Texart.Api.TxReferenceScheme.IsValidScheme(System.String)
+  fullName: Texart.Api.TxReferenceScheme.IsValidScheme(System.String)
+  nameWithType: TxReferenceScheme.IsValidScheme(String)
+- uid: Texart.Api.TxReferenceScheme.IsValidScheme*
+  name: IsValidScheme
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_IsValidScheme_
+  commentId: Overload:Texart.Api.TxReferenceScheme.IsValidScheme
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.IsValidScheme
+  nameWithType: TxReferenceScheme.IsValidScheme
+- uid: Texart.Api.TxReferenceScheme.Matches(System.String)
+  name: Matches(String)
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Matches_System_String_
+  commentId: M:Texart.Api.TxReferenceScheme.Matches(System.String)
+  fullName: Texart.Api.TxReferenceScheme.Matches(System.String)
+  nameWithType: TxReferenceScheme.Matches(String)
+- uid: Texart.Api.TxReferenceScheme.Matches*
+  name: Matches
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Matches_
+  commentId: Overload:Texart.Api.TxReferenceScheme.Matches
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.Matches
+  nameWithType: TxReferenceScheme.Matches
+- uid: Texart.Api.TxReferenceScheme.NormalizePath(System.String)
+  name: NormalizePath(String)
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_NormalizePath_System_String_
+  commentId: M:Texart.Api.TxReferenceScheme.NormalizePath(System.String)
+  fullName: Texart.Api.TxReferenceScheme.NormalizePath(System.String)
+  nameWithType: TxReferenceScheme.NormalizePath(String)
+- uid: Texart.Api.TxReferenceScheme.NormalizePath*
+  name: NormalizePath
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_NormalizePath_
+  commentId: Overload:Texart.Api.TxReferenceScheme.NormalizePath
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.NormalizePath
+  nameWithType: TxReferenceScheme.NormalizePath
+- uid: Texart.Api.TxReferenceScheme.op_Equality(Texart.Api.TxReferenceScheme,Texart.Api.TxReferenceScheme)
+  name: Equality(TxReferenceScheme, TxReferenceScheme)
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_op_Equality_Texart_Api_TxReferenceScheme_Texart_Api_TxReferenceScheme_
+  commentId: M:Texart.Api.TxReferenceScheme.op_Equality(Texart.Api.TxReferenceScheme,Texart.Api.TxReferenceScheme)
+  fullName: Texart.Api.TxReferenceScheme.Equality(Texart.Api.TxReferenceScheme, Texart.Api.TxReferenceScheme)
+  nameWithType: TxReferenceScheme.Equality(TxReferenceScheme, TxReferenceScheme)
+- uid: Texart.Api.TxReferenceScheme.op_Equality*
+  name: Equality
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_op_Equality_
+  commentId: Overload:Texart.Api.TxReferenceScheme.op_Equality
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.Equality
+  nameWithType: TxReferenceScheme.Equality
+- uid: Texart.Api.TxReferenceScheme.op_Inequality(Texart.Api.TxReferenceScheme,Texart.Api.TxReferenceScheme)
+  name: Inequality(TxReferenceScheme, TxReferenceScheme)
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_op_Inequality_Texart_Api_TxReferenceScheme_Texart_Api_TxReferenceScheme_
+  commentId: M:Texart.Api.TxReferenceScheme.op_Inequality(Texart.Api.TxReferenceScheme,Texart.Api.TxReferenceScheme)
+  fullName: Texart.Api.TxReferenceScheme.Inequality(Texart.Api.TxReferenceScheme, Texart.Api.TxReferenceScheme)
+  nameWithType: TxReferenceScheme.Inequality(TxReferenceScheme, TxReferenceScheme)
+- uid: Texart.Api.TxReferenceScheme.op_Inequality*
+  name: Inequality
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_op_Inequality_
+  commentId: Overload:Texart.Api.TxReferenceScheme.op_Inequality
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.Inequality
+  nameWithType: TxReferenceScheme.Inequality
+- uid: Texart.Api.TxReferenceScheme.Prefix(System.String)
+  name: Prefix(String)
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Prefix_System_String_
+  commentId: M:Texart.Api.TxReferenceScheme.Prefix(System.String)
+  fullName: Texart.Api.TxReferenceScheme.Prefix(System.String)
+  nameWithType: TxReferenceScheme.Prefix(String)
+- uid: Texart.Api.TxReferenceScheme.Prefix*
+  name: Prefix
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Prefix_
+  commentId: Overload:Texart.Api.TxReferenceScheme.Prefix
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.Prefix
+  nameWithType: TxReferenceScheme.Prefix
+- uid: Texart.Api.TxReferenceScheme.Scheme
+  name: Scheme
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Scheme
+  commentId: P:Texart.Api.TxReferenceScheme.Scheme
+  fullName: Texart.Api.TxReferenceScheme.Scheme
+  nameWithType: TxReferenceScheme.Scheme
+- uid: Texart.Api.TxReferenceScheme.Scheme*
+  name: Scheme
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Scheme_
+  commentId: Overload:Texart.Api.TxReferenceScheme.Scheme
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.Scheme
+  nameWithType: TxReferenceScheme.Scheme
+- uid: Texart.Api.TxReferenceScheme.SchemePrefix
+  name: SchemePrefix
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_SchemePrefix
+  commentId: P:Texart.Api.TxReferenceScheme.SchemePrefix
+  fullName: Texart.Api.TxReferenceScheme.SchemePrefix
+  nameWithType: TxReferenceScheme.SchemePrefix
+- uid: Texart.Api.TxReferenceScheme.SchemePrefix*
+  name: SchemePrefix
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_SchemePrefix_
+  commentId: Overload:Texart.Api.TxReferenceScheme.SchemePrefix
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.SchemePrefix
+  nameWithType: TxReferenceScheme.SchemePrefix
+- uid: Texart.Api.TxReferenceScheme.ToString
+  name: ToString()
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_ToString
+  commentId: M:Texart.Api.TxReferenceScheme.ToString
+  fullName: Texart.Api.TxReferenceScheme.ToString()
+  nameWithType: TxReferenceScheme.ToString()
+- uid: Texart.Api.TxReferenceScheme.ToString*
+  name: ToString
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_ToString_
+  commentId: Overload:Texart.Api.TxReferenceScheme.ToString
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.ToString
+  nameWithType: TxReferenceScheme.ToString
+- uid: Texart.Api.TxReferenceScheme.Tx
+  name: Tx
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Tx
+  commentId: P:Texart.Api.TxReferenceScheme.Tx
+  fullName: Texart.Api.TxReferenceScheme.Tx
+  nameWithType: TxReferenceScheme.Tx
+- uid: Texart.Api.TxReferenceScheme.Tx*
+  name: Tx
+  href: api/Texart.Api.TxReferenceScheme.html#Texart_Api_TxReferenceScheme_Tx_
+  commentId: Overload:Texart.Api.TxReferenceScheme.Tx
+  isSpec: "True"
+  fullName: Texart.Api.TxReferenceScheme.Tx
+  nameWithType: TxReferenceScheme.Tx
+- uid: Texart.Api.TxSize
+  name: TxSize
+  href: api/Texart.Api.TxSize.html
+  commentId: T:Texart.Api.TxSize
+  fullName: Texart.Api.TxSize
+  nameWithType: TxSize
+- uid: Texart.Api.TxSize.TryParse(ReadOnlySpan{System.Char},SKSize@)
+  name: TryParse(ReadOnlySpan<Char>, out SKSize)
+  href: api/Texart.Api.TxSize.html#Texart_Api_TxSize_TryParse_ReadOnlySpan_System_Char__SKSize__
+  commentId: M:Texart.Api.TxSize.TryParse(ReadOnlySpan{System.Char},SKSize@)
+  name.vb: TryParse(ReadOnlySpan(Of Char), ByRef SKSize)
+  fullName: Texart.Api.TxSize.TryParse(ReadOnlySpan<System.Char>, out SKSize)
+  fullName.vb: Texart.Api.TxSize.TryParse(ReadOnlySpan(Of System.Char), ByRef SKSize)
+  nameWithType: TxSize.TryParse(ReadOnlySpan<Char>, out SKSize)
+  nameWithType.vb: TxSize.TryParse(ReadOnlySpan(Of Char), ByRef SKSize)
+- uid: Texart.Api.TxSize.TryParse*
+  name: TryParse
+  href: api/Texart.Api.TxSize.html#Texart_Api_TxSize_TryParse_
+  commentId: Overload:Texart.Api.TxSize.TryParse
+  isSpec: "True"
+  fullName: Texart.Api.TxSize.TryParse
+  nameWithType: TxSize.TryParse
+- uid: Texart.Api.TxSize.TryParseI(ReadOnlySpan{System.Char},SKSizeI@)
+  name: TryParseI(ReadOnlySpan<Char>, out SKSizeI)
+  href: api/Texart.Api.TxSize.html#Texart_Api_TxSize_TryParseI_ReadOnlySpan_System_Char__SKSizeI__
+  commentId: M:Texart.Api.TxSize.TryParseI(ReadOnlySpan{System.Char},SKSizeI@)
+  name.vb: TryParseI(ReadOnlySpan(Of Char), ByRef SKSizeI)
+  fullName: Texart.Api.TxSize.TryParseI(ReadOnlySpan<System.Char>, out SKSizeI)
+  fullName.vb: Texart.Api.TxSize.TryParseI(ReadOnlySpan(Of System.Char), ByRef SKSizeI)
+  nameWithType: TxSize.TryParseI(ReadOnlySpan<Char>, out SKSizeI)
+  nameWithType.vb: TxSize.TryParseI(ReadOnlySpan(Of Char), ByRef SKSizeI)
+- uid: Texart.Api.TxSize.TryParseI*
+  name: TryParseI
+  href: api/Texart.Api.TxSize.html#Texart_Api_TxSize_TryParseI_
+  commentId: Overload:Texart.Api.TxSize.TryParseI
+  isSpec: "True"
+  fullName: Texart.Api.TxSize.TryParseI
+  nameWithType: TxSize.TryParseI

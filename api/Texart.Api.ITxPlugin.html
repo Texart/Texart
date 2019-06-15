@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface ITxPlugin
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface ITxPlugin
+   ">
+    <meta name="generator" content="docfx 2.43.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Texart.Api.ITxPlugin">
+  
+  
+  <h1 id="Texart_Api_ITxPlugin" data-uid="Texart.Api.ITxPlugin" class="text-break">Interface ITxPlugin
+  </h1>
+  <div class="markdown level0 summary"><p>A plugin represents a collection of named <a class="xref" href="Texart.Api.ITxTextBitmapGenerator.html">ITxTextBitmapGenerator</a> and <a class="xref" href="Texart.Api.ITxTextBitmapRenderer.html">ITxTextBitmapRenderer</a>.
+The plugin abstraction allows sharing these types across assembly boundaries.</p>
+<p>Using types defined in the following contexts are unified by this interface:</p>
+<ul>
+<li>Within Texart code</li>
+<li>Within a separately compiled assembly</li>
+<li>Within a .tx.csx file that will be interpreted at runtime</li>
+</ul>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Texart.Api.html">Texart.Api</a></h6>
+  <h6><strong>Assembly</strong>: Texart.Api.dll</h6>
+  <h5 id="Texart_Api_ITxPlugin_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface ITxPlugin</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_ITxPlugin_AvailableGenerators.md&amp;value=---%0Auid%3A%20Texart.Api.ITxPlugin.AvailableGenerators%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/ITxPlugin.cs/#L20">View Source</a>
+  </span>
+  <a id="Texart_Api_ITxPlugin_AvailableGenerators_" data-uid="Texart.Api.ITxPlugin.AvailableGenerators*"></a>
+  <h4 id="Texart_Api_ITxPlugin_AvailableGenerators" data-uid="Texart.Api.ITxPlugin.AvailableGenerators">AvailableGenerators</h4>
+  <div class="markdown level1 summary"><p>Available names of <a class="xref" href="Texart.Api.ITxTextBitmapGenerator.html">ITxTextBitmapGenerator</a>. Every name listed here must be valid when calling
+<a class="xref" href="Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_LookupGenerator_Texart_Api_TxPluginResourceLocator_">LookupGenerator(TxPluginResourceLocator)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;TxPluginResourceLocator.RelativeLocator&gt; AvailableGenerators { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_ITxPlugin_AvailableRenderers.md&amp;value=---%0Auid%3A%20Texart.Api.ITxPlugin.AvailableRenderers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/ITxPlugin.cs/#L42">View Source</a>
+  </span>
+  <a id="Texart_Api_ITxPlugin_AvailableRenderers_" data-uid="Texart.Api.ITxPlugin.AvailableRenderers*"></a>
+  <h4 id="Texart_Api_ITxPlugin_AvailableRenderers" data-uid="Texart.Api.ITxPlugin.AvailableRenderers">AvailableRenderers</h4>
+  <div class="markdown level1 summary"><p>Available names of <a class="xref" href="Texart.Api.ITxTextBitmapRenderer.html">ITxTextBitmapRenderer</a>. Every name listed here must be valid when calling
+<a class="xref" href="Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_LookupRenderer_Texart_Api_TxPluginResourceLocator_">LookupRenderer(TxPluginResourceLocator)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;TxPluginResourceLocator.RelativeLocator&gt; AvailableRenderers { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_ITxPlugin_LookupGenerator_Texart_Api_TxPluginResourceLocator_.md&amp;value=---%0Auid%3A%20Texart.Api.ITxPlugin.LookupGenerator(Texart.Api.TxPluginResourceLocator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/ITxPlugin.cs/#L36">View Source</a>
+  </span>
+  <a id="Texart_Api_ITxPlugin_LookupGenerator_" data-uid="Texart.Api.ITxPlugin.LookupGenerator*"></a>
+  <h4 id="Texart_Api_ITxPlugin_LookupGenerator_Texart_Api_TxPluginResourceLocator_" data-uid="Texart.Api.ITxPlugin.LookupGenerator(Texart.Api.TxPluginResourceLocator)">LookupGenerator(TxPluginResourceLocator)</h4>
+  <div class="markdown level1 summary"><p>Returns a factory function that constructs an <a class="xref" href="Texart.Api.ITxTextBitmapGenerator.html">ITxTextBitmapGenerator</a> identified by
+<code data-dev-comment-type="paramref" class="paramref">locator</code>, or a &quot;redirect&quot; locator which represents another lookup
+(<a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> or <a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a>).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TxPluginResource&lt;ITxTextBitmapGenerator&gt; LookupGenerator(TxPluginResourceLocator locator)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td><span class="parametername">locator</span></td>
+        <td><p>The resource to look up. This name should appear in <a class="xref" href="Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_AvailableGenerators">AvailableGenerators</a> but not required.
+If a plugin exports a &quot;default&quot; type, then the type should be available as an empty
+<a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResource-1.html">TxPluginResource</a>&lt;<a class="xref" href="Texart.Api.ITxTextBitmapGenerator.html">ITxTextBitmapGenerator</a>&gt;</td>
+        <td><p>A resource specification for <a class="xref" href="Texart.Api.ITxTextBitmapGenerator.html">ITxTextBitmapGenerator</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Texart_Api_ITxPlugin_LookupGenerator_Texart_Api_TxPluginResourceLocator__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_OfFactory__1_Texart_Api_TxFactory___0_Texart_Api_TxArguments__">OfFactory&lt;T&gt;(TxFactory&lt;T, TxArguments&gt;)</a></div>
+      <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect__1_Texart_Api_TxPluginResourceLocator_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__">Redirect&lt;T&gt;(TxPluginResourceLocator, Func&lt;TxArguments, TxArguments&gt;)</a></div>
+      <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect__1_Texart_Api_TxPluginResourceLocator_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__">Redirect&lt;T&gt;(TxPluginResourceLocator, Func&lt;TxArguments, TxArguments&gt;)</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_ITxPlugin_LookupRenderer_Texart_Api_TxPluginResourceLocator_.md&amp;value=---%0Auid%3A%20Texart.Api.ITxPlugin.LookupRenderer(Texart.Api.TxPluginResourceLocator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/ITxPlugin.cs/#L58">View Source</a>
+  </span>
+  <a id="Texart_Api_ITxPlugin_LookupRenderer_" data-uid="Texart.Api.ITxPlugin.LookupRenderer*"></a>
+  <h4 id="Texart_Api_ITxPlugin_LookupRenderer_Texart_Api_TxPluginResourceLocator_" data-uid="Texart.Api.ITxPlugin.LookupRenderer(Texart.Api.TxPluginResourceLocator)">LookupRenderer(TxPluginResourceLocator)</h4>
+  <div class="markdown level1 summary"><p>Returns a factory function that constructs an <a class="xref" href="Texart.Api.ITxTextBitmapRenderer.html">ITxTextBitmapRenderer</a> identified by
+<code data-dev-comment-type="paramref" class="paramref">locator</code>, or a &quot;redirect&quot; locator which represents another lookup
+(<a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> or <a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a>).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TxPluginResource&lt;ITxTextBitmapRenderer&gt; LookupRenderer(TxPluginResourceLocator locator)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
+        <td><span class="parametername">locator</span></td>
+        <td><p>The resource to look up. This identity should appear in <a class="xref" href="Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_AvailableRenderers">AvailableRenderers</a> but not required.
+If a plugin exports a &quot;default&quot; type, then the type should be available as an empty
+<a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Texart.Api.TxPluginResource-1.html">TxPluginResource</a>&lt;<a class="xref" href="Texart.Api.ITxTextBitmapRenderer.html">ITxTextBitmapRenderer</a>&gt;</td>
+        <td><p>A resource specification for <a class="xref" href="Texart.Api.ITxTextBitmapRenderer.html">ITxTextBitmapRenderer</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Texart_Api_ITxPlugin_LookupRenderer_Texart_Api_TxPluginResourceLocator__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_OfFactory__1_Texart_Api_TxFactory___0_Texart_Api_TxArguments__">OfFactory&lt;T&gt;(TxFactory&lt;T, TxArguments&gt;)</a></div>
+      <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect__1_Texart_Api_TxPluginResourceLocator_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__">Redirect&lt;T&gt;(TxPluginResourceLocator, Func&lt;TxArguments, TxArguments&gt;)</a></div>
+      <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect__1_Texart_Api_TxPluginResourceLocator_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__">Redirect&lt;T&gt;(TxPluginResourceLocator, Func&lt;TxArguments, TxArguments&gt;)</a></div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_ITxPlugin.md&amp;value=---%0Auid%3A%20Texart.Api.ITxPlugin%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/ITxPlugin.cs/#L14" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

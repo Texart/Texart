@@ -1,0 +1,422 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/a/1/s/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.ITxPlugin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.ITxPlugin.html",
+          "hash": "XQsj/ddj9Of6eXjU/IMlCA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.ITxTextBitmap.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.ITxTextBitmap.html",
+          "hash": "gYk3GP425Ak4SJkJ18BWxA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.ITxTextBitmapGenerator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.ITxTextBitmapGenerator.html",
+          "hash": "PQLFbrudwP7KGQLnmDkq3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.ITxTextBitmapRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.ITxTextBitmapRenderer.html",
+          "hash": "1IJsFJ2U4sBfQydI66ZO/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxArguments.BadLookupException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxArguments.BadLookupException.html",
+          "hash": "zjDN+4ZHPVpF7ofYrAztmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxArguments.IExtractable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxArguments.IExtractable.html",
+          "hash": "lKyEa/GczM0eKhdslnclpg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxArguments.LookupResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxArguments.LookupResult.html",
+          "hash": "Flxb86fWzhIlURfY12BP4w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxArguments.LookupResultType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxArguments.LookupResultType.html",
+          "hash": "qMo+bd18HnnmbsdOxCBrpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxArguments.TryParseFunc-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxArguments.TryParseFunc-1.html",
+          "hash": "dsn37HdSEYiEcuMM79szWQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxArguments.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxArguments.html",
+          "hash": "hAsR3zCyhncTkRa/LP3yaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxArrayTextBitmap.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxArrayTextBitmap.html",
+          "hash": "eL2okLB4GUXIYPiAuu1Wqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxBitmap.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxBitmap.html",
+          "hash": "8Q0t/YinC8glyDBbOrsHSg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxContract.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxContract.html",
+          "hash": "UFdDkjXLatvfvzieoALjQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxFactory-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxFactory-2.html",
+          "hash": "PBUHwQDlnAUxElExuqZM4Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxPluginResource-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxPluginResource-1.html",
+          "hash": "dOlNuLsDFojtFq0eKPsGbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxPluginResource.InactiveUnionMemberAccessException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxPluginResource.InactiveUnionMemberAccessException.html",
+          "hash": "rqzi6+tJs31OJ84mXqNIIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxPluginResource.MemberKind.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxPluginResource.MemberKind.html",
+          "hash": "kSxVRrxhg3yBLTHVUt0tcA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxPluginResource.ResourceRedirect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxPluginResource.ResourceRedirect.html",
+          "hash": "hmwZDwDbaEIdrj6xS22ivg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxPluginResource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxPluginResource.html",
+          "hash": "vt5hKVT18S35VJ0mIICBdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxPluginResourceLocator.FormatException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxPluginResourceLocator.FormatException.html",
+          "hash": "HrOzf9QPoLGr2rt3o502yA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxPluginResourceLocator.RelativeLocator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxPluginResourceLocator.RelativeLocator.html",
+          "hash": "efJncpmQOcmLrVbPnTe20A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxPluginResourceLocator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxPluginResourceLocator.html",
+          "hash": "y1Y6J9eXzxzyP5a+mhGTjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxReferenceScheme.FormatException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxReferenceScheme.FormatException.html",
+          "hash": "g+TOf+fWjCPbwWKcO6ubuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxReferenceScheme.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxReferenceScheme.html",
+          "hash": "6FxoxPbPvYLPDg/syGR17g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxSize.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxSize.html",
+          "hash": "GZzKwfSKXiKNj0LpiJPC1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.html",
+          "hash": "FB+5+FKdHTBmduVZGO8Dxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "HPzFOCma6zBLE084RVQpFQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "giJareBv1zwL97GyHayDaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "D1DTFC14/cRZYMgFXOHFaQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "2AqzHyV6Q7OsOmG7fUpH+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 2,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 26,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
