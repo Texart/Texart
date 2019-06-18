@@ -75,11 +75,11 @@
   </h1>
   <div class="markdown level0 summary"><p>A plugin represents a collection of named <a class="xref" href="Texart.Api.ITxTextBitmapGenerator.html">ITxTextBitmapGenerator</a> and <a class="xref" href="Texart.Api.ITxTextBitmapRenderer.html">ITxTextBitmapRenderer</a>.
 The plugin abstraction allows sharing these types across assembly boundaries.</p>
-<p>Using types defined in the following contexts are unified by this interface:</p>
+<p><a class="xref" href="Texart.Api.ITxPlugin.html">ITxPlugin</a> unifies sharing &quot;resources&quot; (like algorithms) in the following contexts:</p>
 <ul>
-<li>Within Texart code</li>
-<li>Within a separately compiled assembly</li>
-<li>Within a .tx.csx file that will be interpreted at runtime</li>
+<li>Within Texart code.</li>
+<li>Within a separately compiled assembly, built against <code>Texart.Api</code>.</li>
+<li>Within a <code>.tx.csx</code> script file that will be interpreted by the Texart runtime.</li>
 </ul>
 </div>
   <div class="markdown level0 conceptual"></div>
@@ -128,7 +128,7 @@ The plugin abstraction allows sharing these types across assembly boundaries.</p
     <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_ITxPlugin_AvailableRenderers.md&amp;value=---%0Auid%3A%20Texart.Api.ITxPlugin.AvailableRenderers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/ITxPlugin.cs/#L42">View Source</a>
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/ITxPlugin.cs/#L43">View Source</a>
   </span>
   <a id="Texart_Api_ITxPlugin_AvailableRenderers_" data-uid="Texart.Api.ITxPlugin.AvailableRenderers*"></a>
   <h4 id="Texart_Api_ITxPlugin_AvailableRenderers" data-uid="Texart.Api.ITxPlugin.AvailableRenderers">AvailableRenderers</h4>
@@ -162,13 +162,13 @@ The plugin abstraction allows sharing these types across assembly boundaries.</p
     <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_ITxPlugin_LookupGenerator_Texart_Api_TxPluginResourceLocator_.md&amp;value=---%0Auid%3A%20Texart.Api.ITxPlugin.LookupGenerator(Texart.Api.TxPluginResourceLocator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/ITxPlugin.cs/#L36">View Source</a>
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/ITxPlugin.cs/#L37">View Source</a>
   </span>
   <a id="Texart_Api_ITxPlugin_LookupGenerator_" data-uid="Texart.Api.ITxPlugin.LookupGenerator*"></a>
   <h4 id="Texart_Api_ITxPlugin_LookupGenerator_Texart_Api_TxPluginResourceLocator_" data-uid="Texart.Api.ITxPlugin.LookupGenerator(Texart.Api.TxPluginResourceLocator)">LookupGenerator(TxPluginResourceLocator)</h4>
   <div class="markdown level1 summary"><p>Returns a factory function that constructs an <a class="xref" href="Texart.Api.ITxTextBitmapGenerator.html">ITxTextBitmapGenerator</a> identified by
 <code data-dev-comment-type="paramref" class="paramref">locator</code>, or a &quot;redirect&quot; locator which represents another lookup
-(<a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> or <a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a>).</p>
+(<a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect__1_Texart_Api_TxPluginResourceLocator_System_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__">Redirect&lt;T&gt;(TxPluginResourceLocator, Func&lt;TxArguments, TxArguments&gt;)</a> and <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a>).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -188,9 +188,9 @@ The plugin abstraction allows sharing these types across assembly boundaries.</p
       <tr>
         <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
         <td><span class="parametername">locator</span></td>
-        <td><p>The resource to look up. This name should appear in <a class="xref" href="Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_AvailableGenerators">AvailableGenerators</a> but not required.
-If a plugin exports a &quot;default&quot; type, then the type should be available as an empty
-<a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a>.</p>
+        <td><p>The resource to look up. This identity <em>should</em> appear in <a class="xref" href="Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_AvailableGenerators">AvailableGenerators</a>
+but is not required to. If a plugin exports a &quot;default&quot; type, then the type should be available
+as an empty <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a>.</p>
 </td>
       </tr>
     </tbody>
@@ -214,21 +214,22 @@ If a plugin exports a &quot;default&quot; type, then the type should be availabl
   <h5 id="Texart_Api_ITxPlugin_LookupGenerator_Texart_Api_TxPluginResourceLocator__seealso">See Also</h5>
   <div class="seealso">
       <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_OfFactory__1_Texart_Api_TxFactory___0_Texart_Api_TxArguments__">OfFactory&lt;T&gt;(TxFactory&lt;T, TxArguments&gt;)</a></div>
+      <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_OfGeneratorFactory__1_Texart_Api_TxFactory___0_Texart_Api_TxArguments__">OfGeneratorFactory&lt;T&gt;(TxFactory&lt;T, TxArguments&gt;)</a></div>
       <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect__1_Texart_Api_TxPluginResourceLocator_System_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__">Redirect&lt;T&gt;(TxPluginResourceLocator, Func&lt;TxArguments, TxArguments&gt;)</a></div>
-      <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect__1_Texart_Api_TxPluginResourceLocator_System_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__">Redirect&lt;T&gt;(TxPluginResourceLocator, Func&lt;TxArguments, TxArguments&gt;)</a></div>
+      <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_RedirectGenerator_Texart_Api_TxPluginResourceLocator_System_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__">RedirectGenerator(TxPluginResourceLocator, Func&lt;TxArguments, TxArguments&gt;)</a></div>
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Texart/Texart/new/master/apiSpec/new?filename=Texart_Api_ITxPlugin_LookupRenderer_Texart_Api_TxPluginResourceLocator_.md&amp;value=---%0Auid%3A%20Texart.Api.ITxPlugin.LookupRenderer(Texart.Api.TxPluginResourceLocator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/ITxPlugin.cs/#L58">View Source</a>
+    <a href="https://github.com/Texart/Texart/blob/master/Texart.Api/ITxPlugin.cs/#L60">View Source</a>
   </span>
   <a id="Texart_Api_ITxPlugin_LookupRenderer_" data-uid="Texart.Api.ITxPlugin.LookupRenderer*"></a>
   <h4 id="Texart_Api_ITxPlugin_LookupRenderer_Texart_Api_TxPluginResourceLocator_" data-uid="Texart.Api.ITxPlugin.LookupRenderer(Texart.Api.TxPluginResourceLocator)">LookupRenderer(TxPluginResourceLocator)</h4>
   <div class="markdown level1 summary"><p>Returns a factory function that constructs an <a class="xref" href="Texart.Api.ITxTextBitmapRenderer.html">ITxTextBitmapRenderer</a> identified by
 <code data-dev-comment-type="paramref" class="paramref">locator</code>, or a &quot;redirect&quot; locator which represents another lookup
-(<a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a> or <a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html">TxPluginResourceLocator.RelativeLocator</a>).</p>
+(<a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect__1_Texart_Api_TxPluginResourceLocator_System_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__">Redirect&lt;T&gt;(TxPluginResourceLocator, Func&lt;TxArguments, TxArguments&gt;)</a> and <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a>).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -248,9 +249,9 @@ If a plugin exports a &quot;default&quot; type, then the type should be availabl
       <tr>
         <td><a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a></td>
         <td><span class="parametername">locator</span></td>
-        <td><p>The resource to look up. This identity should appear in <a class="xref" href="Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_AvailableRenderers">AvailableRenderers</a> but not required.
-If a plugin exports a &quot;default&quot; type, then the type should be available as an empty
-<a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a>.</p>
+        <td><p>The resource to look up. This identity <em>should</em> appear in <a class="xref" href="Texart.Api.ITxPlugin.html#Texart_Api_ITxPlugin_AvailableRenderers">AvailableRenderers</a>
+but is not required to. If a plugin exports a &quot;default&quot; type, then the type should be available
+as an empty <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_ResourcePath">ResourcePath</a>.</p>
 </td>
       </tr>
     </tbody>
@@ -274,8 +275,9 @@ If a plugin exports a &quot;default&quot; type, then the type should be availabl
   <h5 id="Texart_Api_ITxPlugin_LookupRenderer_Texart_Api_TxPluginResourceLocator__seealso">See Also</h5>
   <div class="seealso">
       <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_OfFactory__1_Texart_Api_TxFactory___0_Texart_Api_TxArguments__">OfFactory&lt;T&gt;(TxFactory&lt;T, TxArguments&gt;)</a></div>
+      <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_OfRendererFactory__1_Texart_Api_TxFactory___0_Texart_Api_TxArguments__">OfRendererFactory&lt;T&gt;(TxFactory&lt;T, TxArguments&gt;)</a></div>
       <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect__1_Texart_Api_TxPluginResourceLocator_System_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__">Redirect&lt;T&gt;(TxPluginResourceLocator, Func&lt;TxArguments, TxArguments&gt;)</a></div>
-      <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_Redirect__1_Texart_Api_TxPluginResourceLocator_System_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__">Redirect&lt;T&gt;(TxPluginResourceLocator, Func&lt;TxArguments, TxArguments&gt;)</a></div>
+      <div><a class="xref" href="Texart.Api.TxPluginResource.html#Texart_Api_TxPluginResource_RedirectRenderer_Texart_Api_TxPluginResourceLocator_System_Func_Texart_Api_TxArguments_Texart_Api_TxArguments__">RedirectRenderer(TxPluginResourceLocator, Func&lt;TxArguments, TxArguments&gt;)</a></div>
   </div>
 </article>
           </div>

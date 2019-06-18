@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.ITxPlugin.html",
-          "hash": "DYYbR8c1M1pW1kce69jHQg=="
+          "hash": "OTKP7rBFfDeiLfG4W/o1Yw=="
         }
       },
       "is_incremental": false,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.ITxTextBitmapGenerator.html",
-          "hash": "2BbHM8AoPmS1F5PcVRomVA=="
+          "hash": "rHTmRLftdd5KNkY7Gu+QJg=="
         }
       },
       "is_incremental": false,
@@ -173,6 +173,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxPluginAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxPluginAttribute.html",
+          "hash": "tV7qsl47Dw+ASChWdTNbug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Texart.Api.TxPluginResource-1.yml",
       "output": {
         ".html": {
@@ -273,7 +285,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxReferenceScheme.FormatException.html",
-          "hash": "Y9NJYNGllrzVNY/NKyAbfQ=="
+          "hash": "dDRlv7HmQcr1KCbjhv8RqQ=="
         }
       },
       "is_incremental": false,
@@ -285,7 +297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxReferenceScheme.html",
-          "hash": "W2bYaHaAkgnXP20+NCF9hA=="
+          "hash": "NrlwXTBnvje1HzWiQRpEyA=="
         }
       },
       "is_incremental": false,
@@ -309,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.html",
-          "hash": "ZpmL8Yh9kscPGAkSOiMzqw=="
+          "hash": "JYXCgrJmlkYheN31v4EUSA=="
         }
       },
       "is_incremental": false,
@@ -336,7 +348,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "giJareBv1zwL97GyHayDaQ=="
+          "hash": "DvQSPF59rlmYC7AMTXuU8A=="
         }
       },
       "is_incremental": false,
@@ -384,7 +396,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 26,
+          "total_file_count": 27,
           "skipped_file_count": 0
         },
         "ConceptualDocumentProcessor": {

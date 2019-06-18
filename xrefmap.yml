@@ -1082,6 +1082,12 @@ references:
   fullName.vb: Texart.Api.TxFactory(Of TResult, TInput)
   nameWithType: TxFactory<TResult, TInput>
   nameWithType.vb: TxFactory(Of TResult, TInput)
+- uid: Texart.Api.TxPluginAttribute
+  name: TxPluginAttribute
+  href: api/Texart.Api.TxPluginAttribute.html
+  commentId: T:Texart.Api.TxPluginAttribute
+  fullName: Texart.Api.TxPluginAttribute
+  nameWithType: TxPluginAttribute
 - uid: Texart.Api.TxPluginResource
   name: TxPluginResource
   href: api/Texart.Api.TxPluginResource.html

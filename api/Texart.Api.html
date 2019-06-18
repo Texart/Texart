@@ -101,6 +101,13 @@ one dimensional array.</p>
       <h4><a class="xref" href="Texart.Api.TxContract.html">TxContract</a></h4>
       <section><p>Helpers methods around code validation.</p>
 </section>
+      <h4><a class="xref" href="Texart.Api.TxPluginAttribute.html">TxPluginAttribute</a></h4>
+      <section><p>A <a class="xref" href="Texart.Api.TxPluginAttribute.html">TxPluginAttribute</a> &quot;exports&quot; the <a class="xref" href="Texart.Api.ITxPlugin.html">ITxPlugin</a> type from a prebuilt
+assembly. Texart will automatically search the assembly for this attribute and instantiate an
+instance.
+This attribute can only be applied to classes. The applied class <strong>MUST</strong> implement
+<a class="xref" href="Texart.Api.ITxPlugin.html">ITxPlugin</a> and <strong>MUST</strong> be have a <code>public</code> constructor that takes no arguments.</p>
+</section>
       <h4><a class="xref" href="Texart.Api.TxPluginResource.html">TxPluginResource</a></h4>
       <section><p>Factory functions for creating <a class="xref" href="Texart.Api.TxPluginResource-1.html">TxPluginResource&lt;T&gt;</a> instances.</p>
 </section>
@@ -161,18 +168,18 @@ or <a class="xref" href="Texart.Api.TxPluginResourceLocator.RelativeLocator.html
 It represents a resource relative to <a class="xref" href="Texart.Api.TxPluginResourceLocator.html#Texart_Api_TxPluginResourceLocator_AssemblyPath">AssemblyPath</a>.</p>
 </section>
       <h4><a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a></h4>
-      <section><p>A <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a> is akin to URI schemes (such as <code>file:</code> and <code>https:</code>).
+      <section><p>A <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a> represents a URI scheme (such as <code>file:</code> and <code>https:</code>).
 As such, it is also case-insensitive.</p>
 <p>Note that not every valid URI scheme is a valid <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a>. Specifically, the characters,
-<code>+</code>, and <code>.</code>, are not allowed. However, <code>-</code> is allowed. This may relaxed
+<code>+</code>, and <code>.</code>, are not allowed. However, <code>-</code> is allowed. This restriction <em>may</em> be relaxed
 in the future.</p>
 <p>Refer to <a href="https://tools.ietf.org/html/rfc3986#section-3.1">https://tools.ietf.org/html/rfc3986#section-3.1</a> for information on URI schemes
 (which are valid <a class="xref" href="Texart.Api.TxReferenceScheme.html">TxReferenceScheme</a>s, except for the restrictions listed above).</p>
 <pre><code>//    scheme      = ALPHA *( ALPHA / DIGIT / &quot;+&quot; / &quot;-&quot; / &quot;.&quot; )</code></pre>
 <p>Use cases:</p>
 <ul>
-<li>As a way to allow custom resolution strategies for <code>#load</code> and <code>#r</code> directives.</li>
-<li>As part of identify (or locating) objects in a plugin assembly. See <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a>.</li>
+<li>As a way to allow custom resolution strategies for <code>#load</code> and <code>#r</code> directives in Texart scripts.</li>
+<li>As a part of locating resources in a <a class="xref" href="Texart.Api.ITxPlugin.html">ITxPlugin</a> assembly. See <a class="xref" href="Texart.Api.TxPluginResourceLocator.html">TxPluginResourceLocator</a>.</li>
 </ul>
 </section>
       <h4><a class="xref" href="Texart.Api.TxReferenceScheme.FormatException.html">TxReferenceScheme.FormatException</a></h4>
@@ -193,11 +200,11 @@ to <code>bool</code>.</p>
       <h4><a class="xref" href="Texart.Api.ITxPlugin.html">ITxPlugin</a></h4>
       <section><p>A plugin represents a collection of named <a class="xref" href="Texart.Api.ITxTextBitmapGenerator.html">ITxTextBitmapGenerator</a> and <a class="xref" href="Texart.Api.ITxTextBitmapRenderer.html">ITxTextBitmapRenderer</a>.
 The plugin abstraction allows sharing these types across assembly boundaries.</p>
-<p>Using types defined in the following contexts are unified by this interface:</p>
+<p><a class="xref" href="Texart.Api.ITxPlugin.html">ITxPlugin</a> unifies sharing &quot;resources&quot; (like algorithms) in the following contexts:</p>
 <ul>
-<li>Within Texart code</li>
-<li>Within a separately compiled assembly</li>
-<li>Within a .tx.csx file that will be interpreted at runtime</li>
+<li>Within Texart code.</li>
+<li>Within a separately compiled assembly, built against <code>Texart.Api</code>.</li>
+<li>Within a <code>.tx.csx</code> script file that will be interpreted by the Texart runtime.</li>
 </ul>
 </section>
       <h4><a class="xref" href="Texart.Api.ITxTextBitmap.html">ITxTextBitmap</a></h4>
