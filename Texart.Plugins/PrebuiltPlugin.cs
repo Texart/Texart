@@ -74,9 +74,8 @@ namespace Texart.Plugins
             catch (MissingMemberException ex)
             {
                 throw new BadPluginAssemblyException(
-                    $"The plugin ({pluginType.Name}) does not have a public, no-args constructors",
+                    $"The plugin ({pluginType.Name}) does not have a public, no-args constructor; or the plugin is abstract",
                     ex);
-
             }
             catch (MemberAccessException ex)
             {
