@@ -11,6 +11,13 @@ namespace Texart.Plugins.Tests
     public class PrebuiltPluginTests
     {
         [Test]
+        public void AllowsSimplePlugin()
+        {
+            var plugin = FromTypes(typeof(Plugin1), typeof(Plugin0));
+            Assert.AreEqual(plugin.GetType(), typeof(Plugin1));
+        }
+
+        [Test]
         public void RejectsWhenNoPlugins()
         {
             var ex = Assert.Throws<BadPluginAssemblyException>(() => FromTypes(typeof(Plugin0)));
