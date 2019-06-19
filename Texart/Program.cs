@@ -10,6 +10,8 @@ namespace Texart
     {
         private static async Task Main(string[] args)
         {
+            CommandLineArgs.Parse(args);
+
             await using var output = File.OpenWrite("../../../../meme.gen.png");
             var bitmap = TxContract.NonNull(SKBitmap.Decode("../../../../meme.jpg"));
             ITxPlugin builtinPlugin = new Builtin.Plugin();
