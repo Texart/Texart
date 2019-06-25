@@ -10,7 +10,7 @@ pool:
   vmImage: 'windows-2019'
 
 variables:
-  dotnetVersion: '3.0.100-preview5-011568'
+  dotnetVersion: '3.0.100-preview6-012264'
   siteBranch: 'gh-pages'
   currentSiteDirectory: 'gh-pages'
   newSiteDirectory: 'docfx/_site'
