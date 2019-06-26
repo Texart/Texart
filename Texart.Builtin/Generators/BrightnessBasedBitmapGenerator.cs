@@ -63,8 +63,8 @@ namespace Texart.Builtin.Generators
             Debug.Assert(sourceWidth % targetWidth == 0);
             Debug.Assert(sourceHeight % targetHeight == 0);
 
-            var pixelSamplingRatio = this.PixelSamplingRatio;
-            var pixelsPerChunk = pixelSamplingRatio * pixelSamplingRatio;
+            var samplingFactor = SamplingFactor;
+            var pixelsPerChunk = samplingFactor * samplingFactor;
 
             // stores the average brightness of each chunk
             var brightnessValues = new float[targetWidth * targetHeight];
@@ -74,23 +74,23 @@ namespace Texart.Builtin.Generators
             Parallel.For(0, targetWidth, parallelOptions, horizontalChunkIndex =>
             {
                 // the x position of the pixel at the top left of this chunk
-                var chunkX = horizontalChunkIndex * pixelSamplingRatio;
+                var chunkX = horizontalChunkIndex * samplingFactor;
                 Parallel.For(0, targetHeight, parallelOptions, verticalChunkIndex =>
                 {
                     // the y position of the pixel at the top left of this chunk
-                    var chunkY = verticalChunkIndex * pixelSamplingRatio;
+                    var chunkY = verticalChunkIndex * samplingFactor;
                     // the current chunk's coordinate projected to an index for a 1D array
                     var chunkCoordinateProjectedIndex = verticalChunkIndex * targetWidth + horizontalChunkIndex;
 
-                    // we iterate over this square chunk and accumulate the brightness
+                    // We iterate over this square chunk and accumulate the brightness
                     // value of each pixel. This chunk is almost like a bitmap in itself.
                     // We could to do a parallel accumulate, but we won't do that for now. Unless
-                    // the Bitmap is huge or pixelSamplingRatio is tiny, each chunk should be small
+                    // the SKBitmap is huge or samplingFactor is tiny, each chunk should be small
                     // enough.
                     float accumulatedBrightness = 0f;
-                    for (var offsetX = 0; offsetX < pixelSamplingRatio; ++offsetX)
+                    for (var offsetX = 0; offsetX < samplingFactor; ++offsetX)
                     {
-                        for (var offsetY = 0; offsetY < pixelSamplingRatio; ++offsetY)
+                        for (var offsetY = 0; offsetY < samplingFactor; ++offsetY)
                         {
                             SKColor pixelColor = bitmap.GetPixel(chunkX + offsetX, chunkY + offsetY);
                             float alphaFactor = (pixelColor.Alpha / 255f);
@@ -111,9 +111,9 @@ namespace Texart.Builtin.Generators
         /// Constructs a generator with the given character set.
         /// </summary>
         /// <param name="characters">The set of characters to use in the generation.</param>
-        /// <param name="pixelSamplingRatio"></param>
-        private BrightnessBasedBitmapGenerator(IEnumerable<char> characters, int pixelSamplingRatio = 1)
-            : base(new List<char>(characters), pixelSamplingRatio)
+        /// <param name="samplingFactor"></param>
+        private BrightnessBasedBitmapGenerator(IEnumerable<char> characters, int samplingFactor = 1)
+            : base(new List<char>(characters), samplingFactor)
         {
         }
 
