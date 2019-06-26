@@ -96,7 +96,25 @@ key, or parsing the associated value fails.</p>
 one dimensional array.</p>
 </section>
       <h4><a class="xref" href="Texart.Api.TxBitmap.html">TxBitmap</a></h4>
-      <section><p>Helpers for image bitmaps.</p>
+      <section><p>Helpers for image bitmaps. Here are some concepts that you should be familiar with:</p>
+<ul>
+<li><p>Sampling factor: The width (or height) of a square grid of pixels from a source <a class="xref" href="https://docs.microsoft.com/dotnet/api/skiasharp.skbitmap">SKBitmap</a>
+that an <a class="xref" href="Texart.Api.ITxTextBitmapGenerator.html">ITxTextBitmapGenerator</a> maps to exactly one <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.char">Char</a> in <a class="xref" href="Texart.Api.ITxTextBitmap.html">ITxTextBitmap</a>.
+That is, an <a class="xref" href="Texart.Api.ITxTextBitmapGenerator.html">ITxTextBitmapGenerator</a>, <code>generator</code>, using a <em>sampling factor</em>, <code>factor</code>,
+will produce an <a class="xref" href="Texart.Api.ITxTextBitmap.html">ITxTextBitmap</a>, <code>textBitmap</code> from an <a class="xref" href="https://docs.microsoft.com/dotnet/api/skiasharp.skbitmap">SKBitmap</a>, <code>bitmap</code>,
+such that <code>textBitmap.Width * factor == bitmap.Width</code> and <code>textBitmap.Height * factor == bitmap.Height</code>.
+For example, a <em>sampling factor</em> of 3 means that a 3x3 square (of 9 pixels) in a bitmap will be used to come up
+with exactly one output <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.char">Char</a>. Consequently, a <em>sampling factor</em> of 1 maps every pixel to one
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.char">Char</a> and the size of the generated <code>textBitmap</code> and source <code>bitmap</code> are equal.</p>
+</li>
+<li><p>Perfect sampling factor: A <em>sampling factor</em>, <code>factor</code> that can break up a whole <a class="xref" href="https://docs.microsoft.com/dotnet/api/skiasharp.skbitmap">SKBitmap</a> completely
+into a grid of squares of with side length of <code>factor</code>. That is, both the bitmap's height and width is divisible by
+<code>factor</code>. A perfect <em>sampling factor</em> ensures that the same number of pixels are used to determine every
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.char">Char</a> in <a class="xref" href="Texart.Api.ITxTextBitmap.html">ITxTextBitmap</a>. A perfect <em>sampling factor</em> also implies that the output image
+maintains the source aspect ratio without cropping the image. There is always at least one perfect <em>sampling factor</em>,
+<code>1</code>.</p>
+</li>
+</ul>
 </section>
       <h4><a class="xref" href="Texart.Api.TxContract.html">TxContract</a></h4>
       <section><p>Helpers methods around code validation.</p>
@@ -234,6 +252,10 @@ to <code>this</code> which IS immutable.</p>
   </h3>
       <h4><a class="xref" href="Texart.Api.TxArguments.LookupResultType.html">TxArguments.LookupResultType</a></h4>
       <section><p>The result type of a lookup operation on <a class="xref" href="Texart.Api.TxArguments.html">TxArguments</a>.</p>
+</section>
+      <h4><a class="xref" href="Texart.Api.TxBitmap.SamplingFactorCloseness.html">TxBitmap.SamplingFactorCloseness</a></h4>
+      <section><p>A tag representing the strategy to determine if a sampling factor is <em>close</em> to achieving a
+provided target size.</p>
 </section>
       <h4><a class="xref" href="Texart.Api.TxPluginResource.MemberKind.html">TxPluginResource.MemberKind</a></h4>
       <section><p>A tag used to determine the active member of the union.</p>

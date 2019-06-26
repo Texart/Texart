@@ -1032,25 +1032,43 @@ references:
   commentId: T:Texart.Api.TxBitmap
   fullName: Texart.Api.TxBitmap
   nameWithType: TxBitmap
-- uid: Texart.Api.TxBitmap.GetPerfectPixelRatios(SkiaSharp.SKBitmap)
-  name: GetPerfectPixelRatios(SKBitmap)
-  href: api/Texart.Api.TxBitmap.html#Texart_Api_TxBitmap_GetPerfectPixelRatios_SkiaSharp_SKBitmap_
-  commentId: M:Texart.Api.TxBitmap.GetPerfectPixelRatios(SkiaSharp.SKBitmap)
-  fullName: Texart.Api.TxBitmap.GetPerfectPixelRatios(SkiaSharp.SKBitmap)
-  nameWithType: TxBitmap.GetPerfectPixelRatios(SKBitmap)
-- uid: Texart.Api.TxBitmap.GetPerfectPixelRatios(System.Int32,System.Int32)
-  name: GetPerfectPixelRatios(Int32, Int32)
-  href: api/Texart.Api.TxBitmap.html#Texart_Api_TxBitmap_GetPerfectPixelRatios_System_Int32_System_Int32_
-  commentId: M:Texart.Api.TxBitmap.GetPerfectPixelRatios(System.Int32,System.Int32)
-  fullName: Texart.Api.TxBitmap.GetPerfectPixelRatios(System.Int32, System.Int32)
-  nameWithType: TxBitmap.GetPerfectPixelRatios(Int32, Int32)
-- uid: Texart.Api.TxBitmap.GetPerfectPixelRatios*
-  name: GetPerfectPixelRatios
-  href: api/Texart.Api.TxBitmap.html#Texart_Api_TxBitmap_GetPerfectPixelRatios_
-  commentId: Overload:Texart.Api.TxBitmap.GetPerfectPixelRatios
+- uid: Texart.Api.TxBitmap.BestSamplingFactor(SkiaSharp.SKSizeI,SkiaSharp.SKSizeI,System.Single,Texart.Api.TxBitmap.SamplingFactorCloseness)
+  name: BestSamplingFactor(SKSizeI, SKSizeI, Single, TxBitmap.SamplingFactorCloseness)
+  href: api/Texart.Api.TxBitmap.html#Texart_Api_TxBitmap_BestSamplingFactor_SkiaSharp_SKSizeI_SkiaSharp_SKSizeI_System_Single_Texart_Api_TxBitmap_SamplingFactorCloseness_
+  commentId: M:Texart.Api.TxBitmap.BestSamplingFactor(SkiaSharp.SKSizeI,SkiaSharp.SKSizeI,System.Single,Texart.Api.TxBitmap.SamplingFactorCloseness)
+  fullName: Texart.Api.TxBitmap.BestSamplingFactor(SkiaSharp.SKSizeI, SkiaSharp.SKSizeI, System.Single, Texart.Api.TxBitmap.SamplingFactorCloseness)
+  nameWithType: TxBitmap.BestSamplingFactor(SKSizeI, SKSizeI, Single, TxBitmap.SamplingFactorCloseness)
+- uid: Texart.Api.TxBitmap.BestSamplingFactor*
+  name: BestSamplingFactor
+  href: api/Texart.Api.TxBitmap.html#Texart_Api_TxBitmap_BestSamplingFactor_
+  commentId: Overload:Texart.Api.TxBitmap.BestSamplingFactor
   isSpec: "True"
-  fullName: Texart.Api.TxBitmap.GetPerfectPixelRatios
-  nameWithType: TxBitmap.GetPerfectPixelRatios
+  fullName: Texart.Api.TxBitmap.BestSamplingFactor
+  nameWithType: TxBitmap.BestSamplingFactor
+- uid: Texart.Api.TxBitmap.SamplingFactorCloseness
+  name: TxBitmap.SamplingFactorCloseness
+  href: api/Texart.Api.TxBitmap.SamplingFactorCloseness.html
+  commentId: T:Texart.Api.TxBitmap.SamplingFactorCloseness
+  fullName: Texart.Api.TxBitmap.SamplingFactorCloseness
+  nameWithType: TxBitmap.SamplingFactorCloseness
+- uid: Texart.Api.TxBitmap.SamplingFactorCloseness.EuclideanDistanceToTarget
+  name: EuclideanDistanceToTarget
+  href: api/Texart.Api.TxBitmap.SamplingFactorCloseness.html#Texart_Api_TxBitmap_SamplingFactorCloseness_EuclideanDistanceToTarget
+  commentId: F:Texart.Api.TxBitmap.SamplingFactorCloseness.EuclideanDistanceToTarget
+  fullName: Texart.Api.TxBitmap.SamplingFactorCloseness.EuclideanDistanceToTarget
+  nameWithType: TxBitmap.SamplingFactorCloseness.EuclideanDistanceToTarget
+- uid: Texart.Api.TxBitmap.SamplingFactorCloseness.LargerThanTarget
+  name: LargerThanTarget
+  href: api/Texart.Api.TxBitmap.SamplingFactorCloseness.html#Texart_Api_TxBitmap_SamplingFactorCloseness_LargerThanTarget
+  commentId: F:Texart.Api.TxBitmap.SamplingFactorCloseness.LargerThanTarget
+  fullName: Texart.Api.TxBitmap.SamplingFactorCloseness.LargerThanTarget
+  nameWithType: TxBitmap.SamplingFactorCloseness.LargerThanTarget
+- uid: Texart.Api.TxBitmap.SamplingFactorCloseness.SmallerThanTarget
+  name: SmallerThanTarget
+  href: api/Texart.Api.TxBitmap.SamplingFactorCloseness.html#Texart_Api_TxBitmap_SamplingFactorCloseness_SmallerThanTarget
+  commentId: F:Texart.Api.TxBitmap.SamplingFactorCloseness.SmallerThanTarget
+  fullName: Texart.Api.TxBitmap.SamplingFactorCloseness.SmallerThanTarget
+  nameWithType: TxBitmap.SamplingFactorCloseness.SmallerThanTarget
 - uid: Texart.Api.TxContract
   name: TxContract
   href: api/Texart.Api.TxContract.html

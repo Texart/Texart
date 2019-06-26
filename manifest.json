@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.ITxTextBitmapGenerator.html",
-          "hash": "bYkTyEjQ+SoWRsWGfueaRA=="
+          "hash": "0cfUa+NFzfLIvUsrXtTbAw=="
         }
       },
       "is_incremental": false,
@@ -137,11 +137,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Texart.Api.TxBitmap.SamplingFactorCloseness.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Texart.Api.TxBitmap.SamplingFactorCloseness.html",
+          "hash": "SFp3AQIfKVYy75dALzvyTA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Texart.Api.TxBitmap.yml",
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.TxBitmap.html",
-          "hash": "+R8ZXxRxiBdfsea5OCzgYQ=="
+          "hash": "P0mUennaQgZ3HdR8dE8XqA=="
         }
       },
       "is_incremental": false,
@@ -321,7 +333,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Texart.Api.html",
-          "hash": "DvBAQ75eNmm9gzkgWJKQDg=="
+          "hash": "a9uDkr2BbYvoIhXD0vXRMw=="
         }
       },
       "is_incremental": false,
@@ -348,7 +360,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "DvQSPF59rlmYC7AMTXuU8A=="
+          "hash": "R3BexIplPTXePirf/WkfSw=="
         }
       },
       "is_incremental": false,
@@ -393,23 +405,23 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "ConceptualDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build",
-          "total_file_count": 2,
-          "skipped_file_count": 0
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build",
-          "total_file_count": 27,
-          "skipped_file_count": 0
-        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 28,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 2,
           "skipped_file_count": 0
         }
       }
