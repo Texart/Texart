@@ -65,12 +65,12 @@ namespace Texart.Api
         /// Finds the best sampling factor to use that will cause a bitmap of size <paramref name="sourceSize"/>
         /// to produce an output text bitmap that is <i>close</i> in size to <paramref name="targetSize"/>. The
         /// returned sampling factor is guaranteed to be perfect (see <see cref="IsPerfectSamplingFactor"/>).
-        /// character in the output bitmap is assumed to take up a square of <paramref name="fontSize"/> pixels.
+        /// character in the output bitmap is assumed to take up a square of <paramref name="characterSpacing"/> pixels.
         /// <i>Closeness</i> is defined by <paramref name="closeness"/>.
         /// </summary>
         /// <param name="sourceSize">The size of the input <see cref="SKBitmap"/>.</param>
         /// <param name="targetSize">The desired size of the output <see cref="SKBitmap"/> of characters.</param>
-        /// <param name="fontSize">The space (in pixels) used by each character in the output bitmap.</param>
+        /// <param name="characterSpacing">The space (in pixels) used by each character in the output bitmap.</param>
         /// <param name="closeness">
         ///     The strategy used to determine how close a sampling factor is to determining the target
         ///     output size.
@@ -82,13 +82,13 @@ namespace Texart.Api
         /// <seealso cref="SamplingFactorCloseness"/>
         public static int BestSamplingFactor(
             SKSizeI sourceSize, SKSizeI targetSize,
-            float fontSize,
+            float characterSpacing,
             SamplingFactorCloseness closeness = SamplingFactorCloseness.EuclideanDistanceToTarget)
         {
             int? maybeIdealSamplingFactor = null;
             foreach (var samplingFactor in PerfectSamplingFactors(sourceSize.Width, sourceSize.Height))
             {
-                var expectedSize = ExpectedOutputSize(sourceSize, fontSize, samplingFactor);
+                var expectedSize = ExpectedOutputSize(sourceSize, characterSpacing, samplingFactor);
                 if (!maybeIdealSamplingFactor.HasValue)
                 {
                     maybeIdealSamplingFactor = samplingFactor;
@@ -99,15 +99,15 @@ namespace Texart.Api
                 {
                     SamplingFactorCloseness.SmallerThanTarget => BetterFactorForSmaller(
                         sourceSize, targetSize,
-                        fontSize,
+                        characterSpacing,
                         maybeIdealSamplingFactor.Value, samplingFactor),
                     SamplingFactorCloseness.LargerThanTarget => BetterFactorForLarger(
                         sourceSize, targetSize,
-                        fontSize,
+                        characterSpacing,
                         maybeIdealSamplingFactor.Value, samplingFactor),
                     SamplingFactorCloseness.EuclideanDistanceToTarget => BetterFactorForEuclideanDistance(
                         sourceSize, targetSize,
-                        fontSize,
+                        characterSpacing,
                         maybeIdealSamplingFactor.Value, samplingFactor),
                     _ => throw new InvalidOperationException("Unreachable case")
                 };
@@ -116,15 +116,15 @@ namespace Texart.Api
             Debug.Assert(maybeIdealSamplingFactor.HasValue);
             return maybeIdealSamplingFactor.Value;
 
-            static int BetterFactorForSmaller(SKSizeI source, SKSizeI target, float font, int lhs, int rhs)
+            static int BetterFactorForSmaller(SKSizeI source, SKSizeI target, float characters, int lhs, int rhs)
             {
                 if (lhs == rhs)
                 {
                     return lhs;
                 }
 
-                var left = ExpectedOutputSize(source, font, lhs);
-                var right = ExpectedOutputSize(source, font, rhs);
+                var left = ExpectedOutputSize(source, characters, lhs);
+                var right = ExpectedOutputSize(source, characters, rhs);
 
                 var leftIsSmaller = IsSmallerOrEqual(left, target);
                 var rightIsSmaller = IsSmallerOrEqual(right, target);
@@ -146,15 +146,15 @@ namespace Texart.Api
                 return leftDistance < rightDistance ? lhs : rhs;
             }
 
-            static int BetterFactorForLarger(SKSizeI source, SKSizeI target, float font, int lhs, int rhs)
+            static int BetterFactorForLarger(SKSizeI source, SKSizeI target, float characters, int lhs, int rhs)
             {
                 if (lhs == rhs)
                 {
                     return lhs;
                 }
 
-                var left = ExpectedOutputSize(source, font, lhs);
-                var right = ExpectedOutputSize(source, font, rhs);
+                var left = ExpectedOutputSize(source, characters, lhs);
+                var right = ExpectedOutputSize(source, characters, rhs);
 
                 var leftIsGreater = IsGreaterOrEqual(left, target);
                 var rightIsGreater = IsGreaterOrEqual(right, target);
@@ -176,15 +176,15 @@ namespace Texart.Api
                 return leftDistance < rightDistance ? lhs : rhs;
             }
 
-            static int BetterFactorForEuclideanDistance(SKSizeI source, SKSizeI target, float font, int lhs, int rhs)
+            static int BetterFactorForEuclideanDistance(SKSizeI source, SKSizeI target, float characters, int lhs, int rhs)
             {
                 if (lhs == rhs)
                 {
                     return lhs;
                 }
 
-                var left = ExpectedOutputSize(source, font, lhs);
-                var right = ExpectedOutputSize(source, font, rhs);
+                var left = ExpectedOutputSize(source, characters, lhs);
+                var right = ExpectedOutputSize(source, characters, rhs);
 
                 var leftDistance = EuclideanDistanceSquared(left, target);
                 var rightDistance = EuclideanDistanceSquared(right, target);
@@ -206,24 +206,38 @@ namespace Texart.Api
         }
 
         /// <summary>
+        /// Gets <see cref="SKBitmap.Width"/> and <see cref="SKBitmap.Height"/> as <see cref="SKSizeI"/>.
+        /// </summary>
+        /// <param name="bitmap">The bitmap whose dimensions to get.</param>
+        /// <returns><paramref name="bitmap"/>'s dimensions as <see cref="SKSizeI"/>.</returns>
+        public static SKSizeI SizeOf(SKBitmap bitmap)
+        {
+            if (bitmap is null)
+            {
+                throw new ArgumentNullException(nameof(bitmap));
+            }
+            return new SKSizeI(bitmap.Width, bitmap.Height);
+        }
+
+        /// <summary>
         /// Determines the expected size of the output <see cref="SKBitmap"/> from an input <see cref="SKBitmap"/> with size
-        /// <paramref name="sourceSize"/>, where each character is <see cref="fontSize"/> pixels, and using a sampling factor
+        /// <paramref name="sourceSize"/>, where each character is <see cref="characterSpacing"/> pixels, and using a sampling factor
         /// of <paramref name="samplingFactor"/>.
         /// </summary>
         /// <param name="sourceSize">The size of the input <see cref="SKBitmap"/>.</param>
-        /// <param name="fontSize">The space (in pixels) used by each character in the output <see cref="SKBitmap"/>.</param>
+        /// <param name="characterSpacing">The space (in pixels) used by each character in the output <see cref="SKBitmap"/>.</param>
         /// <param name="samplingFactor">
         ///     The sampling factor to use on the input <see cref="SKBitmap"/>.
         ///     See docs for <see cref="TxBitmap"/> for the semantics of this value.
         /// </param>
         /// <returns>The expected size of the output <see cref="SKBitmap"/> of characters.</returns>
-        public static SKSizeI ExpectedOutputSize(SKSizeI sourceSize, float fontSize, int samplingFactor)
+        public static SKSizeI ExpectedOutputSize(SKSizeI sourceSize, float characterSpacing, int samplingFactor)
         {
-            var fontWidth = sourceSize.Width * fontSize;
-            var fontHeight = sourceSize.Height * fontSize;
+            var charactersWidth = sourceSize.Width * characterSpacing;
+            var charactersHeight = sourceSize.Height * characterSpacing;
             return new SKSizeI(
-                (int)Math.Ceiling(fontWidth / samplingFactor),
-                (int)Math.Ceiling(fontHeight / samplingFactor));
+                (int)Math.Ceiling(charactersWidth / samplingFactor),
+                (int)Math.Ceiling(charactersHeight / samplingFactor));
         }
 
         /// <summary>

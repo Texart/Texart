@@ -16,11 +16,16 @@ namespace Texart.Builtin.Generators
         /// <inheritdoc/>
         protected override Task<ITxTextBitmap> DoGenerateTextAsync(SKBitmap bitmap)
         {
+            var samplingFactor = TxBitmap.BestSamplingFactor(
+                TxBitmap.SizeOf(bitmap), TxBitmap.SizeOf(bitmap), 8f);
+            Debug.Assert(bitmap.Width % samplingFactor == 0);
+            Debug.Assert(bitmap.Height % samplingFactor == 0);
+            var targetWidth = bitmap.Width / samplingFactor;
+            var targetHeight = bitmap.Height / samplingFactor;
+
             var characters = Characters;
             var charactersCount = characters.Count;
-            var targetWidth = WidthFor(bitmap);
-            var targetHeight = HeightFor(bitmap);
-            var brightnessValues = GenerateBrightnessArray(bitmap);
+            var brightnessValues = GenerateBrightnessArray(bitmap, samplingFactor);
 
             Debug.Assert(charactersCount > 0);
             Debug.Assert(brightnessValues.Length == targetWidth * targetHeight);
@@ -52,18 +57,19 @@ namespace Texart.Builtin.Generators
         /// The length of this array is <c>Width * Height</c>.
         /// </summary>
         /// <returns>An array representing the brightness of each chunk of <see cref="SKBitmap"/></returns>
-        private float[] GenerateBrightnessArray(SKBitmap bitmap)
+        private float[] GenerateBrightnessArray(SKBitmap bitmap, int samplingFactor)
         {
             var sourceWidth = bitmap.Width;
             var sourceHeight = bitmap.Height;
-            var targetWidth = WidthFor(bitmap);
-            var targetHeight = HeightFor(bitmap);
+            Debug.Assert(sourceWidth % samplingFactor == 0);
+            Debug.Assert(sourceHeight % samplingFactor == 0);
+            var targetWidth = sourceWidth / samplingFactor;
+            var targetHeight = sourceHeight / samplingFactor;
 
             // we assume that we can perfectly scale source to target in square-sized chunks
             Debug.Assert(sourceWidth % targetWidth == 0);
             Debug.Assert(sourceHeight % targetHeight == 0);
 
-            var samplingFactor = SamplingFactor;
             var pixelsPerChunk = samplingFactor * samplingFactor;
 
             // stores the average brightness of each chunk
@@ -111,9 +117,8 @@ namespace Texart.Builtin.Generators
         /// Constructs a generator with the given character set.
         /// </summary>
         /// <param name="characters">The set of characters to use in the generation.</param>
-        /// <param name="samplingFactor"></param>
-        private BrightnessBasedBitmapGenerator(IEnumerable<char> characters, int samplingFactor = 1)
-            : base(new List<char>(characters), samplingFactor)
+        private BrightnessBasedBitmapGenerator(IEnumerable<char> characters)
+            : base(new List<char>(characters))
         {
         }
 
@@ -125,7 +130,7 @@ namespace Texart.Builtin.Generators
         public static BrightnessBasedBitmapGenerator Create(TxArguments args)
         {
             // TODO: Use arguments
-            return new BrightnessBasedBitmapGenerator(CharacterSets.Basic, 1);
+            return new BrightnessBasedBitmapGenerator(CharacterSets.Basic);
         }
 
     }
