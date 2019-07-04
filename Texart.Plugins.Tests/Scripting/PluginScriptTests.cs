@@ -58,6 +58,7 @@ namespace Texart.Plugins.Tests.Scripting
             Assert.AreEqual(0, result.AvailablePackages.Count());
             Assert.Throws<NotImplementedException>(() => result.LookupGenerator(null));
             Assert.Throws<NotImplementedException>(() => result.LookupRenderer(null));
+            Assert.Throws<NotImplementedException>(() => result.LookupPackage(null));
             Assert.Throws<NotImplementedException>(() => result.PrintHelp(null));
             Assert.Throws<NotImplementedException>(() => result.PrintHelp(null, TxPluginResourceKind.Package, null));
             Assert.AreEqual("DummyPlugin", result.GetType().Name);
@@ -74,6 +75,7 @@ namespace Texart.Plugins.Tests.Scripting
             Assert.AreEqual(0, result.AvailablePackages.Count());
             Assert.Throws<ArgumentNullException>(() => result.LookupGenerator(null));
             Assert.Throws<ArgumentNullException>(() => result.LookupRenderer(null));
+            Assert.Throws<ArgumentNullException>(() => result.LookupPackage(null));
             Assert.AreEqual("BuilderStatePlugin", result.GetType().Name);
         }
 

@@ -24,6 +24,9 @@ sealed class DummyPlugin : ITxPlugin
 
     public IEnumerable<RelativeLocator> AvailablePackages => ImmutableArray<RelativeLocator>.Empty;
 
+    public (RelativeLocator generator, RelativeLocator renderer) LookupPackage(Locator locator) =>
+        throw new NotImplementedException();
+
     public void PrintHelp(ITxConsole console) =>
         throw new NotImplementedException();
 

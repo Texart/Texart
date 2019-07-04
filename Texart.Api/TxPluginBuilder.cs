@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 
 #nullable enable
@@ -49,11 +47,11 @@ namespace Texart.Api
                 throw new ArgumentNullException(nameof(generator));
             }
 
-            if (_state.Generators.ContainsKey(locator))
+            if (State.Generators.ContainsKey(locator))
             {
                 throw new ArgumentException($"{nameof(ITxTextBitmapGenerator)} named '{locator}' already exists");
             }
-            _state.Generators.Add(locator, WithHelp.Of(generator, help));
+            State.Generators.Add(locator, WithHelp.Of(generator, help));
 
             return this;
         }
@@ -198,11 +196,11 @@ namespace Texart.Api
                 throw new ArgumentNullException(nameof(renderer));
             }
 
-            if (_state.Renderers.ContainsKey(locator))
+            if (State.Renderers.ContainsKey(locator))
             {
                 throw new ArgumentException($"{nameof(ITxTextBitmapRenderer)} named '{locator}' already exists");
             }
-            _state.Renderers.Add(locator, WithHelp.Of(renderer, help ?? string.Empty));
+            State.Renderers.Add(locator, WithHelp.Of(renderer, help ?? string.Empty));
             return this;
         }
 
@@ -321,28 +319,36 @@ namespace Texart.Api
 
         #endregion
 
-        public TxPluginBuilder AddPackage(RelativeLocator locator, string? help = null)
+        public TxPluginBuilder AddPackage(
+            RelativeLocator locator,
+            (RelativeLocator generator, RelativeLocator renderer) destinationLocators,
+            string? help = null)
         {
             if (locator is null)
             {
                 throw new ArgumentNullException(nameof(locator));
             }
+            if (destinationLocators.generator is null)
+            {
+                throw new ArgumentNullException(nameof(destinationLocators.generator));
+            }
+            if (destinationLocators.renderer is null)
+            {
+                throw new ArgumentNullException(nameof(destinationLocators.renderer));
+            }
 
-            if (_state.Packages.Any(p => p.Value == locator))
+            if (State.Packages.ContainsKey(locator))
             {
-                throw new ArgumentException($"package named '{locator}' already exists");
+                throw new ArgumentException($"package named '{destinationLocators}' already exists");
             }
-            if (!_state.Generators.ContainsKey(locator))
-            {
-                throw new ArgumentException($"No {nameof(ITxTextBitmapGenerator)} named '{locator}' exists.");
-            }
-            if (!_state.Renderers.ContainsKey(locator))
-            {
-                throw new ArgumentException($"No {nameof(ITxTextBitmapRenderer)} named '{locator}' exists.");
-            }
-            _state.Packages.Add(WithHelp.Of(locator, help));
+            State.Packages.Add(locator, WithHelp.Of(destinationLocators, help));
             return this;
         }
+
+        public TxPluginBuilder AddPackage(
+            RelativeLocator locator,
+            RelativeLocator destinationLocator,
+            string? help = null) => AddPackage(locator, (destinationLocator, destinationLocator), help);
 
         /// <summary>
         /// Sets the help string for the <see cref="ITxPlugin"/> as a whole.
@@ -352,7 +358,7 @@ namespace Texart.Api
         /// <seealso cref="ITxPlugin.PrintHelp(Texart.Api.ITxConsole)"/>
         public TxPluginBuilder SetPluginHelp(string? help)
         {
-            _state.Help = help;
+            State.Help = help;
             return this;
         }
 
@@ -361,7 +367,7 @@ namespace Texart.Api
         /// </summary>
         /// <returns><see cref="ITxPlugin"/> instance based on the current state.</returns>
         public ITxPlugin CreatePlugin()
-            => new BuilderStatePlugin(_state);
+            => new BuilderStatePlugin(State);
 
         /// <summary>
         /// Creates a new <see cref="TxPluginBuilder"/> with cloned internal state. Changes to <c>this</c> do not affect
@@ -385,31 +391,31 @@ namespace Texart.Api
         /// <param name="state">The internal state.</param>
         private TxPluginBuilder(BuilderStatePlugin state)
         {
-            _state = state ?? throw new ArgumentNullException(nameof(state));
+            State = state ?? throw new ArgumentNullException(nameof(state));
         }
 
         /// <summary>
         /// Internal instance that represents the current (transient) plugin state for <c>this</c> builder.
         /// When <c>this</c> builder is updated, this value should also be mutated.
         /// </summary>
-        private readonly BuilderStatePlugin _state;
+        internal readonly BuilderStatePlugin State;
 
         /// <summary>
         /// A <see cref="ITxPlugin"/> implementation that helps <see cref="TxPluginBuilder"/> by tracking the "state"
         /// of the plugin that represents the current description. When <see cref="TxPluginBuilder"/> is updated,
         /// this should also be mutated.
         /// </summary>
-        private sealed class BuilderStatePlugin : ITxPlugin
+        internal sealed class BuilderStatePlugin : ITxPlugin
         {
             public readonly Dictionary<RelativeLocator, WithHelp<TxPluginResource<ITxTextBitmapGenerator>>> Generators;
             public readonly Dictionary<RelativeLocator, WithHelp<TxPluginResource<ITxTextBitmapRenderer>>> Renderers;
-            public readonly List<WithHelp<RelativeLocator>> Packages;
+            public readonly Dictionary<RelativeLocator, WithHelp<(RelativeLocator generator, RelativeLocator renderer)>> Packages;
             public string? Help;
 
             internal BuilderStatePlugin() : this(
                 new Dictionary<RelativeLocator, WithHelp<TxPluginResource<ITxTextBitmapGenerator>>>(),
                 new Dictionary<RelativeLocator, WithHelp<TxPluginResource<ITxTextBitmapRenderer>>>(),
-                new List<WithHelp<RelativeLocator>>(),
+                new Dictionary<RelativeLocator, WithHelp<(RelativeLocator generator, RelativeLocator renderer)>>(),
                 null)
             { }
 
@@ -420,7 +426,7 @@ namespace Texart.Api
             private BuilderStatePlugin(
                 Dictionary<RelativeLocator, WithHelp<TxPluginResource<ITxTextBitmapGenerator>>> generators,
                 Dictionary<RelativeLocator, WithHelp<TxPluginResource<ITxTextBitmapRenderer>>> renderers,
-                List<WithHelp<RelativeLocator>> packages,
+                Dictionary<RelativeLocator, WithHelp<(RelativeLocator generator, RelativeLocator renderer)>> packages,
                 string? help)
             {
                 Generators = generators ?? throw new ArgumentNullException(nameof(generators));
@@ -464,7 +470,21 @@ namespace Texart.Api
             }
 
             /// <inheritdoc/>
-            IEnumerable<RelativeLocator> ITxPlugin.AvailablePackages => Packages.Select(p => p.Value);
+            IEnumerable<RelativeLocator> ITxPlugin.AvailablePackages => Packages.Keys;
+
+            /// <inheritdoc/>
+            (RelativeLocator generator, RelativeLocator renderer) ITxPlugin.LookupPackage(Locator locator)
+            {
+                if (locator is null)
+                {
+                    throw new ArgumentNullException(nameof(locator));
+                }
+                if (Packages.TryGetValue(locator.RelativeResource, out var package))
+                {
+                    return package.Value;
+                }
+                throw new ArgumentException($"No package named '{locator.RelativeResource}' exists.");
+            }
 
             /// <inheritdoc/>
             void ITxPlugin.PrintHelp(ITxConsole console)
@@ -481,51 +501,55 @@ namespace Texart.Api
             /// <inheritdoc/>
             void ITxPlugin.PrintHelp(ITxConsole console, TxPluginResourceKind resourceKind, Locator locator)
             {
-                string? help = null;
+                string? help;
                 switch (resourceKind)
                 {
                     case TxPluginResourceKind.Generator:
+                    {
+                        if (Generators.TryGetValue(locator.RelativeResource, out var resource))
                         {
-                            if (Generators.TryGetValue(locator.RelativeResource, out var resource))
-                            {
-                                help = resource.Help;
-                            }
-                            else
-                            {
-                                throw new ArgumentException(
-                                    $"No {nameof(ITxTextBitmapGenerator)} named '{locator.RelativeResource}' exists.");
-                            }
-                            break;
+                            help = resource.Help;
                         }
+                        else
+                        {
+                            throw new ArgumentException(
+                                $"No {nameof(ITxTextBitmapGenerator)} named '{locator.RelativeResource}' exists.");
+                        }
+                        break;
+                    }
                     case TxPluginResourceKind.Renderer:
+                    {
+                        if (Renderers.TryGetValue(locator.RelativeResource, out var resource))
                         {
-                            if (Renderers.TryGetValue(locator.RelativeResource, out var resource))
-                            {
-                                help = resource.Help;
-                            }
-                            else
-                            {
-                                throw new ArgumentException(
-                                    $"No {nameof(ITxTextBitmapRenderer)} named '{locator.RelativeResource}' exists.");
-                            }
-                            break;
+                            help = resource.Help;
                         }
+                        else
+                        {
+                            throw new ArgumentException(
+                                $"No {nameof(ITxTextBitmapRenderer)} named '{locator.RelativeResource}' exists.");
+                        }
+                        break;
+                    }
                     case TxPluginResourceKind.Package:
+                    {
+                        if (Packages.TryGetValue(locator.RelativeResource, out var package))
                         {
-                            help = Packages.Find(p => p.Value == locator.RelativeResource)?.Help;
-                            if (help is null)
-                            {
-                                throw new ArgumentException(
-                                    $"No package named '{locator.RelativeResource}' exists.");
-                            }
-                            break;
+                            help = package.Help;
                         }
+                        else
+                        {
+                            throw new ArgumentException(
+                                $"No package named '{locator.RelativeResource}' exists.");
+                        }
+                        break;
+                    }
+                    default:
+                        throw new InvalidOperationException("Unreachable case");
                 }
-                Debug.Assert(help != null);
                 // TODO: Add better help formatting
-                if (Help != null)
+                if (help != null)
                 {
-                    console.Out.Write(Help);
+                    console.Out.Write(help);
                     console.Out.Write(Environment.NewLine);
                 }
             }

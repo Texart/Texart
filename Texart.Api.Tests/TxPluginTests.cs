@@ -4,17 +4,20 @@ using NUnit.Framework;
 
 namespace Texart.Api.Tests
 {
+    using Locator = TxPluginResourceLocator;
+    using RelativeLocator = TxPluginResourceLocator.RelativeLocator;
+
     [TestFixture]
     internal class TxPluginTests
     {
         private class AllowsRelativeRedirectPlugin : PluginBase
         {
-            public override TxPluginResource<ITxTextBitmapGenerator> LookupGenerator(TxPluginResourceLocator locator) =>
+            public override TxPluginResource<ITxTextBitmapGenerator> LookupGenerator(Locator locator) =>
                 TxPluginResource.RedirectGenerator(locator
                     .WithScheme("other-scheme")
                     .WithAssemblyPath("/other/plugin.dll")
                     .WithRelativeResource("/other/resource"), args => args);
-            public override TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(TxPluginResourceLocator locator) =>
+            public override TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(Locator locator) =>
                 TxPluginResource.RedirectRenderer(locator
                     .WithScheme("other-scheme")
                     .WithAssemblyPath("/other/plugin.dll")
@@ -25,8 +28,8 @@ namespace Texart.Api.Tests
         public void AllowsRelativeRedirect()
         {
             ITxPlugin plugin = new AllowsRelativeRedirectPlugin();
-            var sourceLocator = TxPluginResourceLocator.Of("tx:///plugin.dll:resource");
-            var expectedRedirectLocation = TxPluginResourceLocator.Of("other-scheme:////other/plugin.dll:/other/resource");
+            var sourceLocator = Locator.Of("tx:///plugin.dll:resource");
+            var expectedRedirectLocation = Locator.Of("other-scheme:////other/plugin.dll:/other/resource");
             var expectedArgs = new TxArguments(new Dictionary<string, string> { { "hello", "world" } });
 
             var generatorRedirect = plugin.LookupGenerator(sourceLocator).Redirect;
@@ -44,19 +47,21 @@ namespace Texart.Api.Tests
         /// </summary>
         private class PluginBase : ITxPlugin
         {
-            public IEnumerable<TxPluginResourceLocator.RelativeLocator> AvailableGenerators =>
+            public IEnumerable<RelativeLocator> AvailableGenerators =>
                 throw new NotImplementedException();
-            public virtual TxPluginResource<ITxTextBitmapGenerator> LookupGenerator(TxPluginResourceLocator locator) =>
+            public virtual TxPluginResource<ITxTextBitmapGenerator> LookupGenerator(Locator locator) =>
                 throw new NotImplementedException();
-            public virtual IEnumerable<TxPluginResourceLocator.RelativeLocator> AvailableRenderers =>
+            public virtual IEnumerable<RelativeLocator> AvailableRenderers =>
                 throw new NotImplementedException();
-            public virtual TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(TxPluginResourceLocator locator) =>
-                throw new System.NotImplementedException();
-            public virtual IEnumerable<TxPluginResourceLocator.RelativeLocator> AvailablePackages =>
+            public virtual TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(Locator locator) =>
+                throw new NotImplementedException();
+            public virtual IEnumerable<RelativeLocator> AvailablePackages =>
+                throw new NotImplementedException();
+            public virtual (RelativeLocator generator, RelativeLocator renderer) LookupPackage(Locator locator) =>
                 throw new NotImplementedException();
             public virtual void PrintHelp(ITxConsole console) =>
                 throw new NotImplementedException();
-            public virtual void PrintHelp(ITxConsole console, TxPluginResourceKind resourceKind, TxPluginResourceLocator locator) =>
+            public virtual void PrintHelp(ITxConsole console, TxPluginResourceKind resourceKind, Locator locator) =>
                 throw new NotImplementedException();
         }
     }

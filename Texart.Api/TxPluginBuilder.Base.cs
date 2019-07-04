@@ -63,6 +63,10 @@ namespace Texart.Api
             public IEnumerable<RelativeLocator> AvailablePackages => _plugin.AvailablePackages;
 
             /// <inheritdoc/>
+            public (RelativeLocator generator, RelativeLocator renderer) LookupPackage(Locator locator) =>
+                _plugin.LookupPackage(locator);
+
+            /// <inheritdoc/>
             public void PrintHelp(ITxConsole console) => _plugin.PrintHelp(console);
 
             /// <inheritdoc/>

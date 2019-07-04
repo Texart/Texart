@@ -5,6 +5,8 @@ using Texart.Api;
 
 namespace Texart.Plugins.Tests
 {
+    using Locator = TxPluginResourceLocator;
+    using RelativeLocator = TxPluginResourceLocator.RelativeLocator;
     using BadPluginAssemblyException = PrebuiltPlugin.BadPluginAssemblyException;
 
     [TestFixture]
@@ -68,19 +70,21 @@ namespace Texart.Plugins.Tests
 
         private abstract class DummyPluginBase : ITxPlugin
         {
-            public IEnumerable<TxPluginResourceLocator.RelativeLocator> AvailableGenerators =>
+            public IEnumerable<RelativeLocator> AvailableGenerators =>
                 throw new NotImplementedException();
-            public TxPluginResource<ITxTextBitmapGenerator> LookupGenerator(TxPluginResourceLocator locator) =>
+            public TxPluginResource<ITxTextBitmapGenerator> LookupGenerator(Locator locator) =>
                 throw new NotImplementedException();
-            public IEnumerable<TxPluginResourceLocator.RelativeLocator> AvailableRenderers =>
+            public IEnumerable<RelativeLocator> AvailableRenderers =>
                 throw new NotImplementedException();
-            public TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(TxPluginResourceLocator locator) =>
+            public TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(Locator locator) =>
                 throw new NotImplementedException();
-            public IEnumerable<TxPluginResourceLocator.RelativeLocator> AvailablePackages =>
+            public IEnumerable<RelativeLocator> AvailablePackages =>
+                throw new NotImplementedException();
+            public (RelativeLocator generator, RelativeLocator renderer) LookupPackage(Locator locator) =>
                 throw new NotImplementedException();
             public void PrintHelp(ITxConsole console) =>
                 throw new NotImplementedException();
-            public void PrintHelp(ITxConsole console, TxPluginResourceKind resourceKind, TxPluginResourceLocator locator) =>
+            public void PrintHelp(ITxConsole console, TxPluginResourceKind resourceKind, Locator locator) =>
                 throw new NotImplementedException();
         }
 
@@ -115,6 +119,7 @@ namespace Texart.Plugins.Tests
         private abstract class PluginThatIsAbstract : DummyPluginBase
         {
             // ReSharper disable once PublicConstructorInAbstractClass
+            // ReSharper disable once EmptyConstructor
             public PluginThatIsAbstract() { }
         }
     }
