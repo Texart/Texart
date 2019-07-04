@@ -110,7 +110,7 @@ namespace Texart.Api
         /// Adds <paramref name="generator"/> to the list of available <see cref="ITxTextBitmapGenerator"/> in the plugin.
         /// </summary>
         /// <param name="type">
-        ///     The type whose <see cref="Type.Name"/> will be used as the local identity of <paramref name="generator"/>.
+        ///     The type whose <see cref="MemberInfo.Name"/> will be used as the local identity of <paramref name="generator"/>.
         /// </param>
         /// <param name="generator">The resource that the <see cref="ITxPlugin"/> will return.</param>
         /// <param name="help">The help string associated with <paramref name="generator"/>.</param>
@@ -131,7 +131,7 @@ namespace Texart.Api
         /// Adds <paramref name="generator"/> to the list of available <see cref="ITxTextBitmapGenerator"/> in the plugin.
         /// </summary>
         /// <param name="type">
-        ///     The type whose <see cref="Type.Name"/> will be used as the local identity of <paramref name="generator"/>.
+        ///     The type whose <see cref="MemberInfo.Name"/> will be used as the local identity of <paramref name="generator"/>.
         /// </param>
         /// <param name="generator">
         ///     The resource that the <see cref="ITxPlugin"/> will return.

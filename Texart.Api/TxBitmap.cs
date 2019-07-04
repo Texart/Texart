@@ -42,7 +42,7 @@ namespace Texart.Api
             /// then the largest sampling size is returned (which produces the smallest possible dimension).
             ///
             /// That is, the output image will be of maximal size while still being smaller than the target size,
-            /// and maintaining a perfect sampling factor (see <see cref="TxBitmap.IsPerfectSamplingFactor"/>).
+            /// and maintaining a perfect sampling factor (see <see cref="IsPerfectSamplingFactor(SKSizeI,int)"/>).
             /// </summary>
             SmallerThanTarget,
             /// <summary>
@@ -51,7 +51,7 @@ namespace Texart.Api
             /// then the smallest sampling size is returned (which produces the largest possible dimension).
             ///
             /// That is, the output image will be of minimal size while still being larger than the target size,
-            /// and maintaining a perfect sampling factor (see <see cref="TxBitmap.IsPerfectSamplingFactor"/>).
+            /// and maintaining a perfect sampling factor (see <see cref="IsPerfectSamplingFactor(SKSizeI,int)"/>).
             /// </summary>
             LargerThanTarget,
             /// <summary>
@@ -59,14 +59,14 @@ namespace Texart.Api
             /// to the target size.
             ///
             /// That is, the output image will be of a size <i>close</i> to the target size while maintaining a
-            /// perfect sampling factor (see <see cref="TxBitmap.IsPerfectSamplingFactor"/>).
+            /// perfect sampling factor (see <see cref="IsPerfectSamplingFactor(SKSizeI,int)"/>).
             /// </summary>
-            EuclideanDistanceToTarget
+            EuclideanDistance
         }
         /// <summary>
         /// Finds the best sampling factor to use that will cause a bitmap of size <paramref name="sourceSize"/>
         /// to produce an output text bitmap that is <i>close</i> in size to <paramref name="targetSize"/>. The
-        /// returned sampling factor is guaranteed to be perfect (see <see cref="IsPerfectSamplingFactor"/>).
+        /// returned sampling factor is guaranteed to be perfect (see <see cref="IsPerfectSamplingFactor(SKSizeI,int)"/>).
         /// character in the output bitmap is assumed to take up a square of <paramref name="characterSpacing"/> pixels.
         /// <i>Closeness</i> is defined by <paramref name="closeness"/>.
         /// </summary>
@@ -85,7 +85,7 @@ namespace Texart.Api
         public static int BestSamplingFactor(
             SKSizeI sourceSize, SKSizeI targetSize,
             float characterSpacing,
-            SamplingFactorCloseness closeness = SamplingFactorCloseness.EuclideanDistanceToTarget)
+            SamplingFactorCloseness closeness = SamplingFactorCloseness.EuclideanDistance)
         {
             int? maybeIdealSamplingFactor = null;
             foreach (var samplingFactor in PerfectSamplingFactors(sourceSize.Width, sourceSize.Height))
@@ -96,22 +96,53 @@ namespace Texart.Api
                     continue;
                 }
 
-                maybeIdealSamplingFactor = closeness switch
+                // TODO: Use C# 8 switch expressions when docfx doesn't break on them
+                // https://github.com/dotnet/docfx/issues/4007
+                switch (closeness)
                 {
-                    SamplingFactorCloseness.SmallerThanTarget => BetterFactorForSmaller(
-                        sourceSize, targetSize,
-                        characterSpacing,
-                        maybeIdealSamplingFactor.Value, samplingFactor),
-                    SamplingFactorCloseness.LargerThanTarget => BetterFactorForLarger(
-                        sourceSize, targetSize,
-                        characterSpacing,
-                        maybeIdealSamplingFactor.Value, samplingFactor),
-                    SamplingFactorCloseness.EuclideanDistanceToTarget => BetterFactorForEuclideanDistance(
-                        sourceSize, targetSize,
-                        characterSpacing,
-                        maybeIdealSamplingFactor.Value, samplingFactor),
-                    _ => throw new InvalidOperationException("Unreachable case")
-                };
+                    case SamplingFactorCloseness.SmallerThanTarget:
+                    {
+                        maybeIdealSamplingFactor = BetterFactorForSmaller(
+                            sourceSize, targetSize,
+                            characterSpacing,
+                            maybeIdealSamplingFactor.Value, samplingFactor);
+                        break;
+                    }
+                    case SamplingFactorCloseness.LargerThanTarget:
+                    {
+                        maybeIdealSamplingFactor = BetterFactorForLarger(
+                            sourceSize, targetSize,
+                            characterSpacing,
+                            maybeIdealSamplingFactor.Value, samplingFactor);
+                        break;
+                    }
+                    case SamplingFactorCloseness.EuclideanDistance:
+                    {
+                        maybeIdealSamplingFactor = BetterFactorForEuclideanDistance(
+                            sourceSize, targetSize,
+                            characterSpacing,
+                            maybeIdealSamplingFactor.Value, samplingFactor);
+                        break;
+                    }
+                    default:
+                        throw new InvalidOperationException("Unreachable case");
+                }
+                // maybeIdealSamplingFactor = closeness switch
+                // {
+                //     SamplingFactorCloseness.SmallerThanTarget => BetterFactorForSmaller(
+                //         sourceSize, targetSize,
+                //         characterSpacing,
+                //         maybeIdealSamplingFactor.Value, samplingFactor),
+                //     SamplingFactorCloseness.LargerThanTarget => BetterFactorForLarger(
+                //         sourceSize, targetSize,
+                //         characterSpacing,
+                //         maybeIdealSamplingFactor.Value, samplingFactor),
+                //     SamplingFactorCloseness.EuclideanDistance => BetterFactorForEuclideanDistance(
+                //         sourceSize, targetSize,
+                //         characterSpacing,
+                //         maybeIdealSamplingFactor.Value, samplingFactor),
+                //     _ => throw new InvalidOperationException("Unreachable case")
+                // };
             }
             // there is at least one sampling factor at least
             Debug.Assert(maybeIdealSamplingFactor.HasValue);
@@ -222,7 +253,7 @@ namespace Texart.Api
 
         /// <summary>
         /// Determines the expected size of the output <see cref="SKBitmap"/> from an input <see cref="SKBitmap"/> with size
-        /// <paramref name="sourceSize"/>, where each character is <see cref="characterSpacing"/> pixels, and using a sampling factor
+        /// <paramref name="sourceSize"/>, where each character is <paramref name="characterSpacing"/> pixels, and using a sampling factor
         /// of <paramref name="samplingFactor"/>.
         /// </summary>
         /// <param name="sourceSize">The size of the input <see cref="SKBitmap"/>.</param>
@@ -243,7 +274,7 @@ namespace Texart.Api
 
         /// <summary>
         /// Determines if <paramref name="samplingFactor"/> is a perfect sampling factor for an input <see cref="SKBitmap"/>
-        /// of size <see cref="size"/>. See docs for <see cref="TxBitmap"/> for the definition of <i>perfect sampling factor</i>.
+        /// of size <paramref name="size"/>. See docs for <see cref="TxBitmap"/> for the definition of <i>perfect sampling factor</i>.
         /// </summary>
         /// <param name="size">The size of the input <see cref="SKBitmap"/>.</param>
         /// <param name="samplingFactor">
