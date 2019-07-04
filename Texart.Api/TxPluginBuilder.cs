@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 
@@ -16,7 +15,7 @@ namespace Texart.Api
         public TxPluginBuilder AddGenerator(
             RelativeLocator locator,
             TxPluginResource<ITxTextBitmapGenerator> generator,
-            IReadOnlyList<string>? help = null)
+            string? help = null)
         {
             if (locator is null)
             {
@@ -39,12 +38,12 @@ namespace Texart.Api
         public TxPluginBuilder AddGenerator(
             RelativeLocator locator,
             TxFactory<ITxTextBitmapGenerator, TxArguments> generator,
-            IReadOnlyList<string>? help = null) => AddGenerator(locator, TxPluginResource.OfGeneratorFactory(generator), help);
+            string? help = null) => AddGenerator(locator, TxPluginResource.OfGeneratorFactory(generator), help);
 
         public TxPluginBuilder AddGenerator(
             Type type,
             TxPluginResource<ITxTextBitmapGenerator> generator,
-            IReadOnlyList<string>? help = null)
+            string? help = null)
         {
             if (type is null)
             {
@@ -56,20 +55,20 @@ namespace Texart.Api
         public TxPluginBuilder AddGenerator(
             Type type,
             TxFactory<ITxTextBitmapGenerator, TxArguments> generator,
-            IReadOnlyList<string>? help = null) => AddGenerator(type, TxPluginResource.OfGeneratorFactory(generator), help);
+            string? help = null) => AddGenerator(type, TxPluginResource.OfGeneratorFactory(generator), help);
 
         public TxPluginBuilder AddDefaultGenerator(
             TxPluginResource<ITxTextBitmapGenerator> generator,
-            IReadOnlyList<string>? help = null) => AddGenerator(Locator.OfRelativeResource(string.Empty), generator, help);
+            string? help = null) => AddGenerator(Locator.OfRelativeResource(string.Empty), generator, help);
 
         public TxPluginBuilder AddDefaultGenerator(
             TxFactory<ITxTextBitmapGenerator, TxArguments> generator,
-            IReadOnlyList<string>? help = null) => AddGenerator(Locator.OfRelativeResource(string.Empty), generator, help);
+            string? help = null) => AddGenerator(Locator.OfRelativeResource(string.Empty), generator, help);
 
         public TxPluginBuilder AddRenderer(
             RelativeLocator locator,
             TxPluginResource<ITxTextBitmapRenderer> renderer,
-            IReadOnlyList<string>? help = null)
+            string? help = null)
         {
             if (locator is null)
             {
@@ -84,24 +83,24 @@ namespace Texart.Api
             {
                 throw new ArgumentException($"{nameof(ITxTextBitmapRenderer)} named '{locator}' already exists");
             }
-            _state.Renderers.Add(locator, WithHelp.Of(renderer, help ?? ImmutableArray<string>.Empty));
+            _state.Renderers.Add(locator, WithHelp.Of(renderer, help ?? string.Empty));
             return this;
         }
 
         public TxPluginBuilder AddRenderer(
             RelativeLocator locator,
             TxFactory<ITxTextBitmapRenderer, TxArguments> renderer,
-            IReadOnlyList<string>? help = null) => AddRenderer(locator, TxPluginResource.OfRendererFactory(renderer), help);
+            string? help = null) => AddRenderer(locator, TxPluginResource.OfRendererFactory(renderer), help);
 
         public TxPluginBuilder AddRenderer(
             Type type,
             TxFactory<ITxTextBitmapRenderer, TxArguments> renderer,
-            IReadOnlyList<string>? help = null) => AddRenderer(type, TxPluginResource.OfRendererFactory(renderer), help);
+            string? help = null) => AddRenderer(type, TxPluginResource.OfRendererFactory(renderer), help);
 
         public TxPluginBuilder AddRenderer(
             Type type,
             TxPluginResource<ITxTextBitmapRenderer> renderer,
-            IReadOnlyList<string>? help = null)
+            string? help = null)
         {
             if (type is null)
             {
@@ -112,13 +111,13 @@ namespace Texart.Api
 
         public TxPluginBuilder AddDefaultRenderer(
             TxPluginResource<ITxTextBitmapRenderer> renderer,
-            IReadOnlyList<string>? help = null) => AddRenderer(Locator.OfRelativeResource(string.Empty), renderer, help);
+            string? help = null) => AddRenderer(Locator.OfRelativeResource(string.Empty), renderer, help);
 
         public TxPluginBuilder AddDefaultRenderer(
             TxFactory<ITxTextBitmapRenderer, TxArguments> renderer,
-            IReadOnlyList<string>? help = null) => AddRenderer(Locator.OfRelativeResource(string.Empty), renderer, help);
+            string? help = null) => AddRenderer(Locator.OfRelativeResource(string.Empty), renderer, help);
 
-        public TxPluginBuilder AddPackage(RelativeLocator locator, IReadOnlyList<string>? help = null)
+        public TxPluginBuilder AddPackage(RelativeLocator locator, string? help = null)
         {
             if (locator is null)
             {
@@ -141,23 +140,45 @@ namespace Texart.Api
             return this;
         }
 
-        public TxPluginBuilder AddPluginHelp(IReadOnlyList<string> help)
+        /// <summary>
+        /// Sets the help string for the <see cref="ITxPlugin"/> as a whole.
+        /// </summary>
+        /// <param name="help">The help string to use, or <c>null</c> to reset it.</param>
+        /// <returns><c>this</c>.</returns>
+        /// <seealso cref="ITxPlugin.PrintHelp(Texart.Api.ITxConsole)"/>
+        public TxPluginBuilder SetPluginHelp(string? help)
         {
-            _state.Help = help ?? throw new ArgumentNullException(nameof(help));
+            _state.Help = help;
             return this;
         }
 
+        /// <summary>
+        /// Creates a new <see cref="ITxPlugin"/> instance based on a snapshot of the current state.
+        /// </summary>
+        /// <returns><see cref="ITxPlugin"/> instance based on the current state.</returns>
         public ITxPlugin CreatePlugin()
             => new BuilderStatePlugin(_state);
 
+        /// <summary>
+        /// Creates a new <see cref="TxPluginBuilder"/> with cloned internal state. Changes to <c>this</c> do not affect
+        /// the state of the newly returned value (or vice versa).
+        /// </summary>
+        /// <returns>Cloned instance.</returns>
         public TxPluginBuilder Clone() =>
             new TxPluginBuilder(new BuilderStatePlugin());
 
         /// <inheritdoc/>
         object ICloneable.Clone() => Clone();
 
+        /// <summary>
+        /// Create a new <see cref="TxPluginBuilder"/> with empty initial state.
+        /// </summary>
         public TxPluginBuilder() : this(new BuilderStatePlugin()) { }
 
+        /// <summary>
+        /// Creates a new <see cref="TxPluginBuilder"/> with some initial state.
+        /// </summary>
+        /// <param name="state">The internal state.</param>
         private TxPluginBuilder(BuilderStatePlugin state)
         {
             _state = state ?? throw new ArgumentNullException(nameof(state));
@@ -179,13 +200,13 @@ namespace Texart.Api
             public readonly Dictionary<RelativeLocator, WithHelp<TxPluginResource<ITxTextBitmapGenerator>>> Generators;
             public readonly Dictionary<RelativeLocator, WithHelp<TxPluginResource<ITxTextBitmapRenderer>>> Renderers;
             public readonly List<WithHelp<RelativeLocator>> Packages;
-            public IReadOnlyList<string> Help;
+            public string? Help;
 
             internal BuilderStatePlugin() : this(
                 new Dictionary<RelativeLocator, WithHelp<TxPluginResource<ITxTextBitmapGenerator>>>(),
                 new Dictionary<RelativeLocator, WithHelp<TxPluginResource<ITxTextBitmapRenderer>>>(),
                 new List<WithHelp<RelativeLocator>>(),
-                ImmutableArray<string>.Empty)
+                null)
             { }
 
             internal BuilderStatePlugin(BuilderStatePlugin other) : this(
@@ -196,12 +217,12 @@ namespace Texart.Api
                 Dictionary<RelativeLocator, WithHelp<TxPluginResource<ITxTextBitmapGenerator>>> generators,
                 Dictionary<RelativeLocator, WithHelp<TxPluginResource<ITxTextBitmapRenderer>>> renderers,
                 List<WithHelp<RelativeLocator>> packages,
-                IReadOnlyList<string> help)
+                string? help)
             {
                 Generators = generators ?? throw new ArgumentNullException(nameof(generators));
                 Renderers = renderers ?? throw new ArgumentNullException(nameof(renderers));
                 Packages = packages ?? throw new ArgumentNullException(nameof(packages));
-                Help = help ?? throw new ArgumentNullException(nameof(help));
+                Help = help;
             }
 
             /// <inheritdoc/>
@@ -244,17 +265,19 @@ namespace Texart.Api
             /// <inheritdoc/>
             void ITxPlugin.PrintHelp(ITxConsole console)
             {
-                foreach (var line in Help)
+                if (Help is null)
                 {
-                    console.Out.Write(line);
-                    console.Out.Write(Environment.NewLine);
+                    // TODO: Handle case where help is not available
+                    return;
                 }
+                console.Out.Write(Help);
+                console.Out.Write(Environment.NewLine);
             }
 
             /// <inheritdoc/>
             void ITxPlugin.PrintHelp(ITxConsole console, TxPluginResourceKind resourceKind, Locator locator)
             {
-                IReadOnlyList<string>? help = null;
+                string? help = null;
                 switch (resourceKind)
                 {
                     case TxPluginResourceKind.Generator:
@@ -296,9 +319,9 @@ namespace Texart.Api
                 }
                 Debug.Assert(help != null);
                 // TODO: Add better help formatting
-                foreach (var line in Help)
+                if (Help != null)
                 {
-                    console.Out.Write(line);
+                    console.Out.Write(Help);
                     console.Out.Write(Environment.NewLine);
                 }
             }
@@ -317,23 +340,33 @@ namespace Texart.Api
             /// <summary>
             /// The help string associated with <see cref="Value"/>.
             /// </summary>
-            public IReadOnlyList<string> Help { get; }
+            public string Help { get; }
             /// <summary>
             /// Constructs a wrapped instance.
             /// </summary>
             /// <param name="value">The value to store.</param>
             /// <param name="help">The help string associated with <paramref name="value"/>.</param>
-            internal WithHelp(T value, IReadOnlyList<string> help)
+            internal WithHelp(T value, string help)
             {
                 Value = value;
                 Help = help;
             }
         }
 
+        /// <summary>
+        /// Helpers for <see cref="WithHelp{T}"/>.
+        /// </summary>
         internal static class WithHelp
         {
-            public static WithHelp<T> Of<T>(T value, IReadOnlyList<string>? help = null) =>
-                new WithHelp<T>(value, help ?? ImmutableArray<string>.Empty);
+            /// <summary>
+            /// Creates a <see cref="WithHelp{T}"/> instance, optionally with some help string.
+            /// </summary>
+            /// <typeparam name="T"></typeparam>
+            /// <param name="value">The value to store.</param>
+            /// <param name="help">Help string, if available.</param>
+            /// <returns>The created <see cref="WithHelp{T}"/> instance.</returns>
+            public static WithHelp<T> Of<T>(T value, string? help = null) =>
+                new WithHelp<T>(value, help ?? string.Empty);
         }
     }
 }

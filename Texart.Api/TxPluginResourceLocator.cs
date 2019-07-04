@@ -164,7 +164,7 @@ namespace Texart.Api
             {
                 throw checkFailedException;
             }
-            return relative;
+            return relative!;
         }
 
         /// <summary>
@@ -627,7 +627,7 @@ namespace Texart.Api
         private TxPluginResourceLocator(TxReferenceScheme scheme, ComputedSegments computedSegments,
             string? resourcePathBackingField)
         {
-            Debug.Assert(scheme != null);
+            Debug.Assert(scheme != null!);
             Scheme = scheme;
             AssemblySegments = computedSegments.AssemblySegments;
             RelativeResource = computedSegments.RelativeResource;
@@ -697,7 +697,7 @@ namespace Texart.Api
         /// </summary>
         /// <param name="assemblyPath">The assembly URI path to check.</param>
         /// <returns>An exception if the URI is invalid, or <see cref="ImmutableArray{T}"/> if valid.</returns>
-        private static (Exception, ImmutableArray<string>) CheckIsValidAssemblyPath(string assemblyPath)
+        private static (Exception?, ImmutableArray<string>) CheckIsValidAssemblyPath(string assemblyPath)
         {
             //
             // Reference: https://tools.ietf.org/html/rfc3986#section-3

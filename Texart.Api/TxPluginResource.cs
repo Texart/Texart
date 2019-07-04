@@ -190,7 +190,7 @@ namespace Texart.Api
             internal ResourceRedirect(TxPluginResourceLocator locator,
                 Func<TxArguments, TxArguments>? argumentsTransformer)
             {
-                Debug.Assert(locator != null);
+                Debug.Assert(locator != null!);
                 Locator = locator;
                 ArgumentsTransformer = argumentsTransformer;
             }
