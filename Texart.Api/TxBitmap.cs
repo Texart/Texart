@@ -88,7 +88,6 @@ namespace Texart.Api
             int? maybeIdealSamplingFactor = null;
             foreach (var samplingFactor in PerfectSamplingFactors(sourceSize.Width, sourceSize.Height))
             {
-                var expectedSize = ExpectedOutputSize(sourceSize, characterSpacing, samplingFactor);
                 if (!maybeIdealSamplingFactor.HasValue)
                 {
                     maybeIdealSamplingFactor = samplingFactor;

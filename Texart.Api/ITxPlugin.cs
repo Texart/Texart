@@ -18,7 +18,6 @@ namespace Texart.Api
         /// <see cref="LookupGenerator"/>.
         /// </summary>
         IEnumerable<TxPluginResourceLocator.RelativeLocator> AvailableGenerators { get; }
-
         /// <summary>
         /// Returns a factory function that constructs an <see cref="ITxTextBitmapGenerator"/> identified by
         /// <paramref name="locator"/>, or a "redirect" locator which represents another lookup
@@ -41,7 +40,6 @@ namespace Texart.Api
         /// <see cref="LookupRenderer"/>.
         /// </summary>
         IEnumerable<TxPluginResourceLocator.RelativeLocator> AvailableRenderers { get; }
-
         /// <summary>
         /// Returns a factory function that constructs an <see cref="ITxTextBitmapRenderer"/> identified by
         /// <paramref name="locator"/>, or a "redirect" locator which represents another lookup
@@ -58,5 +56,25 @@ namespace Texart.Api
         /// <seealso cref="TxPluginResource.Redirect{T}"/>
         /// <seealso cref="TxPluginResource.RedirectRenderer"/>
         TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(TxPluginResourceLocator locator);
+
+        /// <summary>
+        /// Available names of packages to look up. Every name listed here must be valid when calling
+        /// <see cref="LookupGenerator"/> and <see cref="LookupRenderer"/>.
+        /// </summary>
+        IEnumerable<TxPluginResourceLocator.RelativeLocator> AvailablePackages { get; }
+
+        /// <summary>
+        /// Prints help information for <c>this</c> into <paramref name="console"/>.
+        /// </summary>
+        /// <param name="console">The output console to print help to.</param>
+        void PrintHelp(ITxConsole console);
+        /// <summary>
+        /// Prints help information for a resource represented by <paramref name="resourceKind"/> and
+        /// identified by <paramref name="locator"/>.
+        /// </summary>
+        /// <param name="console">The output console to print help to.</param>
+        /// <param name="resourceKind">The kind of resource to get help for.</param>
+        /// <param name="locator">The identity of the resource to get help for.</param>
+        void PrintHelp(ITxConsole console, TxPluginResourceKind resourceKind, TxPluginResourceLocator locator);
     }
 }

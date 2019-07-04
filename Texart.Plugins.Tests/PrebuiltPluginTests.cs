@@ -76,6 +76,12 @@ namespace Texart.Plugins.Tests
                 throw new NotImplementedException();
             public TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(TxPluginResourceLocator locator) =>
                 throw new NotImplementedException();
+            public IEnumerable<TxPluginResourceLocator.RelativeLocator> AvailablePackages =>
+                throw new NotImplementedException();
+            public void PrintHelp(ITxConsole console) =>
+                throw new NotImplementedException();
+            public void PrintHelp(ITxConsole console, TxPluginResourceKind resourceKind, TxPluginResourceLocator locator) =>
+                throw new NotImplementedException();
         }
 
         private class Plugin0 : DummyPluginBase { }

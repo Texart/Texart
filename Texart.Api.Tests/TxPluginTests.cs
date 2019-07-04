@@ -52,6 +52,12 @@ namespace Texart.Api.Tests
                 throw new NotImplementedException();
             public virtual TxPluginResource<ITxTextBitmapRenderer> LookupRenderer(TxPluginResourceLocator locator) =>
                 throw new System.NotImplementedException();
+            public virtual IEnumerable<TxPluginResourceLocator.RelativeLocator> AvailablePackages =>
+                throw new NotImplementedException();
+            public virtual void PrintHelp(ITxConsole console) =>
+                throw new NotImplementedException();
+            public virtual void PrintHelp(ITxConsole console, TxPluginResourceKind resourceKind, TxPluginResourceLocator locator) =>
+                throw new NotImplementedException();
         }
     }
 }
