@@ -24,6 +24,8 @@ namespace Texart.Api
     /// </summary>
     public sealed partial class TxPluginBuilder : ICloneable
     {
+        #region Add Generators
+
         /// <summary>
         /// Adds <paramref name="generator"/> to the list of available <see cref="ITxTextBitmapGenerator"/> in the plugin.
         /// </summary>
@@ -169,6 +171,19 @@ namespace Texart.Api
             TxFactory<ITxTextBitmapGenerator, TxArguments> generator,
             string? help = null) => AddGenerator(Locator.OfRelative(string.Empty), generator, help);
 
+        #endregion
+
+        #region Add Renderers
+
+        /// <summary>
+        /// Adds <paramref name="renderer"/> to the list of available <see cref="ITxTextBitmapRenderer"/> in the plugin.
+        /// </summary>
+        /// <param name="locator">The local identity of <paramref name="renderer"/>.</param>
+        /// <param name="renderer">The resource that the <see cref="ITxPlugin"/> will return.</param>
+        /// <param name="help">The help string associated with <paramref name="renderer"/>.</param>
+        /// <returns><c>this</c>.</returns>
+        /// <seealso cref="ITxPlugin.AvailableRenderers"/>
+        /// <seealso cref="ITxPlugin.LookupRenderer"/>
         public TxPluginBuilder AddRenderer(
             RelativeLocator locator,
             TxPluginResource<ITxTextBitmapRenderer> renderer,
@@ -191,26 +206,65 @@ namespace Texart.Api
             return this;
         }
 
+        /// <summary>
+        /// Adds <paramref name="renderer"/> to the list of available <see cref="ITxTextBitmapRenderer"/> in the plugin.
+        /// </summary>
+        /// <param name="locator">
+        ///     The local identity of <paramref name="renderer"/>.
+        ///     This must be a valid <see cref="RelativeLocator"/>.
+        ///     See <see cref="TxPluginResourceLocator.IsWellFormedRelativeResourceString"/>.
+        /// </param>
+        /// <param name="renderer">The resource that the <see cref="ITxPlugin"/> will return.</param>
+        /// <param name="help">The help string associated with <paramref name="renderer"/>.</param>
+        /// <returns><c>this</c>.</returns>
         public TxPluginBuilder AddRenderer(
             string locator,
             TxPluginResource<ITxTextBitmapRenderer> renderer,
             string? help = null) => AddRenderer(Locator.OfRelative(locator), renderer, help);
 
+        /// <summary>
+        /// Adds <paramref name="renderer"/> to the list of available <see cref="ITxTextBitmapRenderer"/> in the plugin.
+        /// </summary>
+        /// <param name="locator">The local identity of <paramref name="renderer"/>.</param>
+        /// <param name="renderer">
+        ///     The resource that the <see cref="ITxPlugin"/> will return.
+        ///     See <see cref="TxPluginResource.OfRendererFactory{T}"/>.
+        /// </param>
+        /// <param name="help">The help string associated with <paramref name="renderer"/>.</param>
+        /// <returns><c>this</c>.</returns>
         public TxPluginBuilder AddRenderer(
             RelativeLocator locator,
             TxFactory<ITxTextBitmapRenderer, TxArguments> renderer,
             string? help = null) => AddRenderer(locator, TxPluginResource.OfRendererFactory(renderer), help);
 
+        /// <summary>
+        /// Adds <paramref name="renderer"/> to the list of available <see cref="ITxTextBitmapRenderer"/> in the plugin.
+        /// </summary>
+        /// <param name="locator">
+        ///     The local identity of <paramref name="renderer"/>.
+        ///     This must be a valid <see cref="RelativeLocator"/>.
+        ///     See <see cref="TxPluginResourceLocator.IsWellFormedRelativeResourceString"/>.
+        /// </param>
+        /// <param name="renderer">
+        ///     The resource that the <see cref="ITxPlugin"/> will return.
+        ///     See <see cref="TxPluginResource.OfRendererFactory{T}"/>.
+        /// </param>
+        /// <param name="help">The help string associated with <paramref name="renderer"/>.</param>
+        /// <returns><c>this</c>.</returns>
         public TxPluginBuilder AddRenderer(
             string locator,
             TxFactory<ITxTextBitmapRenderer, TxArguments> renderer,
             string? help = null) => AddRenderer(locator, TxPluginResource.OfRendererFactory(renderer), help);
 
-        public TxPluginBuilder AddRenderer(
-            Type type,
-            TxFactory<ITxTextBitmapRenderer, TxArguments> renderer,
-            string? help = null) => AddRenderer(type, TxPluginResource.OfRendererFactory(renderer), help);
-
+        /// <summary>
+        /// Adds <paramref name="renderer"/> to the list of available <see cref="ITxTextBitmapRenderer"/> in the plugin.
+        /// </summary>
+        /// <param name="type">
+        ///     The type whose <see cref="MemberInfo.Name"/> will be used as the local identity of <paramref name="renderer"/>.
+        /// </param>
+        /// <param name="renderer">The resource that the <see cref="ITxPlugin"/> will return.</param>
+        /// <param name="help">The help string associated with <paramref name="renderer"/>.</param>
+        /// <returns><c>this</c>.</returns>
         public TxPluginBuilder AddRenderer(
             Type type,
             TxPluginResource<ITxTextBitmapRenderer> renderer,
@@ -223,13 +277,49 @@ namespace Texart.Api
             return AddRenderer(Locator.OfRelative(type.Name), renderer, help);
         }
 
+        /// <summary>
+        /// Adds <paramref name="renderer"/> to the list of available <see cref="ITxTextBitmapRenderer"/> in the plugin.
+        /// </summary>
+        /// <param name="type">
+        ///     The type whose <see cref="MemberInfo.Name"/> will be used as the local identity of <paramref name="renderer"/>.
+        /// </param>
+        /// <param name="renderer">
+        ///     The resource that the <see cref="ITxPlugin"/> will return.
+        ///     See <see cref="TxPluginResource.OfRendererFactory{T}"/>.
+        /// </param>
+        /// <param name="help">The help string associated with <paramref name="renderer"/>.</param>
+        /// <returns><c>this</c>.</returns>
+        public TxPluginBuilder AddRenderer(
+            Type type,
+            TxFactory<ITxTextBitmapRenderer, TxArguments> renderer,
+            string? help = null) => AddRenderer(type, TxPluginResource.OfRendererFactory(renderer), help);
+
+        /// <summary>
+        /// Adds <paramref name="renderer"/> as the default <see cref="ITxTextBitmapRenderer"/> in the plugin.
+        /// This corresponds to an identity of empty <see cref="RelativeLocator"/>.
+        /// </summary>
+        /// <param name="renderer">The resource that the <see cref="ITxPlugin"/> will return.</param>
+        /// <param name="help">The help string associated with <paramref name="renderer"/>.</param>
+        /// <returns><c>this</c>.</returns>
         public TxPluginBuilder AddDefaultRenderer(
             TxPluginResource<ITxTextBitmapRenderer> renderer,
             string? help = null) => AddRenderer(Locator.OfRelative(string.Empty), renderer, help);
 
+        /// <summary>
+        /// Adds <paramref name="renderer"/> as the default <see cref="ITxTextBitmapRenderer"/> in the plugin.
+        /// This corresponds to an identity of empty <see cref="RelativeLocator"/>.
+        /// </summary>
+        /// <param name="renderer">
+        ///     The resource that the <see cref="ITxPlugin"/> will return.
+        ///     See <see cref="TxPluginResource.OfRendererFactory{T}"/>.
+        /// </param>
+        /// <param name="help">The help string associated with <paramref name="renderer"/>.</param>
+        /// <returns><c>this</c>.</returns>
         public TxPluginBuilder AddDefaultRenderer(
             TxFactory<ITxTextBitmapRenderer, TxArguments> renderer,
             string? help = null) => AddRenderer(Locator.OfRelative(string.Empty), renderer, help);
+
+        #endregion
 
         public TxPluginBuilder AddPackage(RelativeLocator locator, string? help = null)
         {
