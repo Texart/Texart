@@ -45,7 +45,17 @@ namespace Texart.Api
         }
 
         public TxPluginBuilder AddGenerator(
+            string locator,
+            TxPluginResource<ITxTextBitmapGenerator> generator,
+            string? help = null) => AddGenerator(Locator.OfRelative(locator), generator, help);
+
+        public TxPluginBuilder AddGenerator(
             RelativeLocator locator,
+            TxFactory<ITxTextBitmapGenerator, TxArguments> generator,
+            string? help = null) => AddGenerator(locator, TxPluginResource.OfGeneratorFactory(generator), help);
+
+        public TxPluginBuilder AddGenerator(
+            string locator,
             TxFactory<ITxTextBitmapGenerator, TxArguments> generator,
             string? help = null) => AddGenerator(locator, TxPluginResource.OfGeneratorFactory(generator), help);
 
@@ -58,7 +68,7 @@ namespace Texart.Api
             {
                 throw new ArgumentNullException(nameof(type));
             }
-            return AddGenerator(Locator.OfRelativeResource(type.Name), generator, help);
+            return AddGenerator(Locator.OfRelative(type.Name), generator, help);
         }
 
         public TxPluginBuilder AddGenerator(
@@ -68,11 +78,11 @@ namespace Texart.Api
 
         public TxPluginBuilder AddDefaultGenerator(
             TxPluginResource<ITxTextBitmapGenerator> generator,
-            string? help = null) => AddGenerator(Locator.OfRelativeResource(string.Empty), generator, help);
+            string? help = null) => AddGenerator(Locator.OfRelative(string.Empty), generator, help);
 
         public TxPluginBuilder AddDefaultGenerator(
             TxFactory<ITxTextBitmapGenerator, TxArguments> generator,
-            string? help = null) => AddGenerator(Locator.OfRelativeResource(string.Empty), generator, help);
+            string? help = null) => AddGenerator(Locator.OfRelative(string.Empty), generator, help);
 
         public TxPluginBuilder AddRenderer(
             RelativeLocator locator,
@@ -97,7 +107,17 @@ namespace Texart.Api
         }
 
         public TxPluginBuilder AddRenderer(
+            string locator,
+            TxPluginResource<ITxTextBitmapRenderer> renderer,
+            string? help = null) => AddRenderer(Locator.OfRelative(locator), renderer, help);
+
+        public TxPluginBuilder AddRenderer(
             RelativeLocator locator,
+            TxFactory<ITxTextBitmapRenderer, TxArguments> renderer,
+            string? help = null) => AddRenderer(locator, TxPluginResource.OfRendererFactory(renderer), help);
+
+        public TxPluginBuilder AddRenderer(
+            string locator,
             TxFactory<ITxTextBitmapRenderer, TxArguments> renderer,
             string? help = null) => AddRenderer(locator, TxPluginResource.OfRendererFactory(renderer), help);
 
@@ -115,16 +135,16 @@ namespace Texart.Api
             {
                 throw new ArgumentNullException(nameof(type));
             }
-            return AddRenderer(Locator.OfRelativeResource(type.Name), renderer, help);
+            return AddRenderer(Locator.OfRelative(type.Name), renderer, help);
         }
 
         public TxPluginBuilder AddDefaultRenderer(
             TxPluginResource<ITxTextBitmapRenderer> renderer,
-            string? help = null) => AddRenderer(Locator.OfRelativeResource(string.Empty), renderer, help);
+            string? help = null) => AddRenderer(Locator.OfRelative(string.Empty), renderer, help);
 
         public TxPluginBuilder AddDefaultRenderer(
             TxFactory<ITxTextBitmapRenderer, TxArguments> renderer,
-            string? help = null) => AddRenderer(Locator.OfRelativeResource(string.Empty), renderer, help);
+            string? help = null) => AddRenderer(Locator.OfRelative(string.Empty), renderer, help);
 
         public TxPluginBuilder AddPackage(RelativeLocator locator, string? help = null)
         {

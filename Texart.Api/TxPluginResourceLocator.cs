@@ -157,7 +157,7 @@ namespace Texart.Api
         /// <returns>A <see cref="RelativeLocator"/> from parsing <paramref name="relativeResource"/>.</returns>
         /// <exception cref="ArgumentNullException">If <paramref name="relativeResource"/> is <c>null</c>.</exception>
         /// <exception cref="FormatException">If the relative resource path is not valid.</exception>
-        public static RelativeLocator OfRelativeResource(string relativeResource)
+        public static RelativeLocator OfRelative(string relativeResource)
         {
             var (checkFailedException, relative) = RelativeLocator.CheckIsValidRelativeResourcePath(relativeResource);
             if (checkFailedException != null)
@@ -260,7 +260,7 @@ namespace Texart.Api
         /// <exception cref="ArgumentNullException">If <paramref name="relativeResourceLocator"/> is <c>null</c></exception>
         /// <exception cref="FormatException">If the resource path is not valid.</exception>
         public TxPluginResourceLocator WithRelativeResource(string relativeResourceLocator) =>
-            WithRelativeResource(OfRelativeResource(relativeResourceLocator));
+            WithRelativeResource(OfRelative(relativeResourceLocator));
 
         /// <summary>
         /// Creates a new <see cref="TxPluginResourceLocator"/> with <see cref="RelativeResource"/> replaced with
