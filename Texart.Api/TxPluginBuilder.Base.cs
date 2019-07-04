@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 #nullable enable
 
@@ -9,13 +10,39 @@ namespace Texart.Api
 
     public sealed partial class TxPluginBuilder
     {
+        /// <summary>
+        /// A simple base class for a <see cref="ITxPlugin"/> that is described using <see cref="TxPluginBuilder"/>.
+        /// </summary>
+        /// <example>
+        /// [TxPlugin]
+        /// public sealed class Plugin : TxPluginBuilder.Base, ITxPlugin
+        /// {
+        ///     private static TxPluginBuilder BuilderDescription => new TxPluginBuilder()
+        ///         .AddGenerator(typeof(MyGenerator), MyGeneratorFactory)
+        ///         .AddRenderer(typeof(MyRenderer), MyRendererFactory)
+        ///         .SetHelp("some help for this plugin");
+        ///
+        ///     public Plugin() : base(BuilderDescription) { }
+        /// }
+        /// </example>
         public abstract class Base : ITxPlugin
         {
+            /// <summary>
+            /// Initializes <c>this</c> using the current state of <paramref name="builder"/>.
+            /// </summary>
+            /// <param name="builder">The plugin builder description.</param>
             protected Base(TxPluginBuilder builder)
             {
+                if (builder is null)
+                {
+                    throw new ArgumentNullException(nameof(builder));
+                }
                 _plugin = builder.CreatePlugin();
             }
 
+            /// <summary>
+            /// The internal underlying <see cref="ITxPlugin"/> instance from <see cref="TxPluginBuilder"/>.
+            /// </summary>
             private readonly ITxPlugin _plugin;
 
             /// <inheritdoc/>

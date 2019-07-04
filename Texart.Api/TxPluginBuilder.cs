@@ -10,6 +10,15 @@ namespace Texart.Api
     using Locator = TxPluginResourceLocator;
     using RelativeLocator = TxPluginResourceLocator.RelativeLocator;
 
+    /// <summary>
+    /// <see cref="TxPluginBuilder"/> provides an API to declaratively describe a <see cref="ITxPlugin"/> type.
+    /// This type offers a fluent API to describe the plugin.
+    ///
+    /// There are two (canonical) ways to materialize a <see cref="TxPluginBuilder"/> into a <see cref="ITxPlugin"/>.
+    ///   * Call <see cref="CreatePlugin"/> to create an <see cref="ITxPlugin"/> instance based on the current
+    ///     description state. This is helpful for Texart scripts (<c>.tx.csx</c> files).
+    ///   * Define a type that inherits from <see cref="Base"/>. This is helpful for a plugin assembly.
+    /// </summary>
     public sealed partial class TxPluginBuilder : ICloneable
     {
         public TxPluginBuilder AddGenerator(
