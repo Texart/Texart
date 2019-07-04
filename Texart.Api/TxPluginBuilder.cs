@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 
 #nullable enable
 
@@ -12,7 +13,9 @@ namespace Texart.Api
 
     /// <summary>
     /// <see cref="TxPluginBuilder"/> provides an API to declaratively describe a <see cref="ITxPlugin"/> type.
-    /// This type offers a fluent API to describe the plugin.
+    /// <see cref="TxPluginBuilder"/> offers a fluent API to describe the plugin. Note that a
+    /// <see cref="TxPluginBuilder"/> instance is mutable. However, you may call <see cref="Clone()"/> to create
+    /// a deep copy.
     ///
     /// There are two (canonical) ways to materialize a <see cref="TxPluginBuilder"/> into a <see cref="ITxPlugin"/>.
     ///   * Call <see cref="CreatePlugin"/> to create an <see cref="ITxPlugin"/> instance based on the current
@@ -21,6 +24,15 @@ namespace Texart.Api
     /// </summary>
     public sealed partial class TxPluginBuilder : ICloneable
     {
+        /// <summary>
+        /// Adds <paramref name="generator"/> to the list of available <see cref="ITxTextBitmapGenerator"/> in the plugin.
+        /// </summary>
+        /// <param name="locator">The local identity of <paramref name="generator"/>.</param>
+        /// <param name="generator">The resource that the <see cref="ITxPlugin"/> will return.</param>
+        /// <param name="help">The help string associated with <paramref name="generator"/>.</param>
+        /// <returns><c>this</c>.</returns>
+        /// <seealso cref="ITxPlugin.AvailableGenerators"/>
+        /// <seealso cref="ITxPlugin.LookupGenerator"/>
         public TxPluginBuilder AddGenerator(
             RelativeLocator locator,
             TxPluginResource<ITxTextBitmapGenerator> generator,
@@ -44,21 +56,65 @@ namespace Texart.Api
             return this;
         }
 
+        /// <summary>
+        /// Adds <paramref name="generator"/> to the list of available <see cref="ITxTextBitmapGenerator"/> in the plugin.
+        /// </summary>
+        /// <param name="locator">
+        ///     The local identity of <paramref name="generator"/>.
+        ///     This must be a valid <see cref="RelativeLocator"/>.
+        ///     See <see cref="TxPluginResourceLocator.IsWellFormedRelativeResourceString"/>.
+        /// </param>
+        /// <param name="generator">The resource that the <see cref="ITxPlugin"/> will return.</param>
+        /// <param name="help">The help string associated with <paramref name="generator"/>.</param>
+        /// <returns><c>this</c>.</returns>
         public TxPluginBuilder AddGenerator(
             string locator,
             TxPluginResource<ITxTextBitmapGenerator> generator,
             string? help = null) => AddGenerator(Locator.OfRelative(locator), generator, help);
 
+        /// <summary>
+        /// Adds <paramref name="generator"/> to the list of available <see cref="ITxTextBitmapGenerator"/> in the plugin.
+        /// </summary>
+        /// <param name="locator">The local identity of <paramref name="generator"/>.</param>
+        /// <param name="generator">
+        ///     The resource that the <see cref="ITxPlugin"/> will return.
+        ///     See <see cref="TxPluginResource.OfGeneratorFactory{T}"/>.
+        /// </param>
+        /// <param name="help">The help string associated with <paramref name="generator"/>.</param>
+        /// <returns><c>this</c>.</returns>
         public TxPluginBuilder AddGenerator(
             RelativeLocator locator,
             TxFactory<ITxTextBitmapGenerator, TxArguments> generator,
             string? help = null) => AddGenerator(locator, TxPluginResource.OfGeneratorFactory(generator), help);
 
+        /// <summary>
+        /// Adds <paramref name="generator"/> to the list of available <see cref="ITxTextBitmapGenerator"/> in the plugin.
+        /// </summary>
+        /// <param name="locator">
+        ///     The local identity of <paramref name="generator"/>.
+        ///     This must be a valid <see cref="RelativeLocator"/>.
+        ///     See <see cref="TxPluginResourceLocator.IsWellFormedRelativeResourceString"/>.
+        /// </param>
+        /// <param name="generator">
+        ///     The resource that the <see cref="ITxPlugin"/> will return.
+        ///     See <see cref="TxPluginResource.OfGeneratorFactory{T}"/>.
+        /// </param>
+        /// <param name="help">The help string associated with <paramref name="generator"/>.</param>
+        /// <returns><c>this</c>.</returns>
         public TxPluginBuilder AddGenerator(
             string locator,
             TxFactory<ITxTextBitmapGenerator, TxArguments> generator,
             string? help = null) => AddGenerator(locator, TxPluginResource.OfGeneratorFactory(generator), help);
 
+        /// <summary>
+        /// Adds <paramref name="generator"/> to the list of available <see cref="ITxTextBitmapGenerator"/> in the plugin.
+        /// </summary>
+        /// <param name="type">
+        ///     The type whose <see cref="Type.Name"/> will be used as the local identity of <paramref name="generator"/>.
+        /// </param>
+        /// <param name="generator">The resource that the <see cref="ITxPlugin"/> will return.</param>
+        /// <param name="help">The help string associated with <paramref name="generator"/>.</param>
+        /// <returns><c>this</c>.</returns>
         public TxPluginBuilder AddGenerator(
             Type type,
             TxPluginResource<ITxTextBitmapGenerator> generator,
@@ -71,15 +127,44 @@ namespace Texart.Api
             return AddGenerator(Locator.OfRelative(type.Name), generator, help);
         }
 
+        /// <summary>
+        /// Adds <paramref name="generator"/> to the list of available <see cref="ITxTextBitmapGenerator"/> in the plugin.
+        /// </summary>
+        /// <param name="type">
+        ///     The type whose <see cref="Type.Name"/> will be used as the local identity of <paramref name="generator"/>.
+        /// </param>
+        /// <param name="generator">
+        ///     The resource that the <see cref="ITxPlugin"/> will return.
+        ///     See <see cref="TxPluginResource.OfGeneratorFactory{T}"/>.
+        /// </param>
+        /// <param name="help">The help string associated with <paramref name="generator"/>.</param>
+        /// <returns><c>this</c>.</returns>
         public TxPluginBuilder AddGenerator(
             Type type,
             TxFactory<ITxTextBitmapGenerator, TxArguments> generator,
             string? help = null) => AddGenerator(type, TxPluginResource.OfGeneratorFactory(generator), help);
 
+        /// <summary>
+        /// Adds <paramref name="generator"/> as the default <see cref="ITxTextBitmapGenerator"/> in the plugin.
+        /// This corresponds to an identity of empty <see cref="RelativeLocator"/>.
+        /// </summary>
+        /// <param name="generator">The resource that the <see cref="ITxPlugin"/> will return.</param>
+        /// <param name="help">The help string associated with <paramref name="generator"/>.</param>
+        /// <returns><c>this</c>.</returns>
         public TxPluginBuilder AddDefaultGenerator(
             TxPluginResource<ITxTextBitmapGenerator> generator,
             string? help = null) => AddGenerator(Locator.OfRelative(string.Empty), generator, help);
 
+        /// <summary>
+        /// Adds <paramref name="generator"/> as the default <see cref="ITxTextBitmapGenerator"/> in the plugin.
+        /// This corresponds to an identity of empty <see cref="RelativeLocator"/>.
+        /// </summary>
+        /// <param name="generator">
+        ///     The resource that the <see cref="ITxPlugin"/> will return.
+        ///     See <see cref="TxPluginResource.OfGeneratorFactory{T}"/>.
+        /// </param>
+        /// <param name="help">The help string associated with <paramref name="generator"/>.</param>
+        /// <returns><c>this</c>.</returns>
         public TxPluginBuilder AddDefaultGenerator(
             TxFactory<ITxTextBitmapGenerator, TxArguments> generator,
             string? help = null) => AddGenerator(Locator.OfRelative(string.Empty), generator, help);
