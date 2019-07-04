@@ -53,7 +53,6 @@ namespace Texart.Plugins.Scripting
         /// <returns>A compiled <see cref="Script{T}"/> object with compile diagnostics.</returns>
         public async Task<PluginScriptCompilation<T>> Compile()
         {
-            // TODO: figure out if Task.Run is actually needed in these cases
             var compilation = await Task.Run(() => Script.GetCompilation());
             var customCompilation = compilation.WithAnalyzers(CustomAnalyzers);
             var customDiagnostics = (await customCompilation.GetAllDiagnosticsAsync())
