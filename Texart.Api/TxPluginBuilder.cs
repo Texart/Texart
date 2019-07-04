@@ -341,6 +341,14 @@ namespace Texart.Api
             {
                 throw new ArgumentException($"package named '{destinationLocators}' already exists");
             }
+            if (!State.Generators.ContainsKey(destinationLocators.generator))
+            {
+                throw new ArgumentException($"No {nameof(ITxTextBitmapGenerator)} named '{destinationLocators.generator}' exists.");
+            }
+            if (!State.Renderers.ContainsKey(destinationLocators.renderer))
+            {
+                throw new ArgumentException($"No {nameof(ITxTextBitmapRenderer)} named '{destinationLocators.renderer}' exists.");
+            }
             State.Packages.Add(locator, WithHelp.Of(destinationLocators, help));
             return this;
         }

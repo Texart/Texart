@@ -17,6 +17,7 @@ namespace Texart.Api.Tests
         public void AllowsMultipleSetHelp() { }
 
         public void AllowsAddPackage() { }
-        public void RejectsAddPackageWithMissing() { }
+        public void RejectsAddPackageWithMissingResources() { }
+        public void RejectsDuplicateAddPackage() { }
     }
 }
