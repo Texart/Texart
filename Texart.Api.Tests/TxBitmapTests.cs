@@ -5,7 +5,7 @@ using SkiaSharp;
 namespace Texart.Api.Tests
 {
     [TestFixture]
-    public class TxBitmapTests
+    internal class TxBitmapTests
     {
         [Test]
         public void HasCorrectPerfectSamplingFactors()

@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Texart.Api.Tests
 {
     [TestFixture]
-    internal class FactoryTests
+    internal class TxFactoryTests
     {
         [Test]
         public void AllowsDelegateBehavior()

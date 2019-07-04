@@ -10,7 +10,7 @@ namespace Texart.Plugins.Tests
     using BadPluginAssemblyException = PrebuiltPlugin.BadPluginAssemblyException;
 
     [TestFixture]
-    public class PrebuiltPluginTests
+    internal class PrebuiltPluginTests
     {
         [Test]
         public void AllowsSimplePlugin()

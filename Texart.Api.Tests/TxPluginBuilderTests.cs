@@ -3,7 +3,7 @@
 namespace Texart.Api.Tests
 {
     [TestFixture]
-    public class TxPluginBuilderTests
+    internal class TxPluginBuilderTests
     {
         public void AllowsAddGeneratorWithResourceLocatorString() { }
         public void RejectsAddGeneratorWithBadResourceLocatorString() { }

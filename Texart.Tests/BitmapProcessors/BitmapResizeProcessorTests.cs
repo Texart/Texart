@@ -8,7 +8,7 @@ using Texart.BitmapProcessors;
 namespace Texart.Tests.BitmapProcessors
 {
     [TestFixture]
-    public class BitmapResizeProcessorTests
+    internal class BitmapResizeProcessorTests
     {
         [Test]
         public async Task CanResizeWithSameAspectRatio()
