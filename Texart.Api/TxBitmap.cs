@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using SkiaSharp;
 
+#nullable enable
+
 namespace Texart.Api
 {
     /// <summary>

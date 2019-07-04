@@ -1,4 +1,6 @@
-﻿namespace Texart.Api
+﻿#nullable enable
+
+namespace Texart.Api
 {
     /// <summary>
     /// A tag to represent types of resources that <see cref="ITxPlugin"/> provides.

@@ -2,6 +2,8 @@
 using System.IO;
 using System.Threading.Tasks;
 
+#nullable enable
+
 namespace Texart.Api
 {
     /// <summary>

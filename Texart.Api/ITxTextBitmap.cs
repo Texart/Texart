@@ -1,4 +1,6 @@
-﻿namespace Texart.Api
+﻿#nullable enable
+
+namespace Texart.Api
 {
     /// <summary>
     /// An <see cref="ITxTextBitmap"/> is a bitmap of character data – like <c>char[,]</c>.

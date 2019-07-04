@@ -1,4 +1,6 @@
-﻿namespace Texart.Api
+﻿#nullable enable
+
+namespace Texart.Api
 {
     public interface ITxConsole
     {

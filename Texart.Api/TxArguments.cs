@@ -4,6 +4,9 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 
+// TODO: Enable nullable references when generics work well with it
+#nullable disable
+
 namespace Texart.Api
 {
     /// <summary>
