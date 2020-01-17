@@ -127,7 +127,7 @@ namespace Texart.Api
         }
 
         /// <inheritdoc/>
-        public override bool Equals(object obj) =>
+        public override bool Equals(object? obj) =>
             ReferenceEquals(this, obj) || obj is TxReferenceScheme other && Equals(other);
 
         /// <inheritdoc/>

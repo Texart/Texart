@@ -204,7 +204,7 @@ namespace Texart.Api
             }
 
             /// <inheritdoc/>
-            public override bool Equals(object obj)
+            public override bool Equals(object? obj)
             {
                 return ReferenceEquals(this, obj) || obj is ResourceRedirect other && Equals(other);
             }
@@ -400,7 +400,7 @@ namespace Texart.Api
         }
 
         /// <inheritdoc/>
-        public override bool Equals(object obj) =>
+        public override bool Equals(object? obj) =>
             ReferenceEquals(this, obj) || obj is TxPluginResource<T> other && Equals(other);
 
         /// <inheritdoc/>

@@ -387,7 +387,7 @@ namespace Texart.Api
             }
 
             /// <inheritdoc/>
-            public override bool Equals(object obj) =>
+            public override bool Equals(object? obj) =>
                 ReferenceEquals(this, obj) || obj is RelativeLocator other && Equals(other);
 
             /// <inheritdoc/>
@@ -657,7 +657,7 @@ namespace Texart.Api
         }
 
         /// <inheritdoc/>
-        public override bool Equals(object obj) =>
+        public override bool Equals(object? obj) =>
             ReferenceEquals(this, obj) || obj is TxPluginResourceLocator other && Equals(other);
 
         /// <inheritdoc/>
