@@ -4,6 +4,8 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 
+#nullable enable
+
 namespace Texart.Api
 {
     /// <summary>
@@ -87,7 +89,7 @@ namespace Texart.Api
         /// <summary>
         /// Backing field for <see cref="ResourcePath"/> which stored the cached value if it was previously computed.
         /// </summary>
-        private string _resourcePathBackingField;
+        private string? _resourcePathBackingField;
         /// <summary>
         /// <see cref="ResourceSegments"/> as a URI path string. The format is "path/to/resource".
         /// </summary>
@@ -155,14 +157,14 @@ namespace Texart.Api
         /// <returns>A <see cref="RelativeLocator"/> from parsing <paramref name="relativeResource"/>.</returns>
         /// <exception cref="ArgumentNullException">If <paramref name="relativeResource"/> is <c>null</c>.</exception>
         /// <exception cref="FormatException">If the relative resource path is not valid.</exception>
-        public static RelativeLocator OfRelativeResource(string relativeResource)
+        public static RelativeLocator OfRelative(string relativeResource)
         {
             var (checkFailedException, relative) = RelativeLocator.CheckIsValidRelativeResourcePath(relativeResource);
             if (checkFailedException != null)
             {
                 throw checkFailedException;
             }
-            return relative;
+            return relative!;
         }
 
         /// <summary>
@@ -258,7 +260,7 @@ namespace Texart.Api
         /// <exception cref="ArgumentNullException">If <paramref name="relativeResourceLocator"/> is <c>null</c></exception>
         /// <exception cref="FormatException">If the resource path is not valid.</exception>
         public TxPluginResourceLocator WithRelativeResource(string relativeResourceLocator) =>
-            WithRelativeResource(OfRelativeResource(relativeResourceLocator));
+            WithRelativeResource(OfRelative(relativeResourceLocator));
 
         /// <summary>
         /// Creates a new <see cref="TxPluginResourceLocator"/> with <see cref="RelativeResource"/> replaced with
@@ -313,7 +315,7 @@ namespace Texart.Api
             /// </summary>
             /// <param name="relativePath">The relative URI path to check.</param>
             /// <returns>An exception if the URI is invalid, or <see cref="RelativeLocator"/> if valid.</returns>
-            internal static (Exception, RelativeLocator) CheckIsValidRelativeResourcePath(string relativePath)
+            internal static (Exception?, RelativeLocator?) CheckIsValidRelativeResourcePath(string relativePath)
             {
                 if (relativePath is null)
                 {
@@ -385,7 +387,7 @@ namespace Texart.Api
             }
 
             /// <inheritdoc/>
-            public override bool Equals(object obj) =>
+            public override bool Equals(object? obj) =>
                 ReferenceEquals(this, obj) || obj is RelativeLocator other && Equals(other);
 
             /// <inheritdoc/>
@@ -438,8 +440,8 @@ namespace Texart.Api
             /// <param name="relativeResource">The pre-computed relative resource path.</param>
             public ComputedSegments(ImmutableArray<string> assemblySegments, RelativeLocator relativeResource)
             {
-                Debug.Assert(assemblySegments != null);
-                Debug.Assert(relativeResource != null);
+                Debug.Assert(assemblySegments != null!);
+                Debug.Assert(relativeResource != null!);
                 AssemblySegments = assemblySegments;
                 RelativeResource = relativeResource;
             }
@@ -450,7 +452,7 @@ namespace Texart.Api
         /// </summary>
         /// <param name="uri">The URI to check.</param>
         /// <returns>An exception if the URI is invalid, or <see cref="RelativeLocator"/> if valid.</returns>
-        private static (Exception, ComputedSegments) CheckIsValidPluginResourceUri(Uri uri)
+        private static (Exception?, ComputedSegments) CheckIsValidPluginResourceUri(Uri uri)
         {
             //
             // Reference: https://tools.ietf.org/html/rfc3986#section-3
@@ -513,7 +515,7 @@ namespace Texart.Api
         /// </summary>
         /// <param name="path">The path to partition.</param>
         /// <returns>Computed partition.</returns>
-        private static (Exception, ComputedSegments) ComputeSegments(string path)
+        private static (Exception?, ComputedSegments) ComputeSegments(string path)
         {
             Debug.Assert(path != null);
             ReadOnlySpan<string> segments = path.Split(UriPathSeparator);
@@ -623,9 +625,9 @@ namespace Texart.Api
         ///     previous object. Be careful not to set this if the resource path has changed!
         /// </param>
         private TxPluginResourceLocator(TxReferenceScheme scheme, ComputedSegments computedSegments,
-            string resourcePathBackingField)
+            string? resourcePathBackingField)
         {
-            Debug.Assert(scheme != null);
+            Debug.Assert(scheme != null!);
             Scheme = scheme;
             AssemblySegments = computedSegments.AssemblySegments;
             RelativeResource = computedSegments.RelativeResource;
@@ -655,7 +657,7 @@ namespace Texart.Api
         }
 
         /// <inheritdoc/>
-        public override bool Equals(object obj) =>
+        public override bool Equals(object? obj) =>
             ReferenceEquals(this, obj) || obj is TxPluginResourceLocator other && Equals(other);
 
         /// <inheritdoc/>
@@ -695,7 +697,7 @@ namespace Texart.Api
         /// </summary>
         /// <param name="assemblyPath">The assembly URI path to check.</param>
         /// <returns>An exception if the URI is invalid, or <see cref="ImmutableArray{T}"/> if valid.</returns>
-        private static (Exception, ImmutableArray<string>) CheckIsValidAssemblyPath(string assemblyPath)
+        private static (Exception?, ImmutableArray<string>) CheckIsValidAssemblyPath(string assemblyPath)
         {
             //
             // Reference: https://tools.ietf.org/html/rfc3986#section-3

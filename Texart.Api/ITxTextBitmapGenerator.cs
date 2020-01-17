@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using SkiaSharp;
 
+#nullable enable
+
 namespace Texart.Api
 {
     /// <summary>

@@ -5,7 +5,7 @@ using SkiaSharp;
 namespace Texart.Api.Tests
 {
     [TestFixture]
-    public class TxBitmapTests
+    internal class TxBitmapTests
     {
         [Test]
         public void HasCorrectPerfectSamplingFactors()
@@ -39,25 +39,25 @@ namespace Texart.Api.Tests
                 TxBitmap.BestSamplingFactor(
                     new SKSizeI(1000, 1000),
                     new SKSizeI(374, 374), 1.0f,
-                    TxBitmap.SamplingFactorCloseness.EuclideanDistanceToTarget));
+                    TxBitmap.SamplingFactorCloseness.EuclideanDistance));
             Assert.AreEqual(
                 2, // closer to 500 than 250
                 TxBitmap.BestSamplingFactor(
                     new SKSizeI(1000, 1000),
                     new SKSizeI(376, 376), 1.0f,
-                    TxBitmap.SamplingFactorCloseness.EuclideanDistanceToTarget));
+                    TxBitmap.SamplingFactorCloseness.EuclideanDistance));
             Assert.AreEqual(
                 8, // perfect match
                 TxBitmap.BestSamplingFactor(
                     new SKSizeI(1000, 1000),
                     new SKSizeI(125, 125), 1.0f,
-                    TxBitmap.SamplingFactorCloseness.EuclideanDistanceToTarget));
+                    TxBitmap.SamplingFactorCloseness.EuclideanDistance));
             Assert.AreEqual(
                 10, // 100 is middle of 50 and 150
                 TxBitmap.BestSamplingFactor(
                     new SKSizeI(1000, 1000),
                     new SKSizeI(50, 150), 1.0f,
-                    TxBitmap.SamplingFactorCloseness.EuclideanDistanceToTarget));
+                    TxBitmap.SamplingFactorCloseness.EuclideanDistance));
         }
 
         [Test]

@@ -2,6 +2,8 @@
 using System.Globalization;
 using SkiaSharp;
 
+#nullable enable
+
 namespace Texart.Api
 {
     /// <summary>

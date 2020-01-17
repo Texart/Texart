@@ -14,7 +14,7 @@ namespace Texart.Api.Tests
             Assert.AreEqual(new TxReferenceScheme("file"), locator.Scheme);
             Assert.AreEqual("plugins/Texart.SomePlugin.dll", locator.AssemblyPath);
             Assert.AreEqual(new [] { "plugins", "Texart.SomePlugin.dll" }, locator.AssemblySegments.ToList());
-            Assert.AreEqual(TxPluginResourceLocator.OfRelativeResource("SomePath/SomeResource"), locator.RelativeResource);
+            Assert.AreEqual(TxPluginResourceLocator.OfRelative("SomePath/SomeResource"), locator.RelativeResource);
             Assert.AreEqual("SomePath/SomeResource", locator.ResourcePath);
             Assert.AreEqual(new[] { "SomePath", "SomeResource" }, locator.ResourceSegments.ToList());
 
@@ -28,7 +28,7 @@ namespace Texart.Api.Tests
             var locator = TxPluginResourceLocator.Of("tx:///:resource/path");
             Assert.AreEqual(new TxReferenceScheme("tx"), locator.Scheme);
             Assert.AreEqual(string.Empty, locator.AssemblyPath);
-            Assert.AreEqual(TxPluginResourceLocator.OfRelativeResource("resource/path"), locator.RelativeResource);
+            Assert.AreEqual(TxPluginResourceLocator.OfRelative("resource/path"), locator.RelativeResource);
             Assert.AreEqual("resource/path", locator.ResourcePath);
             Assert.AreEqual(new[] { "resource", "path" }, locator.ResourceSegments.ToList());
         }
@@ -39,7 +39,7 @@ namespace Texart.Api.Tests
             var locator = TxPluginResourceLocator.Of("tx:///plugin.dll:");
             Assert.AreEqual(new TxReferenceScheme("tx"), locator.Scheme);
             Assert.AreEqual("plugin.dll", locator.AssemblyPath);
-            Assert.AreEqual(TxPluginResourceLocator.OfRelativeResource(string.Empty), locator.RelativeResource);
+            Assert.AreEqual(TxPluginResourceLocator.OfRelative(string.Empty), locator.RelativeResource);
             Assert.AreEqual(string.Empty, locator.ResourcePath);
             Assert.AreEqual(new[] { string.Empty }, locator.ResourceSegments.ToList());
         }
@@ -51,7 +51,7 @@ namespace Texart.Api.Tests
             Assert.AreEqual(new TxReferenceScheme("tx"), locator.Scheme);
             Assert.AreEqual(string.Empty, locator.AssemblyPath);
             Assert.AreEqual(new[] { string.Empty }, locator.AssemblySegments.ToList());
-            Assert.AreEqual(TxPluginResourceLocator.OfRelativeResource(string.Empty), locator.RelativeResource);
+            Assert.AreEqual(TxPluginResourceLocator.OfRelative(string.Empty), locator.RelativeResource);
             Assert.AreEqual(string.Empty, locator.ResourcePath);
             Assert.AreEqual(new[] { string.Empty }, locator.ResourceSegments.ToList());
         }
@@ -63,7 +63,7 @@ namespace Texart.Api.Tests
             Assert.AreEqual(new TxReferenceScheme("tx"), locator.Scheme);
             Assert.AreEqual("path:to/plugin:foo.dll", locator.AssemblyPath);
             Assert.AreEqual(new [] { "path:to", "plugin:foo.dll" }, locator.AssemblySegments.ToList());
-            Assert.AreEqual(TxPluginResourceLocator.OfRelativeResource("resource/path"), locator.RelativeResource);
+            Assert.AreEqual(TxPluginResourceLocator.OfRelative("resource/path"), locator.RelativeResource);
             Assert.AreEqual("resource/path", locator.ResourcePath);
             Assert.AreEqual(new[] { "resource", "path" }, locator.ResourceSegments.ToList());
         }
@@ -200,7 +200,7 @@ namespace Texart.Api.Tests
             Assert.AreEqual(expected, locator.WithRelativeResource("/different/path"));
             Assert.AreEqual(
                 expected,
-                locator.WithRelativeResource(TxPluginResourceLocator.OfRelativeResource("/different/path")));
+                locator.WithRelativeResource(TxPluginResourceLocator.OfRelative("/different/path")));
             // make sure ResourcePath backing field is not incorrectly copied
             Assert.AreEqual(expected.ResourcePath, locator.WithRelativeResource("/different/path").ResourcePath);
             Assert.AreEqual(expected.ResourceSegments.ToList(), locator.WithRelativeResource("/different/path").ResourceSegments.ToList());
@@ -239,7 +239,7 @@ namespace Texart.Api.Tests
             var locator = TxPluginResourceLocator.Of("tx:///plugin%20.dll:hello/%20wor%3Ald");
             Assert.AreEqual(new TxReferenceScheme("tx"), locator.Scheme);
             Assert.AreEqual("plugin%20.dll", locator.AssemblyPath);
-            Assert.AreEqual(TxPluginResourceLocator.OfRelativeResource("hello/%20wor%3Ald"), locator.RelativeResource);
+            Assert.AreEqual(TxPluginResourceLocator.OfRelative("hello/%20wor%3Ald"), locator.RelativeResource);
             Assert.AreEqual("hello/%20wor%3Ald", locator.ResourcePath);
             Assert.AreEqual(new[] { "hello", "%20wor%3Ald" }, locator.ResourceSegments.ToList());
         }
@@ -322,7 +322,7 @@ namespace Texart.Api.Tests
             [Test]
             public void AllowsResource()
             {
-                var relative = TxPluginResourceLocator.OfRelativeResource("SomePath/SomeResource");
+                var relative = TxPluginResourceLocator.OfRelative("SomePath/SomeResource");
                 Assert.AreEqual("SomePath/SomeResource", relative.ResourcePath);
                 Assert.AreEqual(new[] { "SomePath", "SomeResource" }, relative.ResourceSegments.ToList());
                 Assert.AreEqual(
@@ -336,7 +336,7 @@ namespace Texart.Api.Tests
             [Test]
             public void AllowsEmptyResource()
             {
-                var relative = TxPluginResourceLocator.OfRelativeResource(string.Empty);
+                var relative = TxPluginResourceLocator.OfRelative(string.Empty);
                 Assert.AreEqual(string.Empty, relative.ResourcePath);
                 Assert.AreEqual(new[] { string.Empty }, relative.ResourceSegments.ToList());
                 Assert.AreEqual(
@@ -347,7 +347,7 @@ namespace Texart.Api.Tests
             [Test]
             public void AllowsEscaped()
             {
-                var relative = TxPluginResourceLocator.OfRelativeResource("/resource%20/pa%3Ath");
+                var relative = TxPluginResourceLocator.OfRelative("/resource%20/pa%3Ath");
                 Assert.AreEqual("/resource%20/pa%3Ath", relative.ResourcePath);
                 Assert.AreEqual(new[] { string.Empty, "resource%20", "pa%3Ath" }, relative.ResourceSegments.ToList());
                 Assert.AreEqual(
@@ -358,7 +358,7 @@ namespace Texart.Api.Tests
             [Test]
             public void AllowsLeadingSlash()
             {
-                var relative = TxPluginResourceLocator.OfRelativeResource("/resource/path");
+                var relative = TxPluginResourceLocator.OfRelative("/resource/path");
                 Assert.AreEqual("/resource/path", relative.ResourcePath);
                 Assert.AreEqual(new[] { string.Empty, "resource", "path" }, relative.ResourceSegments.ToList());
                 Assert.AreEqual(
@@ -369,7 +369,7 @@ namespace Texart.Api.Tests
             [Test]
             public void AllowsEmptyWithLeadingSlash()
             {
-                var relative = TxPluginResourceLocator.OfRelativeResource("/");
+                var relative = TxPluginResourceLocator.OfRelative("/");
                 Assert.AreEqual("/", relative.ResourcePath);
                 Assert.AreEqual(new[] { string.Empty, string.Empty }, relative.ResourceSegments.ToList());
             }
@@ -377,7 +377,7 @@ namespace Texart.Api.Tests
             [Test]
             public void PreservesLeadingSlashes()
             {
-                var relative = TxPluginResourceLocator.OfRelativeResource("///hello");
+                var relative = TxPluginResourceLocator.OfRelative("///hello");
                 Assert.AreEqual("///hello", relative.ResourcePath);
                 Assert.AreEqual(
                     new[] { string.Empty, string.Empty, string.Empty, "hello" },
@@ -402,7 +402,7 @@ namespace Texart.Api.Tests
             private static void AssertInvalidRelativeResource(string relativePath)
             {
                 Assert.Throws<TxPluginResourceLocator.FormatException>(
-                    () => TxPluginResourceLocator.OfRelativeResource(relativePath));
+                    () => TxPluginResourceLocator.OfRelative(relativePath));
                 Assert.IsFalse(
                     TxPluginResourceLocator.IsWellFormedRelativeResourceString(relativePath));
             }
@@ -410,8 +410,8 @@ namespace Texart.Api.Tests
             [Test]
             public void HasCorrectEquality()
             {
-                var locator1 = TxPluginResourceLocator.OfRelativeResource("/resource%20/pa%3Ath");
-                var locator2 = TxPluginResourceLocator.OfRelativeResource("/resource%20/pa%3Ath");
+                var locator1 = TxPluginResourceLocator.OfRelative("/resource%20/pa%3Ath");
+                var locator2 = TxPluginResourceLocator.OfRelative("/resource%20/pa%3Ath");
 
                 Assert.IsTrue(locator1 == locator2);
                 Assert.IsTrue(locator2 == locator1);
@@ -422,8 +422,8 @@ namespace Texart.Api.Tests
             [Test]
             public void HasCorrectInequality()
             {
-                var locator1 = TxPluginResourceLocator.OfRelativeResource("/resource%20/pa%3Ath");
-                var locator2 = TxPluginResourceLocator.OfRelativeResource("resource%20/path");
+                var locator1 = TxPluginResourceLocator.OfRelative("/resource%20/pa%3Ath");
+                var locator2 = TxPluginResourceLocator.OfRelative("resource%20/path");
 
                 Assert.IsFalse(locator1 == locator2);
                 Assert.IsFalse(locator2 == locator1);
@@ -434,10 +434,10 @@ namespace Texart.Api.Tests
             [Test]
             public void HasCorrectHashCodes()
             {
-                var locator1 = TxPluginResourceLocator.OfRelativeResource("/resource%20/pa%3Ath");
-                var locator2 = TxPluginResourceLocator.OfRelativeResource("resource%20/path");
-                var locator3 = TxPluginResourceLocator.OfRelativeResource("/resource%20/pa%3Ath");
-                var locator4 = TxPluginResourceLocator.OfRelativeResource("resource%20/path");
+                var locator1 = TxPluginResourceLocator.OfRelative("/resource%20/pa%3Ath");
+                var locator2 = TxPluginResourceLocator.OfRelative("resource%20/path");
+                var locator3 = TxPluginResourceLocator.OfRelative("/resource%20/pa%3Ath");
+                var locator4 = TxPluginResourceLocator.OfRelative("resource%20/path");
 
                 Assert.AreEqual(locator1.GetHashCode(), locator3.GetHashCode());
                 Assert.AreEqual(locator2.GetHashCode(), locator4.GetHashCode());

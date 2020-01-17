@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics;
 
+#nullable enable
+
 namespace Texart.Api
 {
     /// <summary>
@@ -72,7 +74,7 @@ namespace Texart.Api
         /// <seealso cref="RedirectRenderer"/>
         public static TxPluginResource<T> Redirect<T>(
             TxPluginResourceLocator locator,
-            Func<TxArguments, TxArguments> argumentsTransformer = null) =>
+            Func<TxArguments, TxArguments>? argumentsTransformer = null) =>
             new TxPluginResource<T>(new ResourceRedirect(locator, argumentsTransformer));
 
         /// <summary>
@@ -96,7 +98,7 @@ namespace Texart.Api
         /// <see cref="ResourceRedirect"/>
         public static TxPluginResource<ITxTextBitmapGenerator> RedirectGenerator(
             TxPluginResourceLocator locator,
-            Func<TxArguments, TxArguments> argumentsTransformer = null) =>
+            Func<TxArguments, TxArguments>? argumentsTransformer = null) =>
             new TxPluginResource<ITxTextBitmapGenerator>(new ResourceRedirect(locator, argumentsTransformer));
 
         /// <summary>
@@ -120,7 +122,7 @@ namespace Texart.Api
         /// <see cref="ResourceRedirect"/>
         public static TxPluginResource<ITxTextBitmapRenderer> RedirectRenderer(
             TxPluginResourceLocator locator,
-            Func<TxArguments, TxArguments> argumentsTransformer = null) =>
+            Func<TxArguments, TxArguments>? argumentsTransformer = null) =>
             new TxPluginResource<ITxTextBitmapRenderer>(new ResourceRedirect(locator, argumentsTransformer));
 
         /// <summary>
@@ -139,8 +141,8 @@ namespace Texart.Api
         {
             switch (resource.ActiveMemberKind)
             {
-                case MemberKind.Factory: return new TxPluginResource<T>(resource._factory);
-                case MemberKind.Redirect: return new TxPluginResource<T>(resource._redirect);
+                case MemberKind.Factory: return new TxPluginResource<T>(resource._factory!);
+                case MemberKind.Redirect: return new TxPluginResource<T>(resource._redirect!);
                 default:
                     Debug.Fail("Unreachable code!");
                     throw new InvalidOperationException();
@@ -178,8 +180,7 @@ namespace Texart.Api
             /// pointed to by <see cref="Locator"/>. If this is <c>null</c>, then the identity transformation
             /// should be applied.
             /// </summary>
-            // TODO: Make this nullable when we have nullable references enabled.
-            public Func<TxArguments, TxArguments> ArgumentsTransformer { get; }
+            public Func<TxArguments, TxArguments>? ArgumentsTransformer { get; }
 
             /// <summary>
             /// Creates a redirect.
@@ -187,9 +188,9 @@ namespace Texart.Api
             /// <param name="locator"><see cref="Locator"/>.</param>
             /// <param name="argumentsTransformer"><see cref="ArgumentsTransformer"/>.</param>
             internal ResourceRedirect(TxPluginResourceLocator locator,
-                Func<TxArguments, TxArguments> argumentsTransformer)
+                Func<TxArguments, TxArguments>? argumentsTransformer)
             {
-                Debug.Assert(locator != null);
+                Debug.Assert(locator != null!);
                 Locator = locator;
                 ArgumentsTransformer = argumentsTransformer;
             }
@@ -203,7 +204,7 @@ namespace Texart.Api
             }
 
             /// <inheritdoc/>
-            public override bool Equals(object obj)
+            public override bool Equals(object? obj)
             {
                 return ReferenceEquals(this, obj) || obj is ResourceRedirect other && Equals(other);
             }
@@ -302,7 +303,7 @@ namespace Texart.Api
                     throw new TxPluginResource.InactiveUnionMemberAccessException(
                         TxPluginResource.MemberKind.Factory, ActiveMemberKind);
                 }
-                return _factory;
+                return _factory!;
             }
         }
 
@@ -321,7 +322,7 @@ namespace Texart.Api
                     throw new TxPluginResource.InactiveUnionMemberAccessException(
                         TxPluginResource.MemberKind.Redirect, ActiveMemberKind);
                 }
-                return _redirect;
+                return _redirect!;
             }
         }
 
@@ -335,8 +336,8 @@ namespace Texart.Api
             {
                 switch (ActiveMemberKind)
                 {
-                    case TxPluginResource.MemberKind.Factory: return _factory;
-                    case TxPluginResource.MemberKind.Redirect: return _redirect;
+                    case TxPluginResource.MemberKind.Factory: return _factory!;
+                    case TxPluginResource.MemberKind.Redirect: return _redirect!;
                     default:
                         Debug.Fail("Unreachable code!");
                         throw new InvalidOperationException();
@@ -363,7 +364,7 @@ namespace Texart.Api
         /// <seealso cref="TxPluginResource.Redirect{T}"/>
         internal TxPluginResource(TxPluginResource.ResourceRedirect redirect)
         {
-            Debug.Assert(redirect != null);
+            Debug.Assert(redirect != null!);
             _redirect = redirect;
             ActiveMemberKind = TxPluginResource.MemberKind.Redirect;
         }
@@ -372,12 +373,12 @@ namespace Texart.Api
         /// The factory union member, or <c>null</c> if <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.Factory"/>.
         /// </summary>
         // ReSharper disable once InconsistentNaming
-        internal readonly TxFactory<T, TxArguments> _factory;
+        internal readonly TxFactory<T, TxArguments>? _factory;
         /// <summary>
         /// The redirect union member, or <c>null</c> if <see cref="ActiveMemberKind"/> is not <see cref="TxPluginResource.MemberKind.Redirect"/>.
         /// </summary>
         // ReSharper disable once InconsistentNaming
-        internal readonly TxPluginResource.ResourceRedirect _redirect;
+        internal readonly TxPluginResource.ResourceRedirect? _redirect;
 
         /// <inheritdoc/>
         public override string ToString() => $"{typeof(TxPluginResource<T>).Name}({ActiveMemberKind}){{{ActiveMember}}}";
@@ -399,7 +400,7 @@ namespace Texart.Api
         }
 
         /// <inheritdoc/>
-        public override bool Equals(object obj) =>
+        public override bool Equals(object? obj) =>
             ReferenceEquals(this, obj) || obj is TxPluginResource<T> other && Equals(other);
 
         /// <inheritdoc/>

@@ -1,4 +1,6 @@
-﻿namespace Texart.Api
+﻿#nullable enable
+
+namespace Texart.Api
 {
     /// <summary>
     /// A factory function taking exactly one input argument.
